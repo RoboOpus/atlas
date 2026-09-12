@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus 具身智能与机器人知识库总入口。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="RoboOpus Atlas 首页">
+        <span class="mark">R/O</span>
+        <span>RoboOpus Atlas</span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="#tracks">建设线</a>
+        <a href="#sources">来源</a>
+        <a href="#workflow">工作流</a>
+        <a href="https://github.com/RoboOpus">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Embodied Intelligence Knowledge Atlas · v0.1</p>
+        <h1>一个入口，<br><em>六条并行建设线。</em></h1>
+        <p class="lede">先把领域地图、入口和数据结构搭稳，再逐步沉淀精读、复现与判断。WAM 已上线，其余板块从最小可用目录同步起步。</p>
+        <div class="hero-actions">
+          <a class="primary" href="#tracks">查看知识地图</a>
+          <a class="secondary" href="https://roboopus.github.io/wam/">进入 WAM ↗</a>
+        </div>
+        <dl class="stats" aria-label="当前建设状态">
+          <div><dt>6</dt><dd>知识建设线</dd></div>
+          <div><dt>1</dt><dd>已上线项目站</dd></div>
+          <div><dt>5</dt><dd>一级骨架启动</dd></div>
+        </dl>
+      </section>
+
+      <section id="tracks" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Knowledge tracks</p>
+          <h2>知识地图</h2>
+          <p>每条建设线先解决“去哪里找、如何分类、怎样验证”，内容数量暂不作为目标。</p>
+        </div>
+        <div class="track-grid">
+          <article class="track live">
+            <div class="track-meta"><span>01</span><span class="status">已上线</span></div>
+            <h3>WAM</h3>
+            <p>World Action Models、VLA 与机器人世界模型的论文、基准和数据。</p>
+            <ul><li>方法路线图</li><li>论文与 Radar</li><li>Benchmark / Dataset</li></ul>
+            <a href="https://roboopus.github.io/wam/">打开项目站 ↗</a>
+          </article>
+          <article class="track">
+            <div class="track-meta"><span>02</span><span class="status muted">骨架中</span></div>
+            <h3>Frontier</h3>
+            <p>具身智能近期论文、访谈与社区讨论的信号入口。</p>
+            <ul><li>arXiv 每日雷达</li><li>人物与访谈</li><li>微信公众号 / 小红书线索</li></ul>
+          </article>
+          <article class="track">
+            <div class="track-meta"><span>03</span><span class="status muted">骨架中</span></div>
+            <h3>Robotics</h3>
+            <p>机器人感知、状态估计、规划与控制的基础知识树。</p>
+            <ul><li>感知与估计</li><li>运动与任务规划</li><li>模型控制与学习控制</li></ul>
+          </article>
+          <article class="track">
+            <div class="track-meta"><span>04</span><span class="status muted">骨架中</span></div>
+            <h3>Hardware</h3>
+            <p>机器人本体、机械臂、灵巧手与传感器的可比较目录。</p>
+            <ul><li>产品规格</li><li>价格与采购时间戳</li><li>开源硬件项目</li></ul>
+          </article>
+          <article class="track">
+            <div class="track-meta"><span>05</span><span class="status muted">骨架中</span></div>
+            <h3>Adjacent</h3>
+            <p>从大模型、计算机视觉与自动驾驶迁移可用方法和研究问题。</p>
+            <ul><li>可迁移能力</li><li>跨领域对照</li><li>Idea 触发器</li></ul>
+          </article>
+          <article class="track personal">
+            <div class="track-meta"><span>06</span><span class="status muted">待资料</span></div>
+            <h3>Lab</h3>
+            <p>个人简历、项目、Idea 与优秀网站案例，事实内容只来自你提供的材料。</p>
+            <ul><li>个人主页</li><li>项目与研究轨迹</li><li>Idea 私有草稿 / 公开摘要</li></ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="sources" class="section sources">
+        <div class="section-heading">
+          <p class="eyebrow">Source pipeline</p>
+          <h2>来源按稳定性分级接入</h2>
+          <p>自动化程度由来源条件决定；“能读取”不等于“适合无人值守抓取”。</p>
+        </div>
+        <div class="source-grid">
+          <article>
+            <span class="source-mode auto">自动</span>
+            <h3>arXiv / GitHub / RSS</h3>
+            <p>使用公开 API、Feed 与 Sitemap 做增量发现，保存标识符、时间和原链接。</p>
+          </article>
+          <article>
+            <span class="source-mode assisted">半自动</span>
+            <h3>普通网站 / 动态页面</h3>
+            <p>优先正文解析；必要时由浏览器辅助读取，再由人工核验页面结构和许可。</p>
+          </article>
+          <article>
+            <span class="source-mode manual">单链接</span>
+            <h3>微信公众号 / 小红书</h3>
+            <p>由你提供公开链接，在已有登录会话中读取可见内容；公开站只发原创摘要和回链。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="workflow" class="section workflow">
+        <div class="section-heading">
+          <p class="eyebrow">Editorial workflow</p>
+          <h2>先收录，再验证，再形成观点</h2>
+        </div>
+        <ol class="steps">
+          <li><span>01</span><strong>收录</strong><p>保存原始链接、日期与来源类型。</p></li>
+          <li><span>02</span><strong>核验</strong><p>对照论文、项目页、代码与官方资料。</p></li>
+          <li><span>03</span><strong>结构化</strong><p>归入统一字段与知识树，保留未知项。</p></li>
+          <li><span>04</span><strong>评述</strong><p>标明证据、推断与个人观点，不混写。</p></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>RoboOpus · 具身智能知识基础设施</p>
+      <p><a href="/atlas/data/atlas.json">机器可读目录</a> · 项目站模式：roboopus.github.io/&lt;repository&gt;/</p>
+    </footer>
+  </body>
+</html>

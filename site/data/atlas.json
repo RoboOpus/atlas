@@ -1,0 +1,70 @@
+{
+  "schema_version": "0.1.0",
+  "updated_at": "2026-09-12",
+  "name": "RoboOpus Atlas",
+  "repository": "RoboOpus/atlas",
+  "site_url": "https://roboopus.github.io/atlas/",
+  "publishing_model": "github-pages-project-sites",
+  "tracks": [
+    {
+      "id": "wam",
+      "name": "WAM",
+      "repository": "RoboOpus/wam",
+      "site_url": "https://roboopus.github.io/wam/",
+      "status": "live",
+      "scope": ["world action models", "vision-language-action", "robot world models", "benchmarks", "datasets"]
+    },
+    {
+      "id": "frontier",
+      "name": "Frontier",
+      "repository": "RoboOpus/frontier",
+      "site_url": "https://roboopus.github.io/frontier/",
+      "status": "planned",
+      "scope": ["arXiv radar", "top venues", "interviews", "WeChat leads", "Xiaohongshu leads"]
+    },
+    {
+      "id": "robotics",
+      "name": "Robotics",
+      "repository": "RoboOpus/robotics",
+      "site_url": "https://roboopus.github.io/robotics/",
+      "status": "planned",
+      "scope": ["perception", "state estimation", "planning", "control", "dynamics", "sim-to-real"]
+    },
+    {
+      "id": "hardware",
+      "name": "Hardware",
+      "repository": "RoboOpus/hardware",
+      "site_url": "https://roboopus.github.io/hardware/",
+      "status": "planned",
+      "scope": ["robot platforms", "arms", "hands and grippers", "sensors", "compute", "open hardware"]
+    },
+    {
+      "id": "adjacent",
+      "name": "Adjacent",
+      "repository": "RoboOpus/adjacent",
+      "site_url": "https://roboopus.github.io/adjacent/",
+      "status": "planned",
+      "scope": ["large models", "computer vision", "autonomous driving", "transfer to robotics"]
+    },
+    {
+      "id": "lab",
+      "name": "Lab",
+      "repository": "RoboOpus/lab",
+      "site_url": "https://roboopus.github.io/lab/",
+      "status": "awaiting-source-material",
+      "scope": ["public resume", "public projects", "public ideas", "website references"]
+    }
+  ],
+  "knowledge_lifecycle": ["inbox", "candidate", "verified", "reviewed", "canonical", "deprecated"],
+  "source_modes": {
+    "automatic": ["arXiv API", "GitHub API", "RSS", "Sitemap"],
+    "assisted": ["ordinary web pages", "JavaScript-rendered pages"],
+    "single_url_only": ["WeChat public articles", "Xiaohongshu web posts"]
+  },
+  "guardrails": [
+    "Do not modify RoboOpus/RoboOpus.github.io.",
+    "Do not modify repositories outside the RoboOpus organization.",
+    "Do not publish private ideas, credentials, cookies, full copyrighted texts, or private source caches.",
+    "AI-generated content must remain distinguishable from verified facts and editor opinion."
+  ]
+}
