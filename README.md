@@ -8,7 +8,9 @@ RoboOpus 具身智能与机器人知识库的总入口与跨项目治理仓库�
 
 - 汇总 WAM、Frontier、Robotics、Hardware、Adjacent、Lab 六条建设线。
 - 保存各板块的一级知识树和首批字段规范。
+- 在 `/atlas/catalog/` 发布可搜索、可筛选的非 WAM 一级目录。
 - 发布机器可读的 `site/data/atlas.json`。
+- 发布 58 个种子节点组成的 `site/data/catalog.json`。
 - 不在这里复制各专题的全部内容；专题稳定后进入各自普通仓库和 GitHub Pages 项目站。
 
 ## 本地运行

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus 非 WAM 板块的一级知识目录。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>一级知识目录 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <script src="/atlas/catalog/catalog.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页">
+        <span class="mark">R/O</span>
+        <span>RoboOpus Atlas</span>
+      </a>
+      <nav aria-label="目录导航">
+        <a href="/atlas/">总览</a>
+        <a href="https://roboopus.github.io/wam/">WAM ↗</a>
+        <a href="https://github.com/RoboOpus/atlas">数据 ↗</a>
+      </nav>
+    </header>
+
+    <main class="catalog-main">
+      <section class="catalog-intro">
+        <div>
+          <p class="eyebrow">Breadth map · non-WAM tracks</p>
+          <h1>一级知识目录</h1>
+        </div>
+        <p>这些是等待补充证据、教程和条目的“知识槽位”，不是已经完成的百科页面。先看覆盖是否合理，再逐层做深。</p>
+      </section>
+
+      <section class="catalog-controls" aria-label="目录筛选">
+        <label class="search-field">
+          <span>搜索节点</span>
+          <input id="catalog-search" type="search" placeholder="例如：MPC、触觉、闭环评测" autocomplete="off">
+        </label>
+        <div class="filter-row" id="track-filters" aria-label="按板块筛选">
+          <button type="button" data-track="all" class="active">全部</button>
+          <button type="button" data-track="frontier">Frontier</button>
+          <button type="button" data-track="robotics">Robotics</button>
+          <button type="button" data-track="hardware">Hardware</button>
+          <button type="button" data-track="adjacent">Adjacent</button>
+          <button type="button" data-track="lab">Lab</button>
+        </div>
+        <div class="result-line" aria-live="polite">
+          <strong id="result-count">加载中</strong>
+          <span>按 P0 → P2 排列；P0 是第一批应建立的基础节点。</span>
+        </div>
+      </section>
+
+      <section id="catalog-grid" class="catalog-grid" aria-label="知识节点列表"></section>
+      <div id="catalog-empty" class="catalog-empty" hidden>
+        <strong>没有匹配节点</strong>
+        <p>换一个关键词，或切回“全部”。</p>
+      </div>
+      <noscript>该目录需要 JavaScript 来加载机器可读数据。</noscript>
+    </main>
+
+    <footer>
+      <p>RoboOpus Atlas · 广度优先</p>
+      <p><a href="/atlas/data/catalog.json">查看机器可读目录</a></p>
+    </footer>
+  </body>
+</html>

@@ -19,7 +19,7 @@
       "name": "Frontier",
       "repository": "RoboOpus/frontier",
       "site_url": "https://roboopus.github.io/frontier/",
-      "status": "planned",
+      "status": "seeded",
       "scope": ["arXiv radar", "top venues", "interviews", "WeChat leads", "Xiaohongshu leads"]
     },
     {
@@ -27,7 +27,7 @@
       "name": "Robotics",
       "repository": "RoboOpus/robotics",
       "site_url": "https://roboopus.github.io/robotics/",
-      "status": "planned",
+      "status": "seeded",
       "scope": ["perception", "state estimation", "planning", "control", "dynamics", "sim-to-real"]
     },
     {
@@ -35,7 +35,7 @@
       "name": "Hardware",
       "repository": "RoboOpus/hardware",
       "site_url": "https://roboopus.github.io/hardware/",
-      "status": "planned",
+      "status": "seeded",
       "scope": ["robot platforms", "arms", "hands and grippers", "sensors", "compute", "open hardware"]
     },
     {
@@ -43,7 +43,7 @@
       "name": "Adjacent",
       "repository": "RoboOpus/adjacent",
       "site_url": "https://roboopus.github.io/adjacent/",
-      "status": "planned",
+      "status": "seeded",
       "scope": ["large models", "computer vision", "autonomous driving", "transfer to robotics"]
     },
     {
