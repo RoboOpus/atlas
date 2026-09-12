@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 非 WAM 板块的可信来源注册表。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>可信来源 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/sources/sources.css">
+    <script src="/atlas/sources/sources.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页">
+        <span class="mark">R/O</span>
+        <span>RoboOpus Atlas</span>
+      </a>
+      <nav aria-label="来源导航">
+        <a href="/atlas/">总览</a>
+        <a href="/atlas/catalog/">总目录</a>
+        <a href="https://roboopus.github.io/wam/">WAM ↗</a>
+        <a href="https://github.com/RoboOpus/atlas">数据 ↗</a>
+      </nav>
+    </header>
+
+    <main class="catalog-main">
+      <section class="catalog-intro source-intro">
+        <div>
+          <p class="eyebrow">Verified entry points · non-WAM tracks</p>
+          <h1>可信来源</h1>
+        </div>
+        <p>这是后续自动发现、人工核验和知识写作的入口注册表。收录表示“值得从这里查证”，不表示对产品、论文或观点背书。</p>
+      </section>
+
+      <section class="source-principles" aria-label="来源使用原则">
+        <article><strong>官方优先</strong><span>论文、文档、代码、数据和产品规格尽量回到第一方。</span></article>
+        <article><strong>入口分级</strong><span>自动适合定时增量；辅助需要页面解析；人工需要单链接核验。</span></article>
+        <article><strong>只发原创</strong><span>公开站保存结构化事实、原创摘要和回链，不镜像受保护全文。</span></article>
+      </section>
+
+      <section class="catalog-controls" aria-label="来源筛选">
+        <label class="search-field">
+          <span>搜索来源</span>
+          <input id="source-search" type="search" placeholder="例如：SLAM、机械臂、数据集、学术主页" autocomplete="off">
+        </label>
+        <div class="filter-group">
+          <span class="filter-label">板块</span>
+          <div class="filter-row" id="track-filters" aria-label="按板块筛选">
+            <button type="button" data-track="all" class="active">全部</button>
+            <button type="button" data-track="frontier">Frontier</button>
+            <button type="button" data-track="robotics">Robotics</button>
+            <button type="button" data-track="hardware">Hardware</button>
+            <button type="button" data-track="adjacent">Adjacent</button>
+            <button type="button" data-track="lab">Lab</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">接入</span>
+          <div class="filter-row" id="mode-filters" aria-label="按接入方式筛选">
+            <button type="button" data-mode="all" class="active">全部</button>
+            <button type="button" data-mode="automatic">自动</button>
+            <button type="button" data-mode="assisted">辅助</button>
+            <button type="button" data-mode="manual">人工</button>
+          </div>
+        </div>
+        <div class="result-line" aria-live="polite">
+          <strong id="result-count">加载中</strong>
+          <span id="verified-date">核验日期加载中</span>
+        </div>
+      </section>
+
+      <section id="source-grid" class="source-registry-grid" aria-label="可信来源列表"></section>
+      <div id="source-empty" class="catalog-empty" hidden>
+        <strong>没有匹配来源</strong>
+        <p>换一个关键词，或放宽板块和接入方式。</p>
+      </div>
+      <noscript>该页面需要 JavaScript 来加载机器可读来源数据。</noscript>
+    </main>
+
+    <footer>
+      <p>RoboOpus Atlas · 来源可追溯</p>
+      <p><a href="/atlas/data/sources.json">查看机器可读来源</a></p>
+    </footer>
+  </body>
+</html>

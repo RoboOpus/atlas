@@ -1,0 +1,33 @@
+.source-intro h1 { font-size: clamp(48px, 7vw, 84px); }
+.source-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 24px 0 0; padding: 1px; background: var(--line); }
+.source-principles article { min-height: 118px; padding: 20px; background: var(--paper); }
+.source-principles strong { display: block; color: var(--blue); font: 700 12px/1 ui-monospace, monospace; letter-spacing: 0.06em; }
+.source-principles span { display: block; margin-top: 18px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.filter-group { display: grid; grid-template-columns: 72px 1fr; align-items: start; margin-top: 12px; }
+.filter-group .filter-row { margin-top: 0; }
+.filter-label { padding-top: 10px; color: var(--muted); font: 700 10px/1 ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+.source-registry-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding-top: 30px; }
+.source-card { display: flex; flex-direction: column; min-height: 330px; padding: 24px; border: 1px solid var(--line); background: var(--panel); }
+.source-card-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+.source-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.source-badge { padding: 5px 7px; border: 1px solid var(--line); color: var(--muted); font: 700 10px/1 ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+.source-badge.official { color: var(--blue); border-color: currentColor; }
+.source-badge.lead { color: var(--orange); border-color: currentColor; }
+.source-badge.automatic { color: var(--blue); }
+.source-badge.assisted { color: #687319; }
+.source-badge.manual { color: var(--orange); }
+.source-track { color: var(--muted); font: 700 10px/1.2 ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; }
+.source-card h2 { margin-top: 30px; font: 500 30px/1.08 Georgia, "Noto Serif SC", serif; letter-spacing: -0.035em; }
+.source-owner { margin: 8px 0 0; color: var(--blue); font: 700 11px/1.4 ui-monospace, monospace; }
+.source-best { margin: 22px 0 0; color: var(--ink); line-height: 1.7; }
+.source-note { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.65; }
+.source-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0; }
+.source-tags span { padding: 5px 7px; border: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+.source-card > a { align-self: flex-start; margin-top: auto; color: var(--blue); font-weight: 750; text-decoration: none; }
+.source-card > a:hover { text-decoration: underline; }
+
+@media (max-width: 760px) {
+  .source-principles, .source-registry-grid { grid-template-columns: 1fr; }
+  .filter-group { grid-template-columns: 1fr; gap: 8px; }
+  .filter-label { padding-top: 0; }
+}

@@ -5,15 +5,21 @@ import { fileURLToPath } from "node:url";
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dataPath = path.join(repo, "site", "data", "atlas.json");
 const catalogPath = path.join(repo, "site", "data", "catalog.json");
+const sourcesPath = path.join(repo, "site", "data", "sources.json");
 const requiredFiles = [
   "site/index.html",
   "site/styles.css",
   "site/data/atlas.json",
   "site/data/catalog.json",
+  "site/data/sources.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
+  "site/sources/index.html",
+  "site/sources/sources.css",
+  "site/sources/sources.js",
   "content/catalog-schema.md",
+  "content/source-registry-schema.md",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -24,6 +30,7 @@ const requiredFiles = [
 for (const file of requiredFiles) await access(path.join(repo, file));
 const atlas = JSON.parse(await readFile(dataPath, "utf8"));
 const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
+const sources = JSON.parse(await readFile(sourcesPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
 
 if (atlas.repository !== "RoboOpus/atlas") throw new Error("Unexpected Atlas repository target");
@@ -61,4 +68,29 @@ for (const [track, count] of Object.entries(perTrack)) {
   if (count < 5) throw new Error(`Catalog track is too thin: ${track} (${count})`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, and ${requiredFiles.length} required files.\n`);
+const sourceKinds = new Set(["api", "standard", "course", "documentation", "repository", "vendor", "open-hardware", "dataset", "platform", "template"]);
+const accessModes = new Set(["automatic", "assisted", "manual"]);
+if (sources.schema_version !== "0.1.0") throw new Error("Unexpected source registry schema version");
+if (sources.verified_at !== "2026-09-12") throw new Error("Source registry verification date is stale or unexpected");
+if (!Array.isArray(sources.sources) || sources.sources.length < 40) throw new Error("Source registry must contain at least 40 entries");
+
+const sourceIds = new Set();
+const sourcesPerTrack = Object.fromEntries([...catalogTracks].map((track) => [track, 0]));
+for (const source of sources.sources) {
+  if (!source.id || sourceIds.has(source.id)) throw new Error(`Missing or duplicate source id: ${source.id}`);
+  sourceIds.add(source.id);
+  if (!catalogTracks.has(source.track)) throw new Error(`Unknown source track: ${source.track}`);
+  if (!source.id.startsWith(`${source.track}-`)) throw new Error(`Source id/track mismatch: ${source.id}`);
+  if (!source.name || !source.owner || !source.best_for || !source.reuse_note) throw new Error(`Incomplete source: ${source.id}`);
+  if (!sourceKinds.has(source.kind)) throw new Error(`Invalid source kind: ${source.id}`);
+  if (!accessModes.has(source.access_mode)) throw new Error(`Invalid source access mode: ${source.id}`);
+  if (typeof source.official !== "boolean") throw new Error(`Source first-party flag is missing: ${source.id}`);
+  if (!source.url.startsWith("https://")) throw new Error(`Source URL must use HTTPS: ${source.id}`);
+  if (!Array.isArray(source.tags) || source.tags.length < 2) throw new Error(`Source needs at least two tags: ${source.id}`);
+  sourcesPerTrack[source.track] += 1;
+}
+for (const [track, count] of Object.entries(sourcesPerTrack)) {
+  if (count < 5) throw new Error(`Source track is too thin: ${track} (${count})`);
+}
+
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} trusted sources, and ${requiredFiles.length} required files.\n`);
