@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="不把热门模型直接当作机器人方案，而是分别测试视频对象状态、跨域视觉表征和多视图几何能否改善闭环任务。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>SAM 2、DINOv2、VGGT：三个机器人最小实验卡 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Adjacent · 视觉基础模型</p>
+        <h1>SAM 2、DINOv2、VGGT：三个机器人最小实验卡</h1>
+        <p class="article-summary">不把热门模型直接当作机器人方案，而是分别测试视频对象状态、跨域视觉表征和多视图几何能否改善闭环任务。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>实验设计</span><span>约 4 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>跨领域迁移证伪框架</span><span>基本机器人视觉</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#共同规则-先测接口-不先改模型">共同规则：先测接口，不先改模型</a>
+<a href="#实验卡-a-sam-2-作为视频对象状态">实验卡 A：SAM 2 作为视频对象状态</a>
+<a href="#实验卡-b-dinov2-作为跨域视觉表征">实验卡 B：DINOv2 作为跨域视觉表征</a>
+<a href="#实验卡-c-vggt-作为快速几何初始化">实验卡 C：VGGT 作为快速几何初始化</a>
+<a href="#三张卡如何形成研究-idea">三张卡如何形成研究 Idea</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>三个模型的输出接口不同，不能用同一种评测指标。</li><li>先冻结模型做最小闭环实验，再决定是否微调或系统集成。</li><li>离线视觉提升只有转化为任务成功率、干预率或恢复能力才有机器人价值。</li></ul></section>
+          <h2 id="共同规则-先测接口-不先改模型">共同规则：先测接口，不先改模型</h2>
+<p>SAM 2 输出可提示的图像/视频分割，DINOv2 输出通用视觉特征，VGGT 从单幅或多幅图像估计相机、深度、点图和点轨迹。<a class="source-ref" href="#source-1">[S1]</a><a class="source-ref" href="#source-2">[S2]</a><a class="source-ref" href="#source-3">[S3]</a> 它们解决的不是同一个问题，也不能直接替代机器人状态、动作或控制器。</p>
+<p>最小实验应冻结官方权重，固定输入输出接口，在少量真实机器人数据上回答一个可证伪问题。只有结果通过，再考虑微调、蒸馏或系统重构。</p>
+<h2 id="实验卡-a-sam-2-作为视频对象状态">实验卡 A：SAM 2 作为视频对象状态</h2>
+<h3 id="假设">假设</h3>
+<p>在操作 episode 第一帧只提示一次目标，SAM 2 的视频 mask 传播可以减少逐帧检测和人工标注，并为遮挡恢复提供对象级状态。<a class="source-ref" href="#source-1">[S1]</a></p>
+<h3 id="最小设置">最小设置</h3>
+<ul>
+<li>选择 20–50 条包含抓取、遮挡、重新出现和失败的腕部或外部相机视频。</li>
+<li>第一帧提供点或框提示，其余帧不再人工纠正。</li>
+<li>记录 mask、对象 ID、置信度、推理时延和显存。</li>
+<li>用 mask 产生简单的目标中心、可见比例或接触前区域，不直接替换策略。</li>
+</ul>
+<h3 id="指标">指标</h3>
+<p>离线记录 mask IoU、边界质量、ID 切换、遮挡恢复和时延；闭环记录抓取成功率、重抓次数、人工干预和误跟踪导致的危险动作。SAM 2 官方实现支持图像提示与视频状态传播，但官方视频分割指标不能自动代表机器人任务收益。<a class="source-ref" href="#source-1">[S1]</a></p>
+<h3 id="停止条件">停止条件</h3>
+<p>若反光、相似物体或手臂遮挡导致对象 ID 频繁跳变，且简单的运动/深度约束无法恢复，就暂停系统集成，先保留为标注工具。</p>
+<h2 id="实验卡-b-dinov2-作为跨域视觉表征">实验卡 B：DINOv2 作为跨域视觉表征</h2>
+<h3 id="假设">假设</h3>
+<p>冻结 DINOv2 特征后，少量机器人数据上的线性头或最近邻检索能够比从零训练的轻量视觉编码器更稳健地跨光照、背景和相机变化。<a class="source-ref" href="#source-2">[S2]</a></p>
+<h3 id="最小设置">最小设置</h3>
+<ul>
+<li>从同一任务采集多天、多光照、不同背景和至少两台相机的数据。</li>
+<li>固定一个小型 DINOv2 backbone，提取全局与 patch 特征。</li>
+<li>比较最近邻、线性分类/回归和现有任务编码器。</li>
+<li>不在第一轮微调 backbone，避免把数据量差异混入结论。</li>
+</ul>
+<h3 id="指标">指标</h3>
+<p>除分类或回归误差外，检查同一物体跨视角特征距离、遮挡后检索、未知物体拒识和端侧时延。若接入策略，必须报告闭环成功率与分布外失败类型。官方仓库提供多尺寸预训练 backbone 和简单加载接口，可让首轮实验聚焦于表征而不是训练基础模型。<a class="source-ref" href="#source-2">[S2]</a></p>
+<h3 id="停止条件">停止条件</h3>
+<p>若离线特征分离更好但闭环无提升，先检查动作相关信息、空间分辨率和时序缺失，不直接用更多微调掩盖接口不匹配。</p>
+<h2 id="实验卡-c-vggt-作为快速几何初始化">实验卡 C：VGGT 作为快速几何初始化</h2>
+<h3 id="假设">假设</h3>
+<p>对短时多视角桌面场景，VGGT 估计的相机、深度、点图和点轨迹可以加速场景初始化或提供重定位先验。<a class="source-ref" href="#source-3">[S3]</a></p>
+<h3 id="最小设置">最小设置</h3>
+<ul>
+<li>用已标定相机采集静态桌面、轻微物体运动和机械臂运动三组序列。</li>
+<li>运行官方预训练模型，保存相机内外参、深度、点图、置信度和轨迹。</li>
+<li>与标定结果、RGB-D 深度或传统 SfM/SLAM 基线对照。</li>
+<li>第一轮只作为候选先验，不直接闭环控制机器人。</li>
+</ul>
+<h3 id="指标">指标</h3>
+<p>报告尺度与坐标对齐方式、重投影误差、相机轨迹误差、深度误差、动态物体区域失败和运行时延。再测试它是否减少初始化时间、重定位失败或人工建图工作。VGGT 官方仓库说明可从一幅、少量或大量视图直接预测关键 3D 属性，并提供导出 COLMAP 的路径；这仍不等于输出已经满足机器人的尺度、安全和实时要求。<a class="source-ref" href="#source-3">[S3]</a></p>
+<h3 id="停止条件">停止条件</h3>
+<p>若尺度、反光表面或动态机械臂导致几何不可控，先把它限定为离线场景准备工具，而不是在线状态估计器。</p>
+<h2 id="三张卡如何形成研究-idea">三张卡如何形成研究 Idea</h2>
+<p>有价值的组合不是简单串联三个模型，而是明确互补关系。例如：SAM 2 给出动态对象区域，VGGT 估计静态场景几何，DINOv2 为对象重识别提供特征。随后用任务级失败定义决定是否值得组合。</p>
+<p>组合实验仍要保留单模型基线、额外时延、显存、数据需求和故障传播。只要加入模型后不能明确改善成功率、恢复能力、数据效率或人工成本，就不应因为模型流行而继续扩张系统。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noreferrer">Segment Anything 2 ↗</a><p>Meta AI Research · 图像与视频可提示分割，可迁移到机器人目标建模和交互感知。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://github.com/facebookresearch/dinov2" target="_blank" rel="noreferrer">DINOv2 ↗</a><p>Meta AI Research · 通用视觉表征及其在机器人感知和数据效率中的迁移。</p></div></li>
+<li id="source-3"><span>S3</span><div><a href="https://github.com/facebookresearch/vggt" target="_blank" rel="noreferrer">VGGT ↗</a><p>Meta AI Research · 从图像预测相机、深度、点图和跟踪等 3D 几何量。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=adjacent">多模态基础模型</a><a href="/atlas/catalog/?track=adjacent">视频理解与预测</a><a href="/atlas/catalog/?track=adjacent">3D / 4D 表征</a><a href="/atlas/catalog/?track=robotics">机器人视觉感知</a><a href="/atlas/catalog/?track=robotics">6D 位姿估计</a><a href="/atlas/catalog/?track=adjacent">闭环评测</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

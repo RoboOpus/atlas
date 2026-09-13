@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="以 OpenMANIPULATOR-X 与 LeRobot SO-101 为入口，把“开源”拆成机械、电气、固件、控制、数据和模型六层。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>开源机器人平台怎么判断能否复现 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Hardware · 开源与低成本平台</p>
+        <h1>开源机器人平台怎么判断能否复现</h1>
+        <p class="article-summary">以 OpenMANIPULATOR-X 与 LeRobot SO-101 为入口，把“开源”拆成机械、电气、固件、控制、数据和模型六层。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>复现指南</span><span>约 4 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>基本机械臂安全</span><span>Linux 与串口基础</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#开源机械臂-至少有六层">“开源机械臂”至少有六层</a>
+<a href="#两个不同的起点">两个不同的起点</a>
+<a href="#复现清单一-bom-能不能真正采购">复现清单一：BOM 能不能真正采购</a>
+<a href="#复现清单二-动作和状态是否有统一语义">复现清单二：动作和状态是否有统一语义</a>
+<a href="#复现清单三-数据闭环是否完整">复现清单三：数据闭环是否完整</a>
+<a href="#低成本平台的隐性成本">低成本平台的隐性成本</a>
+<a href="#从能运行到可复现的四级标准">从能运行到可复现的四级标准</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>开源不是二元标签，必须逐层记录文件、许可证和版本。</li><li>能装起来不等于能重复采集可训练的数据。</li><li>低成本平台的主要风险往往是校准、维护和批次差异。</li></ul></section>
+          <h2 id="开源机械臂-至少有六层">“开源机械臂”至少有六层</h2>
+<p>一个平台可以开放 CAD，却不开放电路；可以开放控制代码，却依赖闭源伺服器；也可以提供训练代码，却没有可重建的数据采集流程。因此 Atlas 不使用单一的“开源/闭源”字段，而分别记录：</p>
+<ul>
+<li>机械：CAD、加工方式、公差、紧固件和装配说明；</li>
+<li>电气：原理图、线束、接口、供电和急停；</li>
+<li>固件：控制板与执行器固件、升级和回滚方式；</li>
+<li>控制：驱动、协议、控制频率、单位和限幅；</li>
+<li>数据：观测/动作定义、时间戳、标定和数据格式；</li>
+<li>模型：训练代码、权重、许可证、评测与部署路径。</li>
+</ul>
+<p>只有逐层核验，才能判断“复现”是重建同一硬件、运行同一软件，还是复现论文中的任务结果。</p>
+<h2 id="两个不同的起点">两个不同的起点</h2>
+<p>OpenMANIPULATOR-X 是围绕 DYNAMIXEL、ROS 与公开 CAD/软件组织的教育研究机械臂。官方手册提供装配、控制和开发入口；美国官方商店也给出整机 SKU 与公开标价。<a class="source-ref" href="#source-1">[S1]</a><a class="source-ref" href="#source-3">[S3]</a></p>
+<p>LeRobot SO-101 更接近数据采集与模仿学习工作流：官方文档连接 BOM、3D 打印、总线舵机配置、leader/follower 校准、遥操作、数据记录和策略训练。<a class="source-ref" href="#source-2">[S2]</a> 它的价值不只是低价机械结构，而是让硬件接口、数据格式和学习代码形成连续路径。</p>
+<p>二者不应简单排名。前者适合学习机械臂与 ROS 系统，后者更适合快速建立 teleoperation—dataset—policy 闭环；最终仍取决于负载、精度、工作空间和研究目标。</p>
+<h2 id="复现清单一-bom-能不能真正采购">复现清单一：BOM 能不能真正采购</h2>
+<p>BOM 应固定版本，并记录每个零件的制造商型号、可接受替代件、数量、地区链接和核验日期。只写“舵机 × 6”无法处理齿比、电压、批次或协议差异。</p>
+<p>对 3D 打印件还要记录材料、层高、填充、支撑方向和关键配合尺寸。对线束和紧固件要给出长度、连接器和端子规格。缺少这些信息时，BOM 只是示意，不是可重建清单。</p>
+<h2 id="复现清单二-动作和状态是否有统一语义">复现清单二：动作和状态是否有统一语义</h2>
+<p>需要逐关节确认：</p>
+<ul>
+<li>零位、正方向、单位和软硬限位；</li>
+<li>位置、速度、电流或力矩的可读/可写范围；</li>
+<li>leader 与 follower 的关节映射和缩放；</li>
+<li>断线、掉电、急停与重新连接后的状态；</li>
+<li>SDK 输出的时间戳来自设备还是主机。</li>
+</ul>
+<p>如果两台同型号机械臂在同一物理姿态返回不同关节值，跨机器人共享策略会先被校准误差击败。LeRobot 文档把 calibration ID 与后续遥操作、录制和评测关联起来，说明校准文件本身就是数据契约的一部分。<a class="source-ref" href="#source-2">[S2]</a></p>
+<h2 id="复现清单三-数据闭环是否完整">复现清单三：数据闭环是否完整</h2>
+<p>一个可训练平台至少应完成以下闭环：</p>
+<ol>
+<li>相机和关节状态具有可解释的时间关系。</li>
+<li>每个 episode 有任务描述、开始/结束条件和失败标签。</li>
+<li>原始观测、动作、校准与元数据可以一起导出。</li>
+<li>数据清洗不会静默删除失败和干预。</li>
+<li>训练后的策略能在同一硬件配置中复现实验，并留下日志。</li>
+</ol>
+<p>ROS 2 可以承担通信和生命周期管理，但“支持 ROS 2”本身不能保证时间同步、控制安全或数据可复现。<a class="source-ref" href="#source-4">[S4]</a></p>
+<h2 id="低成本平台的隐性成本">低成本平台的隐性成本</h2>
+<ul>
+<li>3D 打印、返工和备件占用的时间；</li>
+<li>舵机批次差异、回差、温升和寿命；</li>
+<li>相机支架与工作台刚度；</li>
+<li>leader/follower 反复校准；</li>
+<li>缺少硬件急停或安全限幅时的额外防护；</li>
+<li>数据格式升级造成的迁移工作。</li>
+</ul>
+<p>因此“总成本”至少包括采购、装配、校准、维护、停机和数据返工。对研究项目而言，便宜但不稳定的平台可能比更贵的成熟平台消耗更多实验周转时间。</p>
+<h2 id="从能运行到可复现的四级标准">从能运行到可复现的四级标准</h2>
+<ul>
+<li>L0：仓库可下载，文档存在。</li>
+<li>L1：按固定 BOM 完成装配并通过关节自检。</li>
+<li>L2：完成遥操作、同步记录和重复校准。</li>
+<li>L3：同一任务可跨日期重复收集，策略指标和失败分布稳定。</li>
+<li>L4：另一套独立硬件按公开材料复现，并能解释剩余差异。</li>
+</ul>
+<p>Atlas 中只有达到 L2 的平台才适合进入“数据采集候选”；达到 L3 后才适合支撑算法对比。当前条目仍是来源核对草稿，不声称已经完成本地硬件复现。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://emanual.robotis.com/docs/en/platform/openmanipulator_x/overview/" target="_blank" rel="noreferrer">OpenMANIPULATOR-X ↗</a><p>ROBOTIS · 教育与研究用开源机械臂的 BOM、装配、控制和 ROS 集成。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://github.com/huggingface/lerobot" target="_blank" rel="noreferrer">LeRobot ↗</a><p>Hugging Face · 低成本机器人、数据采集、策略训练与硬件配置的开源生态。</p></div></li>
+<li id="source-3"><span>S3</span><div><a href="https://robotis.us/products/openmanipulator-x-rm-x52-tnm" target="_blank" rel="noreferrer">ROBOTIS America OpenMANIPULATOR-X ↗</a><p>ROBOTIS America · 核对美国地区 RM-X52-TNM 整机套装的公开价格、SKU 与交期。</p></div></li>
+<li id="source-4"><span>S4</span><div><a href="https://docs.ros.org/en/rolling/" target="_blank" rel="noreferrer">ROS 2 Documentation ↗</a><p>Open Robotics · 机器人中间件、接口、工具链、包索引和发行版兼容性。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=hardware">低成本与开源机械臂</a><a href="/atlas/catalog/?track=hardware">开源机器人硬件</a><a href="/atlas/catalog/?track=hardware">夹爪</a><a href="/atlas/catalog/?track=hardware">电机、驱动与实时总线</a><a href="/atlas/catalog/?track=adjacent">数据引擎</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

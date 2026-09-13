@@ -92,8 +92,8 @@
       "cadence": "一次建骨架，季度复核",
       "status": "active",
       "output": "知识正文：坐标系与 SE(3)",
-      "next_action": "继续写运动学、雅可比、动力学三篇正文，并加入可运行练习。",
-      "detail_url": "/atlas/knowledge/frames-se3/"
+      "next_action": "已完成坐标系、运动学和动力学主线；下一步补数值练习与阻抗控制正文。",
+      "detail_url": "/atlas/knowledge/kinematics-jacobian/"
     },
     {
       "id": "robotics-planning-control-stack",
@@ -120,8 +120,8 @@
       "cadence": "每月版本复核",
       "status": "active",
       "output": "知识正文：因子图状态估计",
-      "next_action": "加入三位姿 GTSAM 最小实验、错误回环与噪声权重对照。",
-      "detail_url": "/atlas/knowledge/factor-graphs-state-estimation/"
+      "next_action": "已补标定与时间同步系统指南；下一步加入三位姿 GTSAM 实验和错误回环对照。",
+      "detail_url": "/atlas/knowledge/calibration-time-synchronization/"
     },
     {
       "id": "robotics-simulation-benchmarks",
@@ -170,28 +170,28 @@
       "track": "hardware",
       "title": "低成本与开源机器人平台",
       "summary": "追踪 BOM、机械图、控制板、固件、数据采集与策略训练的开放程度。",
-      "source_ids": ["hardware-openmanipulator-x", "hardware-lerobot", "hardware-jetson"],
+      "source_ids": ["hardware-openmanipulator-x", "hardware-lerobot", "hardware-robotis-us-openmanipulator-price", "hardware-jetson"],
       "target_node_ids": ["hardware-low-cost-arms", "hardware-open-systems", "hardware-edge-compute"],
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "site/data/field-guides.json · Hardware / 开源与低成本",
-      "next_action": "继续拆分硬件、CAD、固件、软件、数据与模型权重的许可。",
-      "detail_url": "/atlas/hardware/"
+      "output": "知识正文：开源机器人平台复现分级",
+      "next_action": "已拆分机械、电气、固件、控制、数据与模型六层；下一步补 SO-101 BOM 版本快照。",
+      "detail_url": "/atlas/knowledge/open-robot-platform-reproducibility/"
     },
     {
       "id": "hardware-price-snapshots",
       "track": "hardware",
       "title": "硬件价格快照",
       "summary": "记录公开标价、询价、地区、税费、运费和核验日期，不用过期价格做结论。",
-      "source_ids": ["hardware-ufactory-xarm", "hardware-gelsight", "hardware-jetson"],
-      "target_node_ids": ["hardware-research-arms", "hardware-tactile-sensors", "hardware-edge-compute"],
+      "source_ids": ["hardware-unitree-go2-price", "hardware-robotis-us-openmanipulator-price", "hardware-ufactory-us-xarm6-price"],
+      "target_node_ids": ["hardware-quadrupeds", "hardware-research-arms", "hardware-low-cost-arms", "hardware-open-systems"],
       "access_mode": "manual",
       "cadence": "每月或采购前",
-      "status": "planned",
-      "output": "待建 timestamped price ledger",
-      "next_action": "字段规则已明确；下一步只收录满足币种、地区、含税、套装和来源日期的公开价格。",
-      "detail_url": "/atlas/hardware/"
+      "status": "active",
+      "output": "content/hardware-price-snapshots.json · 5 条首批价格快照",
+      "next_action": "继续补末端、RGB-D、六维力和边缘计算平台；每月追加，不覆盖历史。",
+      "detail_url": "/atlas/knowledge/hardware-price-snapshots/"
     },
     {
       "id": "adjacent-autonomy-datasets",
@@ -217,9 +217,9 @@
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "知识正文：跨领域迁移证伪框架",
-      "next_action": "为 SAM 2、DINOv2 和 VGGT 分别建立机器人最小验证实验卡。",
-      "detail_url": "/atlas/knowledge/cross-domain-transfer-evaluation/"
+      "output": "知识正文：SAM 2、DINOv2、VGGT 机器人最小实验卡",
+      "next_action": "按实验卡采集小规模真实数据，并把结果升级为带日志的证据记录。",
+      "detail_url": "/atlas/knowledge/foundation-model-robot-experiments/"
     },
     {
       "id": "lab-website-template-review",

@@ -20,7 +20,7 @@
     <section class="knowledge-controls" aria-label="知识正文筛选">
       <label class="search-field"><span>搜索正文</span><input id="knowledge-search" type="search" placeholder="例如：SE(3)、状态估计、机械臂、迁移" autocomplete="off"></label>
       <div class="filter-row" aria-label="按板块筛选"><button type="button" data-track="all" class="active">全部</button><button type="button" data-track="robotics">Robotics</button><button type="button" data-track="hardware">Hardware</button><button type="button" data-track="adjacent">Adjacent</button></div>
-      <div class="result-line"><strong id="knowledge-count">6 / 6 篇正文</strong><span>来源已核对不等于人工终审。</span></div>
+      <div class="result-line"><strong id="knowledge-count">12 / 12 篇正文</strong><span>来源已核对不等于人工终审。</span></div>
     </section>
     <section id="knowledge-grid" class="knowledge-grid" aria-label="知识正文列表"><article class="knowledge-card" data-track="adjacent" data-search="从热门模型到机器人 idea：跨领域迁移的证伪框架 用能力、接口、闭环、时延、数据假设和失败代价审查 sam 2、dinov2、vggt 与 carla 等外部成果，避免把模型名直接当研究问题。 研究方法 adjacent 先抽取可迁移能力，不从模型名称出发。 离线指标提升不能自动推出闭环任务收益。 每个 idea 必须附带一个低成本、可失败的最小实验。">
     <div class="knowledge-card-top"><span>Adjacent · 研究方法</span><span>研究设计</span></div>
@@ -29,12 +29,33 @@
     <div class="knowledge-card-facts"><span>6 个一手来源</span><span>7 个知识节点</span><span>4 分钟</span></div>
     <a class="knowledge-open" href="/atlas/knowledge/cross-domain-transfer-evaluation/">阅读正文 →</a>
   </article>
+<article class="knowledge-card" data-track="adjacent" data-search="sam 2、dinov2、vggt：三个机器人最小实验卡 不把热门模型直接当作机器人方案，而是分别测试视频对象状态、跨域视觉表征和多视图几何能否改善闭环任务。 视觉基础模型 adjacent 三个模型的输出接口不同，不能用同一种评测指标。 先冻结模型做最小闭环实验，再决定是否微调或系统集成。 离线视觉提升只有转化为任务成功率、干预率或恢复能力才有机器人价值。">
+    <div class="knowledge-card-top"><span>Adjacent · 视觉基础模型</span><span>实验设计</span></div>
+    <h2><a href="/atlas/knowledge/foundation-model-robot-experiments/">SAM 2、DINOv2、VGGT：三个机器人最小实验卡</a></h2>
+    <p>不把热门模型直接当作机器人方案，而是分别测试视频对象状态、跨域视觉表征和多视图几何能否改善闭环任务。</p>
+    <div class="knowledge-card-facts"><span>3 个一手来源</span><span>6 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/foundation-model-robot-experiments/">阅读正文 →</a>
+  </article>
 <article class="knowledge-card" data-track="hardware" data-search="机器人传感器选型：先定义信息，再选择设备 把 rgb-d、双目视觉惯性、3d lidar、六维力/力矩和视触觉放进同一任务链，重点处理量程、同步、标定和失效条件。 传感器系统 hardware 先写需要估计的物理量和失效条件，再选传感器。 时间同步和外参误差常比标称分辨率更影响系统。 视觉、力和触觉解决的信息不同，不能用单一精度数字比较。">
     <div class="knowledge-card-top"><span>Hardware · 传感器系统</span><span>系统指南</span></div>
     <h2><a href="/atlas/knowledge/robot-sensor-selection/">机器人传感器选型：先定义信息，再选择设备</a></h2>
     <p>把 RGB-D、双目视觉惯性、3D LiDAR、六维力/力矩和视触觉放进同一任务链，重点处理量程、同步、标定和失效条件。</p>
     <div class="knowledge-card-facts"><span>5 个一手来源</span><span>6 个知识节点</span><span>4 分钟</span></div>
     <a class="knowledge-open" href="/atlas/knowledge/robot-sensor-selection/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="hardware" data-search="机器人硬件价格快照：第一批可追溯样本 用地区、币种、税运费、配置、库存和日期记录首批公开价格，避免把搜索摘要或过期报价当成采购结论。 价格与采购 hardware 价格必须与具体型号、配置、地区和日期绑定。 不含税运费、库存不足和询价都属于价格事实的一部分。 价格快照只用于形成询价短名单，不替代正式报价。">
+    <div class="knowledge-card-top"><span>Hardware · 价格与采购</span><span>采购数据</span></div>
+    <h2><a href="/atlas/knowledge/hardware-price-snapshots/">机器人硬件价格快照：第一批可追溯样本</a></h2>
+    <p>用地区、币种、税运费、配置、库存和日期记录首批公开价格，避免把搜索摘要或过期报价当成采购结论。</p>
+    <div class="knowledge-card-facts"><span>3 个一手来源</span><span>4 个知识节点</span><span>3 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/hardware-price-snapshots/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="hardware" data-search="开源机器人平台怎么判断能否复现 以 openmanipulator-x 与 lerobot so-101 为入口，把“开源”拆成机械、电气、固件、控制、数据和模型六层。 开源与低成本平台 hardware 开源不是二元标签，必须逐层记录文件、许可证和版本。 能装起来不等于能重复采集可训练的数据。 低成本平台的主要风险往往是校准、维护和批次差异。">
+    <div class="knowledge-card-top"><span>Hardware · 开源与低成本平台</span><span>复现指南</span></div>
+    <h2><a href="/atlas/knowledge/open-robot-platform-reproducibility/">开源机器人平台怎么判断能否复现</a></h2>
+    <p>以 OpenMANIPULATOR-X 与 LeRobot SO-101 为入口，把“开源”拆成机械、电气、固件、控制、数据和模型六层。</p>
+    <div class="knowledge-card-facts"><span>4 个一手来源</span><span>5 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/open-robot-platform-reproducibility/">阅读正文 →</a>
   </article>
 <article class="knowledge-card" data-track="hardware" data-search="研究型机械臂怎么选：从论文参数回到系统约束 用负载、臂展、自由度、控制开放性、安全、生态和总成本比较 fr3、ur5e、kinova gen3 与 xarm 7，而不是给出脱离任务的排行榜。 研究型机械臂 hardware 先写任务需求，再看型号参数。 额定负载必须包含夹爪、传感器、线缆和工件。 采购价不是总成本，接口与维护决定长期实验效率。">
     <div class="knowledge-card-top"><span>Hardware · 研究型机械臂</span><span>选型指南</span></div>
@@ -49,6 +70,27 @@
     <p>区分任务规划、几何路径、时间轨迹、反馈控制和执行接口，解释 OMPL、MoveIt 2、ROS 2 与 MPC 在系统中的位置。</p>
     <div class="knowledge-card-facts"><span>5 个一手来源</span><span>5 个知识节点</span><span>4 分钟</span></div>
     <a class="knowledge-open" href="/atlas/knowledge/planning-control-stack/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="robotics" data-search="从正运动学到 jacobian：机械臂运动学的统一主线 用位姿映射、速度映射、奇异性和数值逆运动学串起机械臂运动学，并给出可直接用于代码验收的检查项。 数学与动力学 robotics 正运动学回答位姿，jacobian 回答瞬时运动与力的映射。 空间 jacobian 与本体 jacobian 都正确，前提是速度表达坐标系保持一致。 奇异性应通过秩、奇异值和任务方向解释，而不是只看一个阈值。">
+    <div class="knowledge-card-top"><span>Robotics · 数学与动力学</span><span>基础主线</span></div>
+    <h2><a href="/atlas/knowledge/kinematics-jacobian/">从正运动学到 Jacobian：机械臂运动学的统一主线</a></h2>
+    <p>用位姿映射、速度映射、奇异性和数值逆运动学串起机械臂运动学，并给出可直接用于代码验收的检查项。</p>
+    <div class="knowledge-card-facts"><span>2 个一手来源</span><span>3 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/kinematics-jacobian/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="robotics" data-search="刚体动力学：从方程到可验证的机器人模型 梳理质量矩阵、科氏与重力项、正逆动力学及 rnea/crba/aba，并把模型一致性变成测试。 数学与动力学 robotics 逆动力学、质量矩阵和正动力学是同一模型的不同查询。 惯性、关节方向、重力和传动参数的一致性比算法名称更重要。 动力学模型必须通过能量、静态重力和正逆互逆测试。">
+    <div class="knowledge-card-top"><span>Robotics · 数学与动力学</span><span>基础主线</span></div>
+    <h2><a href="/atlas/knowledge/rigid-body-dynamics/">刚体动力学：从方程到可验证的机器人模型</a></h2>
+    <p>梳理质量矩阵、科氏与重力项、正逆动力学及 RNEA/CRBA/ABA，并把模型一致性变成测试。</p>
+    <div class="knowledge-card-facts"><span>3 个一手来源</span><span>4 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/rigid-body-dynamics/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="robotics" data-search="机器人标定与时间同步：把误差链逐段关掉 从相机内参、外参、手眼标定到 camera–imu 时间偏移，建立采集、求解、验证和上线监控的完整检查链。 感知与状态估计 robotics 空间外参与时间偏移会互相伪装，必须分层验证。 平均重投影误差不能代表整个视场、距离和运动范围。 标定结果必须带数据、版本、坐标方向和上线验收记录。">
+    <div class="knowledge-card-top"><span>Robotics · 感知与状态估计</span><span>系统指南</span></div>
+    <h2><a href="/atlas/knowledge/calibration-time-synchronization/">机器人标定与时间同步：把误差链逐段关掉</a></h2>
+    <p>从相机内参、外参、手眼标定到 Camera–IMU 时间偏移，建立采集、求解、验证和上线监控的完整检查链。</p>
+    <div class="knowledge-card-facts"><span>4 个一手来源</span><span>5 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/calibration-time-synchronization/">阅读正文 →</a>
   </article>
 <article class="knowledge-card" data-track="robotics" data-search="因子图状态估计：把传感器融合写成可检查的约束 从变量、因子和 map 目标出发，解释里程计、观测、回环与先验如何进入同一个估计问题，以及常见工程失败。 状态估计 robotics 变量表示未知量，因子表示只依赖部分变量的局部约束。 图结构让测量来源、稀疏性和错误假设可以被逐项检查。 后端优化不能修复错误的数据关联、时间同步或坐标系。">
     <div class="knowledge-card-top"><span>Robotics · 状态估计</span><span>进阶</span></div>

@@ -6,6 +6,8 @@
 - `/atlas/knowledge/<slug>/` 独立正文页；
 - `site/data/knowledge.json` 机器可读索引。
 
+结构化事实可以使用独立源文件。例如硬件价格以 `content/hardware-price-snapshots.json` 追加保存，并在构建时同步到 `/atlas/data/hardware-price-snapshots.json`。正文负责解释字段、适用范围和风险，JSON 负责机器读取与历史追加。
+
 ## Markdown 约定
 
 每篇文件使用 JSON front matter，至少包含：

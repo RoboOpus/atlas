@@ -70,7 +70,10 @@
     "source_directory": "content/knowledge",
     "index_url": "https://roboopus.github.io/atlas/knowledge/",
     "machine_index": "https://roboopus.github.io/atlas/data/knowledge.json",
-    "article_count": 6,
+    "article_count": 12,
+    "structured_datasets": [
+      "https://roboopus.github.io/atlas/data/hardware-price-snapshots.json"
+    ],
     "default_editorial_state": "source-checked-draft",
     "human_review_required_for": "reviewed"
   },

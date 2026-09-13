@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="梳理质量矩阵、科氏与重力项、正逆动力学及 RNEA/CRBA/ABA，并把模型一致性变成测试。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>刚体动力学：从方程到可验证的机器人模型 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Robotics · 数学与动力学</p>
+        <h1>刚体动力学：从方程到可验证的机器人模型</h1>
+        <p class="article-summary">梳理质量矩阵、科氏与重力项、正逆动力学及 RNEA/CRBA/ABA，并把模型一致性变成测试。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>基础主线</span><span>约 4 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>机械臂运动学</span><span>微积分与线性代数</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#标准方程只是一张接口图">标准方程只是一张接口图</a>
+<a href="#三个核心算法">三个核心算法</a>
+<a href="#质量矩阵应该满足什么">质量矩阵应该满足什么</a>
+<a href="#重力补偿是最小真实实验">重力补偿是最小真实实验</a>
+<a href="#接触使方程多出约束">接触使方程多出约束</a>
+<a href="#模型误差来自哪里">模型误差来自哪里</a>
+<a href="#一组可自动化的模型测试">一组可自动化的模型测试</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>逆动力学、质量矩阵和正动力学是同一模型的不同查询。</li><li>惯性、关节方向、重力和传动参数的一致性比算法名称更重要。</li><li>动力学模型必须通过能量、静态重力和正逆互逆测试。</li></ul></section>
+          <h2 id="标准方程只是一张接口图">标准方程只是一张接口图</h2>
+<p>固定基座机械臂常写为：</p>
+<pre class="math-block"><code>M(q) qdd + C(q, qdot) qdot + g(q) + tau_f = tau + J(q)^T F_ext</code></pre>
+<p><code>M</code> 是质量矩阵，<code>C qdot</code> 汇总速度相关项，<code>g</code> 是重力项，<code>tau_f</code> 是摩擦或其他未建模项，外力通过 Jacobian 转置映射到关节空间。Modern Robotics 从拉格朗日和 Newton–Euler 两条路线解释这些量，并延伸到任务空间与约束动力学。<a class="source-ref" href="#source-1">[S1]</a></p>
+<p>方程的价值不在于背诵，而在于把系统查询分清：已知运动求力矩是逆动力学，已知力矩求加速度是正动力学，已知配置求 <code>M(q)</code> 是惯性查询。</p>
+<h2 id="三个核心算法">三个核心算法</h2>
+<ul>
+<li><strong>RNEA</strong>：递归 Newton–Euler 算法，给定 <code>q、qdot、qdd</code> 计算关节力矩，常用于逆动力学和偏置项。</li>
+<li><strong>CRBA</strong>：复合刚体算法，计算质量矩阵。</li>
+<li><strong>ABA</strong>：关节体算法，给定状态和力矩计算关节加速度，适合正动力学。</li>
+</ul>
+<p>Pinocchio 的官方能力表把运动学、动力学、Lie 群、解析导数和 Python 绑定放在同一模型接口中。<a class="source-ref" href="#source-2">[S2]</a> Drake 的 MultibodyPlant 则提供另一条以系统建模、仿真和控制组合为中心的实现路径。<a class="source-ref" href="#source-3">[S3]</a> 二者都不能替代模型核验：错误的惯性参数会被高效地算出错误答案。</p>
+<h2 id="质量矩阵应该满足什么">质量矩阵应该满足什么</h2>
+<p>对常规刚体系统，<code>M(q)</code> 应对称，并在有效配置中正定。它描述不同关节加速度组合对应的动能：</p>
+<pre class="math-block"><code>K = 0.5 qdot^T M(q) qdot</code></pre>
+<p>这给出两个简单测试：检查 <code>M</code> 与其转置的差，以及对随机非零 <code>qdot</code> 检查动能为正。若失败，先查惯性张量、质量、关节索引和浮动基座约定，而不是先换求解器。</p>
+<h2 id="重力补偿是最小真实实验">重力补偿是最小真实实验</h2>
+<p>在低速、无接触条件下，给机器人施加 <code>tau = g(q)</code>，理想模型应抵消重力。真实系统仍会受到摩擦、齿隙、线缆、负载和安全控制器影响，因此验收需要：</p>
+<ul>
+<li>明确负载质量、质心和安装姿态；</li>
+<li>在多个安全姿态记录稳态误差与关节电流；</li>
+<li>区分厂商控制器已做的补偿与上层算法输出；</li>
+<li>从低增益、限幅和急停可达状态开始。</li>
+</ul>
+<p>如果模型连静态重力都解释不了，直接上计算力矩控制或 NMPC 只会掩盖问题。</p>
+<h2 id="接触使方程多出约束">接触使方程多出约束</h2>
+<p>接触任务需要处理接触 Jacobian、法向约束、摩擦和冲击。刚性接触模型通常引入约束力或互补条件；柔顺模型则用弹簧阻尼近似局部形变。两者的参数都不是“仿真器默认值即真实值”。</p>
+<p>接触丰富任务应记录求解器、时间步、摩擦模型、接触刚度/阻尼和穿透容差。否则不同算法在不同数值条件下的结果不可比较。</p>
+<h2 id="模型误差来自哪里">模型误差来自哪里</h2>
+<ul>
+<li>URDF 惯性张量坐标系错误或不满足物理一致性。</li>
+<li>夹爪、相机、转接板和线缆没有加入末端负载。</li>
+<li>电机侧惯量和减速比未映射到关节侧。</li>
+<li>静摩擦、库仑摩擦、黏性摩擦和回差被一个常数替代。</li>
+<li>仿真与实机使用不同的关节零点、重力方向或控制周期。</li>
+</ul>
+<p>系统辨识不是“把所有误差拟合掉”。需要先定义参数可辨识性、激励轨迹、训练/验证数据划分和模型有效域。</p>
+<h2 id="一组可自动化的模型测试">一组可自动化的模型测试</h2>
+<ol>
+<li><code>M(q)</code> 对称且随机速度下动能为正。</li>
+<li><code>RNEA(q, qdot, qdd)</code> 与 <code>M(q)qdd + bias(q,qdot)</code> 一致。</li>
+<li>将 RNEA 结果送入 ABA，应恢复原始 <code>qdd</code>。</li>
+<li><code>qdot=0、qdd=0</code> 时，逆动力学结果与重力项一致。</li>
+<li>关闭重力与外力后，无驱动无耗散系统的总能量仅有受控数值漂移。</li>
+<li>同一 URDF 在两个库中的质量、质心、关节顺序和重力补偿结果一致。</li>
+</ol>
+<p>通过这些测试后，模型才适合进入轨迹优化、MPC、阻抗控制或 sim-to-real 对照。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://modernrobotics.northwestern.edu/" target="_blank" rel="noreferrer">Modern Robotics ↗</a><p>Northwestern University · 机器人运动学、动力学、规划和控制的系统化课程主线。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://gepettoweb.laas.fr/doc/stack-of-tasks/pinocchio/master/doxygen-html/index.html" target="_blank" rel="noreferrer">Pinocchio ↗</a><p>Stack of Tasks / LAAS-CNRS · 刚体运动学、动力学及导数计算的实现参考。</p></div></li>
+<li id="source-3"><span>S3</span><div><a href="https://drake.mit.edu/" target="_blank" rel="noreferrer">Drake ↗</a><p>Robot Locomotion Group · 基于模型的设计、仿真、优化、规划和控制工具链。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=robotics">刚体动力学</a><a href="/atlas/catalog/?track=robotics">接触与摩擦建模</a><a href="/atlas/catalog/?track=robotics">系统辨识</a><a href="/atlas/catalog/?track=robotics">模型预测控制</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

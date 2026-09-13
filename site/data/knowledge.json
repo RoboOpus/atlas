@@ -45,6 +45,45 @@
       "node_count": 7
     },
     {
+      "id": "adjacent-foundation-model-experiments",
+      "slug": "foundation-model-robot-experiments",
+      "track": "adjacent",
+      "category": "视觉基础模型",
+      "title": "SAM 2、DINOv2、VGGT：三个机器人最小实验卡",
+      "summary": "不把热门模型直接当作机器人方案，而是分别测试视频对象状态、跨域视觉表征和多视图几何能否改善闭环任务。",
+      "difficulty": "实验设计",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "adjacent-sam2",
+        "adjacent-dinov2",
+        "adjacent-vggt"
+      ],
+      "node_ids": [
+        "adjacent-multimodal-models",
+        "adjacent-video-understanding",
+        "adjacent-3d4d",
+        "robotics-visual-perception",
+        "robotics-pose-estimation",
+        "adjacent-closed-loop-eval"
+      ],
+      "prerequisites": [
+        "跨领域迁移证伪框架",
+        "基本机器人视觉"
+      ],
+      "takeaways": [
+        "三个模型的输出接口不同，不能用同一种评测指标。",
+        "先冻结模型做最小闭环实验，再决定是否微调或系统集成。",
+        "离线视觉提升只有转化为任务成功率、干预率或恢复能力才有机器人价值。"
+      ],
+      "source_file": "content/knowledge/adjacent-foundation-model-experiments.md",
+      "url": "/atlas/knowledge/foundation-model-robot-experiments/",
+      "reading_minutes": 4,
+      "source_count": 3,
+      "node_count": 6
+    },
+    {
       "id": "hardware-sensor-selection",
       "slug": "robot-sensor-selection",
       "track": "hardware",
@@ -85,6 +124,81 @@
       "reading_minutes": 4,
       "source_count": 5,
       "node_count": 6
+    },
+    {
+      "id": "hardware-price-snapshots",
+      "slug": "hardware-price-snapshots",
+      "track": "hardware",
+      "category": "价格与采购",
+      "title": "机器人硬件价格快照：第一批可追溯样本",
+      "summary": "用地区、币种、税运费、配置、库存和日期记录首批公开价格，避免把搜索摘要或过期报价当成采购结论。",
+      "difficulty": "采购数据",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "hardware-unitree-go2-price",
+        "hardware-robotis-us-openmanipulator-price",
+        "hardware-ufactory-us-xarm6-price"
+      ],
+      "node_ids": [
+        "hardware-quadrupeds",
+        "hardware-research-arms",
+        "hardware-low-cost-arms",
+        "hardware-open-systems"
+      ],
+      "prerequisites": [
+        "明确采购地区与任务配置"
+      ],
+      "takeaways": [
+        "价格必须与具体型号、配置、地区和日期绑定。",
+        "不含税运费、库存不足和询价都属于价格事实的一部分。",
+        "价格快照只用于形成询价短名单，不替代正式报价。"
+      ],
+      "source_file": "content/knowledge/hardware-price-snapshots.md",
+      "url": "/atlas/knowledge/hardware-price-snapshots/",
+      "reading_minutes": 3,
+      "source_count": 3,
+      "node_count": 4
+    },
+    {
+      "id": "hardware-open-platform-reproducibility",
+      "slug": "open-robot-platform-reproducibility",
+      "track": "hardware",
+      "category": "开源与低成本平台",
+      "title": "开源机器人平台怎么判断能否复现",
+      "summary": "以 OpenMANIPULATOR-X 与 LeRobot SO-101 为入口，把“开源”拆成机械、电气、固件、控制、数据和模型六层。",
+      "difficulty": "复现指南",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "hardware-openmanipulator-x",
+        "hardware-lerobot",
+        "hardware-robotis-us-openmanipulator-price",
+        "robotics-ros2"
+      ],
+      "node_ids": [
+        "hardware-low-cost-arms",
+        "hardware-open-systems",
+        "hardware-grippers",
+        "hardware-motors-buses",
+        "adjacent-data-engines"
+      ],
+      "prerequisites": [
+        "基本机械臂安全",
+        "Linux 与串口基础"
+      ],
+      "takeaways": [
+        "开源不是二元标签，必须逐层记录文件、许可证和版本。",
+        "能装起来不等于能重复采集可训练的数据。",
+        "低成本平台的主要风险往往是校准、维护和批次差异。"
+      ],
+      "source_file": "content/knowledge/hardware-open-platform-reproducibility.md",
+      "url": "/atlas/knowledge/open-robot-platform-reproducibility/",
+      "reading_minutes": 4,
+      "source_count": 4,
+      "node_count": 5
     },
     {
       "id": "hardware-research-arm-selection",
@@ -163,6 +277,117 @@
       "url": "/atlas/knowledge/planning-control-stack/",
       "reading_minutes": 4,
       "source_count": 5,
+      "node_count": 5
+    },
+    {
+      "id": "robotics-kinematics-jacobian",
+      "slug": "kinematics-jacobian",
+      "track": "robotics",
+      "category": "数学与动力学",
+      "title": "从正运动学到 Jacobian：机械臂运动学的统一主线",
+      "summary": "用位姿映射、速度映射、奇异性和数值逆运动学串起机械臂运动学，并给出可直接用于代码验收的检查项。",
+      "difficulty": "基础主线",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "robotics-modern-robotics",
+        "robotics-pinocchio"
+      ],
+      "node_ids": [
+        "robotics-kinematics",
+        "robotics-lie-groups",
+        "robotics-coordinate-frames"
+      ],
+      "prerequisites": [
+        "坐标系与 SE(3)",
+        "线性代数"
+      ],
+      "takeaways": [
+        "正运动学回答位姿，Jacobian 回答瞬时运动与力的映射。",
+        "空间 Jacobian 与本体 Jacobian 都正确，前提是速度表达坐标系保持一致。",
+        "奇异性应通过秩、奇异值和任务方向解释，而不是只看一个阈值。"
+      ],
+      "source_file": "content/knowledge/robotics-kinematics-jacobian.md",
+      "url": "/atlas/knowledge/kinematics-jacobian/",
+      "reading_minutes": 4,
+      "source_count": 2,
+      "node_count": 3
+    },
+    {
+      "id": "robotics-rigid-body-dynamics",
+      "slug": "rigid-body-dynamics",
+      "track": "robotics",
+      "category": "数学与动力学",
+      "title": "刚体动力学：从方程到可验证的机器人模型",
+      "summary": "梳理质量矩阵、科氏与重力项、正逆动力学及 RNEA/CRBA/ABA，并把模型一致性变成测试。",
+      "difficulty": "基础主线",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "robotics-modern-robotics",
+        "robotics-pinocchio",
+        "robotics-drake"
+      ],
+      "node_ids": [
+        "robotics-dynamics",
+        "robotics-contact-modeling",
+        "robotics-system-identification",
+        "robotics-mpc"
+      ],
+      "prerequisites": [
+        "机械臂运动学",
+        "微积分与线性代数"
+      ],
+      "takeaways": [
+        "逆动力学、质量矩阵和正动力学是同一模型的不同查询。",
+        "惯性、关节方向、重力和传动参数的一致性比算法名称更重要。",
+        "动力学模型必须通过能量、静态重力和正逆互逆测试。"
+      ],
+      "source_file": "content/knowledge/robotics-rigid-body-dynamics.md",
+      "url": "/atlas/knowledge/rigid-body-dynamics/",
+      "reading_minutes": 4,
+      "source_count": 3,
+      "node_count": 4
+    },
+    {
+      "id": "robotics-calibration-time-sync",
+      "slug": "calibration-time-synchronization",
+      "track": "robotics",
+      "category": "感知与状态估计",
+      "title": "机器人标定与时间同步：把误差链逐段关掉",
+      "summary": "从相机内参、外参、手眼标定到 Camera–IMU 时间偏移，建立采集、求解、验证和上线监控的完整检查链。",
+      "difficulty": "系统指南",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "robotics-opencv-calib3d",
+        "robotics-kalibr",
+        "robotics-ros2-message-filters",
+        "robotics-ros2"
+      ],
+      "node_ids": [
+        "robotics-calibration",
+        "robotics-state-estimation",
+        "robotics-slam",
+        "hardware-rgbd-cameras",
+        "hardware-imu"
+      ],
+      "prerequisites": [
+        "坐标系与 SE(3)",
+        "相机成像模型"
+      ],
+      "takeaways": [
+        "空间外参与时间偏移会互相伪装，必须分层验证。",
+        "平均重投影误差不能代表整个视场、距离和运动范围。",
+        "标定结果必须带数据、版本、坐标方向和上线验收记录。"
+      ],
+      "source_file": "content/knowledge/robotics-calibration-time-sync.md",
+      "url": "/atlas/knowledge/calibration-time-synchronization/",
+      "reading_minutes": 4,
+      "source_count": 4,
       "node_count": 5
     },
     {

@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.1.0",
+  "captured_at": "2026-09-13",
+  "policy": {
+    "append_only": true,
+    "currency_conversion": false,
+    "unknowns_are_explicit": true,
+    "not_purchase_advice": true
+  },
+  "snapshots": [
+    {
+      "id": "2026-09-13-unitree-go2-air-global",
+      "product": "Unitree Go2",
+      "variant": "AIR",
+      "category": "quadruped",
+      "region": "global-page",
+      "price": 1600,
+      "currency": "USD",
+      "tax": "excluded",
+      "freight": "excluded",
+      "availability": "not-stated",
+      "source_id": "hardware-unitree-go2-price",
+      "source_url": "https://www.unitree.com/go2/",
+      "captured_at": "2026-09-13"
+    },
+    {
+      "id": "2026-09-13-unitree-go2-pro-global",
+      "product": "Unitree Go2",
+      "variant": "PRO",
+      "category": "quadruped",
+      "region": "global-page",
+      "price": 2800,
+      "currency": "USD",
+      "tax": "excluded",
+      "freight": "excluded",
+      "availability": "not-stated",
+      "source_id": "hardware-unitree-go2-price",
+      "source_url": "https://www.unitree.com/go2/",
+      "captured_at": "2026-09-13"
+    },
+    {
+      "id": "2026-09-13-unitree-go2-edu-global",
+      "product": "Unitree Go2",
+      "variant": "EDU",
+      "category": "quadruped",
+      "region": "global-page",
+      "price": 4500,
+      "currency": "USD",
+      "tax": "excluded",
+      "freight": "excluded",
+      "availability": "not-stated",
+      "source_id": "hardware-unitree-go2-price",
+      "source_url": "https://www.unitree.com/go2/",
+      "captured_at": "2026-09-13"
+    },
+    {
+      "id": "2026-09-13-robotis-openmanipulator-x-us",
+      "product": "OpenMANIPULATOR-X",
+      "variant": "RM-X52-TNM",
+      "category": "robot-arm",
+      "region": "United States",
+      "price": 1629.09,
+      "currency": "USD",
+      "tax": "unknown",
+      "freight": "calculated-at-checkout",
+      "availability": "lead-time-2-3-weeks",
+      "source_id": "hardware-robotis-us-openmanipulator-price",
+      "source_url": "https://robotis.us/products/openmanipulator-x-rm-x52-tnm",
+      "captured_at": "2026-09-13"
+    },
+    {
+      "id": "2026-09-13-ufactory-xarm6-us",
+      "product": "UFACTORY xArm 6",
+      "variant": "X-ARM 6 Only",
+      "category": "robot-arm",
+      "region": "United States",
+      "price": 9500,
+      "currency": "USD",
+      "tax": "unknown",
+      "freight": "unknown",
+      "availability": "out-of-stock",
+      "source_id": "hardware-ufactory-us-xarm6-price",
+      "source_url": "https://www.ufactory.us/product/ufactory-xarm-6",
+      "captured_at": "2026-09-13"
+    }
+  ]
+}

@@ -213,6 +213,45 @@
       "tags": ["中间件", "接口", "工具链"]
     },
     {
+      "id": "robotics-ros2-message-filters",
+      "track": "robotics",
+      "name": "ROS 2 message_filters Tutorials",
+      "owner": "Open Robotics",
+      "kind": "documentation",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://docs.ros.org/en/rolling/p/message_filters/doc/tutorials.html",
+      "best_for": "核对多传感器消息的精确、近似与容差时间同步接口。",
+      "reuse_note": "Rolling 文档会变化；实现记录发行版、QoS 和同步窗口。",
+      "tags": ["时间同步", "ROS 2", "多传感器"]
+    },
+    {
+      "id": "robotics-opencv-calib3d",
+      "track": "robotics",
+      "name": "OpenCV calib3d",
+      "owner": "OpenCV",
+      "kind": "documentation",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html",
+      "best_for": "相机模型、内外参、畸变、PnP、立体几何与手眼标定 API。",
+      "reuse_note": "保存 OpenCV 版本、相机模型和标定数据；不能只报告平均重投影误差。",
+      "tags": ["相机标定", "手眼标定", "投影几何"]
+    },
+    {
+      "id": "robotics-kalibr",
+      "track": "robotics",
+      "name": "Kalibr",
+      "owner": "ETH Zurich ASL",
+      "kind": "repository",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://github.com/ethz-asl/kalibr",
+      "best_for": "多相机与相机—IMU 的空间和时间标定、噪声模型及报告。",
+      "reuse_note": "工具以 ROS 1 bag 为主；ROS 2 数据需记录转换流程和工具版本。",
+      "tags": ["Camera-IMU", "时空标定", "VIO"]
+    },
+    {
       "id": "robotics-gtsam",
       "track": "robotics",
       "name": "GTSAM",
@@ -331,6 +370,19 @@
       "tags": ["机械臂", "xArm", "SDK"]
     },
     {
+      "id": "hardware-ufactory-us-xarm6-price",
+      "track": "hardware",
+      "name": "UFACTORY USA xArm 6",
+      "owner": "UFACTORY USA",
+      "kind": "vendor",
+      "access_mode": "manual",
+      "official": true,
+      "url": "https://www.ufactory.us/product/ufactory-xarm-6",
+      "best_for": "核对美国地区 xArm 6 的公开配置、标价与库存状态。",
+      "reuse_note": "价格随配置和库存变化；保存地区、币种、库存与抓取日期。",
+      "tags": ["机械臂价格", "美国", "xArm 6"]
+    },
+    {
       "id": "hardware-unitree",
       "track": "hardware",
       "name": "Unitree Robotics",
@@ -342,6 +394,19 @@
       "best_for": "四足、人形机器人及配套产品的官方型号与入口。",
       "reuse_note": "宣传参数与开发者可用能力分栏记录；价格需地区和日期。",
       "tags": ["四足", "人形", "本体"]
+    },
+    {
+      "id": "hardware-unitree-go2-price",
+      "track": "hardware",
+      "name": "Unitree Go2 Official Product Page",
+      "owner": "Unitree",
+      "kind": "vendor",
+      "access_mode": "manual",
+      "official": true,
+      "url": "https://www.unitree.com/go2/",
+      "best_for": "核对 Go2 各版本的官方起售价、规格和税运费声明。",
+      "reuse_note": "页面明确标注税费和运费不含；不同地区实际可购配置需再次确认。",
+      "tags": ["四足价格", "Go2", "公开标价"]
     },
     {
       "id": "hardware-realsense",
@@ -433,6 +498,19 @@
       "best_for": "教育与研究用开源机械臂的 BOM、装配、控制和 ROS 集成。",
       "reuse_note": "硬件、固件、CAD 与软件可能使用不同许可，逐项核验。",
       "tags": ["开源硬件", "机械臂", "教育"]
+    },
+    {
+      "id": "hardware-robotis-us-openmanipulator-price",
+      "track": "hardware",
+      "name": "ROBOTIS America OpenMANIPULATOR-X",
+      "owner": "ROBOTIS America",
+      "kind": "vendor",
+      "access_mode": "manual",
+      "official": true,
+      "url": "https://robotis.us/products/openmanipulator-x-rm-x52-tnm",
+      "best_for": "核对美国地区 RM-X52-TNM 整机套装的公开价格、SKU 与交期。",
+      "reuse_note": "运费在结账时计算；税费、配件和地区差异不能由单一标价推断。",
+      "tags": ["开源机械臂价格", "美国", "RM-X52-TNM"]
     },
     {
       "id": "hardware-lerobot",

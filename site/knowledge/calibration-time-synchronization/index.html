@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="从相机内参、外参、手眼标定到 Camera–IMU 时间偏移，建立采集、求解、验证和上线监控的完整检查链。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>机器人标定与时间同步：把误差链逐段关掉 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Robotics · 感知与状态估计</p>
+        <h1>机器人标定与时间同步：把误差链逐段关掉</h1>
+        <p class="article-summary">从相机内参、外参、手眼标定到 Camera–IMU 时间偏移，建立采集、求解、验证和上线监控的完整检查链。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>系统指南</span><span>约 4 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>坐标系与 SE(3)</span><span>相机成像模型</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#标定不是一次性生成-yaml">标定不是一次性生成 YAML</a>
+<a href="#第一层-相机内参与畸变">第一层：相机内参与畸变</a>
+<a href="#第二层-外参与手眼关系">第二层：外参与手眼关系</a>
+<a href="#第三层-camera-imu-时空标定">第三层：Camera–IMU 时空标定</a>
+<a href="#运行时同步不是离线标定的替代品">运行时同步不是离线标定的替代品</a>
+<a href="#最小采集记录">最小采集记录</a>
+<a href="#上线验收阶梯">上线验收阶梯</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>空间外参与时间偏移会互相伪装，必须分层验证。</li><li>平均重投影误差不能代表整个视场、距离和运动范围。</li><li>标定结果必须带数据、版本、坐标方向和上线验收记录。</li></ul></section>
+          <h2 id="标定不是一次性生成-yaml">标定不是一次性生成 YAML</h2>
+<p>机器人多传感器系统至少包含三类参数：传感器内部模型、传感器之间的空间变换、各数据流之间的时间关系。任何一类错误都可能表现为点云重影、VIO 漂移、抓取偏差或高速运动下的“拖尾”。</p>
+<p>OpenCV 的 calib3d 文档明确区分相机内参、畸变和世界到相机的外参变换，并指出不合理的畸变函数可能在图像中心看似正常、在边缘明显失败。<a class="source-ref" href="#source-1">[S1]</a></p>
+<h2 id="第一层-相机内参与畸变">第一层：相机内参与畸变</h2>
+<p>针孔模型把相机坐标中的三维点投影到像素：</p>
+<pre class="math-block"><code>s p = K [R | t] Pw</code></pre>
+<p>内参 <code>K</code> 包含焦距与主点，畸变模型补充径向、切向或鱼眼效应。采集数据时应覆盖：</p>
+<ul>
+<li>图像四角和边缘，而不只在中心晃动标定板；</li>
+<li>多个距离与倾角；</li>
+<li>与真实使用一致的分辨率、裁剪和对焦状态；</li>
+<li>足够短的曝光，避免运动模糊污染角点。</li>
+</ul>
+<p>验收不能只看全局均值。应画出每张图、每个区域和不同距离的残差，并用未参与求解的数据做验证。</p>
+<h2 id="第二层-外参与手眼关系">第二层：外参与手眼关系</h2>
+<p>外参必须写清变换方向。例如 <code>T_base_camera</code> 与 <code>T_camera_base</code> 数值互逆，但名字相近。手眼标定还要区分 eye-in-hand 和 eye-to-hand，并把机器人基座、法兰、工具、相机和标定板组成一条闭合变换链。</p>
+<p>一个实用检查是环路一致性：沿两条独立路径把同一点变换到同一坐标系，位置和姿态应在预期误差内。然后用真实抓取点验证，而不是只在标定板上验证。</p>
+<h2 id="第三层-camera-imu-时空标定">第三层：Camera–IMU 时空标定</h2>
+<p>Kalibr 可联合估计多相机参数以及相机相对 IMU 的空间与时间关系。<a class="source-ref" href="#source-2">[S2]</a> 官方流程强调动态数据需要充分激励各旋转和加速度轴，同时控制照明、曝光和冲击。没有激励的方向通常无法被可靠估计。</p>
+<p>空间旋转误差和时间偏移都会让图像运动与 IMU 预测错位。如果只优化其中一个，另一个误差可能被错误吸收。因此需要保存优化后的时间偏移、外参、不确定性和诊断图，而不是只拿最终 YAML。</p>
+<p>Kalibr 主要围绕 ROS 1 bag 工作；ROS 2 数据若经过转换，转换脚本、时间单位、topic 和时钟来源都必须进入记录。<a class="source-ref" href="#source-2">[S2]</a></p>
+<h2 id="运行时同步不是离线标定的替代品">运行时同步不是离线标定的替代品</h2>
+<p>ROS 2 <code>message_filters</code> 提供精确、近似和带容差的多消息同步策略。<a class="source-ref" href="#source-3">[S3]</a> 近似同步能把时间接近的消息送入同一回调，但它不会修复：</p>
+<ul>
+<li>两台设备时钟持续漂移；</li>
+<li>驱动在到达主机后才打时间戳；</li>
+<li>网络排队造成的非固定时延；</li>
+<li>QoS 不一致导致的丢包；</li>
+<li>传感器曝光时刻与消息时间戳定义不一致。</li>
+</ul>
+<p>应优先建立统一硬件时钟或 PTP/触发链；软件近似同步只处理剩余容差。ROS 2 发行版、QoS、队列长度和容差窗口都应版本化。<a class="source-ref" href="#source-4">[S4]</a></p>
+<h2 id="最小采集记录">最小采集记录</h2>
+<p>每次标定至少保存：</p>
+<ul>
+<li>设备型号、序列号、镜头、分辨率、固件和驱动版本；</li>
+<li>原始数据及不可变校验值；</li>
+<li>标定板尺寸、打印方式和实测尺寸；</li>
+<li>坐标系名称、轴方向和变换方向；</li>
+<li>优化工具、提交或版本、完整命令与配置；</li>
+<li>训练残差、独立验证残差和失败样本；</li>
+<li>安装状态照片或机械固定说明。</li>
+</ul>
+<h2 id="上线验收阶梯">上线验收阶梯</h2>
+<ol>
+<li>静态重投影：覆盖全视场和多个距离。</li>
+<li>变换闭环：检查 base、tool、camera、target 的环路误差。</li>
+<li>动态对齐：快速旋转和移动时检查图像、IMU、点云是否重合。</li>
+<li>任务验证：在不同工作区位置执行同一抓取或定位任务。</li>
+<li>温漂与重装：热机后、运输后或更换末端后重新验证。</li>
+<li>在线监控：记录残差、时间差和异常跳变，触发重新标定而非静默退化。</li>
+</ol>
+<p>标定条目的最终产物应是“参数 + 数据 + 证据 + 适用范围”，而不是一份无法追溯的配置文件。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html" target="_blank" rel="noreferrer">OpenCV calib3d ↗</a><p>OpenCV · 相机模型、内外参、畸变、PnP、立体几何与手眼标定 API。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://github.com/ethz-asl/kalibr" target="_blank" rel="noreferrer">Kalibr ↗</a><p>ETH Zurich ASL · 多相机与相机—IMU 的空间和时间标定、噪声模型及报告。</p></div></li>
+<li id="source-3"><span>S3</span><div><a href="https://docs.ros.org/en/rolling/p/message_filters/doc/tutorials.html" target="_blank" rel="noreferrer">ROS 2 message_filters Tutorials ↗</a><p>Open Robotics · 核对多传感器消息的精确、近似与容差时间同步接口。</p></div></li>
+<li id="source-4"><span>S4</span><div><a href="https://docs.ros.org/en/rolling/" target="_blank" rel="noreferrer">ROS 2 Documentation ↗</a><p>Open Robotics · 机器人中间件、接口、工具链、包索引和发行版兼容性。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=robotics">机器人与传感器标定</a><a href="/atlas/catalog/?track=robotics">状态估计</a><a href="/atlas/catalog/?track=robotics">VO / VIO / SLAM</a><a href="/atlas/catalog/?track=hardware">RGB-D 相机</a><a href="/atlas/catalog/?track=hardware">IMU 与惯性系统</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

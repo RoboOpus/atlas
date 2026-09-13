@@ -7,6 +7,7 @@ const inputDir = path.join(repo, "content", "knowledge");
 const outputDir = path.join(repo, "site", "knowledge");
 const sourceData = JSON.parse(await readFile(path.join(repo, "site", "data", "sources.json"), "utf8"));
 const catalogData = JSON.parse(await readFile(path.join(repo, "site", "data", "catalog.json"), "utf8"));
+const hardwarePriceData = JSON.parse(await readFile(path.join(repo, "content", "hardware-price-snapshots.json"), "utf8"));
 const sourcesById = new Map(sourceData.sources.map((source) => [source.id, source]));
 const nodesById = new Map(catalogData.nodes.map((node) => [node.id, node]));
 const trackLabels = { robotics: "Robotics", hardware: "Hardware", adjacent: "Adjacent", frontier: "Frontier", lab: "Lab" };
@@ -234,4 +235,5 @@ const indexBody = `
 await mkdir(outputDir, { recursive: true });
 await writeFile(path.join(outputDir, "index.html"), pageShell({ title: "知识正文", description: "RoboOpus Atlas 具身智能与机器人知识正文。", body: indexBody }), "utf8");
 await writeFile(path.join(repo, "site", "data", "knowledge.json"), `${JSON.stringify({ schema_version: "0.1.0", updated_at: articles[0]?.updated_at ?? null, articles }, null, 2)}\n`, "utf8");
-process.stdout.write(`Built ${articles.length} source-backed knowledge articles.\n`);
+await writeFile(path.join(repo, "site", "data", "hardware-price-snapshots.json"), `${JSON.stringify(hardwarePriceData, null, 2)}\n`, "utf8");
+process.stdout.write(`Built ${articles.length} source-backed knowledge articles and ${hardwarePriceData.snapshots?.length ?? 0} hardware price snapshots.\n`);

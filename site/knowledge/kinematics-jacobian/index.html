@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="用位姿映射、速度映射、奇异性和数值逆运动学串起机械臂运动学，并给出可直接用于代码验收的检查项。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>从正运动学到 Jacobian：机械臂运动学的统一主线 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Robotics · 数学与动力学</p>
+        <h1>从正运动学到 Jacobian：机械臂运动学的统一主线</h1>
+        <p class="article-summary">用位姿映射、速度映射、奇异性和数值逆运动学串起机械臂运动学，并给出可直接用于代码验收的检查项。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>基础主线</span><span>约 4 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>坐标系与 SE(3)</span><span>线性代数</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#一条主线-配置到任务空间">一条主线：配置到任务空间</a>
+<a href="#正运动学的两个常用表达">正运动学的两个常用表达</a>
+<a href="#jacobian-是速度映射">Jacobian 是速度映射</a>
+<a href="#jacobian-也映射力">Jacobian 也映射力</a>
+<a href="#奇异性不是一个-坏姿态-标签">奇异性不是一个“坏姿态”标签</a>
+<a href="#数值逆运动学的最小闭环">数值逆运动学的最小闭环</a>
+<a href="#实现验收清单">实现验收清单</a>
+<a href="#常见失败模式">常见失败模式</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>正运动学回答位姿，Jacobian 回答瞬时运动与力的映射。</li><li>空间 Jacobian 与本体 Jacobian 都正确，前提是速度表达坐标系保持一致。</li><li>奇异性应通过秩、奇异值和任务方向解释，而不是只看一个阈值。</li></ul></section>
+          <h2 id="一条主线-配置到任务空间">一条主线：配置到任务空间</h2>
+<p>串联机械臂的配置由关节变量 <code>q</code> 表示，正运动学把它映射到末端位姿 <code>T(q)</code>。这一步解决“机器人现在在哪里”，但控制和优化还需要知道：关节发生一个很小的变化时，末端如何变化。</p>
+<p>Modern Robotics 用旋量和指数积公式统一旋转关节与移动关节，并区分在空间坐标系和末端坐标系表达的量。<a class="source-ref" href="#source-1">[S1]</a> Pinocchio 则把运动学、Lie 群和解析导数实现为可计算接口，适合把公式落到模型测试中。<a class="source-ref" href="#source-2">[S2]</a></p>
+<h2 id="正运动学的两个常用表达">正运动学的两个常用表达</h2>
+<p>齐次变换连乘直观，适合从 URDF 或 DH 参数检查每级坐标系。指数积表达把每个关节写成零位形下的旋量：</p>
+<pre class="math-block"><code>T(q) = exp([S1]q1) exp([S2]q2) ... exp([Sn]qn) M</code></pre>
+<p>这里的 <code>[Si]</code> 表示旋量的矩阵形式，<code>M</code> 是零位形时末端相对基座的位姿。工程中不必执着于唯一参数化；真正重要的是明确零位形、关节正方向、基座和末端坐标系，并用同一组关节值交叉验证两种实现。</p>
+<h2 id="jacobian-是速度映射">Jacobian 是速度映射</h2>
+<p>空间 Jacobian 把关节速度映射为在空间坐标系表达的末端 twist：</p>
+<pre class="math-block"><code>Vs = Js(q) qdot</code></pre>
+<p>对于 <code>n</code> 个关节的开链机器人，<code>Js</code> 是 <code>6 × n</code>。每一列可解释为“只有该关节以单位速度运动时，末端的瞬时 twist”。Modern Robotics 给出的递推结构说明，第 <code>i</code> 列只依赖它之前的关节配置。<a class="source-ref" href="#source-1">[S1]</a></p>
+<p>本体 Jacobian <code>Jb</code> 则把同一个物理速度表达在末端坐标系。二者由伴随变换联系。混用 <code>Js</code>、<code>Jb</code> 和不同坐标系下的误差，是数值 IK 与控制器常见的隐蔽错误。</p>
+<h2 id="jacobian-也映射力">Jacobian 也映射力</h2>
+<p>虚功关系给出关节力矩与末端 wrench 的联系：</p>
+<pre class="math-block"><code>tau = J(q)^T F</code></pre>
+<p>这个式子仍要求 <code>J</code> 和 <code>F</code> 在同一坐标系、采用一致的 twist/wrench 排列。若线速度与角速度顺序不同，代码可能维度正确却物理意义错误。</p>
+<h2 id="奇异性不是一个-坏姿态-标签">奇异性不是一个“坏姿态”标签</h2>
+<p>当 Jacobian 的秩下降时，末端在某些方向上失去瞬时运动能力，或为了产生有限任务速度需要很大的关节速度。应至少同时检查：</p>
+<ul>
+<li>Jacobian 的秩与最小奇异值；</li>
+<li>条件数随配置的变化；</li>
+<li>丢失的是哪个任务方向；</li>
+<li>关节限位与速度限制是否让理论可行方向实际不可用。</li>
+</ul>
+<p>可操作度椭球比单一阈值更有解释力。对非方阵 Jacobian，“行列式接近零”也不是通用判断方法。</p>
+<h2 id="数值逆运动学的最小闭环">数值逆运动学的最小闭环</h2>
+<p>最基本的迭代是：计算当前位姿误差，映射为 twist，再通过伪逆求关节增量。接近奇异位形时可用阻尼最小二乘：</p>
+<pre class="math-block"><code>dq = J^T (J J^T + lambda^2 I)^-1 e</code></pre>
+<p>阻尼提高稳定性，但会引入任务误差。还需要处理步长、关节限位、姿态误差定义和停止条件。冗余机械臂可在零空间加入避限位、远离碰撞或改善可操作度的目标。</p>
+<h2 id="实现验收清单">实现验收清单</h2>
+<ol>
+<li>零位形的末端位姿与 URDF/CAD 约定一致。</li>
+<li>随机采样关节配置，旋转矩阵满足正交性且行列式接近 1。</li>
+<li>用有限差分检查 Jacobian，每一列都能预测小关节扰动造成的位姿变化。</li>
+<li>分别验证空间和本体表达，不在同一次误差计算中混用。</li>
+<li>在已知奇异位形附近绘制最小奇异值，而不是只测试普通姿态。</li>
+<li>数值 IK 同时报告末端误差、迭代次数、关节限位命中和最大关节增量。</li>
+</ol>
+<h2 id="常见失败模式">常见失败模式</h2>
+<ul>
+<li>把欧拉角差直接当作全局姿态误差，跨越角度分支时产生跳变。</li>
+<li>URDF 中的关节轴、零位形或单位与手写模型不一致。</li>
+<li>把末端线速度 Jacobian 当成完整 6D Jacobian。</li>
+<li>用过小阻尼追求数值精度，导致关节速度在奇异点附近爆炸。</li>
+<li>IK 收敛后不做碰撞、限位和路径连续性检查。</li>
+</ul>
+<p>下一步可在 Pinocchio 中选一台公开 URDF 机械臂，完成 FK、Jacobian、有限差分和阻尼 IK 的同一份可重复测试。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://modernrobotics.northwestern.edu/" target="_blank" rel="noreferrer">Modern Robotics ↗</a><p>Northwestern University · 机器人运动学、动力学、规划和控制的系统化课程主线。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://gepettoweb.laas.fr/doc/stack-of-tasks/pinocchio/master/doxygen-html/index.html" target="_blank" rel="noreferrer">Pinocchio ↗</a><p>Stack of Tasks / LAAS-CNRS · 刚体运动学、动力学及导数计算的实现参考。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=robotics">机器人运动学</a><a href="/atlas/catalog/?track=robotics">李群与李代数</a><a href="/atlas/catalog/?track=robotics">坐标系与刚体变换</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

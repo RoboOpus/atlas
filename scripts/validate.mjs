@@ -10,6 +10,8 @@ const jobsPath = path.join(repo, "site", "data", "ingestion-jobs.json");
 const frontierPapersPath = path.join(repo, "site", "data", "frontier-papers.json");
 const fieldGuidesPath = path.join(repo, "site", "data", "field-guides.json");
 const knowledgePath = path.join(repo, "site", "data", "knowledge.json");
+const hardwarePriceSourcePath = path.join(repo, "content", "hardware-price-snapshots.json");
+const hardwarePricePublishedPath = path.join(repo, "site", "data", "hardware-price-snapshots.json");
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const requiredFiles = [
   "site/index.html",
@@ -21,6 +23,7 @@ const requiredFiles = [
   "site/data/frontier-papers.json",
   "site/data/field-guides.json",
   "site/data/knowledge.json",
+  "site/data/hardware-price-snapshots.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
@@ -52,6 +55,7 @@ const requiredFiles = [
   "content/frontier-radar-schema.md",
   "content/field-guides-schema.md",
   "content/knowledge-schema.md",
+  "content/hardware-price-snapshots.json",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -67,6 +71,8 @@ const jobs = JSON.parse(await readFile(jobsPath, "utf8"));
 const frontierPapers = JSON.parse(await readFile(frontierPapersPath, "utf8"));
 const fieldGuides = JSON.parse(await readFile(fieldGuidesPath, "utf8"));
 const knowledge = JSON.parse(await readFile(knowledgePath, "utf8"));
+const hardwarePrices = JSON.parse(await readFile(hardwarePriceSourcePath, "utf8"));
+const publishedHardwarePrices = JSON.parse(await readFile(hardwarePricePublishedPath, "utf8"));
 const frontierConfig = JSON.parse(await readFile(frontierConfigPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
 
@@ -133,6 +139,24 @@ for (const source of sources.sources) {
 for (const [track, count] of Object.entries(sourcesPerTrack)) {
   if (count < 5) throw new Error(`Source track is too thin: ${track} (${count})`);
 }
+
+if (hardwarePrices.schema_version !== "0.1.0") throw new Error("Unexpected hardware price schema version");
+if (!/^\d{4}-\d{2}-\d{2}$/.test(hardwarePrices.captured_at)) throw new Error("Hardware price capture date is invalid");
+if (hardwarePrices.policy?.append_only !== true || hardwarePrices.policy?.currency_conversion !== false || hardwarePrices.policy?.unknowns_are_explicit !== true) throw new Error("Hardware price policy is incomplete");
+if (!Array.isArray(hardwarePrices.snapshots) || hardwarePrices.snapshots.length < 5) throw new Error("Hardware price ledger needs at least five snapshots");
+const hardwarePriceIds = new Set();
+for (const snapshot of hardwarePrices.snapshots) {
+  if (!snapshot.id || hardwarePriceIds.has(snapshot.id)) throw new Error(`Missing or duplicate hardware price id: ${snapshot.id}`);
+  hardwarePriceIds.add(snapshot.id);
+  if (!snapshot.product || !snapshot.variant || !snapshot.category || !snapshot.region) throw new Error(`Incomplete hardware price identity: ${snapshot.id}`);
+  if (typeof snapshot.price !== "number" || snapshot.price <= 0 || !/^[A-Z]{3}$/.test(snapshot.currency)) throw new Error(`Invalid hardware price value: ${snapshot.id}`);
+  if (!snapshot.tax || !snapshot.freight || !snapshot.availability) throw new Error(`Incomplete hardware price terms: ${snapshot.id}`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(snapshot.captured_at)) throw new Error(`Invalid hardware price date: ${snapshot.id}`);
+  const source = sources.sources.find((item) => item.id === snapshot.source_id);
+  if (!source || source.track !== "hardware" || source.official !== true) throw new Error(`Hardware price source is not first-party: ${snapshot.id}`);
+  if (snapshot.source_url !== source.url) throw new Error(`Hardware price URL does not match source registry: ${snapshot.id}`);
+}
+if (JSON.stringify(hardwarePrices) !== JSON.stringify(publishedHardwarePrices)) throw new Error("Published hardware price ledger is stale");
 
 const jobStatuses = new Set(["active", "ready", "planned", "awaiting-input"]);
 if (jobs.schema_version !== "0.1.0") throw new Error("Unexpected ingestion job schema version");
@@ -266,4 +290,4 @@ for (const paper of frontierPapers.papers) {
   if (!paperStatuses.has(paper.status)) throw new Error(`Invalid Frontier paper status: ${paper.id}`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);

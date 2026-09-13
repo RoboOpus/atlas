@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="用地区、币种、税运费、配置、库存和日期记录首批公开价格，避免把搜索摘要或过期报价当成采购结论。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>机器人硬件价格快照：第一批可追溯样本 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Hardware · 价格与采购</p>
+        <h1>机器人硬件价格快照：第一批可追溯样本</h1>
+        <p class="article-summary">用地区、币种、税运费、配置、库存和日期记录首批公开价格，避免把搜索摘要或过期报价当成采购结论。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>采购数据</span><span>约 3 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>明确采购地区与任务配置</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#为什么用-快照-而不是-价格表">为什么用“快照”而不是“价格表”</a>
+<a href="#2026-09-13-首批公开价格">2026-09-13 首批公开价格</a>
+<a href="#当前记录能回答什么">当前记录能回答什么</a>
+<a href="#采购比较的正确顺序">采购比较的正确顺序</a>
+<a href="#后续快照的质量规则">后续快照的质量规则</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>价格必须与具体型号、配置、地区和日期绑定。</li><li>不含税运费、库存不足和询价都属于价格事实的一部分。</li><li>价格快照只用于形成询价短名单，不替代正式报价。</li></ul></section>
+          <h2 id="为什么用-快照-而不是-价格表">为什么用“快照”而不是“价格表”</h2>
+<p>机器人硬件价格变化快，同一型号在不同地区可能包含不同控制柜、配件、税费、运费和保修。一个没有时间和地区的数字通常不可用于预算。</p>
+<p>Atlas 的价格记录采用追加快照，不覆盖历史。每条至少包含：产品、具体版本、配置、数值、币种、地区、税费、运费、库存、来源 URL 和抓取日期。缺失字段保留 <code>unknown</code>，不从常识补齐。</p>
+<p>机器可读快照发布在 <code>/atlas/data/hardware-price-snapshots.json</code>。</p>
+<h2 id="2026-09-13-首批公开价格">2026-09-13 首批公开价格</h2>
+<p>以下均为一手公开页面的来源核对结果，不含汇率换算，也不构成采购建议。</p>
+<ul>
+<li><strong>Unitree Go2 AIR</strong>：1,600 USD。官方页面标明价格不含税费和运费。<a class="source-ref" href="#source-1">[S1]</a></li>
+<li><strong>Unitree Go2 PRO</strong>：2,800 USD。官方页面标明价格不含税费和运费。<a class="source-ref" href="#source-1">[S1]</a></li>
+<li><strong>Unitree Go2 EDU</strong>：4,500 USD。官方页面标明价格不含税费和运费；二次开发能力还需结合具体版本确认。<a class="source-ref" href="#source-1">[S1]</a></li>
+<li><strong>OpenMANIPULATOR-X RM-X52-TNM</strong>：1,629.09 USD，美国官方商店公开标价；运费在结账时计算，页面列出 2–3 周交期。<a class="source-ref" href="#source-2">[S2]</a></li>
+<li><strong>UFACTORY xArm 6</strong>：9,500 USD，美国官方产品页当前公开标价；核验时页面显示缺货，税费和运费条件未在同一记录中确认。<a class="source-ref" href="#source-3">[S3]</a></li>
+</ul>
+<p>同一厂商其他地区页面可能给出不同数字。Atlas 不把这些条目合并成“全球价格”，也不使用实时汇率伪造人民币采购成本。</p>
+<h2 id="当前记录能回答什么">当前记录能回答什么</h2>
+<p>它可以回答：某个日期、某个地区或官方全球页面公开了什么配置和价格；页面是否说明税运费；当时是否有库存或交期信息。</p>
+<p>它不能回答：最终到岸价、教育折扣、批量折扣、售后条款、发票税率、进口合规成本、配件是否必选，以及特定实验室可获得的真实报价。</p>
+<h2 id="采购比较的正确顺序">采购比较的正确顺序</h2>
+<ol>
+<li>定义任务：负载、工作空间、控制接口、安全和使用强度。</li>
+<li>固定套装：本体、控制柜、末端、传感器、线缆和计算平台。</li>
+<li>用公开快照估算数量级并形成短名单。</li>
+<li>向厂商或授权渠道索取同一口径正式报价。</li>
+<li>把报价有效期、税运费、交期、保修和教育折扣作为独立字段。</li>
+<li>到货后记录真实总成本和验收结果，与公开快照分开。</li>
+</ol>
+<h2 id="后续快照的质量规则">后续快照的质量规则</h2>
+<ul>
+<li>搜索结果摘要只能作为发现线索，入库前必须回到产品页。</li>
+<li>“起售价”必须记录对应最低配置，不能代表研究版或教育版。</li>
+<li>价格旁必须保留可购状态；缺货价格不能当作当前采购能力。</li>
+<li>询价产品记录 <code>quote_required</code>，不填零或估算值。</li>
+<li>经销商、二手和社区报价可以进入独立层，但不能与官方价混排。</li>
+<li>每月复核高关注条目，保留旧快照并标记 superseded，而不是覆盖。</li>
+</ul>
+<p>下一轮应补机械臂末端、RGB-D 相机、六维力传感器和边缘计算平台；只有满足同一字段规范的条目才进入公开总览。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://www.unitree.com/go2/" target="_blank" rel="noreferrer">Unitree Go2 Official Product Page ↗</a><p>Unitree · 核对 Go2 各版本的官方起售价、规格和税运费声明。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://robotis.us/products/openmanipulator-x-rm-x52-tnm" target="_blank" rel="noreferrer">ROBOTIS America OpenMANIPULATOR-X ↗</a><p>ROBOTIS America · 核对美国地区 RM-X52-TNM 整机套装的公开价格、SKU 与交期。</p></div></li>
+<li id="source-3"><span>S3</span><div><a href="https://www.ufactory.us/product/ufactory-xarm-6" target="_blank" rel="noreferrer">UFACTORY USA xArm 6 ↗</a><p>UFACTORY USA · 核对美国地区 xArm 6 的公开配置、标价与库存状态。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=hardware">四足机器人</a><a href="/atlas/catalog/?track=hardware">研究型机械臂</a><a href="/atlas/catalog/?track=hardware">低成本与开源机械臂</a><a href="/atlas/catalog/?track=hardware">开源机器人硬件</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>
