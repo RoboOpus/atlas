@@ -66,6 +66,14 @@
     "assisted": ["ordinary web pages", "JavaScript-rendered pages"],
     "single_url_only": ["WeChat public articles", "Xiaohongshu web posts"]
   },
+  "knowledge_content": {
+    "source_directory": "content/knowledge",
+    "index_url": "https://roboopus.github.io/atlas/knowledge/",
+    "machine_index": "https://roboopus.github.io/atlas/data/knowledge.json",
+    "article_count": 6,
+    "default_editorial_state": "source-checked-draft",
+    "human_review_required_for": "reviewed"
+  },
   "guardrails": [
     "Do not modify RoboOpus/RoboOpus.github.io.",
     "Do not modify repositories outside the RoboOpus organization.",

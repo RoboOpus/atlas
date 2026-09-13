@@ -1,0 +1,239 @@
+{
+  "schema_version": "0.1.0",
+  "updated_at": "2026-09-13",
+  "articles": [
+    {
+      "id": "adjacent-transfer-evaluation",
+      "slug": "cross-domain-transfer-evaluation",
+      "track": "adjacent",
+      "category": "研究方法",
+      "title": "从热门模型到机器人 Idea：跨领域迁移的证伪框架",
+      "summary": "用能力、接口、闭环、时延、数据假设和失败代价审查 SAM 2、DINOv2、VGGT 与 CARLA 等外部成果，避免把模型名直接当研究问题。",
+      "difficulty": "研究设计",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "adjacent-sam2",
+        "adjacent-dinov2",
+        "adjacent-vggt",
+        "adjacent-carla",
+        "adjacent-waymo-open",
+        "adjacent-nuscenes"
+      ],
+      "node_ids": [
+        "adjacent-multimodal-models",
+        "adjacent-video-understanding",
+        "adjacent-3d4d",
+        "adjacent-closed-loop-eval",
+        "adjacent-data-engines",
+        "robotics-visual-perception",
+        "robotics-sim-to-real"
+      ],
+      "prerequisites": [
+        "明确机器人任务与评价指标"
+      ],
+      "takeaways": [
+        "先抽取可迁移能力，不从模型名称出发。",
+        "离线指标提升不能自动推出闭环任务收益。",
+        "每个 Idea 必须附带一个低成本、可失败的最小实验。"
+      ],
+      "source_file": "content/knowledge/adjacent-transfer-evaluation.md",
+      "url": "/atlas/knowledge/cross-domain-transfer-evaluation/",
+      "reading_minutes": 4,
+      "source_count": 6,
+      "node_count": 7
+    },
+    {
+      "id": "hardware-sensor-selection",
+      "slug": "robot-sensor-selection",
+      "track": "hardware",
+      "category": "传感器系统",
+      "title": "机器人传感器选型：先定义信息，再选择设备",
+      "summary": "把 RGB-D、双目视觉惯性、3D LiDAR、六维力/力矩和视触觉放进同一任务链，重点处理量程、同步、标定和失效条件。",
+      "difficulty": "系统指南",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "hardware-realsense",
+        "hardware-stereolabs-zed",
+        "hardware-ouster",
+        "hardware-ati-ft",
+        "hardware-gelsight"
+      ],
+      "node_ids": [
+        "hardware-rgbd-cameras",
+        "hardware-lidar",
+        "hardware-force-torque",
+        "hardware-tactile-sensors",
+        "robotics-calibration",
+        "robotics-state-estimation"
+      ],
+      "prerequisites": [
+        "任务工作距离",
+        "机器人坐标系",
+        "计算与带宽预算"
+      ],
+      "takeaways": [
+        "先写需要估计的物理量和失效条件，再选传感器。",
+        "时间同步和外参误差常比标称分辨率更影响系统。",
+        "视觉、力和触觉解决的信息不同，不能用单一精度数字比较。"
+      ],
+      "source_file": "content/knowledge/hardware-sensor-selection.md",
+      "url": "/atlas/knowledge/robot-sensor-selection/",
+      "reading_minutes": 4,
+      "source_count": 5,
+      "node_count": 6
+    },
+    {
+      "id": "hardware-research-arm-selection",
+      "slug": "research-arm-selection",
+      "track": "hardware",
+      "category": "研究型机械臂",
+      "title": "研究型机械臂怎么选：从论文参数回到系统约束",
+      "summary": "用负载、臂展、自由度、控制开放性、安全、生态和总成本比较 FR3、UR5e、Kinova Gen3 与 xArm 7，而不是给出脱离任务的排行榜。",
+      "difficulty": "选型指南",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "hardware-franka",
+        "hardware-universal-robots",
+        "hardware-kinova-gen3",
+        "hardware-ufactory-xarm"
+      ],
+      "node_ids": [
+        "hardware-research-arms",
+        "hardware-grippers",
+        "hardware-force-torque",
+        "hardware-edge-compute",
+        "robotics-impedance"
+      ],
+      "prerequisites": [
+        "明确任务与预算边界"
+      ],
+      "takeaways": [
+        "先写任务需求，再看型号参数。",
+        "额定负载必须包含夹爪、传感器、线缆和工件。",
+        "采购价不是总成本，接口与维护决定长期实验效率。"
+      ],
+      "source_file": "content/knowledge/hardware-research-arm-selection.md",
+      "url": "/atlas/knowledge/research-arm-selection/",
+      "reading_minutes": 4,
+      "source_count": 4,
+      "node_count": 5
+    },
+    {
+      "id": "robotics-planning-control-stack",
+      "slug": "planning-control-stack",
+      "track": "robotics",
+      "category": "规划与控制",
+      "title": "从任务目标到电机指令：机器人规划控制栈",
+      "summary": "区分任务规划、几何路径、时间轨迹、反馈控制和执行接口，解释 OMPL、MoveIt 2、ROS 2 与 MPC 在系统中的位置。",
+      "difficulty": "基础 → 进阶",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "robotics-modern-robotics",
+        "robotics-ompl",
+        "robotics-moveit2",
+        "robotics-ros2",
+        "robotics-underactuated"
+      ],
+      "node_ids": [
+        "robotics-sampling-planning",
+        "robotics-trajectory-optimization",
+        "robotics-tamp",
+        "robotics-mpc",
+        "robotics-impedance"
+      ],
+      "prerequisites": [
+        "运动学",
+        "基本控制概念",
+        "坐标变换"
+      ],
+      "takeaways": [
+        "路径、轨迹和控制指令是三个不同对象。",
+        "OMPL 是抽象规划算法层，MoveIt 2 是机械臂集成层。",
+        "规划成功只证明找到了候选解，不证明真实执行会成功。"
+      ],
+      "source_file": "content/knowledge/robotics-planning-control-stack.md",
+      "url": "/atlas/knowledge/planning-control-stack/",
+      "reading_minutes": 4,
+      "source_count": 5,
+      "node_count": 5
+    },
+    {
+      "id": "robotics-factor-graphs",
+      "slug": "factor-graphs-state-estimation",
+      "track": "robotics",
+      "category": "状态估计",
+      "title": "因子图状态估计：把传感器融合写成可检查的约束",
+      "summary": "从变量、因子和 MAP 目标出发，解释里程计、观测、回环与先验如何进入同一个估计问题，以及常见工程失败。",
+      "difficulty": "进阶",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "robotics-gtsam",
+        "robotics-orb-slam3"
+      ],
+      "node_ids": [
+        "robotics-state-estimation",
+        "robotics-slam",
+        "robotics-calibration"
+      ],
+      "prerequisites": [
+        "概率基础",
+        "非线性最小二乘",
+        "SE(3)"
+      ],
+      "takeaways": [
+        "变量表示未知量，因子表示只依赖部分变量的局部约束。",
+        "图结构让测量来源、稀疏性和错误假设可以被逐项检查。",
+        "后端优化不能修复错误的数据关联、时间同步或坐标系。"
+      ],
+      "source_file": "content/knowledge/robotics-factor-graphs.md",
+      "url": "/atlas/knowledge/factor-graphs-state-estimation/",
+      "reading_minutes": 4,
+      "source_count": 2,
+      "node_count": 3
+    },
+    {
+      "id": "robotics-frames-se3",
+      "slug": "frames-se3",
+      "track": "robotics",
+      "category": "数学与动力学",
+      "title": "坐标系与 SE(3)：机器人系统最容易被低估的基础",
+      "summary": "从 T_ab 的记号、齐次变换、复合顺序到最小单元测试，建立可直接用于感知、规划和控制的软件约定。",
+      "difficulty": "基础",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "robotics-modern-robotics"
+      ],
+      "node_ids": [
+        "robotics-coordinate-frames",
+        "robotics-lie-groups",
+        "robotics-calibration"
+      ],
+      "prerequisites": [
+        "线性代数",
+        "矩阵乘法"
+      ],
+      "takeaways": [
+        "先固定 T_ab 的语义，再写任何坐标变换代码。",
+        "矩阵乘法顺序由坐标系链决定，不能凭直觉交换。",
+        "单位测试至少覆盖单位变换、逆变换和闭环复合。"
+      ],
+      "source_file": "content/knowledge/robotics-frames-se3.md",
+      "url": "/atlas/knowledge/frames-se3/",
+      "reading_minutes": 5,
+      "source_count": 1,
+      "node_count": 3
+    }
+  ]
+}

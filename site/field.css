@@ -29,6 +29,10 @@
 .field-block > strong { display: block; margin-bottom: 6px; color: var(--orange); font: 700 10px/1.2 ui-monospace, monospace; letter-spacing: 0.07em; text-transform: uppercase; }
 .field-block p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
 .field-card footer { display: block; width: auto; margin: auto 0 0; padding: 20px 0 0; color: inherit; }
+.field-reading { display: grid; gap: 7px; margin-bottom: 14px; padding: 14px; border-left: 3px solid var(--blue); background: rgba(20, 83, 216, 0.06); }
+.field-reading strong { color: var(--blue); font: 700 10px/1.3 ui-monospace, monospace; letter-spacing: 0.07em; text-transform: uppercase; }
+.field-reading a { font-size: 11px; line-height: 1.45; text-decoration: none; }
+.field-reading a:hover { color: var(--blue); }
 .field-links, .field-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .field-links { margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
 .field-links a, .field-tags a, .field-tags span { padding: 6px 8px; border: 1px solid var(--line); color: var(--muted); font-size: 10px; text-decoration: none; }

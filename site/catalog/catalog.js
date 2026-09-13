@@ -14,6 +14,7 @@ const buttons = [...document.querySelectorAll("[data-track]")];
 const query = new URLSearchParams(location.search);
 let activeTrack = trackLabels[query.get("track")] ? query.get("track") : "all";
 let nodes = [];
+let articlesByNode = new Map();
 
 function createText(tag, className, value) {
   const element = document.createElement(tag);
@@ -26,7 +27,8 @@ function render() {
   const needle = search.value.trim().toLocaleLowerCase("zh-CN");
   const filtered = nodes.filter((node) => {
     const inTrack = activeTrack === "all" || node.track === activeTrack;
-    const haystack = [node.title, node.title_en, node.section, node.summary, ...node.tags].join(" ").toLocaleLowerCase("zh-CN");
+    const articleTitles = (articlesByNode.get(node.id) ?? []).map((article) => article.title);
+    const haystack = [node.title, node.title_en, node.section, node.summary, ...node.tags, ...articleTitles].join(" ").toLocaleLowerCase("zh-CN");
     return inTrack && (!needle || haystack.includes(needle));
   });
 
@@ -53,6 +55,19 @@ function render() {
     next.className = "node-next";
     next.append(createText("strong", "", "下一步 · "), document.createTextNode(node.next_step));
     card.append(next);
+
+    const relatedArticles = articlesByNode.get(node.id) ?? [];
+    if (relatedArticles.length) {
+      const reading = document.createElement("div");
+      reading.className = "node-articles";
+      reading.append(createText("strong", "", `知识正文 · ${relatedArticles.length}`));
+      for (const article of relatedArticles) {
+        const link = createText("a", "", `${article.title} →`);
+        link.href = article.url;
+        reading.append(link);
+      }
+      card.append(reading);
+    }
     grid.append(card);
   }
 
@@ -74,13 +89,23 @@ buttons.forEach((button) => {
 search.addEventListener("input", render);
 
 buttons.forEach((button) => button.classList.toggle("active", button.dataset.track === activeTrack));
-fetch("/atlas/data/catalog.json")
-  .then((response) => {
+function getJson(url) {
+  return fetch(url).then((response) => {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return response.json();
-  })
-  .then((data) => {
-    nodes = data.nodes.sort((a, b) => a.priority.localeCompare(b.priority) || a.track.localeCompare(b.track) || a.title.localeCompare(b.title, "zh-CN"));
+  });
+}
+
+Promise.all([getJson("/atlas/data/catalog.json"), getJson("/atlas/data/knowledge.json")])
+  .then(([catalogData, knowledgeData]) => {
+    nodes = catalogData.nodes.sort((a, b) => a.priority.localeCompare(b.priority) || a.track.localeCompare(b.track) || a.title.localeCompare(b.title, "zh-CN"));
+    for (const article of knowledgeData.articles) {
+      for (const nodeId of article.node_ids) {
+        const linked = articlesByNode.get(nodeId) ?? [];
+        linked.push(article);
+        articlesByNode.set(nodeId, linked);
+      }
+    }
     render();
   })
   .catch(() => {

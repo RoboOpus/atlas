@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 具身智能与机器人知识正文。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>知识正文 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+  <header class="topbar">
+    <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>Knowledge</span></a>
+    <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+  </header>
+  <main class="knowledge-main">
+    <section class="knowledge-intro"><div><p class="eyebrow">Knowledge units · source backed</p><h1>知识正文</h1></div><p>这里不是目录槽位，而是可阅读、可引用、可继续修订的知识单元。每篇都公开来源、知识节点、编辑状态和更新时间。</p></section>
+    <section class="knowledge-controls" aria-label="知识正文筛选">
+      <label class="search-field"><span>搜索正文</span><input id="knowledge-search" type="search" placeholder="例如：SE(3)、状态估计、机械臂、迁移" autocomplete="off"></label>
+      <div class="filter-row" aria-label="按板块筛选"><button type="button" data-track="all" class="active">全部</button><button type="button" data-track="robotics">Robotics</button><button type="button" data-track="hardware">Hardware</button><button type="button" data-track="adjacent">Adjacent</button></div>
+      <div class="result-line"><strong id="knowledge-count">6 / 6 篇正文</strong><span>来源已核对不等于人工终审。</span></div>
+    </section>
+    <section id="knowledge-grid" class="knowledge-grid" aria-label="知识正文列表"><article class="knowledge-card" data-track="adjacent" data-search="从热门模型到机器人 idea：跨领域迁移的证伪框架 用能力、接口、闭环、时延、数据假设和失败代价审查 sam 2、dinov2、vggt 与 carla 等外部成果，避免把模型名直接当研究问题。 研究方法 adjacent 先抽取可迁移能力，不从模型名称出发。 离线指标提升不能自动推出闭环任务收益。 每个 idea 必须附带一个低成本、可失败的最小实验。">
+    <div class="knowledge-card-top"><span>Adjacent · 研究方法</span><span>研究设计</span></div>
+    <h2><a href="/atlas/knowledge/cross-domain-transfer-evaluation/">从热门模型到机器人 Idea：跨领域迁移的证伪框架</a></h2>
+    <p>用能力、接口、闭环、时延、数据假设和失败代价审查 SAM 2、DINOv2、VGGT 与 CARLA 等外部成果，避免把模型名直接当研究问题。</p>
+    <div class="knowledge-card-facts"><span>6 个一手来源</span><span>7 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/cross-domain-transfer-evaluation/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="hardware" data-search="机器人传感器选型：先定义信息，再选择设备 把 rgb-d、双目视觉惯性、3d lidar、六维力/力矩和视触觉放进同一任务链，重点处理量程、同步、标定和失效条件。 传感器系统 hardware 先写需要估计的物理量和失效条件，再选传感器。 时间同步和外参误差常比标称分辨率更影响系统。 视觉、力和触觉解决的信息不同，不能用单一精度数字比较。">
+    <div class="knowledge-card-top"><span>Hardware · 传感器系统</span><span>系统指南</span></div>
+    <h2><a href="/atlas/knowledge/robot-sensor-selection/">机器人传感器选型：先定义信息，再选择设备</a></h2>
+    <p>把 RGB-D、双目视觉惯性、3D LiDAR、六维力/力矩和视触觉放进同一任务链，重点处理量程、同步、标定和失效条件。</p>
+    <div class="knowledge-card-facts"><span>5 个一手来源</span><span>6 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/robot-sensor-selection/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="hardware" data-search="研究型机械臂怎么选：从论文参数回到系统约束 用负载、臂展、自由度、控制开放性、安全、生态和总成本比较 fr3、ur5e、kinova gen3 与 xarm 7，而不是给出脱离任务的排行榜。 研究型机械臂 hardware 先写任务需求，再看型号参数。 额定负载必须包含夹爪、传感器、线缆和工件。 采购价不是总成本，接口与维护决定长期实验效率。">
+    <div class="knowledge-card-top"><span>Hardware · 研究型机械臂</span><span>选型指南</span></div>
+    <h2><a href="/atlas/knowledge/research-arm-selection/">研究型机械臂怎么选：从论文参数回到系统约束</a></h2>
+    <p>用负载、臂展、自由度、控制开放性、安全、生态和总成本比较 FR3、UR5e、Kinova Gen3 与 xArm 7，而不是给出脱离任务的排行榜。</p>
+    <div class="knowledge-card-facts"><span>4 个一手来源</span><span>5 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/research-arm-selection/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="robotics" data-search="从任务目标到电机指令：机器人规划控制栈 区分任务规划、几何路径、时间轨迹、反馈控制和执行接口，解释 ompl、moveit 2、ros 2 与 mpc 在系统中的位置。 规划与控制 robotics 路径、轨迹和控制指令是三个不同对象。 ompl 是抽象规划算法层，moveit 2 是机械臂集成层。 规划成功只证明找到了候选解，不证明真实执行会成功。">
+    <div class="knowledge-card-top"><span>Robotics · 规划与控制</span><span>基础 → 进阶</span></div>
+    <h2><a href="/atlas/knowledge/planning-control-stack/">从任务目标到电机指令：机器人规划控制栈</a></h2>
+    <p>区分任务规划、几何路径、时间轨迹、反馈控制和执行接口，解释 OMPL、MoveIt 2、ROS 2 与 MPC 在系统中的位置。</p>
+    <div class="knowledge-card-facts"><span>5 个一手来源</span><span>5 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/planning-control-stack/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="robotics" data-search="因子图状态估计：把传感器融合写成可检查的约束 从变量、因子和 map 目标出发，解释里程计、观测、回环与先验如何进入同一个估计问题，以及常见工程失败。 状态估计 robotics 变量表示未知量，因子表示只依赖部分变量的局部约束。 图结构让测量来源、稀疏性和错误假设可以被逐项检查。 后端优化不能修复错误的数据关联、时间同步或坐标系。">
+    <div class="knowledge-card-top"><span>Robotics · 状态估计</span><span>进阶</span></div>
+    <h2><a href="/atlas/knowledge/factor-graphs-state-estimation/">因子图状态估计：把传感器融合写成可检查的约束</a></h2>
+    <p>从变量、因子和 MAP 目标出发，解释里程计、观测、回环与先验如何进入同一个估计问题，以及常见工程失败。</p>
+    <div class="knowledge-card-facts"><span>2 个一手来源</span><span>3 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/factor-graphs-state-estimation/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="robotics" data-search="坐标系与 se(3)：机器人系统最容易被低估的基础 从 t_ab 的记号、齐次变换、复合顺序到最小单元测试，建立可直接用于感知、规划和控制的软件约定。 数学与动力学 robotics 先固定 t_ab 的语义，再写任何坐标变换代码。 矩阵乘法顺序由坐标系链决定，不能凭直觉交换。 单位测试至少覆盖单位变换、逆变换和闭环复合。">
+    <div class="knowledge-card-top"><span>Robotics · 数学与动力学</span><span>基础</span></div>
+    <h2><a href="/atlas/knowledge/frames-se3/">坐标系与 SE(3)：机器人系统最容易被低估的基础</a></h2>
+    <p>从 T_ab 的记号、齐次变换、复合顺序到最小单元测试，建立可直接用于感知、规划和控制的软件约定。</p>
+    <div class="knowledge-card-facts"><span>1 个一手来源</span><span>3 个知识节点</span><span>5 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/frames-se3/">阅读正文 →</a>
+  </article></section>
+    <div id="knowledge-empty" class="catalog-empty" hidden><strong>没有匹配正文</strong><p>换一个关键词，或切回“全部”。</p></div>
+  </main>
+  <footer><p>RoboOpus Atlas · 内容与页面同步生长</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer>
+  <script src="/atlas/knowledge/knowledge.js"></script></body>
+</html>

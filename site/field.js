@@ -8,6 +8,7 @@ let activeSection = "all";
 let records = [];
 let sourcesById = new Map();
 let nodesById = new Map();
+let knowledgeArticles = [];
 
 function createText(tag, className, value) {
   const element = document.createElement(tag);
@@ -83,6 +84,14 @@ function render() {
     card.append(boundaryBlock);
 
     const footer = document.createElement("footer");
+    const relatedArticles = knowledgeArticles.filter((article) => article.track === record.track && article.node_ids.some((id) => record.node_ids.includes(id)));
+    if (relatedArticles.length) {
+      const reading = document.createElement("div");
+      reading.className = "field-reading";
+      reading.append(createText("strong", "", "相关知识正文"));
+      for (const article of relatedArticles) reading.append(makeLink(`${article.title} →`, article.url));
+      footer.append(reading);
+    }
     const nodeTags = document.createElement("div");
     nodeTags.className = "field-tags";
     for (const id of record.node_ids) {
@@ -119,12 +128,14 @@ search.addEventListener("input", render);
 Promise.all([
   getJson("/atlas/data/field-guides.json"),
   getJson("/atlas/data/sources.json"),
-  getJson("/atlas/data/catalog.json")
+  getJson("/atlas/data/catalog.json"),
+  getJson("/atlas/data/knowledge.json")
 ])
-  .then(([guideData, sourceData, catalogData]) => {
+  .then(([guideData, sourceData, catalogData, knowledgeData]) => {
     records = guideData.records.filter((record) => record.track === track);
     sourcesById = new Map(sourceData.sources.map((source) => [source.id, source]));
     nodesById = new Map(catalogData.nodes.map((node) => [node.id, node]));
+    knowledgeArticles = knowledgeData.articles;
     const linkedSources = new Set(records.flatMap((record) => record.source_ids));
     const linkedNodes = new Set(records.flatMap((record) => record.node_ids));
     const unknownFacts = records.flatMap((record) => record.facts).filter((fact) => fact.value.toLocaleLowerCase().includes("unknown")).length;

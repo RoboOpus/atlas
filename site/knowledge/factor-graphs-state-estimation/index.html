@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="从变量、因子和 MAP 目标出发，解释里程计、观测、回环与先验如何进入同一个估计问题，以及常见工程失败。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>因子图状态估计：把传感器融合写成可检查的约束 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Robotics · 状态估计</p>
+        <h1>因子图状态估计：把传感器融合写成可检查的约束</h1>
+        <p class="article-summary">从变量、因子和 MAP 目标出发，解释里程计、观测、回环与先验如何进入同一个估计问题，以及常见工程失败。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>进阶</span><span>约 4 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>概率基础</span><span>非线性最小二乘</span><span>SE(3)</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#核心对象-变量和因子">核心对象：变量和因子</a>
+<a href="#一个最小位姿图">一个最小位姿图</a>
+<a href="#前端和后端不能混为一谈">前端和后端不能混为一谈</a>
+<a href="#传感器融合不是简单叠加">传感器融合不是简单叠加</a>
+<a href="#线性化与初值">线性化与初值</a>
+<a href="#最小可复现实验">最小可复现实验</a>
+<a href="#常见失败模式">常见失败模式</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>变量表示未知量，因子表示只依赖部分变量的局部约束。</li><li>图结构让测量来源、稀疏性和错误假设可以被逐项检查。</li><li>后端优化不能修复错误的数据关联、时间同步或坐标系。</li></ul></section>
+          <h2 id="核心对象-变量和因子">核心对象：变量和因子</h2>
+<p>状态估计不是“把多个传感器平均一下”，而是在噪声模型下寻找最能解释全部观测的未知状态。因子图用两类节点表达这个问题：变量节点表示未知量，例如机器人位姿、速度、偏置或路标；因子节点表示先验、运动模型或测量带来的局部约束。<a class="source-ref" href="#source-1">[S1]</a></p>
+<p>若未知变量集合为 <code>X</code>，观测为 <code>z</code>，最大后验估计可以写成多个局部因子的乘积：</p>
+<pre class="math-block"><code>X* = argmax_X product_i phi_i(X_i; z_i)</code></pre>
+<p>在常见高斯噪声假设下，取负对数后成为加权非线性最小二乘：</p>
+<pre class="math-block"><code>X* = argmin_X sum_i || r_i(X_i; z_i) ||^2_(Sigma_i^-1)</code></pre>
+<p><code>r_i</code> 是预测和测量之间的残差，<code>Sigma_i</code> 描述我们对这条测量的信任程度。图上的边只连接某个因子实际依赖的变量，这种局部性带来稀疏结构，也是因子图适合大规模 SLAM 和平滑问题的重要原因。<a class="source-ref" href="#source-1">[S1]</a></p>
+<h2 id="一个最小位姿图">一个最小位姿图</h2>
+<p>设机器人在三个时刻的位姿为 <code>x1</code>、<code>x2</code>、<code>x3</code>：</p>
+<ul>
+<li>先验因子约束 <code>x1</code>，消除整体坐标系自由漂移。</li>
+<li>里程计因子连接 <code>x1-x2</code> 和 <code>x2-x3</code>。</li>
+<li>回环因子连接 <code>x3-x1</code>，表示重新看到起点附近的证据。</li>
+</ul>
+<p>没有先验时，整个解可以在空间中任意平移或旋转而不改变相对约束，这称为 gauge freedom。优化器可能因此遇到奇异系统。先验不必代表“世界绝对真值”，但必须明确它定义了哪一个参考系。</p>
+<p>回环因子也不是越多越好。错误回环是一条强但错误的约束，可能把整张地图拉坏。工程系统应保留回环候选、验证方法、残差、鲁棒核和最终是否接受，而不是只保留优化后的轨迹。</p>
+<h2 id="前端和后端不能混为一谈">前端和后端不能混为一谈</h2>
+<p>因子图主要负责后端建模与推断。视觉 SLAM 前端仍需完成特征提取、匹配、数据关联、关键帧选择和回环候选生成。ORB-SLAM3 这样的完整系统把视觉或视觉惯性前端、多地图和优化后端组合起来，是研究端到端结构的参考实现。<a class="source-ref" href="#source-2">[S2]</a></p>
+<p>因此，看到“使用 GTSAM”并不能判断一个 SLAM 系统的性能。还必须问：</p>
+<ul>
+<li>测量如何产生，错误数据关联如何拒绝；</li>
+<li>状态变量包含位姿、速度和 IMU 偏置中的哪些；</li>
+<li>噪声协方差来自标定、经验还是在线估计；</li>
+<li>使用批量优化、增量平滑还是固定滞后；</li>
+<li>什么时候边缘化旧变量，边缘化引入什么近似；</li>
+<li>坐标系、单位和时间戳如何定义。</li>
+</ul>
+<h2 id="传感器融合不是简单叠加">传感器融合不是简单叠加</h2>
+<p>新增传感器意味着新增观测模型，而不是只把数据接入系统。例如 IMU 高频但会积累偏置，视觉提供几何约束但受纹理、光照和动态物体影响，轮速在平面运动中有效但会打滑。因子图允许分别表达这些假设，但错误的噪声权重会让某类测量不恰当地支配结果。</p>
+<p>一个实用检查是比较<strong>归一化残差</strong>而不只是原始残差。若某类因子的残差长期超出其噪声模型，可能是协方差设得过小、模型遗漏系统误差、时间未同步，或观测存在离群值。</p>
+<h2 id="线性化与初值">线性化与初值</h2>
+<p>机器人位姿估计通常是非线性问题。求解器会在当前估计附近线性化，再迭代更新。初值过差时，局部优化可能进入错误极小值；旋转接近 180°、长时间无观测或回环跨度大时尤其明显。</p>
+<p>需要记录的不只是最终误差，还包括：初值来源、迭代次数、线性化点、终止条件、鲁棒核、变量排序和求解时间。对在线系统，还要记录每次增量更新的最坏时延，而不是只报告平均值。</p>
+<h2 id="最小可复现实验">最小可复现实验</h2>
+<p>第一版实验无需直接上复杂数据集：</p>
+<ol>
+<li>构造三个位姿、两条带噪里程计和一个先验。</li>
+<li>优化并检查估计是否接近手工设定的真值。</li>
+<li>加入一条正确回环，观察不确定性和全局误差变化。</li>
+<li>加入一条错误回环，比较无鲁棒核和有鲁棒核的差别。</li>
+<li>删除先验，确认系统能检测 gauge freedom 或数值奇异。</li>
+<li>改变噪声协方差，观察哪类因子主导估计。</li>
+</ol>
+<h2 id="常见失败模式">常见失败模式</h2>
+<ul>
+<li>时间戳相差几十毫秒，却在高速运动中当作同时观测。</li>
+<li>外参方向写反，残差仍能下降但地图被系统性扭曲。</li>
+<li>所有测量使用同一个经验协方差，失去物理含义。</li>
+<li>把前端误匹配当成高置信观测交给后端。</li>
+<li>只保存优化结果，不保存原始因子与接受/拒绝决策。</li>
+<li>使用边缘协方差做判断，却没有记录其计算方式和近似。</li>
+</ul>
+<p>RoboOpus 后续应把每个估计系统拆成“变量表、因子表、噪声来源、前端接口、求解策略、失败日志”六部分。这样更容易连接经典 SLAM、视觉惯性和未来学习式世界模型，而不是把所有内容压缩成一个库名。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://gtsam.org/docs/" target="_blank" rel="noreferrer">GTSAM ↗</a><p>GTSAM Project · 因子图、传感器融合、SLAM 与状态估计实现。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://github.com/UZ-SLAMLab/ORB_SLAM3" target="_blank" rel="noreferrer">ORB-SLAM3 ↗</a><p>UZ-SLAMLab · 视觉、视觉惯性与多地图 SLAM 的经典开源实现入口。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=robotics">状态估计</a><a href="/atlas/catalog/?track=robotics">VO / VIO / SLAM</a><a href="/atlas/catalog/?track=robotics">机器人与传感器标定</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

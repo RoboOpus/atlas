@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="用负载、臂展、自由度、控制开放性、安全、生态和总成本比较 FR3、UR5e、Kinova Gen3 与 xArm 7，而不是给出脱离任务的排行榜。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>研究型机械臂怎么选：从论文参数回到系统约束 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Hardware · 研究型机械臂</p>
+        <h1>研究型机械臂怎么选：从论文参数回到系统约束</h1>
+        <p class="article-summary">用负载、臂展、自由度、控制开放性、安全、生态和总成本比较 FR3、UR5e、Kinova Gen3 与 xArm 7，而不是给出脱离任务的排行榜。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>选型指南</span><span>约 4 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>明确任务与预算边界</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#先写需求-不先写型号">先写需求，不先写型号</a>
+<a href="#首批四款官方规格快照">首批四款官方规格快照</a>
+<a href="#七个真正决定使用体验的维度">七个真正决定使用体验的维度</a>
+<a href="#按研究任务形成短名单">按研究任务形成短名单</a>
+<a href="#采购前验收清单">采购前验收清单</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>先写任务需求，再看型号参数。</li><li>额定负载必须包含夹爪、传感器、线缆和工件。</li><li>采购价不是总成本，接口与维护决定长期实验效率。</li></ul></section>
+          <h2 id="先写需求-不先写型号">先写需求，不先写型号</h2>
+<p>机械臂选型应从实验闭环开始。至少写清：最大工件和末端总质量、工作区域、安装姿态、是否需要关节力矩或末端力控、控制频率、碰撞风险、期望运行小时数、已有 ROS/仿真栈，以及预算是否包含夹爪、相机、力传感器、工作台和安全设施。</p>
+<p>如果这些问题没有答案，“哪台机械臂最好”就没有可验证含义。论文中常见的桌面抓取演示，也不能说明同一平台适合装配、移动操作或高速交互。</p>
+<h2 id="首批四款官方规格快照">首批四款官方规格快照</h2>
+<p>以下数字只用于建立统一字段，不构成采购建议。核验日期为 2026-09-13。</p>
+<ul>
+<li><strong>Franka Research 3</strong>：7 自由度、额定负载 3 kg、最大臂展 855 mm；官方页面说明提供 1 kHz 低层运动控制接口，并在 7 个轴上具有关节侧力矩传感。<a class="source-ref" href="#source-1">[S1]</a></li>
+<li><strong>Universal Robots UR5e</strong>：6 自由度、最大负载 5 kg、臂展 850 mm；官方技术规格列出 500 Hz 系统更新频率和 ±0.03 mm 位姿重复定位指标。<a class="source-ref" href="#source-2">[S2]</a></li>
+<li><strong>Kinova Gen3 7 DoF</strong>：7 自由度、连续全工作范围负载 2.0 kg、最大臂展 902 mm。官方一页资料同时列出 6/7 自由度版本，因此引用时必须说明具体配置。<a class="source-ref" href="#source-3">[S3]</a></li>
+<li><strong>UFactory xArm 7</strong>：7 自由度、最大负载 3.5 kg、本体重量 14.3 kg。当前纳入的官方硬件手册没有在同一表中确认臂展，因此 Atlas 保留为 <code>unknown</code>，不从二手页面补值。<a class="source-ref" href="#source-4">[S4]</a></li>
+</ul>
+<p>四款产品的公开采购价格目前都没有同时满足“地区、币种、税费、套装内容、核验日期”五个条件，所以不发布数字。询价、教育价、经销商价和二手价不能混在同一列。</p>
+<h2 id="七个真正决定使用体验的维度">七个真正决定使用体验的维度</h2>
+<h3 id="1-负载不是工件重量">1. 负载不是工件重量</h3>
+<p>有效负载通常需要包含夹爪、转接板、腕部相机、力传感器、线缆拖链和工件。还要考虑质心偏移及动态加速度。UR5e 官方手册特别给出了负载随质心偏移变化的说明；只看“5 kg”而忽略质心，会高估可用能力。<a class="source-ref" href="#source-2">[S2]</a></p>
+<h3 id="2-臂展不是可用工作空间">2. 臂展不是可用工作空间</h3>
+<p>最大臂展是单一长度，真实可用工作空间受关节限位、奇异位形、桌面、相机、线缆和自碰撞影响。选型时应把真实任务点放入机器人模型，检查可达率和姿态余量，而不是只比较毫米数。</p>
+<h3 id="3-自由度决定冗余-但不保证灵活">3. 自由度决定冗余，但不保证灵活</h3>
+<p>7 自由度通常能在保持末端姿态时调整肘部，有助于避障和优化姿态；6 自由度结构更直接，工业生态可能更成熟。是否需要冗余取决于场景拥挤程度、任务姿态和规划控制能力。</p>
+<h3 id="4-控制开放性必须落到接口">4. 控制开放性必须落到接口</h3>
+<p>“支持 ROS”不足以判断研究可用性。需要确认控制模式是位置、速度还是力矩；命令和状态频率；是否能读取关节力矩；实时性和网络要求；安全系统是否限制某些低层模式；SDK、驱动和控制器固件的版本关系。</p>
+<h3 id="5-重复定位不等于绝对精度">5. 重复定位不等于绝对精度</h3>
+<p>重复定位描述机器人重复到达相近位置的能力，绝对精度还受机械标定、负载、温度、安装和外部测量影响。视觉伺服可补偿一部分绝对误差，但会引入相机标定、遮挡和时延问题。</p>
+<h3 id="6-安全不是一个-协作-标签">6. 安全不是一个“协作”标签</h3>
+<p>协作应用是否安全取决于整套应用：末端形状、速度、负载、工件、安装、工作区和风险评估。机器人带安全功能不代表任何实验都可无人看守运行。</p>
+<h3 id="7-生态决定实验周转时间">7. 生态决定实验周转时间</h3>
+<p>模型文件、仿真支持、驱动维护、示例、末端接口、线缆、社区和售后，常比峰值参数更影响研究效率。一个缺少稳定驱动的平台会把大量时间消耗在与研究问题无关的集成上。</p>
+<h2 id="按研究任务形成短名单">按研究任务形成短名单</h2>
+<ul>
+<li><strong>低层力控与交互研究</strong>：优先核对力矩感知、控制频率、安全限制和实时接口，FR3 是首批重点候选。</li>
+<li><strong>成熟工业集成与标准工作流</strong>：优先核对末端生态、安全文档和现场支持，UR5e 是首批重点候选。</li>
+<li><strong>轻量桌面研究与冗余运动</strong>：比较 Gen3 与 xArm 7 的真实负载、控制接口、预算和维护条件。</li>
+<li><strong>VLA 数据采集</strong>：除机械臂外，必须同时评估遥操作装置、相机同步、夹爪状态、数据格式和重复复位能力。</li>
+</ul>
+<p>这里的“重点候选”不是排名，而是应进入下一轮询价和验收测试的对象。</p>
+<h2 id="采购前验收清单">采购前验收清单</h2>
+<ol>
+<li>用真实末端和最大工件核算质量与质心。</li>
+<li>在模型中验证全部关键任务点、姿态和避障余量。</li>
+<li>让厂商或集成商确认所需控制模式、频率与 SDK 版本。</li>
+<li>确认 ROS 2 驱动、仿真模型和目标操作系统组合。</li>
+<li>索取完整报价：本体、控制柜、示教器、夹爪、线缆、培训、税运费和保修。</li>
+<li>设计到货测试：重复定位、长时间运行、断网、急停恢复和日志导出。</li>
+<li>把报价和规格作为带日期快照保存，不覆盖历史。</li>
+</ol>
+<p>下一步 Atlas 应把四款机械臂扩展为真正的采购矩阵，并加入“已核验 / 未知 / 厂商声明 / 本地实测”字段。只有完成本地任务验收，选型结论才应从候选升级为推荐。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://franka.de/resources" target="_blank" rel="noreferrer">Franka Resources ↗</a><p>Franka Robotics · Franka Research 3 的手册、数据表、控制接口与开发资源。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://www.universal-robots.com/products/" target="_blank" rel="noreferrer">Universal Robots Products ↗</a><p>Universal Robots · UR 系列协作机械臂的负载、臂展、重量与产品资料。</p></div></li>
+<li id="source-3"><span>S3</span><div><a href="https://www.kinovarobotics.com/product/gen3-robots" target="_blank" rel="noreferrer">Kinova Gen3 ↗</a><p>Kinova Robotics · Gen3 研究机械臂的配置、接口、配件和技术资料。</p></div></li>
+<li id="source-4"><span>S4</span><div><a href="https://www.ufactory.cc/xarm-collaborative-robot/" target="_blank" rel="noreferrer">UFactory xArm ↗</a><p>UFactory · xArm 系列型号、负载、臂展、SDK 与集成资料。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=hardware">研究型机械臂</a><a href="/atlas/catalog/?track=hardware">夹爪</a><a href="/atlas/catalog/?track=hardware">力/力矩传感器</a><a href="/atlas/catalog/?track=hardware">边缘计算平台</a><a href="/atlas/catalog/?track=robotics">阻抗与导纳控制</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

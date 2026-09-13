@@ -33,7 +33,7 @@ h1 em { color: var(--orange); font-style: normal; }
 .hero-actions a { padding: 13px 17px; border: 1px solid var(--ink); text-decoration: none; font-weight: 700; font-size: 14px; }
 .hero-actions .primary { color: white; background: var(--ink); }
 .hero-actions a:hover { transform: translateY(-1px); }
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 170px)); gap: 1px; max-width: 700px; margin: 64px 0 0; background: var(--line); border: 1px solid var(--line); }
+.stats { display: grid; grid-template-columns: repeat(5, minmax(0, 160px)); gap: 1px; max-width: 805px; margin: 64px 0 0; background: var(--line); border: 1px solid var(--line); }
 .stats div { padding: 18px; background: var(--paper); }
 .stats dt { font: 500 34px/1 Georgia, serif; }
 .stats dd { margin: 8px 0 0; color: var(--muted); font-size: 12px; }

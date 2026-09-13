@@ -91,9 +91,9 @@
       "access_mode": "assisted",
       "cadence": "一次建骨架，季度复核",
       "status": "active",
-      "output": "site/data/field-guides.json · Robotics / 学习主线",
-      "next_action": "把 Modern Robotics 与 Underactuated 的章节映射到现有知识节点，不复制教材正文。",
-      "detail_url": "/atlas/robotics/"
+      "output": "知识正文：坐标系与 SE(3)",
+      "next_action": "继续写运动学、雅可比、动力学三篇正文，并加入可运行练习。",
+      "detail_url": "/atlas/knowledge/frames-se3/"
     },
     {
       "id": "robotics-planning-control-stack",
@@ -105,9 +105,9 @@
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "site/data/field-guides.json · Robotics / 建模、规划与系统",
-      "next_action": "补语言、许可证、ROS 发行版、版本号和可运行最小示例。",
-      "detail_url": "/atlas/robotics/"
+      "output": "知识正文：机器人规划控制栈",
+      "next_action": "补一套 OMPL—MoveIt 2—控制器的最小可运行示例和版本矩阵。",
+      "detail_url": "/atlas/knowledge/planning-control-stack/"
     },
     {
       "id": "robotics-perception-estimation-stack",
@@ -119,9 +119,9 @@
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "site/data/field-guides.json · Robotics / 感知与估计",
-      "next_action": "为 GTSAM 与 ORB-SLAM3 补最小数据流、传感器假设和复现版本。",
-      "detail_url": "/atlas/robotics/"
+      "output": "知识正文：因子图状态估计",
+      "next_action": "加入三位姿 GTSAM 最小实验、错误回环与噪声权重对照。",
+      "detail_url": "/atlas/knowledge/factor-graphs-state-estimation/"
     },
     {
       "id": "robotics-simulation-benchmarks",
@@ -147,9 +147,9 @@
       "access_mode": "assisted",
       "cadence": "每月核验",
       "status": "active",
-      "output": "site/data/field-guides.json · Hardware / 研究型机械臂",
-      "next_action": "已完成四款首批规格；继续补控制接口、许可证、末端生态与采购配置。",
-      "detail_url": "/atlas/hardware/"
+      "output": "知识正文：研究型机械臂选型",
+      "next_action": "已完成四款首批规格；继续补控制接口、许可证、末端生态与真实询价。",
+      "detail_url": "/atlas/knowledge/research-arm-selection/"
     },
     {
       "id": "hardware-sensor-catalog",
@@ -161,9 +161,9 @@
       "access_mode": "assisted",
       "cadence": "每月核验",
       "status": "active",
-      "output": "site/data/field-guides.json · Hardware / 传感器",
-      "next_action": "按传感原理补具体型号；只在同原理、同工况下比较量程与精度。",
-      "detail_url": "/atlas/hardware/"
+      "output": "知识正文：机器人传感器选型",
+      "next_action": "按传感原理补具体型号，并增加时间同步与外参验收模板。",
+      "detail_url": "/atlas/knowledge/robot-sensor-selection/"
     },
     {
       "id": "hardware-open-platforms",
@@ -203,9 +203,9 @@
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "site/data/field-guides.json · Adjacent / 自动驾驶",
-      "next_action": "为每条迁移假设补直接机器人证据或最小可证伪实验。",
-      "detail_url": "/atlas/adjacent/"
+      "output": "知识正文：跨领域迁移证伪框架",
+      "next_action": "把 Waymo、nuScenes 与 CARLA 迁移假设分别升级为独立实验卡。",
+      "detail_url": "/atlas/knowledge/cross-domain-transfer-evaluation/"
     },
     {
       "id": "adjacent-foundation-models",
@@ -217,9 +217,9 @@
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "site/data/field-guides.json · Adjacent / 视觉与多模态",
-      "next_action": "补模型版本、输入输出、许可，并为每个假设记录机器人验证结果。",
-      "detail_url": "/atlas/adjacent/"
+      "output": "知识正文：跨领域迁移证伪框架",
+      "next_action": "为 SAM 2、DINOv2 和 VGGT 分别建立机器人最小验证实验卡。",
+      "detail_url": "/atlas/knowledge/cross-domain-transfer-evaluation/"
     },
     {
       "id": "lab-website-template-review",

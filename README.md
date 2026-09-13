@@ -13,11 +13,13 @@ RoboOpus 具身智能与机器人知识库的总入口与跨项目治理仓库�
 - 在 `/atlas/pipeline/` 发布来源到知识节点的跨板块采集任务清单。
 - 在 `/atlas/frontier/` 发布跨主题 arXiv 候选雷达，并把候选路由到 WAM、Robotics、Hardware、Adjacent。
 - 在 `/atlas/robotics/`、`/atlas/hardware/`、`/atlas/adjacent/` 发布三张可筛选领域地图。
+- 在 `/atlas/knowledge/` 发布由 Markdown 自动生成的来源核对知识正文与详情页。
 - 发布机器可读的 `site/data/atlas.json`。
 - 发布 58 个种子节点组成的 `site/data/catalog.json`。
 - 发布 48 个来源入口组成的 `site/data/sources.json`，标明第一方/线索源、接入方式与使用边界。
 - 发布 18 个采集任务组成的 `site/data/ingestion-jobs.json`。
 - 发布 34 个结构化入口组成的 `site/data/field-guides.json`，连接知识节点与一手来源。
+- 首批发布 6 篇知识正文；每篇标明来源、关联节点、编辑状态和是否经过人工复核。
 - 每天北京时间 08:20 运行 Frontier arXiv 发现任务；自动化只能创建 `candidate`，不能发布人工结论。
 - 不在这里复制各专题的全部内容；专题稳定后进入各自普通仓库和 GitHub Pages 项目站。
 

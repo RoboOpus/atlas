@@ -9,6 +9,7 @@ const sourcesPath = path.join(repo, "site", "data", "sources.json");
 const jobsPath = path.join(repo, "site", "data", "ingestion-jobs.json");
 const frontierPapersPath = path.join(repo, "site", "data", "frontier-papers.json");
 const fieldGuidesPath = path.join(repo, "site", "data", "field-guides.json");
+const knowledgePath = path.join(repo, "site", "data", "knowledge.json");
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const requiredFiles = [
   "site/index.html",
@@ -19,6 +20,7 @@ const requiredFiles = [
   "site/data/ingestion-jobs.json",
   "site/data/frontier-papers.json",
   "site/data/field-guides.json",
+  "site/data/knowledge.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
@@ -36,8 +38,12 @@ const requiredFiles = [
   "site/robotics/index.html",
   "site/hardware/index.html",
   "site/adjacent/index.html",
+  "site/knowledge/index.html",
+  "site/knowledge/knowledge.css",
+  "site/knowledge/knowledge.js",
   "config/frontier-arxiv.json",
   "scripts/fetch-frontier-arxiv.mjs",
+  "scripts/build-knowledge.mjs",
   "tests/fixtures/frontier-arxiv.atom.xml",
   ".github/workflows/refresh-frontier-arxiv.yml",
   "content/catalog-schema.md",
@@ -45,6 +51,7 @@ const requiredFiles = [
   "content/ingestion-jobs-schema.md",
   "content/frontier-radar-schema.md",
   "content/field-guides-schema.md",
+  "content/knowledge-schema.md",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -59,6 +66,7 @@ const sources = JSON.parse(await readFile(sourcesPath, "utf8"));
 const jobs = JSON.parse(await readFile(jobsPath, "utf8"));
 const frontierPapers = JSON.parse(await readFile(frontierPapersPath, "utf8"));
 const fieldGuides = JSON.parse(await readFile(fieldGuidesPath, "utf8"));
+const knowledge = JSON.parse(await readFile(knowledgePath, "utf8"));
 const frontierConfig = JSON.parse(await readFile(frontierConfigPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
 
@@ -188,6 +196,48 @@ for (const [track, count] of Object.entries(guidesPerTrack)) {
   if (count < 8) throw new Error(`Field guide track is too thin: ${track} (${count})`);
 }
 
+const editorialStates = new Set(["source-checked-draft", "reviewed"]);
+if (knowledge.schema_version !== "0.1.0") throw new Error("Unexpected knowledge index schema version");
+if (!Array.isArray(knowledge.articles) || knowledge.articles.length < 6) throw new Error("Knowledge base must contain at least six source-backed articles");
+if (atlas.knowledge_content?.article_count !== knowledge.articles.length) throw new Error("Atlas knowledge article count is out of sync");
+const articleIds = new Set();
+const articleSlugs = new Set();
+const articlesPerTrack = Object.fromEntries([...guideTracks].map((track) => [track, 0]));
+for (const article of knowledge.articles) {
+  if (!article.id || articleIds.has(article.id)) throw new Error(`Missing or duplicate knowledge article id: ${article.id}`);
+  articleIds.add(article.id);
+  if (!article.slug || articleSlugs.has(article.slug)) throw new Error(`Missing or duplicate knowledge article slug: ${article.slug}`);
+  articleSlugs.add(article.slug);
+  if (!guideTracks.has(article.track)) throw new Error(`Unknown knowledge article track: ${article.id}`);
+  if (!article.id.startsWith(`${article.track}-`)) throw new Error(`Knowledge article id/track mismatch: ${article.id}`);
+  if (!article.category || !article.title || !article.summary || !article.difficulty || !article.updated_at) throw new Error(`Incomplete knowledge article: ${article.id}`);
+  if (!editorialStates.has(article.editorial_state)) throw new Error(`Invalid editorial state: ${article.id}`);
+  if (typeof article.human_reviewed !== "boolean") throw new Error(`Missing human review flag: ${article.id}`);
+  if (article.editorial_state === "reviewed" && article.human_reviewed !== true) throw new Error(`Reviewed article lacks human confirmation: ${article.id}`);
+  if (article.editorial_state === "source-checked-draft" && article.human_reviewed !== false) throw new Error(`Draft article incorrectly claims human review: ${article.id}`);
+  if (!Array.isArray(article.source_ids) || article.source_ids.length === 0) throw new Error(`Knowledge article needs sources: ${article.id}`);
+  for (const sourceId of article.source_ids) {
+    if (!sourceIds.has(sourceId)) throw new Error(`Unknown source ${sourceId} in knowledge article ${article.id}`);
+  }
+  if (!Array.isArray(article.node_ids) || article.node_ids.length === 0) throw new Error(`Knowledge article needs catalog nodes: ${article.id}`);
+  for (const nodeId of article.node_ids) {
+    if (!nodeIds.has(nodeId)) throw new Error(`Unknown node ${nodeId} in knowledge article ${article.id}`);
+  }
+  if (!article.source_file?.startsWith("content/knowledge/") || !article.source_file.endsWith(".md")) throw new Error(`Invalid knowledge source file: ${article.id}`);
+  if (article.url !== `/atlas/knowledge/${article.slug}/`) throw new Error(`Invalid knowledge article URL: ${article.id}`);
+  if (!Number.isInteger(article.reading_minutes) || article.reading_minutes < 2) throw new Error(`Invalid reading time: ${article.id}`);
+  if (article.source_count !== article.source_ids.length || article.node_count !== article.node_ids.length) throw new Error(`Knowledge article counts are stale: ${article.id}`);
+  await access(path.join(repo, article.source_file));
+  const renderedPath = path.join(repo, "site", "knowledge", article.slug, "index.html");
+  await access(renderedPath);
+  const renderedArticle = await readFile(renderedPath, "utf8");
+  if (!renderedArticle.includes(article.title) || !renderedArticle.includes("来源与证据")) throw new Error(`Rendered knowledge article is incomplete: ${article.id}`);
+  articlesPerTrack[article.track] += 1;
+}
+for (const [track, count] of Object.entries(articlesPerTrack)) {
+  if (count < 1) throw new Error(`Knowledge track has no article: ${track}`);
+}
+
 if (frontierConfig.schema_version !== "0.1.0") throw new Error("Unexpected Frontier arXiv config schema version");
 if (frontierConfig.endpoint !== "https://export.arxiv.org/api/query") throw new Error("Unexpected arXiv endpoint");
 if (frontierConfig.fallback_feed !== "https://rss.arxiv.org/rss/cs.RO") throw new Error("Unexpected arXiv RSS fallback");
@@ -216,4 +266,4 @@ for (const paper of frontierPapers.papers) {
   if (!paperStatuses.has(paper.status)) throw new Error(`Invalid Frontier paper status: ${paper.id}`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);
