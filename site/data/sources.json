@@ -331,6 +331,32 @@
       "tags": ["机械臂", "力控", "FR3"]
     },
     {
+      "id": "hardware-robotiq-grippers",
+      "track": "hardware",
+      "name": "Robotiq Adaptive Grippers",
+      "owner": "Robotiq",
+      "kind": "vendor",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://robotiq.com/products/adaptive-grippers",
+      "best_for": "平行、自适应与三指末端的行程、负载、接口、防护和指尖资源入口。",
+      "reuse_note": "营销页不是跨品牌结论；规格按具体型号和数据表核验，价格单独记录日期与地区。",
+      "tags": ["夹爪", "末端执行器", "协作机器人"]
+    },
+    {
+      "id": "hardware-onrobot-rg2",
+      "track": "hardware",
+      "name": "OnRobot RG2",
+      "owner": "OnRobot",
+      "kind": "vendor",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://onrobot.com/en/products/rg2-finger-gripper",
+      "best_for": "两指电动夹爪的行程、抓取反馈、指尖定制、快换与机器人兼容性参考。",
+      "reuse_note": "采用官方数据表而非宣传数字做选型；适配器、线缆、控制盒和软件许可需一起核验。",
+      "tags": ["夹爪", "两指夹爪", "末端生态"]
+    },
+    {
       "id": "hardware-universal-robots",
       "track": "hardware",
       "name": "Universal Robots Products",

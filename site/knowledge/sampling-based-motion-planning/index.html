@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="从单次/多次查询、只求可行/继续优化、几何/动力学约束四个维度组织采样规划器，并给出可复现的比较协议。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>采样式运动规划：怎样选 RRT、PRM 与优化型规划器 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Robotics · 规划与控制</p>
+        <h1>采样式运动规划：怎样选 RRT、PRM 与优化型规划器</h1>
+        <p class="article-summary">从单次/多次查询、只求可行/继续优化、几何/动力学约束四个维度组织采样规划器，并给出可复现的比较协议。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>基础 → 进阶</span><span>约 4 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>构型空间</span><span>碰撞检测</span><span>路径与轨迹的区别</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#先问四个问题">先问四个问题</a>
+<a href="#单次查询与多次查询">单次查询与多次查询</a>
+<a href="#可行解与优化解">可行解与优化解</a>
+<a href="#有效性检查往往是主要成本">有效性检查往往是主要成本</a>
+<a href="#ompl-与-moveit-2-的接口边界">OMPL 与 MoveIt 2 的接口边界</a>
+<a href="#最小规划器比较协议">最小规划器比较协议</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>先按问题结构选择规划器类别，不从算法名气出发。</li><li>最快找到第一条路径与持续改善路径质量是不同目标。</li><li>规划器比较必须固定场景、预算、随机种子和有效性检查器。</li></ul></section>
+          <h2 id="先问四个问题">先问四个问题</h2>
+<p>面对一张长长的 OMPL 规划器列表，最有效的入口不是逐个记名字，而是先回答四个问题：</p>
+<ol>
+<li>环境会重复查询，还是每次只解一个起点—终点？</li>
+<li>只要尽快找到可行路径，还是愿意继续计算来降低路径代价？</li>
+<li>问题只有几何与运动学约束，还是存在速度、转向半径和动力学约束？</li>
+<li>目标、状态空间、距离度量和投影是否容易采样与定义？</li>
+</ol>
+<p>OMPL 官方把规划器分为几何、控制和多层三类；几何规划默认假设可行路径之后能够转成动力学可行轨迹，而控制型规划器通过状态传播处理微分约束。<a class="source-ref" href="#source-1">[S1]</a> 这条边界决定了结果能否直接代表系统真实运动。</p>
+<h2 id="单次查询与多次查询">单次查询与多次查询</h2>
+<p>RRT 一类树方法通常面向单次查询，从起点或起点与终点向外探索。RRTConnect 使用双向树，常被用作快速寻找首条可行路径的基线。<a class="source-ref" href="#source-1">[S1]</a></p>
+<p>PRM 一类路网方法先构建可复用的自由空间图，再连接不同查询的起终点。若工作空间和碰撞几何长期不变、需要处理大量目标，路网构建成本可以由后续查询摊薄。若场景频繁变化，复用价值会下降，还要明确哪些边必须重新检查。</p>
+<p>因此不能脱离工作负载说“RRT 比 PRM 快”。单次规划时间、预处理时间、场景更新成本和查询数量必须分开报告。</p>
+<h2 id="可行解与优化解">可行解与优化解</h2>
+<p>RRTConnect、基础 RRT 或 PRM 常被用来尽快找可行解；RRT*、PRM*、BIT* 等规划器关注在增加采样和计算后逐步改善代价。OMPL 提供统一的优化目标，可表达路径长度、最小间隙、机械功等代价，但官方也提醒：并非对任意自定义代价都自动具有相同的最优性保证。<a class="source-ref" href="#source-1">[S1]</a></p>
+<p>工程上应同时记录两个时间：</p>
+<ul>
+<li><strong>首解时间</strong>：第一次找到可行解需要多久；</li>
+<li><strong>质量—时间曲线</strong>：继续运行后路径代价怎样变化。</li>
+</ul>
+<p>只报告最终最短路径会隐藏实时系统能否及时获得首解；只报告首解成功率又会隐藏路径是否贴近障碍、过长或难以时间化。</p>
+<h2 id="有效性检查往往是主要成本">有效性检查往往是主要成本</h2>
+<p>采样规划不断调用状态与运动有效性检查。对复杂机械臂，碰撞检测可能占据主要运行时间。LazyPRM 等方法延迟检查，只有候选解真正用到顶点或边时才验证。<a class="source-ref" href="#source-1">[S1]</a> 这可能减少无用检查，但若环境密集或候选路径反复失效，也可能付出别的代价。</p>
+<p>比较规划器时必须使用相同机器人模型、碰撞几何、离散检查分辨率、允许碰撞矩阵和关节限制。否则所谓算法提升可能只是漏检了窄障碍，或者使用了更粗的碰撞采样。</p>
+<h2 id="ompl-与-moveit-2-的接口边界">OMPL 与 MoveIt 2 的接口边界</h2>
+<p>OMPL 的规划器是抽象算法，不认识机械臂。MoveIt 2 负责把机器人状态、规划场景、碰撞检查、约束和规划请求组织起来，再通过插件接口调用 OMPL。<a class="source-ref" href="#source-2">[S2]</a> MoveIt 的规划结果通常还要经过请求/响应适配器和时间参数化，生成满足关节速度、加速度限制的轨迹。<a class="source-ref" href="#source-2">[S2]</a></p>
+<p>因此复现实验至少要固定：</p>
+<ul>
+<li>ROS 与 MoveIt 版本、机器人 URDF/SRDF 和关节限制；</li>
+<li><code>planning_pipeline</code>、<code>planner_id</code> 与所有规划参数；</li>
+<li>起点、目标约束、规划场景和碰撞检查分辨率；</li>
+<li>时间预算、终止条件、随机种子和重复次数；</li>
+<li>是否做路径简化、时间参数化和执行前复检。</li>
+</ul>
+<h2 id="最小规划器比较协议">最小规划器比较协议</h2>
+<ol>
+<li>选三类场景：开阔空间、窄通道和强约束目标。</li>
+<li>每个场景固定 20—50 个起终点查询，不删除失败样本。</li>
+<li>每个规划器用相同时间预算，运行多个随机种子。</li>
+<li>同时记录成功率、首解时间、最终代价、最小间隙、状态检查次数和轨迹时间化结果。</li>
+<li>将“无解”“超时”“起点非法”“路径后处理失败”分开统计。</li>
+<li>最后在同一控制器和速度限制下做低速执行，记录计划—实际误差。</li>
+</ol>
+<p>Modern Robotics 将运动规划放在构型空间、障碍与可达性的统一框架中。<a class="source-ref" href="#source-3">[S3]</a> 这提醒我们：规划器输出只是某个问题定义下的候选路径。只要状态空间、约束或碰撞模型改变，结论就需要重新验证。</p>
+<p>RoboOpus 后续不做脱离场景的“规划器总榜”。更可用的形式是问题卡加实验卡：前者描述空间、约束与查询模式，后者保存版本、预算、随机性和完整失败分布。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://ompl.kavrakilab.org/" target="_blank" rel="noreferrer">Open Motion Planning Library ↗</a><p>OMPL Project · 采样式运动规划算法、基准与接口的统一参考。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://moveit.picknik.ai/" target="_blank" rel="noreferrer">MoveIt 2 Documentation ↗</a><p>MoveIt Project · 机械臂运动规划、场景表示、轨迹执行与任务构造。</p></div></li>
+<li id="source-3"><span>S3</span><div><a href="https://modernrobotics.northwestern.edu/" target="_blank" rel="noreferrer">Modern Robotics ↗</a><p>Northwestern University · 机器人运动学、动力学、规划和控制的系统化课程主线。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=robotics">采样式运动规划</a><a href="/atlas/catalog/?track=robotics">轨迹优化</a><a href="/atlas/catalog/?track=robotics">任务与运动规划</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

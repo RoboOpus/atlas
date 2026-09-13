@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="比较平行夹爪、自适应夹爪、真空、灵巧手与任务专用工具，建立包含接触、负载、反馈、工具坐标和验收实验的选型框架。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>夹爪与末端执行器选型：从对象接触到软件接口 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/knowledge/knowledge.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    </header>
+    <main class="article-main">
+      <header class="article-header">
+        <p class="eyebrow">Hardware · 末端执行器</p>
+        <h1>夹爪与末端执行器选型：从对象接触到软件接口</h1>
+        <p class="article-summary">比较平行夹爪、自适应夹爪、真空、灵巧手与任务专用工具，建立包含接触、负载、反馈、工具坐标和验收实验的选型框架。</p>
+        <div class="article-meta"><span>来源已核对 · 待人工复核</span><span>系统指南</span><span>约 3 分钟</span><span>更新 2026-09-13</span></div>
+        <div class="article-prerequisites"><strong>前置</strong><span>目标物体与任务流程</span><span>机械臂负载与法兰</span><span>控制接口</span></div>
+      </header>
+      <div class="article-layout">
+        <aside class="article-toc"><strong>本文目录</strong><a href="#末端不是机械臂的附件">末端不是机械臂的附件</a>
+<a href="#五类常见方案">五类常见方案</a>
+<a href="#八个必须统一的字段">八个必须统一的字段</a>
+<a href="#力与触觉怎样补充夹爪">力与触觉怎样补充夹爪</a>
+<a href="#三组低成本验收实验">三组低成本验收实验</a><a href="#evidence">来源与证据</a></aside>
+        <article class="article-content">
+          <section class="takeaway-box"><strong>读完应带走</strong><ul><li>先定义接触模式和失败代价，再比较行程、力与自由度。</li><li>夹爪自重、转接板和线缆都会侵占机械臂负载与工作空间。</li><li>有位置、力或触觉反馈不等于闭环可用，必须验证频率、时延和语义。</li></ul></section>
+          <h2 id="末端不是机械臂的附件">末端不是机械臂的附件</h2>
+<p>机器人最终通过末端与世界交换力。夹爪选错后，感知、规划和策略再复杂也可能败在最简单的物理条件：指尖碰不到、摩擦不足、夹持力损伤物体、法兰负载超限，或者线缆在旋转时缠绕。</p>
+<p>选型的第一步是描述任务，而不是品牌：对象尺寸与质量范围、表面材料、允许接触区域、抓取方向、节拍、卫生或防护要求、掉落代价，以及是否需要在手内调整姿态。</p>
+<h2 id="五类常见方案">五类常见方案</h2>
+<ul>
+<li><strong>平行两指夹爪</strong>：控制简单、重复性高，适合规则物体和明确抓取面；能力高度依赖指尖形状与摩擦。</li>
+<li><strong>自适应夹爪</strong>：机械耦合或多指结构可包络不同形状，降低部分几何精度要求，但接触状态更难精确建模。</li>
+<li><strong>真空末端</strong>：对平整、气密表面高效，需把真空源、泄漏、过滤与掉电保持纳入系统。</li>
+<li><strong>灵巧手</strong>：自由度和接触模式丰富，适合研究在手操作；控制、标定、耐久和维修成本显著增加。</li>
+<li><strong>任务专用工具</strong>：夹具、螺丝刀、磁吸或定制指尖可能牺牲通用性，却常带来最高稳定性与节拍。</li>
+</ul>
+<p>Robotiq 官方产品族展示了平行、自适应和三指等不同末端入口，并明确不同型号的行程、负载、防护与集成定位不同。<a class="source-ref" href="#source-1">[S1]</a> OnRobot RG2 官方页则把行程、抓取检测、宽度测量、指尖定制和 TCP 计算列为系统功能。<a class="source-ref" href="#source-2">[S2]</a> 这些信息适合生成候选表，但跨品牌比较必须回到具体数据表和同一测试条件。</p>
+<h2 id="八个必须统一的字段">八个必须统一的字段</h2>
+<ol>
+<li><strong>开口与可达几何</strong>：最大/最小行程、指长、指尖厚度、手掌与工件干涉。</li>
+<li><strong>对象能力</strong>：质量、质心偏置、表面摩擦、易碎性和允许夹持区域。</li>
+<li><strong>输出与反馈</strong>：夹持力范围、位置/宽度反馈、抓取检测及其更新频率。</li>
+<li><strong>本体代价</strong>：末端、转接板、快换、传感器和线缆的总质量与惯量。</li>
+<li><strong>机械接口</strong>：法兰、螺纹、定位销、指尖图纸、TCP 与碰撞模型。</li>
+<li><strong>电气接口</strong>：供电、电流峰值、I/O、现场总线、USB 或以太网。</li>
+<li><strong>软件接口</strong>：驱动版本、ROS 支持、控制模式、错误码和掉线恢复。</li>
+<li><strong>维护与采购</strong>：易损件、指尖寿命、交期、保修、地区价格和许可。</li>
+</ol>
+<p>机械臂标称负载不能直接全部留给工件。末端自重、质心到法兰的距离以及运动加速度都会改变关节负载。Franka 的官方资源可用于核对具体机械臂与手爪的接口和限制，但组合后的安全边界仍需按本机手册计算。<a class="source-ref" href="#source-3">[S3]</a></p>
+<h2 id="力与触觉怎样补充夹爪">力与触觉怎样补充夹爪</h2>
+<p>腕部六维力/力矩传感器给出整体合力与力矩，可用于接触检测、插入和负载估计。ATI 的选型资料强调量程要同时考虑静态与动态载荷。<a class="source-ref" href="#source-4">[S4]</a> 指尖触觉则更接近局部接触分布、滑移和表面形变；GelSight 一类视触觉设备是这条路线的官方产品与研究入口。<a class="source-ref" href="#source-5">[S5]</a></p>
+<p>两者不能互换。腕力传感器能看到整体交互，却不一定知道哪根手指在滑；触觉能看到局部接触，却未必覆盖整个工具上的外力。知识库应记录传感器放置位置、坐标变换、采样率、滤波和饱和，而不是只标“支持力控”。</p>
+<h2 id="三组低成本验收实验">三组低成本验收实验</h2>
+<ol>
+<li><strong>对象矩阵</strong>：选小硬物、大软物、薄片、易碎物和偏心重物，记录成功、滑移、损伤和失败类型。</li>
+<li><strong>姿态矩阵</strong>：从正上方、侧面和受限空间抓取，检查手掌干涉、指尖可达和线缆运动。</li>
+<li><strong>持续运行</strong>：重复数百到数千次开合，记录温升、零点漂移、丢步、通信错误和指尖磨损。</li>
+</ol>
+<p>每次实验保存对象版本、指尖材料、夹持参数、TCP、机械臂速度和失败视频。若更换指尖却没有更新碰撞模型与 TCP，软件中的“同一个夹爪”实际上已经是另一套系统。</p>
+<p>RoboOpus 的末端目录后续将把规格、价格、接口、传感和验收记录分开：规格回答“厂家声明什么”，实验回答“在我们的任务里发生什么”，两者不能混成一个评分。</p>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://robotiq.com/products/adaptive-grippers" target="_blank" rel="noreferrer">Robotiq Adaptive Grippers ↗</a><p>Robotiq · 平行、自适应与三指末端的行程、负载、接口、防护和指尖资源入口。</p></div></li>
+<li id="source-2"><span>S2</span><div><a href="https://onrobot.com/en/products/rg2-finger-gripper" target="_blank" rel="noreferrer">OnRobot RG2 ↗</a><p>OnRobot · 两指电动夹爪的行程、抓取反馈、指尖定制、快换与机器人兼容性参考。</p></div></li>
+<li id="source-3"><span>S3</span><div><a href="https://franka.de/resources" target="_blank" rel="noreferrer">Franka Resources ↗</a><p>Franka Robotics · Franka Research 3 的手册、数据表、控制接口与开发资源。</p></div></li>
+<li id="source-4"><span>S4</span><div><a href="https://www.ati-ia.com/products/ft/ft_models.aspx" target="_blank" rel="noreferrer">ATI Force/Torque Sensors ↗</a><p>ATI Industrial Automation · 六维力/力矩传感器型号、量程、分辨率和接口比较。</p></div></li>
+<li id="source-5"><span>S5</span><div><a href="https://www.gelsight.com/products/" target="_blank" rel="noreferrer">GelSight Products ↗</a><p>GelSight · 视触觉传感器产品、应用案例与集成资料。</p></div></li></ol></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=hardware">夹爪</a><a href="/atlas/catalog/?track=hardware">灵巧手</a><a href="/atlas/catalog/?track=hardware">力/力矩传感器</a><a href="/atlas/catalog/?track=hardware">触觉传感器</a></div></section>
+        </article>
+      </div>
+    </main>
+    <footer><p>RoboOpus Atlas · Source-backed knowledge</p><p><a href="/atlas/data/knowledge.json">机器可读正文索引</a></p></footer></body>
+</html>

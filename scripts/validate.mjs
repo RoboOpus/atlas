@@ -48,6 +48,7 @@ const requiredFiles = [
   "scripts/fetch-frontier-arxiv.mjs",
   "scripts/build-knowledge.mjs",
   "tests/fixtures/frontier-arxiv.atom.xml",
+  "tests/fixtures/frontier-arxiv-listing.html",
   ".github/workflows/refresh-frontier-arxiv.yml",
   "content/catalog-schema.md",
   "content/source-registry-schema.md",
@@ -265,6 +266,7 @@ for (const [track, count] of Object.entries(articlesPerTrack)) {
 if (frontierConfig.schema_version !== "0.1.0") throw new Error("Unexpected Frontier arXiv config schema version");
 if (frontierConfig.endpoint !== "https://export.arxiv.org/api/query") throw new Error("Unexpected arXiv endpoint");
 if (frontierConfig.fallback_feed !== "https://rss.arxiv.org/rss/cs.RO") throw new Error("Unexpected arXiv RSS fallback");
+if (frontierConfig.fallback_listing !== "https://arxiv.org/list/cs.RO/recent?skip=0&show=100") throw new Error("Unexpected arXiv listing fallback");
 if (!frontierConfig.search_query || frontierConfig.max_results > 100 || frontierConfig.pool_limit > 60) throw new Error("Unsafe or incomplete Frontier arXiv limits");
 if (!Array.isArray(frontierConfig.topic_rules) || frontierConfig.topic_rules.length < 8) throw new Error("Frontier routing rules are too thin");
 const topicRuleIds = new Set(frontierConfig.topic_rules.map((rule) => rule.id));
@@ -281,7 +283,9 @@ const paperIds = new Set();
 for (const paper of frontierPapers.papers) {
   if (!paper.id || paperIds.has(paper.id)) throw new Error(`Missing or duplicate Frontier paper id: ${paper.id}`);
   paperIds.add(paper.id);
-  if (!paper.title || !paper.abstract || !paper.url || !paper.pdfUrl || !paper.published) throw new Error(`Incomplete Frontier paper: ${paper.id}`);
+  if (!paper.title || !paper.url || !paper.pdfUrl || !paper.published) throw new Error(`Incomplete Frontier paper: ${paper.id}`);
+  if (!new Set(["abstract", "listing"]).has(paper.metadataCompleteness)) throw new Error(`Unknown Frontier metadata completeness: ${paper.id}`);
+  if (paper.metadataCompleteness === "abstract" && !paper.abstract) throw new Error(`Frontier abstract is missing: ${paper.id}`);
   if (!Array.isArray(paper.authors) || paper.authors.length === 0) throw new Error(`Frontier paper has no authors: ${paper.id}`);
   if (!Array.isArray(paper.routes) || paper.routes.length === 0 || paper.routes.some((route) => !paperRoutes.has(route))) throw new Error(`Invalid Frontier route: ${paper.id}`);
   if (!Array.isArray(paper.matchedTopics) || paper.matchedTopics.length === 0) throw new Error(`Frontier paper has no topic match: ${paper.id}`);

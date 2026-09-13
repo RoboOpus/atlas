@@ -45,6 +45,44 @@
       "node_count": 7
     },
     {
+      "id": "adjacent-closed-loop-evaluation",
+      "slug": "closed-loop-evaluation-protocol",
+      "track": "adjacent",
+      "category": "闭环评测",
+      "title": "从自动驾驶借鉴闭环评测：场景、事件与失败重放",
+      "summary": "把自动驾驶中的场景参数化、多传感器时空组织和失败切片迁移到机器人实验，形成不被单一成功率掩盖的闭环协议。",
+      "difficulty": "研究设计",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "adjacent-carla",
+        "adjacent-waymo-open",
+        "adjacent-nuscenes",
+        "adjacent-kitti"
+      ],
+      "node_ids": [
+        "adjacent-closed-loop-eval",
+        "adjacent-data-engines",
+        "adjacent-driving-world-models"
+      ],
+      "prerequisites": [
+        "机器人任务成功条件",
+        "日志与时间同步",
+        "基本统计"
+      ],
+      "takeaways": [
+        "闭环评测的单位应是可重放场景与事件，不只是平均成功率。",
+        "离线感知指标、仿真性能和真实任务结果需要分层报告。",
+        "版本、随机种子、传感器和时间模式是评测结果的一部分。"
+      ],
+      "source_file": "content/knowledge/adjacent-closed-loop-evaluation.md",
+      "url": "/atlas/knowledge/closed-loop-evaluation-protocol/",
+      "reading_minutes": 4,
+      "source_count": 4,
+      "node_count": 3
+    },
+    {
       "id": "adjacent-foundation-model-experiments",
       "slug": "foundation-model-robot-experiments",
       "track": "adjacent",
@@ -162,6 +200,46 @@
       "node_count": 4
     },
     {
+      "id": "hardware-end-effector-selection",
+      "slug": "end-effector-selection",
+      "track": "hardware",
+      "category": "末端执行器",
+      "title": "夹爪与末端执行器选型：从对象接触到软件接口",
+      "summary": "比较平行夹爪、自适应夹爪、真空、灵巧手与任务专用工具，建立包含接触、负载、反馈、工具坐标和验收实验的选型框架。",
+      "difficulty": "系统指南",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "hardware-robotiq-grippers",
+        "hardware-onrobot-rg2",
+        "hardware-franka",
+        "hardware-ati-ft",
+        "hardware-gelsight"
+      ],
+      "node_ids": [
+        "hardware-grippers",
+        "hardware-dexterous-hands",
+        "hardware-force-torque",
+        "hardware-tactile-sensors"
+      ],
+      "prerequisites": [
+        "目标物体与任务流程",
+        "机械臂负载与法兰",
+        "控制接口"
+      ],
+      "takeaways": [
+        "先定义接触模式和失败代价，再比较行程、力与自由度。",
+        "夹爪自重、转接板和线缆都会侵占机械臂负载与工作空间。",
+        "有位置、力或触觉反馈不等于闭环可用，必须验证频率、时延和语义。"
+      ],
+      "source_file": "content/knowledge/hardware-end-effector-selection.md",
+      "url": "/atlas/knowledge/end-effector-selection/",
+      "reading_minutes": 3,
+      "source_count": 5,
+      "node_count": 4
+    },
+    {
       "id": "hardware-open-platform-reproducibility",
       "slug": "open-robot-platform-reproducibility",
       "track": "hardware",
@@ -237,6 +315,43 @@
       "reading_minutes": 4,
       "source_count": 4,
       "node_count": 5
+    },
+    {
+      "id": "robotics-sampling-motion-planning",
+      "slug": "sampling-based-motion-planning",
+      "track": "robotics",
+      "category": "规划与控制",
+      "title": "采样式运动规划：怎样选 RRT、PRM 与优化型规划器",
+      "summary": "从单次/多次查询、只求可行/继续优化、几何/动力学约束四个维度组织采样规划器，并给出可复现的比较协议。",
+      "difficulty": "基础 → 进阶",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-13",
+      "source_ids": [
+        "robotics-ompl",
+        "robotics-moveit2",
+        "robotics-modern-robotics"
+      ],
+      "node_ids": [
+        "robotics-sampling-planning",
+        "robotics-trajectory-optimization",
+        "robotics-tamp"
+      ],
+      "prerequisites": [
+        "构型空间",
+        "碰撞检测",
+        "路径与轨迹的区别"
+      ],
+      "takeaways": [
+        "先按问题结构选择规划器类别，不从算法名气出发。",
+        "最快找到第一条路径与持续改善路径质量是不同目标。",
+        "规划器比较必须固定场景、预算、随机种子和有效性检查器。"
+      ],
+      "source_file": "content/knowledge/robotics-sampling-motion-planning.md",
+      "url": "/atlas/knowledge/sampling-based-motion-planning/",
+      "reading_minutes": 4,
+      "source_count": 3,
+      "node_count": 3
     },
     {
       "id": "robotics-planning-control-stack",

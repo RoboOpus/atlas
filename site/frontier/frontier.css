@@ -4,7 +4,7 @@
 .frontier-policy { padding: 22px; border-left: 3px solid var(--orange); background: var(--panel); }
 .frontier-policy strong { font: 700 12px/1 ui-monospace, monospace; letter-spacing: 0.08em; }
 .frontier-policy p { margin: 14px 0 0; color: var(--muted); line-height: 1.7; }
-.radar-status { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; padding: 1px; background: var(--line); }
+.radar-status { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; padding: 1px; background: var(--line); }
 .radar-status div { min-height: 102px; padding: 18px; background: var(--paper); }
 .radar-status span { display: block; color: var(--muted); font: 700 10px/1 ui-monospace, monospace; letter-spacing: 0.07em; text-transform: uppercase; }
 .radar-status strong { display: block; margin-top: 24px; font: 500 21px/1.1 Georgia, "Noto Serif SC", serif; }

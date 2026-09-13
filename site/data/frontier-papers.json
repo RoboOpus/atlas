@@ -1,10 +1,10 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": null,
+  "generated_at": "2026-09-13T15:15:41.331Z",
   "source": {
-    "endpoint": "https://export.arxiv.org/api/query",
-    "mode": "api",
-    "query": "cat:cs.RO OR cat:eess.SY OR ((cat:cs.AI OR cat:cs.CV OR cat:cs.LG) AND (all:robot OR all:embodied OR all:manipulation OR all:autonomous))",
+    "endpoint": "https://arxiv.org/list/cs.RO/recent?skip=0&show=100",
+    "mode": "listing-fallback",
+    "query": "cs.RO recent listing; title-level routing when abstracts are unavailable",
     "sort_by": "submittedDate",
     "sort_order": "descending",
     "acknowledgement": "Thank you to arXiv for use of its open access interoperability."
@@ -14,5 +14,1727 @@
     "score_meaning": "Metadata-only routing relevance; not paper quality, correctness, acceptance, or reproducibility.",
     "review_gate": "Automation may create candidates only. Verified and reviewed states require human source checks."
   },
-  "papers": []
+  "papers": [
+    {
+      "id": "2609.11308",
+      "title": "2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation",
+      "authors": [
+        "Yutong Hu",
+        "Fengjiao Chen",
+        "Xuezhi Cao",
+        "Renaud Detry"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "url": "https://arxiv.org/abs/2609.11308",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11308",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics"
+      ],
+      "triageScore": 26,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10506",
+      "title": "DUET-DINO: Simultaneous Cross-View World Modeling for Latent Planning in Robot Manipulation",
+      "authors": [
+        "Nisarga Nilavadi",
+        "Ralf Römer",
+        "Moritz Reuss",
+        "Michael Krawez",
+        "Tobias Jülg",
+        "Angela P. Schoellig",
+        "Rudolf Lioutikov",
+        "Wolfram Burgard"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "url": "https://arxiv.org/abs/2609.10506",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10506",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics"
+      ],
+      "triageScore": 26,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11357",
+      "title": "Morphology-Aware Human Motion Retargeting for Wheeled-Humanoid Loco-Manipulation",
+      "authors": [
+        "Chenbo Xia",
+        "Chao Ye"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11357",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11357",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 21,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09492",
+      "title": "Actuator Dynamics Curricula for Narrow-Viability Tasks in Legged Robot Learning",
+      "authors": [
+        "Kousheek Chakraborty",
+        "Chandan K. Rajendra",
+        "Ayham Alharbat",
+        "Abeje Y. Mersha"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09492",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09492",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        },
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "hardware",
+        "robotics"
+      ],
+      "triageScore": 21,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10050",
+      "title": "Grounding Generated Video Plans in Simulation Towards Versatile Dexterous Controllers",
+      "authors": [
+        "Tianyue Wu",
+        "Boyuan An",
+        "Shuqi Zhao",
+        "Heyu Guo",
+        "Wanli Xing",
+        "Yi Ma",
+        "Kaifeng Zhang",
+        "Ruihai Wu",
+        "Masayoshi Tomizuka"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.10050",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10050",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 20,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11445",
+      "title": "FARM: Reading Failure Signals from the Internal Predictive States of a Frozen Robotic World Model",
+      "authors": [
+        "Haoran Pei",
+        "Mingrui Luo",
+        "Senbao Wang",
+        "Haoran Lv",
+        "Jie Guo",
+        "Sheng Zhong",
+        "Ruixi Ci"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11445",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11445",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 19,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11561",
+      "title": "Memory as Plans: World-Action Modeling with Memory-Grounded Planning",
+      "authors": [
+        "Sizhe Zhao",
+        "Haozhe Xie",
+        "Weiyu Zhao",
+        "Chenchu Zhang",
+        "Huan Wang",
+        "Chenyang Wang",
+        "Qinglin Liu",
+        "Shengping Zhang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11561",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11561",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 19,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11875",
+      "title": "UniMPA: A Unified Memory-Prediction-Action Model via Action-Grounded Transition Modeling",
+      "authors": [
+        "Wei Li",
+        "Rui Shao",
+        "Jie He",
+        "Lingsen Zhang",
+        "Ziwei Liu",
+        "Liqiang Nie"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11875",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11875",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 19,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:15:41.331Z"
+    },
+    {
+      "id": "2609.09210",
+      "title": "Identifying Habit, Physics, and Nuisance in Robot World Models",
+      "authors": [
+        "Jinting Hang",
+        "Zhenhui Cai"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "url": "https://arxiv.org/abs/2609.09210",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09210",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 19,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09808",
+      "title": "GTA-2: A Multi-VLM Framework for Synthesizing Robot Manipulation Skills via Grounded Task Axes",
+      "authors": [
+        "M. Yunus Seker",
+        "Shobhit Aggarwal",
+        "Ruwan Wickramarachchi",
+        "Jonathan Francis",
+        "Oliver Kroemer"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09808",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09808",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "adjacent"
+      ],
+      "triageScore": 19,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11478",
+      "title": "CARLAverse: A Highly Modular, Distributed, and Multimodal Framework for Human-in-the-Loop Simulation",
+      "authors": [
+        "Patrick Rebling",
+        "Philipp Nenninger",
+        "Reiner Kriesten"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.HC"
+      ],
+      "url": "https://arxiv.org/abs/2609.11478",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11478",
+      "matchedTopics": [
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        },
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "adjacent"
+      ],
+      "triageScore": 18,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10706",
+      "title": "HuRo: Robotizing Human Videos for Scalable VLA Pretraining",
+      "authors": [
+        "Jinho Jeong",
+        "Se June Joo",
+        "Jaehyun Kang",
+        "Dongyun Kim",
+        "Yena Kim",
+        "Hanjung Kim",
+        "Seon Joo Kim"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "url": "https://arxiv.org/abs/2609.10706",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10706",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 16,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10915",
+      "title": "IMLE-VLA: Fast Single-Step Action Generation for Vision-Language-Action Policies",
+      "authors": [
+        "Kian Hosseinkhani",
+        "Qinhe Peng",
+        "George Shramko",
+        "Mehran Aghabozorgi",
+        "Jianing Qian",
+        "Tristan Engst",
+        "Alireza Moazeni",
+        "Dinesh Jayaraman",
+        "Ke Li"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "url": "https://arxiv.org/abs/2609.10915",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10915",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 16,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11270",
+      "title": "Beyond Noise Steering: Dual-Latent Space Reinforcement Learning for Generative Robot Policy",
+      "authors": [
+        "Pengfei Zhang",
+        "Teng Sun",
+        "Xianchao Xiu"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11270",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11270",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 16,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09630",
+      "title": "JEPA Policy: Diffusion-Free Imitation Learning via Paired Action and Future Representation Prediction",
+      "authors": [
+        "Jie Xu",
+        "Kangjin Yu",
+        "Ziyi Jin",
+        "Junjie Gao",
+        "Liqing Chen",
+        "Yixian Li",
+        "Shuai Tian",
+        "Zhongpu Xia"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09630",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09630",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 16,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09925",
+      "title": "Time-Frequency Geometric Cross-Attention for Chunked Vision-Language-Action Models",
+      "authors": [
+        "Shengye Dong",
+        "Haochen Niu",
+        "Hao Liu",
+        "Peiwen Lin",
+        "Chuang Wang",
+        "Shanmin Pang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09925",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09925",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 16,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09941",
+      "title": "HaWMPO: Hallucination-Aware World Model-based Policy Optimization for Generalist Robot Policy",
+      "authors": [
+        "Zengjue Chen",
+        "Peidong Liu",
+        "Jiawei Li",
+        "Qi Wang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09941",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09941",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 16,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10021",
+      "title": "RoboDrop: Curating VLA Post-Training Data via Local Gradient Compatibility",
+      "authors": [
+        "Runze Xu",
+        "Yuanfan Xu",
+        "Cuijie Xu",
+        "Shuang Dai",
+        "Yining Li",
+        "Yu Wang",
+        "Jincheng Yu"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.10021",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10021",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 16,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10405",
+      "title": "Frequency-Conditioned Flow Matching for Vision-Language-Action Models",
+      "authors": [
+        "Haochen Niu",
+        "Shengye Dong",
+        "Hao Liu",
+        "Peiwen Lin",
+        "Wang Chuang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.10405",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10405",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        }
+      ],
+      "routes": [
+        "wam"
+      ],
+      "triageScore": 16,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11043",
+      "title": "LTLDiff: Finite Linear Temporal Logic-Guided Data Generation and Diffusion Policies for Multi-agent Robotic Manipulation",
+      "authors": [
+        "Chuhan Meng",
+        "Haiyan Yin"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11043",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11043",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11059",
+      "title": "Gait-Dependent Effects on Quadruped Locomotion for Load-Carrying using Passive Mechanism",
+      "authors": [
+        "Giovanni B. Dessy",
+        "Claudio Semini",
+        "Victor Barasuol"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11059",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11059",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11079",
+      "title": "RIDE: Relocalization-Informed Depth Estimation with 3D Gaussian Splatting",
+      "authors": [
+        "Jiarong Lian",
+        "Zhe Xiao",
+        "Zhaoyang Zhang",
+        "Wei Li",
+        "Ruizhi Chen"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11079",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11079",
+      "matchedTopics": [
+        {
+          "id": "perception-estimation",
+          "label": "感知与估计",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11225",
+      "title": "Harness Robotic OS: A Unified Embodied-Agent Runtime for Closed-Loop Quadruped Inspection",
+      "authors": [
+        "Yaoyuan Yan",
+        "Zhiyou Heng",
+        "Haoxiang Jie",
+        "Gang Liu",
+        "Hongjie Yan",
+        "Wei Zhou"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11225",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11225",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11382",
+      "title": "SwarmNxt: Open-source Software-Hardware Platform for Fast and Agile Aerial Swarms",
+      "authors": [
+        "Charbel Toumieh",
+        "Niel Mistry",
+        "Benjamin Jarvis",
+        "Simon Jeger",
+        "Peize Liu",
+        "Shaojie Shen",
+        "Dario Floreano"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11382",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11382",
+      "matchedTopics": [
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "hardware"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:15:41.331Z"
+    },
+    {
+      "id": "2609.11553",
+      "title": "CAP: Continuously Adaptive Perception-Blind Humanoid Locomotion via Learned Denoising",
+      "authors": [
+        "Hongjin Chen",
+        "Zijun Xu",
+        "Shihao Ma",
+        "Yi Zhao",
+        "Xilai Liu",
+        "Ke Ma",
+        "Wei Zhang",
+        "Chunyang Xie",
+        "Pengfei Li",
+        "Jieru Zhao",
+        "Wenchao Ding"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11553",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11553",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11579",
+      "title": "Quasi-static analysis of passive stability in a novel underactuated multi-finger hand",
+      "authors": [
+        "Léonie Plancoulaine",
+        "Sylvain Guégan",
+        "Franck Plestan",
+        "Damien Chablat"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11579",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11579",
+      "matchedTopics": [
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "hardware"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:15:41.331Z"
+    },
+    {
+      "id": "2609.11661",
+      "title": "Contact-Aware Incremental Model Predictive Control for an Underactuated Aerial Manipulator",
+      "authors": [
+        "Darwin Liu",
+        "Tamas Keviczky",
+        "Sihao Sun"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11661",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11661",
+      "matchedTopics": [
+        {
+          "id": "planning-control",
+          "label": "规划与控制",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11733",
+      "title": "Reflex-Informed Neuromuscular Reinforcement Learning for Muscle-Driven Locomotion",
+      "authors": [
+        "Jian Zhou",
+        "Xingyu Zhang",
+        "Rui Ma",
+        "Yu Cao",
+        "Shane Xie",
+        "Zhi-qiang Zhang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.GR",
+        "cs.LG"
+      ],
+      "url": "https://arxiv.org/abs/2609.11733",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11733",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11753",
+      "title": "SEED-UMI: Sharing the Exoskeleton between human and robot for onE-to-one Dexterous demonstration",
+      "authors": [
+        "Tengbo Yu",
+        "Jiahao Wu",
+        "Daohan Li",
+        "Bingxu Chen",
+        "Hao Liu",
+        "Xiaojian Ma",
+        "Hangxin Liu"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11753",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11753",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11766",
+      "title": "Visual-SLAM for the detection of hidden tomatoes in greenhouses by Hierarchical Localization and GLOMAPfor robotized harvesting",
+      "authors": [
+        "Fernando Cañadas-Aránega",
+        "José C. Moreno",
+        "José L. Blanco-Claraco",
+        "Francisco Rodríguez"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11766",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11766",
+      "matchedTopics": [
+        {
+          "id": "perception-estimation",
+          "label": "感知与估计",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11775",
+      "title": "Rapid Learning of Dexterous In-Hand Pen Writing through Real-Time Jacobian Estimation",
+      "authors": [
+        "Kai Stewart",
+        "Yasunori Toshimitsu",
+        "Robert K. Katzschmann"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11775",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11775",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.11871",
+      "title": "Learning Agent-based Model Predictive Control for Holistic Vehicle Performance",
+      "authors": [
+        "Jiaming Zhong",
+        "Reza Valiollahi Mehrizi",
+        "Mohammad Pirani",
+        "Chao Yu",
+        "Alireza Kasaiezadeh",
+        "Yash Vardhan Pant",
+        "Amir Khajepour"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.11871",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11871",
+      "matchedTopics": [
+        {
+          "id": "planning-control",
+          "label": "规划与控制",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09217",
+      "title": "Design and Attitude Control of an Underwater Quadruped Robot",
+      "authors": [
+        "Davide Molinaroli",
+        "Mohit Singh",
+        "Kostas Alexis"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09217",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09217",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09380",
+      "title": "AccelMPC: High-Rate, Low-Power FPGA-Accelerated Model Predictive Control for Tiny Drones",
+      "authors": [
+        "Andrea Grillo",
+        "Brian Plancher"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "url": "https://arxiv.org/abs/2609.09380",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09380",
+      "matchedTopics": [
+        {
+          "id": "planning-control",
+          "label": "规划与控制",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09650",
+      "title": "A Risk-Sensitive and Uncertainty-Aware Decision-Making and Control Framework for Safe and Robust Autonomous Driving",
+      "authors": [
+        "Zhuoren Li",
+        "Ran Yu",
+        "Weiqi Zhang",
+        "Ming Liu",
+        "Lu Xiong",
+        "Chen Sun",
+        "Bo Leng"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09650",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09650",
+      "matchedTopics": [
+        {
+          "id": "autonomous-systems",
+          "label": "自动驾驶 / 自主系统",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "adjacent"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09745",
+      "title": "PccDiffuser: Multi-solution Motion Planning for Continuum Robots",
+      "authors": [
+        "Ke Qiu",
+        "Sifan Chen",
+        "Si Wang",
+        "Rong Xiong",
+        "Yue Wang",
+        "Haojian Lu"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09745",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09745",
+      "matchedTopics": [
+        {
+          "id": "planning-control",
+          "label": "规划与控制",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09881",
+      "title": "CLFTv2: Efficient Camera-LiDAR Fusion for Semantic Segmentation via Hierarchical Feature Pyramids",
+      "authors": [
+        "Toomas Tahves",
+        "Mauro Bellone",
+        "Raivo Sell"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09881",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09881",
+      "matchedTopics": [
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "hardware"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09918",
+      "title": "ViBe: Visual Behavior Adaptation for Perceptive Humanoid Whole-Body Control",
+      "authors": [
+        "Lokesh Krishna",
+        "Sarvesh Venkatesan",
+        "An Zhang",
+        "Quan Nguyen"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09918",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09918",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10243",
+      "title": "FolDeX: A Physical-World Benchmark for Long-Horizon Robotic Manipulation of Deformable Objects",
+      "authors": [
+        "Chenhuan Liu",
+        "Yi Xu",
+        "Feng Wu",
+        "Hanyang Wang",
+        "Wenxiao Kuai",
+        "Weihao Ding",
+        "Shan Wang",
+        "Yang Liu",
+        "Shuyong Gao",
+        "Wenqiang Zhang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.10243",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10243",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10273",
+      "title": "Frame-Coded Legged Locomotion over Noisy Terrain",
+      "authors": [
+        "Lav R. Varshney"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.IT",
+      "categories": [
+        "cs.IT",
+        "cs.RO",
+        "eess.SY"
+      ],
+      "url": "https://arxiv.org/abs/2609.10273",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10273",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10283",
+      "title": "SwingBot: Learning Whole-Body Brachiation for Humanoid Robots",
+      "authors": [
+        "Yujie Xiong",
+        "Peng Zhai",
+        "Taixian Hou",
+        "Quancheng Qian",
+        "Cunwang Liu",
+        "Kangmai Hu",
+        "Long Yang",
+        "Zhiyan Dong",
+        "Lihua Zhang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.10283",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10283",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10286",
+      "title": "Learning Terrain-Adaptive Humanoid Locomotion on Granular Terrain",
+      "authors": [
+        "Junnosuke Kamohara",
+        "Feiyang Wu",
+        "Andy Ningan Zong",
+        "Daniel I. Goldman",
+        "Yashwanth Nakka",
+        "Seth Hutchinson",
+        "Ye Zhao"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.10286",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10286",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10308",
+      "title": "Deformable Object Manipulation under Partial Observability via Real-Time Full-Shape Estimation",
+      "authors": [
+        "Kosar Behnia",
+        "Ville Kyrki",
+        "Gokhan Alcan"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.10308",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10308",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10377",
+      "title": "Data-Driven Risk Fields for Safer End-to-End Autonomous Driving",
+      "authors": [
+        "Yuanxin Tian",
+        "Zhiyuan Liu",
+        "Jinhao Li",
+        "Liangfan Zhu",
+        "Shuai Wang",
+        "Heye Huang",
+        "Qingwen Meng",
+        "Fang Zhang",
+        "Liuzhu Tong",
+        "Zhenhua Xu",
+        "Wenhao Yu",
+        "Jianqiang Wang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "url": "https://arxiv.org/abs/2609.10377",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10377",
+      "matchedTopics": [
+        {
+          "id": "autonomous-systems",
+          "label": "自动驾驶 / 自主系统",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "adjacent"
+      ],
+      "triageScore": 14,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.09828",
+      "title": "RealSimLoop: Online Real-to-Sim Adaptation via Differentiable Reduced-Order Simulation with Vision Feedback",
+      "authors": [
+        "Zhihao Cen",
+        "Chuhua Xian",
+        "Hailin Sun",
+        "Yuliang Liufu",
+        "Zhen Zhang",
+        "Xiangyu Chu",
+        "Hongmin Cai",
+        "Yunbo Zhang",
+        "Guoxin Fang"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.GR",
+      "categories": [
+        "cs.GR",
+        "cs.CV",
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.09828",
+      "pdfUrl": "https://arxiv.org/pdf/2609.09828",
+      "matchedTopics": [
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 13,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10855",
+      "title": "Evaluation of Vision-Language Models Across Diverse Coastal Environments",
+      "authors": [
+        "Seth Knoop",
+        "Chad R. Samuelson",
+        "Gabriel R. Slade",
+        "Brady Moon",
+        "Joshua G. Mangelson"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.10855",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10855",
+      "matchedTopics": [
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "adjacent"
+      ],
+      "triageScore": 12,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10895",
+      "title": "ReactHuman: A Physics-Grounded Benchmark for Human-Like Reactive Decision-Making in Embodied Multimodal LLMs",
+      "authors": [
+        "Yizhan Li",
+        "Jianxin You",
+        "Mengyang Xiong",
+        "Yinhuan Chen",
+        "Zicheng Zhao",
+        "Dekun Wu",
+        "Dongqing Zhang",
+        "Bang Liu"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "url": "https://arxiv.org/abs/2609.10895",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10895",
+      "matchedTopics": [
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "adjacent"
+      ],
+      "triageScore": 12,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    },
+    {
+      "id": "2609.10339",
+      "title": "A Confidence-Aware Multimodal Fusion Framework for Industrial Human-Robot Collaboration",
+      "authors": [
+        "Xinyu Liu",
+        "Qiqi Dong",
+        "Boya Jia",
+        "Yi Zhang",
+        "Binbin Lian"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-10T12:00:00.000Z",
+      "updated": "2026-09-10T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.HC"
+      ],
+      "url": "https://arxiv.org/abs/2609.10339",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10339",
+      "matchedTopics": [
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "adjacent"
+      ],
+      "triageScore": 12,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z"
+    }
+  ]
 }

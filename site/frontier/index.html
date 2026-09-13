@@ -39,6 +39,7 @@
 
       <section class="radar-status" aria-label="雷达状态">
         <div><span>运行阶段</span><strong>Discovery</strong></div>
+        <div><span>数据入口</span><strong id="source-mode">加载中</strong></div>
         <div><span>候选数量</span><strong id="paper-total">—</strong></div>
         <div><span>最近更新</span><strong id="generated-at">加载中</strong></div>
         <div><span>人工闸门</span><strong>必须</strong></div>
@@ -68,7 +69,7 @@
       <section id="paper-grid" class="paper-grid" aria-label="arXiv 候选列表"></section>
       <div id="paper-empty" class="catalog-empty" hidden>
         <strong>候选池尚未生成</strong>
-        <p>初始化已完成。周末 arXiv RSS 通常无新增；下一次成功任务会自动填充，并始终保留旧数据。</p>
+        <p>自动任务会依次尝试 arXiv API、每日 RSS 与 recent 列表；若全部不可用则保留旧数据并公开失败状态。</p>
       </div>
       <noscript>该页面需要 JavaScript 来加载机器可读候选数据。</noscript>
     </main>

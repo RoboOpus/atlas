@@ -11,6 +11,7 @@ const empty = document.querySelector("#paper-empty");
 const count = document.querySelector("#result-count");
 const total = document.querySelector("#paper-total");
 const generatedAt = document.querySelector("#generated-at");
+const sourceMode = document.querySelector("#source-mode");
 const search = document.querySelector("#paper-search");
 const buttons = [...document.querySelectorAll("[data-route]")];
 const query = new URLSearchParams(location.search);
@@ -61,7 +62,15 @@ function render() {
     card.append(top);
     card.append(createText("h2", "", paper.title));
     card.append(createText("p", "paper-authors", compactAuthors(paper.authors)));
-    card.append(createText("p", "paper-abstract", compactAbstract(paper.abstract)));
+    card.append(
+      createText(
+        "p",
+        "paper-abstract",
+        paper.abstract
+          ? compactAbstract(paper.abstract)
+          : "本条来自 arXiv recent 列表的标题级元数据；摘要请在 arXiv 原页核验。"
+      )
+    );
 
     card.append(createText("p", "paper-label", "建议路由"));
     const routes = document.createElement("div");
@@ -121,12 +130,16 @@ fetch("/atlas/data/frontier-papers.json")
     papers = data.papers;
     total.textContent = String(papers.length);
     generatedAt.textContent = data.generated_at ? dateLabel(data.generated_at) : "等待首次成功运行";
+    sourceMode.textContent =
+      { api: "API + 摘要", "rss-fallback": "每日 RSS", "listing-fallback": "recent 列表" }[data.source?.mode] ||
+      "未知";
     render();
   })
   .catch(() => {
     count.textContent = "候选池加载失败";
     total.textContent = "—";
     generatedAt.textContent = "读取失败";
+    sourceMode.textContent = "读取失败";
     empty.hidden = false;
     empty.querySelector("strong").textContent = "暂时无法读取候选池";
     empty.querySelector("p").textContent = "请稍后刷新页面。";

@@ -105,9 +105,9 @@
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "知识正文：机器人规划控制栈",
-      "next_action": "补一套 OMPL—MoveIt 2—控制器的最小可运行示例和版本矩阵。",
-      "detail_url": "/atlas/knowledge/planning-control-stack/"
+      "output": "知识正文：机器人规划控制栈 + 采样式运动规划选择指南",
+      "next_action": "按统一场景运行 RRTConnect、PRM 与优化型规划器，保存随机种子、终止条件和失败分布。",
+      "detail_url": "/atlas/knowledge/sampling-based-motion-planning/"
     },
     {
       "id": "robotics-perception-estimation-stack",
@@ -166,6 +166,20 @@
       "detail_url": "/atlas/knowledge/robot-sensor-selection/"
     },
     {
+      "id": "hardware-end-effectors",
+      "track": "hardware",
+      "title": "夹爪与末端执行器选型",
+      "summary": "从对象、接触、行程、力、反馈、工具坐标和软件接口建立末端选型与验收表。",
+      "source_ids": ["hardware-robotiq-grippers", "hardware-onrobot-rg2", "hardware-franka", "hardware-ati-ft", "hardware-gelsight"],
+      "target_node_ids": ["hardware-grippers", "hardware-dexterous-hands", "hardware-force-torque", "hardware-tactile-sensors"],
+      "access_mode": "assisted",
+      "cadence": "每月核验",
+      "status": "active",
+      "output": "知识正文：夹爪与末端执行器选型",
+      "next_action": "补首批具体型号规格与询价快照，并建立三类标准物体的抓取验收记录。",
+      "detail_url": "/atlas/knowledge/end-effector-selection/"
+    },
+    {
       "id": "hardware-open-platforms",
       "track": "hardware",
       "title": "低成本与开源机器人平台",
@@ -203,9 +217,9 @@
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "知识正文：跨领域迁移证伪框架",
-      "next_action": "把 Waymo、nuScenes 与 CARLA 迁移假设分别升级为独立实验卡。",
-      "detail_url": "/atlas/knowledge/cross-domain-transfer-evaluation/"
+      "output": "知识正文：跨领域迁移证伪框架 + 闭环评测协议",
+      "next_action": "为一个机器人任务落地首张场景矩阵，并保存失败事件与可重放证据。",
+      "detail_url": "/atlas/knowledge/closed-loop-evaluation-protocol/"
     },
     {
       "id": "adjacent-foundation-models",

@@ -20,7 +20,7 @@
     <section class="knowledge-controls" aria-label="知识正文筛选">
       <label class="search-field"><span>搜索正文</span><input id="knowledge-search" type="search" placeholder="例如：SE(3)、状态估计、机械臂、迁移" autocomplete="off"></label>
       <div class="filter-row" aria-label="按板块筛选"><button type="button" data-track="all" class="active">全部</button><button type="button" data-track="robotics">Robotics</button><button type="button" data-track="hardware">Hardware</button><button type="button" data-track="adjacent">Adjacent</button></div>
-      <div class="result-line"><strong id="knowledge-count">12 / 12 篇正文</strong><span>来源已核对不等于人工终审。</span></div>
+      <div class="result-line"><strong id="knowledge-count">15 / 15 篇正文</strong><span>来源已核对不等于人工终审。</span></div>
     </section>
     <section id="knowledge-grid" class="knowledge-grid" aria-label="知识正文列表"><article class="knowledge-card" data-track="adjacent" data-search="从热门模型到机器人 idea：跨领域迁移的证伪框架 用能力、接口、闭环、时延、数据假设和失败代价审查 sam 2、dinov2、vggt 与 carla 等外部成果，避免把模型名直接当研究问题。 研究方法 adjacent 先抽取可迁移能力，不从模型名称出发。 离线指标提升不能自动推出闭环任务收益。 每个 idea 必须附带一个低成本、可失败的最小实验。">
     <div class="knowledge-card-top"><span>Adjacent · 研究方法</span><span>研究设计</span></div>
@@ -28,6 +28,13 @@
     <p>用能力、接口、闭环、时延、数据假设和失败代价审查 SAM 2、DINOv2、VGGT 与 CARLA 等外部成果，避免把模型名直接当研究问题。</p>
     <div class="knowledge-card-facts"><span>6 个一手来源</span><span>7 个知识节点</span><span>4 分钟</span></div>
     <a class="knowledge-open" href="/atlas/knowledge/cross-domain-transfer-evaluation/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="adjacent" data-search="从自动驾驶借鉴闭环评测：场景、事件与失败重放 把自动驾驶中的场景参数化、多传感器时空组织和失败切片迁移到机器人实验，形成不被单一成功率掩盖的闭环协议。 闭环评测 adjacent 闭环评测的单位应是可重放场景与事件，不只是平均成功率。 离线感知指标、仿真性能和真实任务结果需要分层报告。 版本、随机种子、传感器和时间模式是评测结果的一部分。">
+    <div class="knowledge-card-top"><span>Adjacent · 闭环评测</span><span>研究设计</span></div>
+    <h2><a href="/atlas/knowledge/closed-loop-evaluation-protocol/">从自动驾驶借鉴闭环评测：场景、事件与失败重放</a></h2>
+    <p>把自动驾驶中的场景参数化、多传感器时空组织和失败切片迁移到机器人实验，形成不被单一成功率掩盖的闭环协议。</p>
+    <div class="knowledge-card-facts"><span>4 个一手来源</span><span>3 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/closed-loop-evaluation-protocol/">阅读正文 →</a>
   </article>
 <article class="knowledge-card" data-track="adjacent" data-search="sam 2、dinov2、vggt：三个机器人最小实验卡 不把热门模型直接当作机器人方案，而是分别测试视频对象状态、跨域视觉表征和多视图几何能否改善闭环任务。 视觉基础模型 adjacent 三个模型的输出接口不同，不能用同一种评测指标。 先冻结模型做最小闭环实验，再决定是否微调或系统集成。 离线视觉提升只有转化为任务成功率、干预率或恢复能力才有机器人价值。">
     <div class="knowledge-card-top"><span>Adjacent · 视觉基础模型</span><span>实验设计</span></div>
@@ -50,6 +57,13 @@
     <div class="knowledge-card-facts"><span>3 个一手来源</span><span>4 个知识节点</span><span>3 分钟</span></div>
     <a class="knowledge-open" href="/atlas/knowledge/hardware-price-snapshots/">阅读正文 →</a>
   </article>
+<article class="knowledge-card" data-track="hardware" data-search="夹爪与末端执行器选型：从对象接触到软件接口 比较平行夹爪、自适应夹爪、真空、灵巧手与任务专用工具，建立包含接触、负载、反馈、工具坐标和验收实验的选型框架。 末端执行器 hardware 先定义接触模式和失败代价，再比较行程、力与自由度。 夹爪自重、转接板和线缆都会侵占机械臂负载与工作空间。 有位置、力或触觉反馈不等于闭环可用，必须验证频率、时延和语义。">
+    <div class="knowledge-card-top"><span>Hardware · 末端执行器</span><span>系统指南</span></div>
+    <h2><a href="/atlas/knowledge/end-effector-selection/">夹爪与末端执行器选型：从对象接触到软件接口</a></h2>
+    <p>比较平行夹爪、自适应夹爪、真空、灵巧手与任务专用工具，建立包含接触、负载、反馈、工具坐标和验收实验的选型框架。</p>
+    <div class="knowledge-card-facts"><span>5 个一手来源</span><span>4 个知识节点</span><span>3 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/end-effector-selection/">阅读正文 →</a>
+  </article>
 <article class="knowledge-card" data-track="hardware" data-search="开源机器人平台怎么判断能否复现 以 openmanipulator-x 与 lerobot so-101 为入口，把“开源”拆成机械、电气、固件、控制、数据和模型六层。 开源与低成本平台 hardware 开源不是二元标签，必须逐层记录文件、许可证和版本。 能装起来不等于能重复采集可训练的数据。 低成本平台的主要风险往往是校准、维护和批次差异。">
     <div class="knowledge-card-top"><span>Hardware · 开源与低成本平台</span><span>复现指南</span></div>
     <h2><a href="/atlas/knowledge/open-robot-platform-reproducibility/">开源机器人平台怎么判断能否复现</a></h2>
@@ -63,6 +77,13 @@
     <p>用负载、臂展、自由度、控制开放性、安全、生态和总成本比较 FR3、UR5e、Kinova Gen3 与 xArm 7，而不是给出脱离任务的排行榜。</p>
     <div class="knowledge-card-facts"><span>4 个一手来源</span><span>5 个知识节点</span><span>4 分钟</span></div>
     <a class="knowledge-open" href="/atlas/knowledge/research-arm-selection/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="robotics" data-search="采样式运动规划：怎样选 rrt、prm 与优化型规划器 从单次/多次查询、只求可行/继续优化、几何/动力学约束四个维度组织采样规划器，并给出可复现的比较协议。 规划与控制 robotics 先按问题结构选择规划器类别，不从算法名气出发。 最快找到第一条路径与持续改善路径质量是不同目标。 规划器比较必须固定场景、预算、随机种子和有效性检查器。">
+    <div class="knowledge-card-top"><span>Robotics · 规划与控制</span><span>基础 → 进阶</span></div>
+    <h2><a href="/atlas/knowledge/sampling-based-motion-planning/">采样式运动规划：怎样选 RRT、PRM 与优化型规划器</a></h2>
+    <p>从单次/多次查询、只求可行/继续优化、几何/动力学约束四个维度组织采样规划器，并给出可复现的比较协议。</p>
+    <div class="knowledge-card-facts"><span>3 个一手来源</span><span>3 个知识节点</span><span>4 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/sampling-based-motion-planning/">阅读正文 →</a>
   </article>
 <article class="knowledge-card" data-track="robotics" data-search="从任务目标到电机指令：机器人规划控制栈 区分任务规划、几何路径、时间轨迹、反馈控制和执行接口，解释 ompl、moveit 2、ros 2 与 mpc 在系统中的位置。 规划与控制 robotics 路径、轨迹和控制指令是三个不同对象。 ompl 是抽象规划算法层，moveit 2 是机械臂集成层。 规划成功只证明找到了候选解，不证明真实执行会成功。">
     <div class="knowledge-card-top"><span>Robotics · 规划与控制</span><span>基础 → 进阶</span></div>

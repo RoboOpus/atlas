@@ -6,12 +6,14 @@ const OUTPUT_PATH = resolve(process.cwd(), "site", "data", "frontier-papers.json
 const config = JSON.parse(readFileSync(CONFIG_PATH, "utf8"));
 const endpoint = config.endpoint;
 const fallbackFeed = config.fallback_feed;
+const fallbackListing = config.fallback_listing;
 const maxResults = readNumberArgument("--max-results", config.max_results);
 const poolLimit = readNumberArgument("--pool-limit", config.pool_limit);
 const minTriageScore = readNumberArgument("--min-triage-score", config.min_triage_score);
 const fetchAttempts = readNumberArgument("--fetch-attempts", 4);
 const inputFile = readStringArgument("--input-file", "");
 const dryRun = process.argv.includes("--dry-run");
+const listingOnly = process.argv.includes("--listing-only");
 const retryableStatus = new Set([408, 425, 429]);
 
 function readNumberArgument(name, fallback) {
@@ -46,14 +48,14 @@ function retryDelay(response, attempt) {
   return Math.max(3_000, Math.min(5_000 * 2 ** (attempt - 1), 30_000));
 }
 
-async function fetchFeed(url) {
+async function fetchDocument(url, accept = "application/atom+xml") {
   let lastError;
   for (let attempt = 1; attempt <= fetchAttempts; attempt += 1) {
     let response;
     try {
       response = await fetch(url, {
         headers: {
-          Accept: "application/atom+xml",
+          Accept: accept,
           "User-Agent": "RoboOpus-Atlas/0.2 (https://github.com/RoboOpus/atlas)"
         },
         signal: AbortSignal.timeout(45_000)
@@ -148,6 +150,56 @@ function parseRssItems(xml) {
   });
 }
 
+function classBlock(fragment, className) {
+  const expression = new RegExp(
+    `<div\\b[^>]*class=["'][^"']*\\b${className}\\b[^"']*["'][^>]*>([\\s\\S]*?)<\\/div>`,
+    "i"
+  );
+  return expression.exec(fragment)?.[1] ?? "";
+}
+
+function parseRecentListing(html) {
+  const records = [];
+  let published = new Date().toISOString();
+  const blocks = html.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>|<dt\b[^>]*>([\s\S]*?)<\/dt>\s*<dd\b[^>]*>([\s\S]*?)<\/dd>/gi);
+
+  for (const block of blocks) {
+    if (block[1]) {
+      const heading = normalizeText(block[1]).replace(/\s*\(.*$/, "");
+      const headingDate = new Date(`${heading} 12:00:00 UTC`);
+      if (!Number.isNaN(headingDate.getTime())) published = headingDate.toISOString();
+      continue;
+    }
+
+    const entryHeader = block[2] ?? "";
+    const metadata = block[3] ?? "";
+    const id = entryHeader.match(/href\s*=\s*["']\/abs\/([^"']+)["']/i)?.[1]?.replace(/v\d+$/, "");
+    if (!id) continue;
+
+    const authors = [...classBlock(metadata, "list-authors").matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)]
+      .map((author) => normalizeText(author[1]))
+      .filter(Boolean);
+    const subjects = classBlock(metadata, "list-subjects");
+    const categories = [...subjects.matchAll(/\(([A-Za-z-]+(?:\.[A-Za-z-]+)+)\)/g)].map((match) => match[1]);
+    const primarySubject = subjects.match(/class=["']primary-subject["'][^>]*>[\s\S]*?\(([A-Za-z-]+(?:\.[A-Za-z-]+)+)\)/i)?.[1];
+
+    records.push({
+      id,
+      title: normalizeText(classBlock(metadata, "list-title")).replace(/^Title:\s*/i, ""),
+      abstract: "",
+      authors,
+      published,
+      updated: published,
+      primaryCategory: primarySubject || categories[0] || "cs.RO",
+      categories: categories.length > 0 ? categories : ["cs.RO"],
+      url: `https://arxiv.org/abs/${id}`,
+      pdfUrl: `https://arxiv.org/pdf/${id}`
+    });
+  }
+
+  return records;
+}
+
 const topicRules = config.topic_rules.map((rule) => ({ ...rule, expression: new RegExp(rule.pattern, "i") }));
 
 function scorePaper(paper, now) {
@@ -183,6 +235,7 @@ function publicRecord(paper, previous, now) {
     title: paper.title,
     authors: paper.authors,
     abstract: paper.abstract,
+    metadataCompleteness: paper.abstract ? "abstract" : "listing",
     published: paper.published,
     updated: paper.updated,
     primaryCategory: paper.primaryCategory,
@@ -209,24 +262,45 @@ queryUrl.search = new URLSearchParams({
 
 let sourceMode = "api";
 let sourceEndpoint = endpoint;
-let xml;
+let sourceQuery = config.search_query;
+let parsed = [];
 if (inputFile) {
-  xml = readFileSync(resolve(process.cwd(), inputFile), "utf8");
-  sourceMode = "fixture";
+  const fixture = readFileSync(resolve(process.cwd(), inputFile), "utf8");
+  const isListing = /<dl\b[^>]*id=["']articles["']/i.test(fixture);
+  parsed = isListing ? parseRecentListing(fixture) : parseEntries(fixture);
+  sourceMode = isListing ? "fixture-listing" : "fixture";
   sourceEndpoint = inputFile;
+  sourceQuery = isListing ? "cs.RO recent listing fixture" : config.search_query;
+} else if (listingOnly) {
+  parsed = parseRecentListing(await fetchDocument(fallbackListing, "text/html"));
+  sourceMode = "listing-fallback";
+  sourceEndpoint = fallbackListing;
+  sourceQuery = "cs.RO recent listing; title-level routing when abstracts are unavailable";
 } else {
   try {
-    xml = await fetchFeed(queryUrl);
+    parsed = parseEntries(await fetchDocument(queryUrl));
   } catch (error) {
     console.warn(`Primary arXiv query failed: ${error.message}`);
     console.warn("Waiting 3 seconds before trying the official cs.RO RSS fallback.");
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 3_000));
-    xml = await fetchFeed(fallbackFeed);
-    sourceMode = "rss-fallback";
-    sourceEndpoint = fallbackFeed;
+    try {
+      parsed = parseRssItems(await fetchDocument(fallbackFeed, "application/rss+xml"));
+      sourceMode = "rss-fallback";
+      sourceEndpoint = fallbackFeed;
+      sourceQuery = "cs.RO daily RSS";
+    } catch (rssError) {
+      console.warn(`arXiv RSS fallback failed: ${rssError.message}`);
+    }
+  }
+
+  if (parsed.length === 0) {
+    console.warn("Daily feed has no entries; using the official cs.RO recent listing metadata fallback.");
+    parsed = parseRecentListing(await fetchDocument(fallbackListing, "text/html"));
+    sourceMode = "listing-fallback";
+    sourceEndpoint = fallbackListing;
+    sourceQuery = "cs.RO recent listing; title-level routing when abstracts are unavailable";
   }
 }
-const parsed = sourceMode === "rss-fallback" ? parseRssItems(xml) : parseEntries(xml);
 
 const now = new Date();
 const current = existsSync(OUTPUT_PATH)
@@ -273,7 +347,7 @@ const snapshot = {
   source: {
     endpoint: sourceEndpoint,
     mode: sourceMode,
-    query: sourceMode === "api" ? config.search_query : "cs.RO daily RSS",
+    query: sourceQuery,
     sort_by: "submittedDate",
     sort_order: "descending",
     acknowledgement: "Thank you to arXiv for use of its open access interoperability."

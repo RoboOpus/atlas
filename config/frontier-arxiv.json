@@ -2,6 +2,7 @@
   "schema_version": "0.1.0",
   "endpoint": "https://export.arxiv.org/api/query",
   "fallback_feed": "https://rss.arxiv.org/rss/cs.RO",
+  "fallback_listing": "https://arxiv.org/list/cs.RO/recent?skip=0&show=100",
   "search_query": "cat:cs.RO OR cat:eess.SY OR ((cat:cs.AI OR cat:cs.CV OR cat:cs.LG) AND (all:robot OR all:embodied OR all:manipulation OR all:autonomous))",
   "max_results": 100,
   "pool_limit": 48,
@@ -11,7 +12,7 @@
       "id": "world-action-models",
       "label": "世界模型 / WAM",
       "route": "wam",
-      "pattern": "world[- ]action model|robot(?:ic)? world model|video world model|world model.{0,32}robot",
+      "pattern": "world[- ]action model|robot(?:ic)? world model|video world model|world model.{0,32}robot|memory[- ]prediction[- ]action model|steerable action model",
       "title_weight": 12,
       "abstract_weight": 6
     },
@@ -67,7 +68,7 @@
       "id": "hardware-sensing",
       "label": "硬件与传感",
       "route": "hardware",
-      "pattern": "tactile sensor|force[- /]torque|robot hardware|proprioceptive|sensor calibration|event camera|depth camera|lidar",
+      "pattern": "tactile sensor|force[- /]torque|robot hardware|software[- ]hardware|robot platform|robot(?:ic)? hand|multi-finger hand|gripper|actuator|proprioceptive|sensor calibration|event camera|depth camera|lidar|edge computing|embedded",
       "title_weight": 7,
       "abstract_weight": 3
     },
@@ -83,7 +84,7 @@
       "id": "foundation-models",
       "label": "基础模型 / 多模态",
       "route": "adjacent",
-      "pattern": "foundation model|multimodal|vision-language model|large language model|video understanding|video generation",
+      "pattern": "foundation model|multimodal|vision-language model|\\bVLMs?\\b|large language model|video understanding|video generation",
       "title_weight": 5,
       "abstract_weight": 2
     }
