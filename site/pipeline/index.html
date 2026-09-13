@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 跨板块采集任务与建设队列。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>采集管线 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/pipeline/pipeline.css">
+    <script src="/atlas/pipeline/pipeline.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页">
+        <span class="mark">R/O</span>
+        <span>RoboOpus Atlas</span>
+      </a>
+      <nav aria-label="采集管线导航">
+        <a href="/atlas/">总览</a>
+        <a href="/atlas/frontier/">Frontier</a>
+        <a href="/atlas/catalog/">总目录</a>
+        <a href="/atlas/sources/">来源</a>
+      </nav>
+    </header>
+
+    <main class="catalog-main">
+      <section class="pipeline-intro">
+        <div>
+          <p class="eyebrow">Acquisition queue · breadth first</p>
+          <h1>采集管线</h1>
+        </div>
+        <p>把“来源”和“知识槽位”连成可执行任务。每张卡说明从哪里取、写到哪里、多久复核一次，以及下一步具体做什么。</p>
+      </section>
+
+      <section class="pipeline-summary" aria-label="管线概览">
+        <div><span>全部任务</span><strong id="job-total">—</strong></div>
+        <div><span>运行中</span><strong id="job-active">—</strong></div>
+        <div><span>可执行</span><strong id="job-ready">—</strong></div>
+        <div><span>覆盖节点</span><strong id="node-coverage">—</strong></div>
+        <div><span>接入来源</span><strong id="source-coverage">—</strong></div>
+        <div><span>等待材料</span><strong id="job-waiting">—</strong></div>
+      </section>
+
+      <section class="catalog-controls" aria-label="采集任务筛选">
+        <label class="search-field">
+          <span>搜索任务</span>
+          <input id="job-search" type="search" placeholder="例如：机械臂、SLAM、OpenReview、价格" autocomplete="off">
+        </label>
+        <div class="filter-group">
+          <span class="filter-label">板块</span>
+          <div class="filter-row" aria-label="按板块筛选">
+            <button type="button" data-track="all" class="active">全部</button>
+            <button type="button" data-track="frontier">Frontier</button>
+            <button type="button" data-track="robotics">Robotics</button>
+            <button type="button" data-track="hardware">Hardware</button>
+            <button type="button" data-track="adjacent">Adjacent</button>
+            <button type="button" data-track="lab">Lab</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">状态</span>
+          <div class="filter-row" aria-label="按状态筛选">
+            <button type="button" data-status="all" class="active">全部</button>
+            <button type="button" data-status="active">运行中</button>
+            <button type="button" data-status="ready">可执行</button>
+            <button type="button" data-status="planned">待排期</button>
+            <button type="button" data-status="awaiting-input">等待材料</button>
+          </div>
+        </div>
+        <div class="result-line" aria-live="polite">
+          <strong id="result-count">加载中</strong>
+          <span>Active 表示已有可运行流程；Ready 表示来源和字段已明确。</span>
+        </div>
+      </section>
+
+      <section id="job-grid" class="job-grid" aria-label="采集任务列表"></section>
+      <div id="job-empty" class="catalog-empty" hidden>
+        <strong>没有匹配任务</strong>
+        <p>换一个关键词，或放宽板块和状态筛选。</p>
+      </div>
+      <noscript>该页面需要 JavaScript 来加载机器可读任务数据。</noscript>
+    </main>
+
+    <footer>
+      <p>RoboOpus Atlas · 从入口到可执行任务</p>
+      <p><a href="/atlas/data/ingestion-jobs.json">机器可读任务清单</a></p>
+    </footer>
+  </body>
+</html>

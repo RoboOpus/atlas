@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:arxiv="http://arxiv.org/schemas/atom">
+  <entry>
+    <id>http://arxiv.org/abs/9999.00001v1</id>
+    <updated>2026-09-13T00:00:00Z</updated>
+    <published>2026-09-13T00:00:00Z</published>
+    <title>Synthetic World Action Model Test Record</title>
+    <summary>A synthetic fixture for robot policy and manipulation routing tests.</summary>
+    <author><name>Test Author</name></author>
+    <arxiv:primary_category term="cs.RO"/>
+    <category term="cs.RO"/>
+    <link href="http://arxiv.org/abs/9999.00001v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/9999.00001v1" rel="related" type="application/pdf"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/9999.00002v1</id>
+    <updated>2026-09-13T00:00:00Z</updated>
+    <published>2026-09-13T00:00:00Z</published>
+    <title>Synthetic Tactile Sensor and SLAM Test Record</title>
+    <summary>A synthetic fixture for robot perception, state estimation, and force torque sensor routing tests.</summary>
+    <author><name>Fixture Author</name></author>
+    <arxiv:primary_category term="cs.RO"/>
+    <category term="cs.RO"/>
+    <link href="http://arxiv.org/abs/9999.00002v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/9999.00002v1" rel="related" type="application/pdf"/>
+  </entry>
+</feed>

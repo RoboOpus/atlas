@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.1.0",
+  "endpoint": "https://export.arxiv.org/api/query",
+  "fallback_feed": "https://rss.arxiv.org/rss/cs.RO",
+  "search_query": "cat:cs.RO OR cat:eess.SY OR ((cat:cs.AI OR cat:cs.CV OR cat:cs.LG) AND (all:robot OR all:embodied OR all:manipulation OR all:autonomous))",
+  "max_results": 100,
+  "pool_limit": 48,
+  "min_triage_score": 7,
+  "topic_rules": [
+    {
+      "id": "world-action-models",
+      "label": "世界模型 / WAM",
+      "route": "wam",
+      "pattern": "world[- ]action model|robot(?:ic)? world model|video world model|world model.{0,32}robot",
+      "title_weight": 12,
+      "abstract_weight": 6
+    },
+    {
+      "id": "vla-policy-learning",
+      "label": "VLA / 策略学习",
+      "route": "wam",
+      "pattern": "vision[- ]language[- ]action|\\bVLA\\b|robot policy|visuomotor policy|imitation learning|behavior cloning",
+      "title_weight": 9,
+      "abstract_weight": 4
+    },
+    {
+      "id": "manipulation",
+      "label": "机器人操作",
+      "route": "robotics",
+      "pattern": "manipulation|grasp(?:ing)?|dexterous|bimanual|mobile manipulation",
+      "title_weight": 7,
+      "abstract_weight": 3
+    },
+    {
+      "id": "planning-control",
+      "label": "规划与控制",
+      "route": "robotics",
+      "pattern": "motion planning|task and motion|trajectory optimization|model predictive control|\\bMPC\\b|robot control|control policy",
+      "title_weight": 7,
+      "abstract_weight": 3
+    },
+    {
+      "id": "perception-estimation",
+      "label": "感知与估计",
+      "route": "robotics",
+      "pattern": "\\bSLAM\\b|odometry|localization|pose estimation|state estimation|robot perception|visual perception|3D reconstruction",
+      "title_weight": 7,
+      "abstract_weight": 3
+    },
+    {
+      "id": "locomotion-navigation",
+      "label": "运动与导航",
+      "route": "robotics",
+      "pattern": "locomotion|legged|quadruped|humanoid|robot navigation|navigation policy",
+      "title_weight": 7,
+      "abstract_weight": 3
+    },
+    {
+      "id": "simulation-data",
+      "label": "仿真 / 数据 / 评测",
+      "route": "robotics",
+      "pattern": "simulator|simulation|sim-to-real|synthetic data|robot dataset|robot benchmark|benchmarking",
+      "title_weight": 6,
+      "abstract_weight": 3
+    },
+    {
+      "id": "hardware-sensing",
+      "label": "硬件与传感",
+      "route": "hardware",
+      "pattern": "tactile sensor|force[- /]torque|robot hardware|proprioceptive|sensor calibration|event camera|depth camera|lidar",
+      "title_weight": 7,
+      "abstract_weight": 3
+    },
+    {
+      "id": "autonomous-systems",
+      "label": "自动驾驶 / 自主系统",
+      "route": "adjacent",
+      "pattern": "autonomous driving|end-to-end driving|motion forecasting|occupancy prediction|driving world model|autonomous vehicle",
+      "title_weight": 7,
+      "abstract_weight": 3
+    },
+    {
+      "id": "foundation-models",
+      "label": "基础模型 / 多模态",
+      "route": "adjacent",
+      "pattern": "foundation model|multimodal|vision-language model|large language model|video understanding|video generation",
+      "title_weight": 5,
+      "abstract_weight": 2
+    }
+  ]
+}

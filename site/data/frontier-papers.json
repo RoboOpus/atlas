@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": null,
+  "source": {
+    "endpoint": "https://export.arxiv.org/api/query",
+    "mode": "api",
+    "query": "cat:cs.RO OR cat:eess.SY OR ((cat:cs.AI OR cat:cs.CV OR cat:cs.LG) AND (all:robot OR all:embodied OR all:manipulation OR all:autonomous))",
+    "sort_by": "submittedDate",
+    "sort_order": "descending",
+    "acknowledgement": "Thank you to arXiv for use of its open access interoperability."
+  },
+  "policy": {
+    "stage": "discovery",
+    "score_meaning": "Metadata-only routing relevance; not paper quality, correctness, acceptance, or reproducibility.",
+    "review_gate": "Automation may create candidates only. Verified and reviewed states require human source checks."
+  },
+  "papers": []
+}

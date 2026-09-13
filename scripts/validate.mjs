@@ -6,20 +6,37 @@ const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dataPath = path.join(repo, "site", "data", "atlas.json");
 const catalogPath = path.join(repo, "site", "data", "catalog.json");
 const sourcesPath = path.join(repo, "site", "data", "sources.json");
+const jobsPath = path.join(repo, "site", "data", "ingestion-jobs.json");
+const frontierPapersPath = path.join(repo, "site", "data", "frontier-papers.json");
+const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const requiredFiles = [
   "site/index.html",
   "site/styles.css",
   "site/data/atlas.json",
   "site/data/catalog.json",
   "site/data/sources.json",
+  "site/data/ingestion-jobs.json",
+  "site/data/frontier-papers.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
   "site/sources/index.html",
   "site/sources/sources.css",
   "site/sources/sources.js",
+  "site/pipeline/index.html",
+  "site/pipeline/pipeline.css",
+  "site/pipeline/pipeline.js",
+  "site/frontier/index.html",
+  "site/frontier/frontier.css",
+  "site/frontier/frontier.js",
+  "config/frontier-arxiv.json",
+  "scripts/fetch-frontier-arxiv.mjs",
+  "tests/fixtures/frontier-arxiv.atom.xml",
+  ".github/workflows/refresh-frontier-arxiv.yml",
   "content/catalog-schema.md",
   "content/source-registry-schema.md",
+  "content/ingestion-jobs-schema.md",
+  "content/frontier-radar-schema.md",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -31,6 +48,9 @@ for (const file of requiredFiles) await access(path.join(repo, file));
 const atlas = JSON.parse(await readFile(dataPath, "utf8"));
 const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
 const sources = JSON.parse(await readFile(sourcesPath, "utf8"));
+const jobs = JSON.parse(await readFile(jobsPath, "utf8"));
+const frontierPapers = JSON.parse(await readFile(frontierPapersPath, "utf8"));
+const frontierConfig = JSON.parse(await readFile(frontierConfigPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
 
 if (atlas.repository !== "RoboOpus/atlas") throw new Error("Unexpected Atlas repository target");
@@ -71,7 +91,7 @@ for (const [track, count] of Object.entries(perTrack)) {
 const sourceKinds = new Set(["api", "standard", "course", "documentation", "repository", "vendor", "open-hardware", "dataset", "platform", "template"]);
 const accessModes = new Set(["automatic", "assisted", "manual"]);
 if (sources.schema_version !== "0.1.0") throw new Error("Unexpected source registry schema version");
-if (sources.verified_at !== "2026-09-12") throw new Error("Source registry verification date is stale or unexpected");
+if (!/^\d{4}-\d{2}-\d{2}$/.test(sources.verified_at)) throw new Error("Source registry verification date is invalid");
 if (!Array.isArray(sources.sources) || sources.sources.length < 40) throw new Error("Source registry must contain at least 40 entries");
 
 const sourceIds = new Set();
@@ -93,4 +113,63 @@ for (const [track, count] of Object.entries(sourcesPerTrack)) {
   if (count < 5) throw new Error(`Source track is too thin: ${track} (${count})`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} trusted sources, and ${requiredFiles.length} required files.\n`);
+const jobStatuses = new Set(["active", "ready", "planned", "awaiting-input"]);
+if (jobs.schema_version !== "0.1.0") throw new Error("Unexpected ingestion job schema version");
+if (!Array.isArray(jobs.jobs) || jobs.jobs.length < 15) throw new Error("Ingestion plan must contain at least 15 jobs");
+
+const jobIds = new Set();
+const jobsPerTrack = Object.fromEntries([...catalogTracks].map((track) => [track, 0]));
+for (const job of jobs.jobs) {
+  if (!job.id || jobIds.has(job.id)) throw new Error(`Missing or duplicate ingestion job id: ${job.id}`);
+  jobIds.add(job.id);
+  if (!catalogTracks.has(job.track)) throw new Error(`Unknown ingestion job track: ${job.id}`);
+  if (!job.id.startsWith(`${job.track}-`)) throw new Error(`Ingestion job id/track mismatch: ${job.id}`);
+  if (!job.title || !job.summary || !job.cadence || !job.output || !job.next_action) throw new Error(`Incomplete ingestion job: ${job.id}`);
+  if (!accessModes.has(job.access_mode)) throw new Error(`Invalid ingestion access mode: ${job.id}`);
+  if (!jobStatuses.has(job.status)) throw new Error(`Invalid ingestion status: ${job.id}`);
+  if (!Array.isArray(job.source_ids)) throw new Error(`Missing source links for ingestion job: ${job.id}`);
+  if (job.source_ids.length === 0 && job.status !== "awaiting-input") throw new Error(`Only awaiting-input jobs may omit sources: ${job.id}`);
+  for (const sourceId of job.source_ids) {
+    if (!sourceIds.has(sourceId)) throw new Error(`Unknown source ${sourceId} in ingestion job ${job.id}`);
+  }
+  if (!Array.isArray(job.target_node_ids) || job.target_node_ids.length === 0) throw new Error(`Missing target nodes for ingestion job: ${job.id}`);
+  for (const nodeId of job.target_node_ids) {
+    if (!nodeIds.has(nodeId)) throw new Error(`Unknown target node ${nodeId} in ingestion job ${job.id}`);
+  }
+  if (job.detail_url && !job.detail_url.startsWith("/atlas/")) throw new Error(`Invalid job detail URL: ${job.id}`);
+  jobsPerTrack[job.track] += 1;
+}
+for (const [track, count] of Object.entries(jobsPerTrack)) {
+  if (count < 1) throw new Error(`Ingestion track has no job: ${track}`);
+}
+if (![...jobs.jobs].some((job) => job.status === "active")) throw new Error("At least one ingestion job must be active");
+
+if (frontierConfig.schema_version !== "0.1.0") throw new Error("Unexpected Frontier arXiv config schema version");
+if (frontierConfig.endpoint !== "https://export.arxiv.org/api/query") throw new Error("Unexpected arXiv endpoint");
+if (frontierConfig.fallback_feed !== "https://rss.arxiv.org/rss/cs.RO") throw new Error("Unexpected arXiv RSS fallback");
+if (!frontierConfig.search_query || frontierConfig.max_results > 100 || frontierConfig.pool_limit > 60) throw new Error("Unsafe or incomplete Frontier arXiv limits");
+if (!Array.isArray(frontierConfig.topic_rules) || frontierConfig.topic_rules.length < 8) throw new Error("Frontier routing rules are too thin");
+const topicRuleIds = new Set(frontierConfig.topic_rules.map((rule) => rule.id));
+if (topicRuleIds.size !== frontierConfig.topic_rules.length) throw new Error("Duplicate Frontier topic rule id");
+
+const paperRoutes = new Set(["wam", "robotics", "hardware", "adjacent"]);
+const paperStatuses = new Set(["candidate", "reviewing", "verified", "reviewed", "ignored"]);
+if (frontierPapers.schema_version !== "0.1.0") throw new Error("Unexpected Frontier paper schema version");
+if (frontierPapers.policy?.stage !== "discovery") throw new Error("Frontier paper pool must remain discovery-only");
+if (!Array.isArray(frontierPapers.papers)) throw new Error("Frontier paper pool is missing");
+if (frontierPapers.papers.length > frontierConfig.pool_limit) throw new Error("Frontier paper pool exceeds configured limit");
+if (frontierPapers.papers.length > 0 && !frontierPapers.generated_at) throw new Error("Populated Frontier paper pool lacks generation time");
+const paperIds = new Set();
+for (const paper of frontierPapers.papers) {
+  if (!paper.id || paperIds.has(paper.id)) throw new Error(`Missing or duplicate Frontier paper id: ${paper.id}`);
+  paperIds.add(paper.id);
+  if (!paper.title || !paper.abstract || !paper.url || !paper.pdfUrl || !paper.published) throw new Error(`Incomplete Frontier paper: ${paper.id}`);
+  if (!Array.isArray(paper.authors) || paper.authors.length === 0) throw new Error(`Frontier paper has no authors: ${paper.id}`);
+  if (!Array.isArray(paper.routes) || paper.routes.length === 0 || paper.routes.some((route) => !paperRoutes.has(route))) throw new Error(`Invalid Frontier route: ${paper.id}`);
+  if (!Array.isArray(paper.matchedTopics) || paper.matchedTopics.length === 0) throw new Error(`Frontier paper has no topic match: ${paper.id}`);
+  if (paper.matchedTopics.some((topic) => !topicRuleIds.has(topic.id))) throw new Error(`Unknown Frontier topic match: ${paper.id}`);
+  if (!Number.isInteger(paper.triageScore) || paper.triageScore < frontierConfig.min_triage_score) throw new Error(`Invalid Frontier triage score: ${paper.id}`);
+  if (!paperStatuses.has(paper.status)) throw new Error(`Invalid Frontier paper status: ${paper.id}`);
+}
+
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);

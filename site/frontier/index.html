@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 跨主题 arXiv 候选发现与知识路由。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>Frontier 候选雷达 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/frontier/frontier.css">
+    <script src="/atlas/frontier/frontier.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页">
+        <span class="mark">R/O</span>
+        <span>RoboOpus Atlas</span>
+      </a>
+      <nav aria-label="Frontier 导航">
+        <a href="/atlas/">总览</a>
+        <a href="/atlas/pipeline/">采集管线</a>
+        <a href="/atlas/sources/?track=frontier">来源</a>
+        <a href="https://roboopus.github.io/wam/">WAM ↗</a>
+      </nav>
+    </header>
+
+    <main class="catalog-main">
+      <section class="frontier-intro">
+        <div>
+          <p class="eyebrow">Daily discovery · metadata only</p>
+          <h1>Frontier<br><em>候选雷达</em></h1>
+        </div>
+        <div class="frontier-policy">
+          <strong>候选不是结论</strong>
+          <p>每天北京时间 08:20 做一次跨主题发现，自动化只做去重、相关度计算和板块路由。录用、正确性、可复现性与长期价值必须另行核验。</p>
+        </div>
+      </section>
+
+      <section class="radar-status" aria-label="雷达状态">
+        <div><span>运行阶段</span><strong>Discovery</strong></div>
+        <div><span>候选数量</span><strong id="paper-total">—</strong></div>
+        <div><span>最近更新</span><strong id="generated-at">加载中</strong></div>
+        <div><span>人工闸门</span><strong>必须</strong></div>
+      </section>
+
+      <section class="catalog-controls" aria-label="论文候选筛选">
+        <label class="search-field">
+          <span>搜索候选</span>
+          <input id="paper-search" type="search" placeholder="标题、作者、主题或 arXiv ID" autocomplete="off">
+        </label>
+        <div class="filter-group">
+          <span class="filter-label">路由</span>
+          <div class="filter-row" aria-label="按目标板块筛选">
+            <button type="button" data-route="all" class="active">全部</button>
+            <button type="button" data-route="wam">WAM</button>
+            <button type="button" data-route="robotics">Robotics</button>
+            <button type="button" data-route="hardware">Hardware</button>
+            <button type="button" data-route="adjacent">Adjacent</button>
+          </div>
+        </div>
+        <div class="result-line" aria-live="polite">
+          <strong id="result-count">加载中</strong>
+          <span>路由相关度只衡量元数据命中，不代表论文质量。</span>
+        </div>
+      </section>
+
+      <section id="paper-grid" class="paper-grid" aria-label="arXiv 候选列表"></section>
+      <div id="paper-empty" class="catalog-empty" hidden>
+        <strong>候选池尚未生成</strong>
+        <p>初始化已完成。周末 arXiv RSS 通常无新增；下一次成功任务会自动填充，并始终保留旧数据。</p>
+      </div>
+      <noscript>该页面需要 JavaScript 来加载机器可读候选数据。</noscript>
+    </main>
+
+    <footer>
+      <p>RoboOpus Atlas · 自动化只创建候选</p>
+      <p><a href="/atlas/data/frontier-papers.json">机器可读候选池</a> · Thank you to arXiv for use of its open access interoperability.</p>
+    </footer>
+  </body>
+</html>
