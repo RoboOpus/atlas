@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 机器人机械臂、传感器、计算与开源平台选型地图。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>机器人硬件图谱 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/field.css">
+    <script src="/atlas/field.js" defer></script>
+  </head>
+  <body data-track="hardware">
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>Hardware</span></a>
+      <nav aria-label="机器人硬件图谱导航">
+        <a href="/atlas/">Atlas</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a><a href="/atlas/pipeline/?track=hardware">管线</a>
+      </nav>
+    </header>
+    <main class="field-main">
+      <section class="field-intro">
+        <div><p class="eyebrow">Hardware field guide · comparable, not ranked</p><h1>机器人<br><em>硬件图谱</em></h1><p>第一批覆盖研究机械臂、机器人本体、视觉、距离、力触觉、边缘计算和开源平台。型号规格只采用官方资料；未知值保留为空，不从经销商或旧文章猜测。</p></div>
+        <p class="field-principle"><strong>选型原则</strong>先按任务确定负载、工作空间、接触、视觉、实时性和开放接口，再比较单项参数。公开价格必须同时保存地区、币种和核验日期。</p>
+      </section>
+      <section class="field-summary" aria-label="硬件图谱概览">
+        <div><span>结构化入口</span><strong id="guide-total">—</strong></div><div><span>设备分区</span><strong id="guide-sections">—</strong></div><div><span>官方来源</span><strong id="guide-sources">—</strong></div><div><span>连接节点</span><strong id="guide-nodes">—</strong></div>
+      </section>
+      <section class="field-controls" aria-label="硬件入口筛选">
+        <label class="search-field"><span>搜索</span><input id="field-search" type="search" placeholder="例如：7 DoF、RGB-D、六维力、开源" autocomplete="off"></label>
+        <div id="section-filter" class="section-filter" aria-label="按设备分区筛选"></div>
+        <div class="field-result-line"><strong id="field-count">加载中</strong><span id="unknown-note">未知字段保持显式，不做推测。</span></div>
+      </section>
+      <section id="field-grid" class="field-grid" aria-label="机器人硬件条目"></section>
+      <div id="field-empty" class="catalog-empty" hidden><strong>没有匹配条目</strong><p>换一个关键词，或选择“全部”。</p></div>
+      <noscript>该页面需要 JavaScript 来加载机器可读领域地图。</noscript>
+      <aside class="field-note"><strong>核验时间</strong><p>首批机械臂规格于 2026-09-13 对照厂商资料。当前价格均未形成满足“地区＋币种＋日期”的公开快照，因此明确标为 unknown，而不是给出可能误导采购的数字。</p></aside>
+    </main>
+    <footer><p>RoboOpus Atlas · Hardware</p><p><a href="/atlas/data/field-guides.json">机器可读领域地图</a> · <a href="/atlas/catalog/?track=hardware">完整知识节点</a></p></footer>
+  </body>
+</html>

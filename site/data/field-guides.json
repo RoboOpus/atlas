@@ -1,0 +1,651 @@
+{
+  "schema_version": "0.1.0",
+  "updated_at": "2026-09-13",
+  "scope": "Breadth-first field guides for the Robotics, Hardware, and Adjacent tracks",
+  "policy": {
+    "ranking": "No item is ranked by popularity or vendor claims.",
+    "unknowns": "Unknown or variant-dependent fields remain explicit instead of being inferred.",
+    "evidence": "Facts link to first-party documentation; transfer ideas are hypotheses until tested."
+  },
+  "records": [
+    {
+      "id": "robotics-modern-robotics-spine",
+      "track": "robotics",
+      "section": "学习主线",
+      "name": "Modern Robotics",
+      "subtitle": "从刚体运动到规划与控制的基础坐标系",
+      "kind": "课程 / 教材",
+      "summary": "用统一符号串起位姿表示、运动学、动力学、轨迹生成、运动规划和控制，适合作为基础知识树的第一条主线。",
+      "use_when": "第一次系统补齐机器人基础，或需要统一团队中的符号和问题定义。",
+      "boundary": "课程主线不是软件集成方案；真实系统仍需补充估计、实时接口和安全约束。",
+      "node_ids": ["robotics-coordinate-frames", "robotics-lie-groups", "robotics-kinematics", "robotics-dynamics"],
+      "source_ids": ["robotics-modern-robotics"],
+      "facts": [
+        {"label": "输入", "value": "数学与基础编程"},
+        {"label": "产出", "value": "统一建模语言与练习路径"}
+      ],
+      "tags": ["基础", "运动学", "动力学"]
+    },
+    {
+      "id": "robotics-underactuated-spine",
+      "track": "robotics",
+      "section": "学习主线",
+      "name": "Underactuated Robotics",
+      "subtitle": "动力系统、规划、最优控制与学习",
+      "kind": "课程 / 可运行笔记",
+      "summary": "围绕欠驱动系统建立动力学、轨迹优化、反馈控制、状态估计与学习的连接，并提供可运行示例。",
+      "use_when": "已经掌握基础运动学，希望理解模型控制如何处理复杂动力学。",
+      "boundary": "示例强调原理与研究方法，不能直接替代特定机器人的工程控制栈。",
+      "node_ids": ["robotics-dynamics", "robotics-trajectory-optimization", "robotics-mpc", "robotics-system-identification"],
+      "source_ids": ["robotics-underactuated"],
+      "facts": [
+        {"label": "重点", "value": "非线性动力系统"},
+        {"label": "产出", "value": "从模型到闭环的推导路径"}
+      ],
+      "tags": ["最优控制", "规划", "动力系统"]
+    },
+    {
+      "id": "robotics-pinocchio-modeling",
+      "track": "robotics",
+      "section": "建模与动力学",
+      "name": "Pinocchio",
+      "subtitle": "刚体运动学、动力学与导数计算库",
+      "kind": "软件库",
+      "summary": "面向多体系统计算位姿、雅可比、逆动力学和相关导数，是优化、估计和控制算法的模型层候选。",
+      "use_when": "算法需要快速、可微分友好的刚体动力学量，并希望自行组合上层优化器或控制器。",
+      "boundary": "它解决模型计算，不负责完整的任务规划、传感器融合或机器人运行时。",
+      "node_ids": ["robotics-kinematics", "robotics-dynamics", "robotics-trajectory-optimization"],
+      "source_ids": ["robotics-pinocchio"],
+      "facts": [
+        {"label": "层级", "value": "模型计算"},
+        {"label": "典型输出", "value": "位姿、雅可比、动力学量与导数"}
+      ],
+      "tags": ["刚体动力学", "导数", "优化"]
+    },
+    {
+      "id": "robotics-drake-systems",
+      "track": "robotics",
+      "section": "建模与优化",
+      "name": "Drake",
+      "subtitle": "模型、系统、仿真、优化与控制的一体化工具箱",
+      "kind": "软件框架",
+      "summary": "把多体模型、系统图、仿真、数学规划和控制放在同一框架内，适合模型驱动的端到端原型。",
+      "use_when": "研究问题跨越动力学、轨迹优化和反馈控制，需要统一计算图与仿真环境。",
+      "boundary": "能力面较宽，学习和部署成本高于单一功能库；硬件接口需单独验证。",
+      "node_ids": ["robotics-dynamics", "robotics-trajectory-optimization", "robotics-mpc", "robotics-contact-modeling"],
+      "source_ids": ["robotics-drake"],
+      "facts": [
+        {"label": "层级", "value": "系统与优化框架"},
+        {"label": "典型输出", "value": "仿真轨迹、优化解与控制器"}
+      ],
+      "tags": ["模型式", "优化", "控制"]
+    },
+    {
+      "id": "robotics-gtsam-estimation",
+      "track": "robotics",
+      "section": "感知与估计",
+      "name": "GTSAM",
+      "subtitle": "因子图与概率状态估计",
+      "kind": "软件库",
+      "summary": "把传感器测量、运动模型和先验表示为因子图，用于批量或增量估计轨迹、地图和标定参数。",
+      "use_when": "多源测量需要显式建模不确定性，并希望观察每个约束如何进入估计问题。",
+      "boundary": "它不是开箱即用的完整 SLAM 系统；前端特征、数据关联和传感器同步仍需实现。",
+      "node_ids": ["robotics-state-estimation", "robotics-slam", "robotics-calibration"],
+      "source_ids": ["robotics-gtsam"],
+      "facts": [
+        {"label": "问题形式", "value": "因子图优化"},
+        {"label": "典型输出", "value": "状态、轨迹、地图或标定参数"}
+      ],
+      "tags": ["因子图", "SLAM", "传感器融合"]
+    },
+    {
+      "id": "robotics-orb-slam3-system",
+      "track": "robotics",
+      "section": "感知与估计",
+      "name": "ORB-SLAM3",
+      "subtitle": "视觉与视觉惯性 SLAM 参考系统",
+      "kind": "开源实现",
+      "summary": "提供单目、双目、RGB-D 与视觉惯性配置的经典 SLAM 实现入口，适合研究系统结构和复现实验。",
+      "use_when": "需要一个可追溯论文与代码的视觉 SLAM 基线，或比较前端、后端和回环模块。",
+      "boundary": "许可证、传感器标定和数据集配置必须单独核对；真实环境鲁棒性不能由演示推断。",
+      "node_ids": ["robotics-slam", "robotics-state-estimation", "robotics-calibration"],
+      "source_ids": ["robotics-orb-slam3"],
+      "facts": [
+        {"label": "输入", "value": "相机，可选 IMU"},
+        {"label": "典型输出", "value": "相机轨迹与地图"}
+      ],
+      "tags": ["视觉 SLAM", "VIO", "基线"]
+    },
+    {
+      "id": "robotics-ompl-planners",
+      "track": "robotics",
+      "section": "规划",
+      "name": "OMPL",
+      "subtitle": "采样式运动规划算法库",
+      "kind": "软件库",
+      "summary": "集中实现随机采样规划器和基准接口，供上层系统提供状态空间、有效性检查与问题定义。",
+      "use_when": "需要比较 RRT、PRM 等采样规划器，或为新规划器建立统一实验接口。",
+      "boundary": "规划器是抽象算法层；机器人模型、碰撞检测和执行由 MoveIt 等上层系统接入。",
+      "node_ids": ["robotics-sampling-planning", "robotics-search-planning"],
+      "source_ids": ["robotics-ompl"],
+      "facts": [
+        {"label": "层级", "value": "规划算法"},
+        {"label": "典型输出", "value": "状态空间中的可行路径"}
+      ],
+      "tags": ["采样规划", "RRT", "PRM"]
+    },
+    {
+      "id": "robotics-moveit2-integration",
+      "track": "robotics",
+      "section": "规划",
+      "name": "MoveIt 2",
+      "subtitle": "ROS 2 机械臂规划与执行集成层",
+      "kind": "软件平台",
+      "summary": "连接机器人模型、规划场景、碰撞检查、规划插件、轨迹处理和控制器执行，是机械臂系统的主要集成入口。",
+      "use_when": "目标是让真实或仿真机械臂完成姿态目标、避障、抓取或任务序列。",
+      "boundary": "默认规划成功不等于真实执行可靠；需核对 URDF/SRDF、控制器、时间参数化与场景更新。",
+      "node_ids": ["robotics-sampling-planning", "robotics-tamp", "robotics-trajectory-optimization"],
+      "source_ids": ["robotics-moveit2", "robotics-ompl", "robotics-ros2"],
+      "facts": [
+        {"label": "输入", "value": "机器人模型、场景与目标约束"},
+        {"label": "典型输出", "value": "满足约束的时间化轨迹"}
+      ],
+      "tags": ["机械臂", "碰撞检查", "轨迹执行"]
+    },
+    {
+      "id": "robotics-ros2-runtime",
+      "track": "robotics",
+      "section": "系统",
+      "name": "ROS 2",
+      "subtitle": "模块通信、工具与机器人运行时",
+      "kind": "中间件 / 生态",
+      "summary": "用 Topic 承载连续数据流、Service 处理短请求、Action 管理带反馈和取消的长任务，并连接记录、调试和包生态。",
+      "use_when": "系统需要拆分传感器、估计、规划、控制和任务节点，并明确接口语义。",
+      "boundary": "Rolling 是开发版本；可复现实验应固定发行版、QoS、消息定义和时间源。",
+      "node_ids": ["robotics-calibration", "robotics-state-estimation", "robotics-tamp", "robotics-impedance"],
+      "source_ids": ["robotics-ros2"],
+      "facts": [
+        {"label": "核心接口", "value": "Topic / Service / Action"},
+        {"label": "典型输出", "value": "可组合、可记录的机器人软件系统"}
+      ],
+      "tags": ["中间件", "接口", "工具链"]
+    },
+    {
+      "id": "robotics-mujoco-simulation",
+      "track": "robotics",
+      "section": "仿真与评测",
+      "name": "MuJoCo",
+      "subtitle": "接触丰富多体动力学仿真器",
+      "kind": "物理引擎",
+      "summary": "适合建立可控、可复现的多体和接触仿真，用于控制、优化、强化学习与模型误差研究。",
+      "use_when": "重点是动力学、接触与控制回路，而不是大规模逼真视觉生成。",
+      "boundary": "仿真可信度取决于模型、接触参数、求解器和步长；版本与配置必须随结果保存。",
+      "node_ids": ["robotics-contact-modeling", "robotics-sim-to-real", "robotics-dynamics"],
+      "source_ids": ["robotics-mujoco"],
+      "facts": [
+        {"label": "层级", "value": "物理仿真"},
+        {"label": "核验重点", "value": "模型参数、求解器与时间步长"}
+      ],
+      "tags": ["接触", "控制", "仿真"]
+    },
+    {
+      "id": "robotics-isaac-lab-training",
+      "track": "robotics",
+      "section": "仿真与评测",
+      "name": "Isaac Lab",
+      "subtitle": "GPU 并行机器人学习环境",
+      "kind": "仿真 / 训练框架",
+      "summary": "围绕 Isaac Sim 组织机器人、任务、传感器、并行环境和学习流程，面向强化学习、模仿学习与大规模数据生成。",
+      "use_when": "训练吞吐、视觉传感器和多环境并行是主要约束。",
+      "boundary": "软件、驱动和 GPU 组合高度相关；结果需绑定完整版本矩阵与任务配置。",
+      "node_ids": ["robotics-sim-to-real", "robotics-contact-modeling"],
+      "source_ids": ["robotics-isaac-lab"],
+      "facts": [
+        {"label": "层级", "value": "GPU 仿真与训练"},
+        {"label": "核验重点", "value": "Isaac Sim、Lab、驱动与任务版本"}
+      ],
+      "tags": ["GPU 仿真", "强化学习", "数据生成"]
+    },
+    {
+      "id": "robotics-maniskill-benchmark",
+      "track": "robotics",
+      "section": "仿真与评测",
+      "name": "ManiSkill",
+      "subtitle": "操作任务、数据与学习基准",
+      "kind": "仿真 / Benchmark",
+      "summary": "提供 Gym 风格接口、CPU/GPU 仿真、不同观测与控制模式，以及覆盖桌面、移动和灵巧操作的任务。",
+      "use_when": "需要快速建立操作学习基线，或比较状态、视觉和不同控制空间。",
+      "boundary": "任务、奖励、控制模式和评测版本必须锁定；不同仿真器的吞吐数字不可直接横比。",
+      "node_ids": ["robotics-sim-to-real", "robotics-contact-modeling"],
+      "source_ids": ["robotics-maniskill"],
+      "facts": [
+        {"label": "接口", "value": "Gym / Gymnasium 风格"},
+        {"label": "观测", "value": "状态、RGB-D、点云等"}
+      ],
+      "tags": ["机器人操作", "Benchmark", "GPU 仿真"]
+    },
+
+    {
+      "id": "hardware-franka-research-3",
+      "track": "hardware",
+      "section": "研究型机械臂",
+      "name": "Franka Research 3",
+      "subtitle": "高频低层接口与全关节力矩感知",
+      "kind": "协作研究机械臂",
+      "summary": "面向控制和交互研究的 7 自由度平台，官方资料提供低层运动控制与各轴关节侧力矩传感信息。",
+      "use_when": "研究重点是阻抗控制、力交互、精细操作或自定义低层行为。",
+      "boundary": "价格为询价；末端执行器、控制许可和系统镜像兼容性需纳入整套预算。",
+      "node_ids": ["hardware-research-arms", "robotics-impedance"],
+      "source_ids": ["hardware-franka"],
+      "facts": [
+        {"label": "自由度", "value": "7"},
+        {"label": "额定负载", "value": "3 kg"},
+        {"label": "最大臂展", "value": "855 mm"},
+        {"label": "低层控制", "value": "1 kHz"},
+        {"label": "公开价格", "value": "unknown / 询价"}
+      ],
+      "evidence_urls": [
+        {"label": "官方产品页", "url": "https://franka.de/franka-research-3"},
+        {"label": "官方数据表 v2.4", "url": "https://franka.de/hubfs/Datasheet%20Franka%20Research%203_R02212_2.4_EN.pdf?hsLang=en"}
+      ],
+      "tags": ["7 DoF", "力控", "研究平台"]
+    },
+    {
+      "id": "hardware-ur5e",
+      "track": "hardware",
+      "section": "研究型机械臂",
+      "name": "Universal Robots UR5e",
+      "subtitle": "工业生态成熟的中等负载协作臂",
+      "kind": "协作机械臂",
+      "summary": "6 自由度协作臂，产品资料公开负载、臂展、重复定位、通信和控制更新频率等工程字段。",
+      "use_when": "需要成熟工业集成、广泛末端生态和清晰安全文档，并接受 6 自由度结构。",
+      "boundary": "研究所需的低层控制能力、附加许可与安全配置应在采购前逐项确认。",
+      "node_ids": ["hardware-research-arms"],
+      "source_ids": ["hardware-universal-robots"],
+      "facts": [
+        {"label": "自由度", "value": "6"},
+        {"label": "最大负载", "value": "5 kg"},
+        {"label": "臂展", "value": "850 mm"},
+        {"label": "系统更新频率", "value": "500 Hz"},
+        {"label": "公开价格", "value": "unknown / 询价"}
+      ],
+      "evidence_urls": [
+        {"label": "官方技术规格", "url": "https://www.universal-robots.com/manuals/EN/HTML/SW10_6/Content/prod-usr-man/hardware/arm_e-Series/UR5e/H_g5_sections/appendix_g5/tech_spec_sheet.htm"}
+      ],
+      "tags": ["6 DoF", "协作臂", "工业集成"]
+    },
+    {
+      "id": "hardware-kinova-gen3",
+      "track": "hardware",
+      "section": "研究型机械臂",
+      "name": "Kinova Gen3 · 7 DoF",
+      "subtitle": "轻量研究机械臂",
+      "kind": "协作研究机械臂",
+      "summary": "7 自由度轻量平台，官方 2026 一页资料区分 6/7 自由度版本并给出连续全工作范围负载和最大臂展。",
+      "use_when": "桌面研究需要冗余自由度、较低本体重量和面向研究的软件接口。",
+      "boundary": "负载需区分连续全工作范围与其他工况；配套夹爪、视觉和区域配置另行核验。",
+      "node_ids": ["hardware-research-arms"],
+      "source_ids": ["hardware-kinova-gen3"],
+      "facts": [
+        {"label": "自由度", "value": "7"},
+        {"label": "连续全范围负载", "value": "2.0 kg"},
+        {"label": "最大臂展", "value": "902 mm"},
+        {"label": "公开价格", "value": "unknown / 询价"}
+      ],
+      "evidence_urls": [
+        {"label": "官方 2026 规格页", "url": "https://www.kinovarobotics.com/uploads/Kinova_Onepager_Gen3_2026_EN.pdf"}
+      ],
+      "tags": ["7 DoF", "轻量", "研究平台"]
+    },
+    {
+      "id": "hardware-xarm7",
+      "track": "hardware",
+      "section": "研究型机械臂",
+      "name": "UFactory xArm 7",
+      "subtitle": "7 自由度协作机械臂与开放 SDK 生态",
+      "kind": "协作机械臂",
+      "summary": "xArm 系列中的 7 自由度型号，官方手册公开负载、关节范围和本体重量，适合纳入成本与能力平衡比较。",
+      "use_when": "需要 7 自由度桌面操作平台，并看重 Python/C++/ROS 等软件接入路径。",
+      "boundary": "当前数据表未在同一口径下确认臂展和采购总价，保持 unknown，后续单独核验。",
+      "node_ids": ["hardware-research-arms", "hardware-low-cost-arms"],
+      "source_ids": ["hardware-ufactory-xarm"],
+      "facts": [
+        {"label": "自由度", "value": "7"},
+        {"label": "最大负载", "value": "3.5 kg"},
+        {"label": "本体重量", "value": "14.3 kg"},
+        {"label": "臂展", "value": "unknown"},
+        {"label": "公开价格", "value": "unknown / 地区相关"}
+      ],
+      "evidence_urls": [
+        {"label": "官方硬件手册 v2.6.0", "url": "https://www.ufactory.cc/wp-content/uploads/2025/05/xArm_Hardware_Manual1305_V2.6.0-1.pdf"}
+      ],
+      "tags": ["7 DoF", "SDK", "成本平衡"]
+    },
+    {
+      "id": "hardware-unitree-platforms",
+      "track": "hardware",
+      "section": "机器人本体",
+      "name": "Unitree 产品线",
+      "subtitle": "四足与人形机器人官方入口",
+      "kind": "机器人本体",
+      "summary": "用于登记四足、人形和配套计算平台的型号变化，后续将开发者接口与营销能力声明分栏。",
+      "use_when": "需要比较移动本体、全身控制平台或具身数据采集载体。",
+      "boundary": "不同代际、教育版和开发版能力差异大；本轮不跨型号拼接规格。",
+      "node_ids": ["hardware-humanoids", "hardware-quadrupeds", "hardware-mobile-manipulators"],
+      "source_ids": ["hardware-unitree"],
+      "facts": [
+        {"label": "覆盖", "value": "四足 / 人形"},
+        {"label": "规格状态", "value": "按型号待展开"},
+        {"label": "价格状态", "value": "按地区与配置待核验"}
+      ],
+      "tags": ["四足", "人形", "本体"]
+    },
+    {
+      "id": "hardware-realsense-family",
+      "track": "hardware",
+      "section": "视觉传感器",
+      "name": "RealSense 深度相机",
+      "subtitle": "RGB-D 产品族与 SDK 入口",
+      "kind": "深度相机",
+      "summary": "作为 RGB-D 选型入口，后续按型号登记深度原理、量程、视场、快门、接口和当前供货状态。",
+      "use_when": "桌面操作、近距离三维感知或需要成熟深度相机 SDK。",
+      "boundary": "不同系列不可只按分辨率比较；量程、环境光、纹理和运动条件必须匹配任务。",
+      "node_ids": ["hardware-rgbd-cameras", "robotics-visual-perception"],
+      "source_ids": ["hardware-realsense"],
+      "facts": [
+        {"label": "类别", "value": "RGB-D / 深度相机"},
+        {"label": "比较字段", "value": "原理、量程、视场、快门、接口"}
+      ],
+      "tags": ["RGB-D", "深度", "SDK"]
+    },
+    {
+      "id": "hardware-zed-family",
+      "track": "hardware",
+      "section": "视觉传感器",
+      "name": "Stereolabs ZED",
+      "subtitle": "双目深度、定位与边缘视觉产品族",
+      "kind": "双目相机",
+      "summary": "用于比较双目深度、视觉惯性、定位和机载计算组合，按具体型号记录 SDK 与算力要求。",
+      "use_when": "系统希望同时获得双目视觉、深度和定位能力，并能提供相应 GPU 计算资源。",
+      "boundary": "算法输出质量依赖场景、标定和算力；不能与主动深度相机只按单项精度对比。",
+      "node_ids": ["hardware-rgbd-cameras", "hardware-imu", "robotics-slam"],
+      "source_ids": ["hardware-stereolabs-zed"],
+      "facts": [
+        {"label": "类别", "value": "双目 / 视觉惯性"},
+        {"label": "比较字段", "value": "基线、视场、IMU、SDK、算力"}
+      ],
+      "tags": ["双目", "VIO", "定位"]
+    },
+    {
+      "id": "hardware-ouster-os",
+      "track": "hardware",
+      "section": "距离传感器",
+      "name": "Ouster OS 系列",
+      "subtitle": "数字 3D LiDAR 产品族",
+      "kind": "激光雷达",
+      "summary": "作为 3D LiDAR 入口，后续按 OS 型号登记线数、垂直视场、量程、最小距离、时间同步和数据接口。",
+      "use_when": "移动机器人需要较大范围三维几何、全天候定位或障碍物感知。",
+      "boundary": "型号和固件影响数据模式；价格、分辨率与量程必须在相同配置下比较。",
+      "node_ids": ["hardware-lidar", "robotics-slam"],
+      "source_ids": ["hardware-ouster"],
+      "facts": [
+        {"label": "类别", "value": "3D LiDAR"},
+        {"label": "比较字段", "value": "线数、视场、量程、同步、接口"}
+      ],
+      "tags": ["LiDAR", "3D 感知", "定位"]
+    },
+    {
+      "id": "hardware-ati-ft-family",
+      "track": "hardware",
+      "section": "力与触觉",
+      "name": "ATI 六维力/力矩传感器",
+      "subtitle": "多型号量程矩阵与标定入口",
+      "kind": "力/力矩传感器",
+      "summary": "用于按具体型号比较 Fx/Fy/Fz、Tx/Ty/Tz 量程、分辨率、过载、接口与校准信息。",
+      "use_when": "末端力控、接触检测、装配或交互实验需要独立六维力测量。",
+      "boundary": "不同型号和校准范围不可混写；放大器、数据采集卡和安装结构属于系统成本。",
+      "node_ids": ["hardware-force-torque", "robotics-impedance"],
+      "source_ids": ["hardware-ati-ft"],
+      "facts": [
+        {"label": "输出", "value": "六轴力与力矩"},
+        {"label": "比较字段", "value": "量程、分辨率、过载、采样、接口"}
+      ],
+      "tags": ["六维力", "力控", "装配"]
+    },
+    {
+      "id": "hardware-gelsight-family",
+      "track": "hardware",
+      "section": "力与触觉",
+      "name": "GelSight 视触觉产品",
+      "subtitle": "高分辨率接触表面观测入口",
+      "kind": "视触觉传感器",
+      "summary": "用于研究接触几何、纹理、滑移和抓取状态，厂商能力声明与论文实测将分开记录。",
+      "use_when": "精细操作需要局部接触图像，而普通力传感无法表达接触分布。",
+      "boundary": "传感表面耐久、标定、照明和帧率会影响结果；公开价格保持时间戳。",
+      "node_ids": ["hardware-tactile-sensors", "robotics-tactile-perception"],
+      "source_ids": ["hardware-gelsight"],
+      "facts": [
+        {"label": "类别", "value": "视触觉"},
+        {"label": "比较字段", "value": "接触面积、分辨率、帧率、表面寿命"}
+      ],
+      "tags": ["触觉", "接触", "精细操作"]
+    },
+    {
+      "id": "hardware-jetson-family",
+      "track": "hardware",
+      "section": "边缘计算",
+      "name": "NVIDIA Jetson",
+      "subtitle": "机器人边缘 GPU 模组与开发套件",
+      "kind": "边缘计算平台",
+      "summary": "按模组与开发套件分别记录 AI 性能档、功耗模式、内存、I/O、JetPack 和供货生命周期。",
+      "use_when": "机器人需要在机运行视觉、深度学习或多传感器处理，并受功耗和体积约束。",
+      "boundary": "峰值算力不代表端到端时延；模组与开发套件价格、接口和散热条件不可混同。",
+      "node_ids": ["hardware-edge-compute"],
+      "source_ids": ["hardware-jetson"],
+      "facts": [
+        {"label": "类别", "value": "边缘 GPU 计算"},
+        {"label": "比较字段", "value": "内存、功耗、I/O、软件版本、散热"}
+      ],
+      "tags": ["GPU", "边缘计算", "部署"]
+    },
+    {
+      "id": "hardware-openmanipulator-x",
+      "track": "hardware",
+      "section": "开源与低成本",
+      "name": "OpenMANIPULATOR-X",
+      "subtitle": "教育与研究用开源机械臂",
+      "kind": "开源机器人平台",
+      "summary": "官方手册覆盖结构、执行器、装配、控制与 ROS 接入，适合建立完整硬件—固件—软件链路的教学样例。",
+      "use_when": "目标是理解和修改整套机械臂，而不是只调用封闭控制器。",
+      "boundary": "机械、电气、固件与软件的开放范围和许可证需要逐层登记。",
+      "node_ids": ["hardware-low-cost-arms", "hardware-open-systems"],
+      "source_ids": ["hardware-openmanipulator-x"],
+      "facts": [
+        {"label": "开放层", "value": "机械 / 控制 / ROS 文档"},
+        {"label": "定位", "value": "教育与原型研究"}
+      ],
+      "tags": ["开源硬件", "教育", "ROS"]
+    },
+    {
+      "id": "hardware-lerobot-platforms",
+      "track": "hardware",
+      "section": "开源与低成本",
+      "name": "LeRobot 硬件生态",
+      "subtitle": "低成本机器人、遥操作、数据与策略训练",
+      "kind": "开源软硬件生态",
+      "summary": "把支持的低成本机械臂、数据采集、数据集格式和策略训练放在同一生态中，适合快速形成闭环实验。",
+      "use_when": "研究目标是尽快打通采集—训练—部署，而不是先自建完整硬件软件栈。",
+      "boundary": "兼容硬件、BOM、固件和数据格式变化较快；复现需固定提交与具体机型。",
+      "node_ids": ["hardware-low-cost-arms", "hardware-open-systems"],
+      "source_ids": ["hardware-lerobot"],
+      "facts": [
+        {"label": "覆盖", "value": "硬件 / 遥操作 / 数据 / 策略"},
+        {"label": "核验重点", "value": "机型、BOM、固件、提交记录"}
+      ],
+      "tags": ["低成本", "数据采集", "开源生态"]
+    },
+
+    {
+      "id": "adjacent-sam2-transfer",
+      "track": "adjacent",
+      "section": "视觉基础模型",
+      "name": "SAM 2 → 交互对象记忆",
+      "subtitle": "把图像/视频可提示分割迁移到机器人目标建模",
+      "kind": "迁移假设",
+      "summary": "借用可提示分割和视频传播能力，为目标、部件和交互区域建立随时间更新的掩码表示。",
+      "use_when": "操作任务需要开放类别目标、少样本指定或跨帧保持对象身份。",
+      "boundary": "需验证遮挡恢复、在线时延、相机运动和掩码错误对动作闭环的累积影响。",
+      "node_ids": ["adjacent-multimodal-models", "adjacent-video-understanding", "robotics-visual-perception"],
+      "source_ids": ["adjacent-sam2"],
+      "facts": [
+        {"label": "可借用能力", "value": "提示分割与视频传播"},
+        {"label": "最小验证", "value": "遮挡操作视频中的掩码稳定性与时延"}
+      ],
+      "tags": ["分割", "视频", "对象记忆"]
+    },
+    {
+      "id": "adjacent-dinov2-transfer",
+      "track": "adjacent",
+      "section": "视觉基础模型",
+      "name": "DINOv2 → 机器人视觉表征",
+      "subtitle": "用通用视觉特征减少机器人标注依赖",
+      "kind": "迁移假设",
+      "summary": "借用自监督视觉特征做对象匹配、关键点、可供性或策略输入，并与任务专用表征比较。",
+      "use_when": "机器人数据有限，但有大量未标注图像或跨环境迁移需求。",
+      "boundary": "互联网图像表征不保证包含接触、尺度和动作相关信息；需做冻结、微调和任务专用基线。",
+      "node_ids": ["adjacent-multimodal-models", "robotics-visual-perception", "robotics-pose-estimation"],
+      "source_ids": ["adjacent-dinov2"],
+      "facts": [
+        {"label": "可借用能力", "value": "通用视觉特征"},
+        {"label": "最小验证", "value": "跨场景对应与下游成功率"}
+      ],
+      "tags": ["自监督", "表征", "迁移学习"]
+    },
+    {
+      "id": "adjacent-vggt-transfer",
+      "track": "adjacent",
+      "section": "3D / 4D 表征",
+      "name": "VGGT → 快速场景几何",
+      "subtitle": "从多视图图像获得相机、深度和点图先验",
+      "kind": "迁移假设",
+      "summary": "把多视图几何基础模型作为快速初始化或离线建图先验，再交给机器人估计和规划模块使用。",
+      "use_when": "系统有多视图图像，希望减少传统重建流水线的初始化成本。",
+      "boundary": "需验证尺度、动态物体、在线更新、相机模型和输出不确定性；不能直接视为安全地图。",
+      "node_ids": ["adjacent-3d4d", "robotics-slam", "robotics-pose-estimation"],
+      "source_ids": ["adjacent-vggt"],
+      "facts": [
+        {"label": "可借用能力", "value": "相机、深度、点图与跟踪先验"},
+        {"label": "最小验证", "value": "带尺度误差的抓取/规划敏感性"}
+      ],
+      "tags": ["多视图", "3D 几何", "建图"]
+    },
+    {
+      "id": "adjacent-transformers-transfer",
+      "track": "adjacent",
+      "section": "多模态与系统",
+      "name": "Transformers 生态 → 机器人模型工程",
+      "subtitle": "复用模型配置、权重、处理器和推理接口",
+      "kind": "工程迁移",
+      "summary": "借用成熟的模型加载、配置、处理器、训练和部署抽象，降低多模态机器人模型的工程碎片化。",
+      "use_when": "机器人模型基于主流 Transformer 架构，需要统一实验配置和模型资产。",
+      "boundary": "模型卡和具体仓库才是能力与许可证依据；通用推理 API 不解决实时控制和安全。",
+      "node_ids": ["adjacent-multimodal-models", "adjacent-agents"],
+      "source_ids": ["adjacent-transformers"],
+      "facts": [
+        {"label": "可借用能力", "value": "模型与推理工程抽象"},
+        {"label": "最小验证", "value": "端到端时延、显存与版本可复现性"}
+      ],
+      "tags": ["模型工程", "多模态", "部署"]
+    },
+    {
+      "id": "adjacent-openpcdet-transfer",
+      "track": "adjacent",
+      "section": "3D / 4D 表征",
+      "name": "OpenPCDet → 机器人点云基线",
+      "subtitle": "复用 3D 检测数据管线与评测实现",
+      "kind": "工程迁移",
+      "summary": "借用自动驾驶点云检测代码库中的数据预处理、配置和评测框架，为机器人 3D 感知建立可比较基线。",
+      "use_when": "机器人拥有 LiDAR 或稠密点云，需要快速比较检测与特征提取方法。",
+      "boundary": "驾驶数据的尺度、类别和传感器布置不同；必须重做坐标系、类别和近场遮挡设定。",
+      "node_ids": ["adjacent-3d4d", "robotics-visual-perception", "hardware-lidar"],
+      "source_ids": ["adjacent-openpcdet"],
+      "facts": [
+        {"label": "可借用能力", "value": "点云数据管线与 3D 检测基线"},
+        {"label": "最小验证", "value": "近场机器人数据上的类别与尺度迁移"}
+      ],
+      "tags": ["点云", "3D 检测", "基线"]
+    },
+    {
+      "id": "adjacent-waymo-transfer",
+      "track": "adjacent",
+      "section": "自动驾驶",
+      "name": "Waymo Open → 场景预测与数据引擎",
+      "subtitle": "借鉴大规模多主体场景的数据组织和评测",
+      "kind": "数据 / 评测迁移",
+      "summary": "从感知、运动预测、场景生成和端到端驾驶任务中提取可迁移的数据组织、长尾覆盖与评测思路。",
+      "use_when": "机器人研究需要构造多主体场景、长尾切片或数据闭环，而不仅是扩大样本量。",
+      "boundary": "道路结构、主体动力学和安全规则与室内机器人不同；数据许可也不是开源许可。",
+      "node_ids": ["adjacent-driving-world-models", "adjacent-data-engines", "adjacent-closed-loop-eval"],
+      "source_ids": ["adjacent-waymo-open"],
+      "facts": [
+        {"label": "可借用能力", "value": "场景数据组织与长尾评测"},
+        {"label": "最小验证", "value": "机器人失败案例能否形成可复现数据切片"}
+      ],
+      "tags": ["场景预测", "长尾", "数据引擎"]
+    },
+    {
+      "id": "adjacent-nuscenes-transfer",
+      "track": "adjacent",
+      "section": "自动驾驶",
+      "name": "nuScenes → 多传感器时空融合",
+      "subtitle": "借鉴相机、LiDAR、雷达、地图和轨迹的统一表示",
+      "kind": "数据 / 评测迁移",
+      "summary": "把多模态时间同步、坐标变换、地图上下文和预测任务的组织方式映射到移动机器人。",
+      "use_when": "机器人系统同时使用多相机、LiDAR、IMU 或地图，需要统一时空数据协议。",
+      "boundary": "采样频率、近场几何和室内动态不同；不能直接沿用驾驶类别和指标。",
+      "node_ids": ["adjacent-3d4d", "adjacent-data-engines", "robotics-state-estimation"],
+      "source_ids": ["adjacent-nuscenes"],
+      "facts": [
+        {"label": "可借用能力", "value": "多传感器时空数据模型"},
+        {"label": "最小验证", "value": "统一时间轴与坐标系的数据回放"}
+      ],
+      "tags": ["多传感器", "时空融合", "数据规范"]
+    },
+    {
+      "id": "adjacent-carla-transfer",
+      "track": "adjacent",
+      "section": "自动驾驶",
+      "name": "CARLA → 闭环场景评测",
+      "subtitle": "借鉴可控交通场景、传感器配置与闭环回放",
+      "kind": "仿真迁移",
+      "summary": "从自动驾驶仿真中借鉴场景参数化、对手行为、天气扰动、传感器配置和闭环失败复现。",
+      "use_when": "机器人评测需要从固定数据集升级为可干预、可回放的闭环场景。",
+      "boundary": "CARLA 本身不是通用机器人操作仿真器；应迁移评测设计，而非强行迁移物理环境。",
+      "node_ids": ["adjacent-closed-loop-eval", "adjacent-driving-world-models", "robotics-sim-to-real"],
+      "source_ids": ["adjacent-carla"],
+      "facts": [
+        {"label": "可借用能力", "value": "参数化闭环场景"},
+        {"label": "最小验证", "value": "同一失败能否稳定重放并定位责任模块"}
+      ],
+      "tags": ["闭环", "仿真", "场景生成"]
+    },
+    {
+      "id": "adjacent-kitti-transfer",
+      "track": "adjacent",
+      "section": "自动驾驶",
+      "name": "KITTI → 经典几何基线",
+      "subtitle": "用成熟任务定义检查机器人视觉评测口径",
+      "kind": "Benchmark 迁移",
+      "summary": "借鉴立体、光流、视觉里程计和 3D 检测的清晰任务边界，作为机器人数据集设计的历史对照。",
+      "use_when": "需要先建立简单、可比较的几何或里程计基线，再引入复杂基础模型。",
+      "boundary": "数据年代、场景和传感器与当前机器人差异明显；适合作为基线结构而非性能目标。",
+      "node_ids": ["adjacent-3d4d", "robotics-slam", "robotics-visual-perception"],
+      "source_ids": ["adjacent-kitti"],
+      "facts": [
+        {"label": "可借用能力", "value": "清晰任务定义与几何指标"},
+        {"label": "最小验证", "value": "机器人数据上可复现的传统几何基线"}
+      ],
+      "tags": ["Benchmark", "视觉里程计", "几何"]
+    }
+  ]
+}

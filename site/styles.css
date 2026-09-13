@@ -33,7 +33,7 @@ h1 em { color: var(--orange); font-style: normal; }
 .hero-actions a { padding: 13px 17px; border: 1px solid var(--ink); text-decoration: none; font-weight: 700; font-size: 14px; }
 .hero-actions .primary { color: white; background: var(--ink); }
 .hero-actions a:hover { transform: translateY(-1px); }
-.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 170px)); gap: 1px; max-width: 530px; margin: 64px 0 0; background: var(--line); border: 1px solid var(--line); }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 170px)); gap: 1px; max-width: 700px; margin: 64px 0 0; background: var(--line); border: 1px solid var(--line); }
 .stats div { padding: 18px; background: var(--paper); }
 .stats dt { font: 500 34px/1 Georgia, serif; }
 .stats dd { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
@@ -77,9 +77,9 @@ footer { display: flex; justify-content: space-between; gap: 24px; padding: 30px
 
 @media (max-width: 580px) {
   .topbar, main, footer { width: min(100% - 24px, 1180px); }
-  .topbar { align-items: flex-start; padding: 15px 0; }
-  nav { gap: 12px; font-size: 12px; }
-  nav a:nth-child(3) { display: none; }
+  .topbar { align-items: center; flex-wrap: wrap; gap: 12px; padding: 15px 0; }
+  nav { width: 100%; gap: 14px; overflow-x: auto; padding-bottom: 4px; font-size: 12px; scrollbar-width: thin; }
+  nav a { flex: 0 0 auto; white-space: nowrap; }
   .hero { padding: 58px 0 60px; }
   .stats, .track-grid, .source-grid, .steps { grid-template-columns: 1fr; }
   .track { min-height: auto; }

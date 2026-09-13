@@ -8,6 +8,7 @@ const catalogPath = path.join(repo, "site", "data", "catalog.json");
 const sourcesPath = path.join(repo, "site", "data", "sources.json");
 const jobsPath = path.join(repo, "site", "data", "ingestion-jobs.json");
 const frontierPapersPath = path.join(repo, "site", "data", "frontier-papers.json");
+const fieldGuidesPath = path.join(repo, "site", "data", "field-guides.json");
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const requiredFiles = [
   "site/index.html",
@@ -17,6 +18,7 @@ const requiredFiles = [
   "site/data/sources.json",
   "site/data/ingestion-jobs.json",
   "site/data/frontier-papers.json",
+  "site/data/field-guides.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
@@ -29,6 +31,11 @@ const requiredFiles = [
   "site/frontier/index.html",
   "site/frontier/frontier.css",
   "site/frontier/frontier.js",
+  "site/field.css",
+  "site/field.js",
+  "site/robotics/index.html",
+  "site/hardware/index.html",
+  "site/adjacent/index.html",
   "config/frontier-arxiv.json",
   "scripts/fetch-frontier-arxiv.mjs",
   "tests/fixtures/frontier-arxiv.atom.xml",
@@ -37,6 +44,7 @@ const requiredFiles = [
   "content/source-registry-schema.md",
   "content/ingestion-jobs-schema.md",
   "content/frontier-radar-schema.md",
+  "content/field-guides-schema.md",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -50,6 +58,7 @@ const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
 const sources = JSON.parse(await readFile(sourcesPath, "utf8"));
 const jobs = JSON.parse(await readFile(jobsPath, "utf8"));
 const frontierPapers = JSON.parse(await readFile(frontierPapersPath, "utf8"));
+const fieldGuides = JSON.parse(await readFile(fieldGuidesPath, "utf8"));
 const frontierConfig = JSON.parse(await readFile(frontierConfigPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
 
@@ -62,6 +71,10 @@ for (const track of atlas.tracks) {
   ids.add(track.id);
   if (!track.repository.startsWith("RoboOpus/")) throw new Error(`Repository outside RoboOpus: ${track.repository}`);
   if (track.repository === "RoboOpus/RoboOpus.github.io") throw new Error("Organization Pages repository is protected");
+  if (track.planned_repository) {
+    if (!track.planned_repository.startsWith("RoboOpus/")) throw new Error(`Planned repository outside RoboOpus: ${track.planned_repository}`);
+    if (track.planned_repository === "RoboOpus/RoboOpus.github.io") throw new Error("Organization Pages repository cannot be a planned target");
+  }
   if (!track.site_url.startsWith("https://roboopus.github.io/")) throw new Error(`Invalid project-site URL: ${track.site_url}`);
   if (!allowedStatuses.has(track.status)) throw new Error(`Invalid status for ${track.id}: ${track.status}`);
   if (!Array.isArray(track.scope) || track.scope.length < 3) throw new Error(`Track scope is too thin: ${track.id}`);
@@ -144,6 +157,37 @@ for (const [track, count] of Object.entries(jobsPerTrack)) {
 }
 if (![...jobs.jobs].some((job) => job.status === "active")) throw new Error("At least one ingestion job must be active");
 
+const guideTracks = new Set(["robotics", "hardware", "adjacent"]);
+if (fieldGuides.schema_version !== "0.1.0") throw new Error("Unexpected field guide schema version");
+if (!/^\d{4}-\d{2}-\d{2}$/.test(fieldGuides.updated_at)) throw new Error("Field guide update date is invalid");
+if (!Array.isArray(fieldGuides.records) || fieldGuides.records.length < 30) throw new Error("Field guides must contain at least 30 breadth records");
+const guideIds = new Set();
+const guidesPerTrack = Object.fromEntries([...guideTracks].map((track) => [track, 0]));
+for (const record of fieldGuides.records) {
+  if (!record.id || guideIds.has(record.id)) throw new Error(`Missing or duplicate field guide id: ${record.id}`);
+  guideIds.add(record.id);
+  if (!guideTracks.has(record.track)) throw new Error(`Unknown field guide track: ${record.id}`);
+  if (!record.id.startsWith(`${record.track}-`)) throw new Error(`Field guide id/track mismatch: ${record.id}`);
+  if (!record.section || !record.name || !record.subtitle || !record.kind || !record.summary || !record.use_when || !record.boundary) throw new Error(`Incomplete field guide record: ${record.id}`);
+  if (!Array.isArray(record.node_ids) || record.node_ids.length === 0) throw new Error(`Field guide needs catalog links: ${record.id}`);
+  for (const nodeId of record.node_ids) {
+    if (!nodeIds.has(nodeId)) throw new Error(`Unknown catalog node ${nodeId} in field guide ${record.id}`);
+  }
+  if (!Array.isArray(record.source_ids) || record.source_ids.length === 0) throw new Error(`Field guide needs source links: ${record.id}`);
+  for (const sourceId of record.source_ids) {
+    if (!sourceIds.has(sourceId)) throw new Error(`Unknown source ${sourceId} in field guide ${record.id}`);
+  }
+  if (!Array.isArray(record.facts) || record.facts.length < 2 || record.facts.some((fact) => !fact.label || !fact.value)) throw new Error(`Field guide needs at least two facts: ${record.id}`);
+  if (!Array.isArray(record.tags) || record.tags.length < 2) throw new Error(`Field guide needs at least two tags: ${record.id}`);
+  for (const evidence of record.evidence_urls ?? []) {
+    if (!evidence.label || !evidence.url?.startsWith("https://")) throw new Error(`Invalid evidence link in field guide ${record.id}`);
+  }
+  guidesPerTrack[record.track] += 1;
+}
+for (const [track, count] of Object.entries(guidesPerTrack)) {
+  if (count < 8) throw new Error(`Field guide track is too thin: ${track} (${count})`);
+}
+
 if (frontierConfig.schema_version !== "0.1.0") throw new Error("Unexpected Frontier arXiv config schema version");
 if (frontierConfig.endpoint !== "https://export.arxiv.org/api/query") throw new Error("Unexpected arXiv endpoint");
 if (frontierConfig.fallback_feed !== "https://rss.arxiv.org/rss/cs.RO") throw new Error("Unexpected arXiv RSS fallback");
@@ -172,4 +216,4 @@ for (const paper of frontierPapers.papers) {
   if (!paperStatuses.has(paper.status)) throw new Error(`Invalid Frontier paper status: ${paper.id}`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 大模型、计算机视觉与自动驾驶向机器人的迁移地图。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>跨领域迁移地图 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/field.css">
+    <script src="/atlas/field.js" defer></script>
+  </head>
+  <body data-track="adjacent">
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>Adjacent</span></a>
+      <nav aria-label="跨领域迁移地图导航">
+        <a href="/atlas/">Atlas</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a><a href="/atlas/pipeline/?track=adjacent">管线</a>
+      </nav>
+    </header>
+    <main class="field-main">
+      <section class="field-intro">
+        <div><p class="eyebrow">Adjacent transfer map · hypotheses, not hype</p><h1>跨领域<br><em>迁移地图</em></h1><p>只保留能改变机器人问题、方法或评测的外部成果。每条记录都把“可借用能力”和“机器人上必须验证的问题”并列，避免把热门模型名称直接当作 Idea。</p></div>
+        <p class="field-principle"><strong>迁移原则</strong>先问是否闭环、是否满足时延、数据假设能否成立、错误是否累积，再设计一个低成本实验证伪。</p>
+      </section>
+      <section class="field-summary" aria-label="跨领域迁移地图概览">
+        <div><span>迁移入口</span><strong id="guide-total">—</strong></div><div><span>来源分区</span><strong id="guide-sections">—</strong></div><div><span>一手来源</span><strong id="guide-sources">—</strong></div><div><span>连接节点</span><strong id="guide-nodes">—</strong></div>
+      </section>
+      <section class="field-controls" aria-label="迁移入口筛选">
+        <label class="search-field"><span>搜索</span><input id="field-search" type="search" placeholder="例如：视频、3D、闭环、数据引擎" autocomplete="off"></label>
+        <div id="section-filter" class="section-filter" aria-label="按来源分区筛选"></div>
+        <div class="field-result-line"><strong id="field-count">加载中</strong><span>迁移假设不是已验证的机器人结论。</span></div>
+      </section>
+      <section id="field-grid" class="field-grid" aria-label="跨领域迁移条目"></section>
+      <div id="field-empty" class="catalog-empty" hidden><strong>没有匹配条目</strong><p>换一个关键词，或选择“全部”。</p></div>
+      <noscript>该页面需要 JavaScript 来加载机器可读领域地图。</noscript>
+      <aside class="field-note"><strong>证据分层</strong><p>当前条目是来源核验后的迁移假设。后续只有完成机器人任务上的实验或找到直接机器人证据，才会升级为 verified；纯类比不会写成事实。</p></aside>
+    </main>
+    <footer><p>RoboOpus Atlas · Adjacent</p><p><a href="/atlas/data/field-guides.json">机器可读领域地图</a> · <a href="/atlas/catalog/?track=adjacent">完整知识节点</a></p></footer>
+  </body>
+</html>

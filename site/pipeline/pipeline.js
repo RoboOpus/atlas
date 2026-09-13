@@ -1,5 +1,5 @@
 const trackLabels = { frontier: "Frontier", robotics: "Robotics", hardware: "Hardware", adjacent: "Adjacent", lab: "Lab" };
-const statusLabels = { active: "运行中", ready: "可执行", planned: "待排期", "awaiting-input": "等待材料" };
+const statusLabels = { active: "已启动", ready: "可执行", planned: "待排期", "awaiting-input": "等待材料" };
 const modeLabels = { automatic: "自动", assisted: "辅助", manual: "人工" };
 
 const grid = document.querySelector("#job-grid");

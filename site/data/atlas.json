@@ -17,40 +17,45 @@
     {
       "id": "frontier",
       "name": "Frontier",
-      "repository": "RoboOpus/frontier",
-      "site_url": "https://roboopus.github.io/frontier/",
-      "status": "seeded",
+      "repository": "RoboOpus/atlas",
+      "planned_repository": "RoboOpus/frontier",
+      "site_url": "https://roboopus.github.io/atlas/frontier/",
+      "status": "live",
       "scope": ["arXiv radar", "top venues", "interviews", "WeChat leads", "Xiaohongshu leads"]
     },
     {
       "id": "robotics",
       "name": "Robotics",
-      "repository": "RoboOpus/robotics",
-      "site_url": "https://roboopus.github.io/robotics/",
-      "status": "seeded",
+      "repository": "RoboOpus/atlas",
+      "planned_repository": "RoboOpus/robotics",
+      "site_url": "https://roboopus.github.io/atlas/robotics/",
+      "status": "live",
       "scope": ["perception", "state estimation", "planning", "control", "dynamics", "sim-to-real"]
     },
     {
       "id": "hardware",
       "name": "Hardware",
-      "repository": "RoboOpus/hardware",
-      "site_url": "https://roboopus.github.io/hardware/",
-      "status": "seeded",
+      "repository": "RoboOpus/atlas",
+      "planned_repository": "RoboOpus/hardware",
+      "site_url": "https://roboopus.github.io/atlas/hardware/",
+      "status": "live",
       "scope": ["robot platforms", "arms", "hands and grippers", "sensors", "compute", "open hardware"]
     },
     {
       "id": "adjacent",
       "name": "Adjacent",
-      "repository": "RoboOpus/adjacent",
-      "site_url": "https://roboopus.github.io/adjacent/",
-      "status": "seeded",
+      "repository": "RoboOpus/atlas",
+      "planned_repository": "RoboOpus/adjacent",
+      "site_url": "https://roboopus.github.io/atlas/adjacent/",
+      "status": "live",
       "scope": ["large models", "computer vision", "autonomous driving", "transfer to robotics"]
     },
     {
       "id": "lab",
       "name": "Lab",
-      "repository": "RoboOpus/lab",
-      "site_url": "https://roboopus.github.io/lab/",
+      "repository": "RoboOpus/atlas",
+      "planned_repository": "RoboOpus/lab",
+      "site_url": "https://roboopus.github.io/atlas/catalog/?track=lab",
       "status": "awaiting-source-material",
       "scope": ["public resume", "public projects", "public ideas", "website references"]
     }

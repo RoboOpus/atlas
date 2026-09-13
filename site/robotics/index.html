@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 机器人建模、感知、规划、控制与仿真基础地图。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>机器人算法栈 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/field.css">
+    <script src="/atlas/field.js" defer></script>
+  </head>
+  <body data-track="robotics">
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>Robotics</span></a>
+      <nav aria-label="机器人算法栈导航">
+        <a href="/atlas/">Atlas</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a><a href="/atlas/pipeline/?track=robotics">管线</a>
+      </nav>
+    </header>
+    <main class="field-main">
+      <section class="field-intro">
+        <div><p class="eyebrow">Robotics field guide · breadth first</p><h1>机器人<br><em>算法栈</em></h1><p>不是“算法名词清单”，而是从建模、估计、规划、控制到系统与仿真的职责地图。每个入口说明它解决什么、产出什么，以及不能替你解决什么。</p></div>
+        <p class="field-principle"><strong>阅读方式</strong>先按系统层级找到问题，再进入官方资料。课程负责建立坐标系，软件负责某一层能力，平台负责把多层连接起来。</p>
+      </section>
+      <section class="field-summary" aria-label="机器人算法栈概览">
+        <div><span>结构化入口</span><strong id="guide-total">—</strong></div><div><span>系统分区</span><strong id="guide-sections">—</strong></div><div><span>一手来源</span><strong id="guide-sources">—</strong></div><div><span>连接节点</span><strong id="guide-nodes">—</strong></div>
+      </section>
+      <section class="field-controls" aria-label="机器人算法入口筛选">
+        <label class="search-field"><span>搜索</span><input id="field-search" type="search" placeholder="例如：状态估计、OMPL、接触、仿真" autocomplete="off"></label>
+        <div id="section-filter" class="section-filter" aria-label="按系统分区筛选"></div>
+        <div class="field-result-line"><strong id="field-count">加载中</strong><span>条目是入口与边界，不是工具排名。</span></div>
+      </section>
+      <section id="field-grid" class="field-grid" aria-label="机器人算法栈条目"></section>
+      <div id="field-empty" class="catalog-empty" hidden><strong>没有匹配条目</strong><p>换一个关键词，或选择“全部”。</p></div>
+      <noscript>该页面需要 JavaScript 来加载机器可读领域地图。</noscript>
+      <aside class="field-note"><strong>建设规则</strong><p>规划和控制不会被泛化成“策略学习”的同义词。后续每个入口将继续补问题定义、输入输出、最小示例、版本与真实硬件接口。</p></aside>
+    </main>
+    <footer><p>RoboOpus Atlas · Robotics</p><p><a href="/atlas/data/field-guides.json">机器可读领域地图</a> · <a href="/atlas/catalog/?track=robotics">完整知识节点</a></p></footer>
+  </body>
+</html>

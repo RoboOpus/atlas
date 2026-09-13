@@ -90,9 +90,10 @@
       "target_node_ids": ["robotics-coordinate-frames", "robotics-kinematics", "robotics-dynamics", "robotics-mpc"],
       "access_mode": "assisted",
       "cadence": "一次建骨架，季度复核",
-      "status": "ready",
-      "output": "待建 curriculum map",
-      "next_action": "先登记章节到知识节点的映射，不复制教材正文。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Robotics / 学习主线",
+      "next_action": "把 Modern Robotics 与 Underactuated 的章节映射到现有知识节点，不复制教材正文。",
+      "detail_url": "/atlas/robotics/"
     },
     {
       "id": "robotics-planning-control-stack",
@@ -103,9 +104,10 @@
       "target_node_ids": ["robotics-sampling-planning", "robotics-tamp", "robotics-trajectory-optimization", "robotics-impedance"],
       "access_mode": "assisted",
       "cadence": "每月版本复核",
-      "status": "ready",
-      "output": "待建 tool compatibility matrix",
-      "next_action": "登记语言、许可证、ROS 版本、核心能力和最小示例。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Robotics / 建模、规划与系统",
+      "next_action": "补语言、许可证、ROS 发行版、版本号和可运行最小示例。",
+      "detail_url": "/atlas/robotics/"
     },
     {
       "id": "robotics-perception-estimation-stack",
@@ -116,9 +118,10 @@
       "target_node_ids": ["robotics-slam", "robotics-state-estimation", "robotics-pose-estimation", "robotics-calibration"],
       "access_mode": "assisted",
       "cadence": "每月版本复核",
-      "status": "ready",
-      "output": "待建 perception stack map",
-      "next_action": "先做问题定义、输入输出、假设和代码入口的统一字段。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Robotics / 感知与估计",
+      "next_action": "为 GTSAM 与 ORB-SLAM3 补最小数据流、传感器假设和复现版本。",
+      "detail_url": "/atlas/robotics/"
     },
     {
       "id": "robotics-simulation-benchmarks",
@@ -129,9 +132,10 @@
       "target_node_ids": ["robotics-sim-to-real", "robotics-contact-modeling"],
       "access_mode": "assisted",
       "cadence": "每月版本复核",
-      "status": "ready",
-      "output": "待建 simulation benchmark matrix",
-      "next_action": "先登记版本、物理引擎、任务数量、许可和评测单位。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Robotics / 仿真与评测",
+      "next_action": "补版本、物理引擎、观测/控制模式、任务协议与公平比较字段。",
+      "detail_url": "/atlas/robotics/"
     },
     {
       "id": "hardware-research-arms",
@@ -142,9 +146,10 @@
       "target_node_ids": ["hardware-research-arms"],
       "access_mode": "assisted",
       "cadence": "每月核验",
-      "status": "ready",
-      "output": "待建 arm comparison dataset",
-      "next_action": "从四家官方产品页抽取同口径规格，未知值保持为空。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Hardware / 研究型机械臂",
+      "next_action": "已完成四款首批规格；继续补控制接口、许可证、末端生态与采购配置。",
+      "detail_url": "/atlas/hardware/"
     },
     {
       "id": "hardware-sensor-catalog",
@@ -155,9 +160,10 @@
       "target_node_ids": ["hardware-rgbd-cameras", "hardware-lidar", "hardware-force-torque", "hardware-tactile-sensors"],
       "access_mode": "assisted",
       "cadence": "每月核验",
-      "status": "ready",
-      "output": "待建 sensor comparison dataset",
-      "next_action": "按传感原理拆表，避免把不可比的精度和量程放在同一列。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Hardware / 传感器",
+      "next_action": "按传感原理补具体型号；只在同原理、同工况下比较量程与精度。",
+      "detail_url": "/atlas/hardware/"
     },
     {
       "id": "hardware-open-platforms",
@@ -168,9 +174,10 @@
       "target_node_ids": ["hardware-low-cost-arms", "hardware-open-systems", "hardware-edge-compute"],
       "access_mode": "assisted",
       "cadence": "每月版本复核",
-      "status": "ready",
-      "output": "待建 open platform matrix",
-      "next_action": "把硬件、CAD、固件、软件和数据许可分别记录。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Hardware / 开源与低成本",
+      "next_action": "继续拆分硬件、CAD、固件、软件、数据与模型权重的许可。",
+      "detail_url": "/atlas/hardware/"
     },
     {
       "id": "hardware-price-snapshots",
@@ -183,7 +190,8 @@
       "cadence": "每月或采购前",
       "status": "planned",
       "output": "待建 timestamped price ledger",
-      "next_action": "先定义币种、地区、含税、套装和来源日期字段。"
+      "next_action": "字段规则已明确；下一步只收录满足币种、地区、含税、套装和来源日期的公开价格。",
+      "detail_url": "/atlas/hardware/"
     },
     {
       "id": "adjacent-autonomy-datasets",
@@ -194,9 +202,10 @@
       "target_node_ids": ["adjacent-driving-world-models", "adjacent-closed-loop-eval", "adjacent-data-engines"],
       "access_mode": "assisted",
       "cadence": "每月版本复核",
-      "status": "ready",
-      "output": "待建 autonomy-to-robotics map",
-      "next_action": "先映射数据模态、预测对象、闭环指标和机器人可迁移点。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Adjacent / 自动驾驶",
+      "next_action": "为每条迁移假设补直接机器人证据或最小可证伪实验。",
+      "detail_url": "/atlas/adjacent/"
     },
     {
       "id": "adjacent-foundation-models",
@@ -207,9 +216,10 @@
       "target_node_ids": ["adjacent-multimodal-models", "adjacent-3d4d", "adjacent-video-understanding", "adjacent-generative-models"],
       "access_mode": "assisted",
       "cadence": "每月版本复核",
-      "status": "ready",
-      "output": "待建 transfer hypothesis registry",
-      "next_action": "每个模型只登记能力、输入输出、许可与待验证机器人假设。"
+      "status": "active",
+      "output": "site/data/field-guides.json · Adjacent / 视觉与多模态",
+      "next_action": "补模型版本、输入输出、许可，并为每个假设记录机器人验证结果。",
+      "detail_url": "/atlas/adjacent/"
     },
     {
       "id": "lab-website-template-review",

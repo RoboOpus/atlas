@@ -36,7 +36,7 @@
 
       <section class="pipeline-summary" aria-label="管线概览">
         <div><span>全部任务</span><strong id="job-total">—</strong></div>
-        <div><span>运行中</span><strong id="job-active">—</strong></div>
+        <div><span>已启动</span><strong id="job-active">—</strong></div>
         <div><span>可执行</span><strong id="job-ready">—</strong></div>
         <div><span>覆盖节点</span><strong id="node-coverage">—</strong></div>
         <div><span>接入来源</span><strong id="source-coverage">—</strong></div>
@@ -63,7 +63,7 @@
           <span class="filter-label">状态</span>
           <div class="filter-row" aria-label="按状态筛选">
             <button type="button" data-status="all" class="active">全部</button>
-            <button type="button" data-status="active">运行中</button>
+            <button type="button" data-status="active">已启动</button>
             <button type="button" data-status="ready">可执行</button>
             <button type="button" data-status="planned">待排期</button>
             <button type="button" data-status="awaiting-input">等待材料</button>
@@ -71,7 +71,7 @@
         </div>
         <div class="result-line" aria-live="polite">
           <strong id="result-count">加载中</strong>
-          <span>Active 表示已有可运行流程；Ready 表示来源和字段已明确。</span>
+          <span>Active 表示已有可访问产物或可运行流程；Ready 表示来源和字段已明确。</span>
         </div>
       </section>
 
