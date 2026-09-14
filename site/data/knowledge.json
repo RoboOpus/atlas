@@ -1,7 +1,43 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-13",
+  "updated_at": "2026-09-14",
   "articles": [
+    {
+      "id": "robotics-impedance-force-control",
+      "slug": "impedance-force-control",
+      "track": "robotics",
+      "category": "模型控制",
+      "title": "机器人阻抗与力控制：从控制目标到接触实验",
+      "summary": "区分位置、直接力、混合力位、阻抗与导纳控制，给出坐标、信号、稳定性检查和最小接触实验框架。",
+      "difficulty": "进阶基础",
+      "editorial_state": "source-checked-draft",
+      "human_reviewed": false,
+      "updated_at": "2026-09-14",
+      "source_ids": [
+        "robotics-modern-robotics",
+        "robotics-libfranka-control-examples"
+      ],
+      "node_ids": [
+        "robotics-impedance",
+        "robotics-dynamics",
+        "hardware-force-torque"
+      ],
+      "prerequisites": [
+        "刚体动力学",
+        "Jacobian 与坐标变换",
+        "反馈控制"
+      ],
+      "takeaways": [
+        "阻抗控制规定力—运动关系，直接力控制规定期望接触力；两者不是同一个开关。",
+        "比较控制器前必须统一力/力矩坐标系、符号、滤波、控制频率和机器人内部控制模式。",
+        "先在低刚度、低速度、有限工作空间中验证自由空间和接触切换，再逐步提高性能。"
+      ],
+      "source_file": "content/knowledge/robotics-impedance-force-control.md",
+      "url": "/atlas/knowledge/impedance-force-control/",
+      "reading_minutes": 6,
+      "source_count": 2,
+      "node_count": 3
+    },
     {
       "id": "adjacent-transfer-evaluation",
       "slug": "cross-domain-transfer-evaluation",

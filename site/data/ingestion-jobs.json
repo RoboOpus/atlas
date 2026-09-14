@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-13",
+  "updated_at": "2026-09-14",
   "jobs": [
     {
       "id": "frontier-daily-arxiv",
@@ -25,9 +25,10 @@
       "target_node_ids": ["frontier-top-venues", "frontier-evidence-ledger"],
       "access_mode": "automatic",
       "cadence": "每周",
-      "status": "ready",
-      "output": "待建 venue registry",
-      "next_action": "先确定 CoRL、RSS、ICRA、IROS 与相关 ML/CV venue 的公开 invitation。"
+      "status": "active",
+      "output": "content/venue-registry.json · 7 个会议周期",
+      "next_action": "每周复核 OpenReview 公开开关；ICRA、IROS 继续走官网、程序和出版入口。",
+      "detail_url": "/atlas/frontier/venues/"
     },
     {
       "id": "frontier-publication-identity",
@@ -91,9 +92,9 @@
       "access_mode": "assisted",
       "cadence": "一次建骨架，季度复核",
       "status": "active",
-      "output": "知识正文：坐标系与 SE(3)",
-      "next_action": "已完成坐标系、运动学和动力学主线；下一步补数值练习与阻抗控制正文。",
-      "detail_url": "/atlas/knowledge/kinematics-jacobian/"
+      "output": "知识正文：坐标、运动学、动力学、阻抗与力控制",
+      "next_action": "已补控制目标、坐标约定和最小接触实验；下一步增加可运行数值练习与真机日志模板。",
+      "detail_url": "/atlas/knowledge/impedance-force-control/"
     },
     {
       "id": "robotics-planning-control-stack",
@@ -175,8 +176,8 @@
       "access_mode": "assisted",
       "cadence": "每月核验",
       "status": "active",
-      "output": "知识正文：夹爪与末端执行器选型",
-      "next_action": "补首批具体型号规格与询价快照，并建立三类标准物体的抓取验收记录。",
+      "output": "知识正文 + 2F-85、2F-140、RG2 首批型号规格",
+      "next_action": "补官方数据表、真实询价快照，并建立三类标准物体的抓取验收记录。",
       "detail_url": "/atlas/knowledge/end-effector-selection/"
     },
     {

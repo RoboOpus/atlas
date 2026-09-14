@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-13",
+  "updated_at": "2026-09-14",
   "name": "RoboOpus Atlas",
   "repository": "RoboOpus/atlas",
   "site_url": "https://roboopus.github.io/atlas/",
@@ -62,7 +62,7 @@
   ],
   "knowledge_lifecycle": ["inbox", "candidate", "verified", "reviewed", "canonical", "deprecated"],
   "source_modes": {
-    "automatic": ["arXiv API", "GitHub API", "RSS", "Sitemap"],
+    "automatic": ["arXiv API", "OpenReview API", "GitHub API", "RSS", "Sitemap"],
     "assisted": ["ordinary web pages", "JavaScript-rendered pages"],
     "single_url_only": ["WeChat public articles", "Xiaohongshu web posts"]
   },
@@ -70,9 +70,10 @@
     "source_directory": "content/knowledge",
     "index_url": "https://roboopus.github.io/atlas/knowledge/",
     "machine_index": "https://roboopus.github.io/atlas/data/knowledge.json",
-    "article_count": 15,
+    "article_count": 16,
     "structured_datasets": [
-      "https://roboopus.github.io/atlas/data/hardware-price-snapshots.json"
+      "https://roboopus.github.io/atlas/data/hardware-price-snapshots.json",
+      "https://roboopus.github.io/atlas/data/venue-registry.json"
     ],
     "default_editorial_state": "source-checked-draft",
     "human_review_required_for": "reviewed"

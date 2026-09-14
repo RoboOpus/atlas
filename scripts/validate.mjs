@@ -12,7 +12,10 @@ const fieldGuidesPath = path.join(repo, "site", "data", "field-guides.json");
 const knowledgePath = path.join(repo, "site", "data", "knowledge.json");
 const hardwarePriceSourcePath = path.join(repo, "content", "hardware-price-snapshots.json");
 const hardwarePricePublishedPath = path.join(repo, "site", "data", "hardware-price-snapshots.json");
+const venueRegistrySourcePath = path.join(repo, "content", "venue-registry.json");
+const venueRegistryPublishedPath = path.join(repo, "site", "data", "venue-registry.json");
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
+const venueConfigPath = path.join(repo, "config", "frontier-venues.json");
 const requiredFiles = [
   "site/index.html",
   "site/styles.css",
@@ -24,6 +27,7 @@ const requiredFiles = [
   "site/data/field-guides.json",
   "site/data/knowledge.json",
   "site/data/hardware-price-snapshots.json",
+  "site/data/venue-registry.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
@@ -36,6 +40,9 @@ const requiredFiles = [
   "site/frontier/index.html",
   "site/frontier/frontier.css",
   "site/frontier/frontier.js",
+  "site/frontier/venues/index.html",
+  "site/frontier/venues/venues.css",
+  "site/frontier/venues/venues.js",
   "site/field.css",
   "site/field.js",
   "site/robotics/index.html",
@@ -45,18 +52,23 @@ const requiredFiles = [
   "site/knowledge/knowledge.css",
   "site/knowledge/knowledge.js",
   "config/frontier-arxiv.json",
+  "config/frontier-venues.json",
   "scripts/fetch-frontier-arxiv.mjs",
+  "scripts/fetch-openreview-venues.mjs",
   "scripts/build-knowledge.mjs",
   "tests/fixtures/frontier-arxiv.atom.xml",
   "tests/fixtures/frontier-arxiv-listing.html",
   ".github/workflows/refresh-frontier-arxiv.yml",
+  ".github/workflows/refresh-openreview-venues.yml",
   "content/catalog-schema.md",
   "content/source-registry-schema.md",
   "content/ingestion-jobs-schema.md",
   "content/frontier-radar-schema.md",
+  "content/venue-registry-schema.md",
   "content/field-guides-schema.md",
   "content/knowledge-schema.md",
   "content/hardware-price-snapshots.json",
+  "content/venue-registry.json",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -74,7 +86,10 @@ const fieldGuides = JSON.parse(await readFile(fieldGuidesPath, "utf8"));
 const knowledge = JSON.parse(await readFile(knowledgePath, "utf8"));
 const hardwarePrices = JSON.parse(await readFile(hardwarePriceSourcePath, "utf8"));
 const publishedHardwarePrices = JSON.parse(await readFile(hardwarePricePublishedPath, "utf8"));
+const venueRegistry = JSON.parse(await readFile(venueRegistrySourcePath, "utf8"));
+const publishedVenueRegistry = JSON.parse(await readFile(venueRegistryPublishedPath, "utf8"));
 const frontierConfig = JSON.parse(await readFile(frontierConfigPath, "utf8"));
+const venueConfig = JSON.parse(await readFile(venueConfigPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
 
 if (atlas.repository !== "RoboOpus/atlas") throw new Error("Unexpected Atlas repository target");
@@ -158,6 +173,35 @@ for (const snapshot of hardwarePrices.snapshots) {
   if (snapshot.source_url !== source.url) throw new Error(`Hardware price URL does not match source registry: ${snapshot.id}`);
 }
 if (JSON.stringify(hardwarePrices) !== JSON.stringify(publishedHardwarePrices)) throw new Error("Published hardware price ledger is stale");
+
+const venueCaptureModes = new Set(["openreview-api-v2", "official-site"]);
+const venueIngestionStates = new Set(["ready-public-submissions", "metadata-only", "manual-proceedings"]);
+const venueFetchStates = new Set(["fresh", "stale", "manual-source"]);
+const venueRoutes = new Set(["wam", "robotics", "hardware", "adjacent"]);
+if (venueConfig.schema_version !== "0.1.0" || venueConfig.endpoint !== "https://api2.openreview.net/groups") throw new Error("Unexpected venue config");
+if (!Array.isArray(venueConfig.venues) || venueConfig.venues.length < 7) throw new Error("Venue config is too thin");
+if (venueRegistry.schema_version !== "0.1.0" || !Array.isArray(venueRegistry.venues)) throw new Error("Unexpected venue registry schema");
+if (Number.isNaN(new Date(venueRegistry.generated_at).getTime())) throw new Error("Venue registry generation time is invalid");
+if (venueRegistry.venues.length !== venueConfig.venues.length) throw new Error("Venue registry/config counts differ");
+if (JSON.stringify(venueRegistry) !== JSON.stringify(publishedVenueRegistry)) throw new Error("Published venue registry is stale");
+const configuredVenueIds = new Set(venueConfig.venues.map((venue) => venue.id));
+const venueIds = new Set();
+for (const venue of venueRegistry.venues) {
+  if (!venue.id || venueIds.has(venue.id) || !configuredVenueIds.has(venue.id)) throw new Error(`Missing, duplicate, or unconfigured venue: ${venue.id}`);
+  venueIds.add(venue.id);
+  if (!venue.family || !Number.isInteger(venue.cycle) || !venue.domain || !venue.title) throw new Error(`Incomplete venue identity: ${venue.id}`);
+  if (!venueCaptureModes.has(venue.capture_mode) || !venueIngestionStates.has(venue.paper_ingestion) || !venueFetchStates.has(venue.fetch_state)) throw new Error(`Invalid venue state: ${venue.id}`);
+  if (!Array.isArray(venue.relevance_routes) || venue.relevance_routes.length === 0 || venue.relevance_routes.some((route) => !venueRoutes.has(route))) throw new Error(`Invalid venue routes: ${venue.id}`);
+  if (!sourceIds.has(venue.source_id)) throw new Error(`Unknown venue source: ${venue.id}`);
+  if (!venue.venue_url?.startsWith("https://") || !venue.location || !venue.start_date || !venue.date_text || !venue.collection_note) throw new Error(`Incomplete venue metadata: ${venue.id}`);
+  if (Number.isNaN(new Date(venue.checked_at).getTime())) throw new Error(`Invalid venue check time: ${venue.id}`);
+  if (venue.capture_mode === "openreview-api-v2") {
+    if (!venue.group_id || !venue.group_url?.startsWith("https://openreview.net/group") || typeof venue.submissions_public !== "boolean") throw new Error(`Incomplete OpenReview venue: ${venue.id}`);
+    if (venue.paper_ingestion === "manual-proceedings" || venue.fetch_state === "manual-source") throw new Error(`OpenReview venue has manual-only state: ${venue.id}`);
+  } else if (venue.group_id !== null || venue.group_url !== null || venue.submissions_public !== null || venue.paper_ingestion !== "manual-proceedings") {
+    throw new Error(`Official-site venue incorrectly claims OpenReview access: ${venue.id}`);
+  }
+}
 
 const jobStatuses = new Set(["active", "ready", "planned", "awaiting-input"]);
 if (jobs.schema_version !== "0.1.0") throw new Error("Unexpected ingestion job schema version");
@@ -294,4 +338,4 @@ for (const paper of frontierPapers.papers) {
   if (!paperStatuses.has(paper.status)) throw new Error(`Invalid Frontier paper status: ${paper.id}`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${venueRegistry.venues.length} venue records, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);

@@ -20,9 +20,16 @@
     <section class="knowledge-controls" aria-label="知识正文筛选">
       <label class="search-field"><span>搜索正文</span><input id="knowledge-search" type="search" placeholder="例如：SE(3)、状态估计、机械臂、迁移" autocomplete="off"></label>
       <div class="filter-row" aria-label="按板块筛选"><button type="button" data-track="all" class="active">全部</button><button type="button" data-track="robotics">Robotics</button><button type="button" data-track="hardware">Hardware</button><button type="button" data-track="adjacent">Adjacent</button></div>
-      <div class="result-line"><strong id="knowledge-count">15 / 15 篇正文</strong><span>来源已核对不等于人工终审。</span></div>
+      <div class="result-line"><strong id="knowledge-count">16 / 16 篇正文</strong><span>来源已核对不等于人工终审。</span></div>
     </section>
-    <section id="knowledge-grid" class="knowledge-grid" aria-label="知识正文列表"><article class="knowledge-card" data-track="adjacent" data-search="从热门模型到机器人 idea：跨领域迁移的证伪框架 用能力、接口、闭环、时延、数据假设和失败代价审查 sam 2、dinov2、vggt 与 carla 等外部成果，避免把模型名直接当研究问题。 研究方法 adjacent 先抽取可迁移能力，不从模型名称出发。 离线指标提升不能自动推出闭环任务收益。 每个 idea 必须附带一个低成本、可失败的最小实验。">
+    <section id="knowledge-grid" class="knowledge-grid" aria-label="知识正文列表"><article class="knowledge-card" data-track="robotics" data-search="机器人阻抗与力控制：从控制目标到接触实验 区分位置、直接力、混合力位、阻抗与导纳控制，给出坐标、信号、稳定性检查和最小接触实验框架。 模型控制 robotics 阻抗控制规定力—运动关系，直接力控制规定期望接触力；两者不是同一个开关。 比较控制器前必须统一力/力矩坐标系、符号、滤波、控制频率和机器人内部控制模式。 先在低刚度、低速度、有限工作空间中验证自由空间和接触切换，再逐步提高性能。">
+    <div class="knowledge-card-top"><span>Robotics · 模型控制</span><span>进阶基础</span></div>
+    <h2><a href="/atlas/knowledge/impedance-force-control/">机器人阻抗与力控制：从控制目标到接触实验</a></h2>
+    <p>区分位置、直接力、混合力位、阻抗与导纳控制，给出坐标、信号、稳定性检查和最小接触实验框架。</p>
+    <div class="knowledge-card-facts"><span>2 个一手来源</span><span>3 个知识节点</span><span>6 分钟</span></div>
+    <a class="knowledge-open" href="/atlas/knowledge/impedance-force-control/">阅读正文 →</a>
+  </article>
+<article class="knowledge-card" data-track="adjacent" data-search="从热门模型到机器人 idea：跨领域迁移的证伪框架 用能力、接口、闭环、时延、数据假设和失败代价审查 sam 2、dinov2、vggt 与 carla 等外部成果，避免把模型名直接当研究问题。 研究方法 adjacent 先抽取可迁移能力，不从模型名称出发。 离线指标提升不能自动推出闭环任务收益。 每个 idea 必须附带一个低成本、可失败的最小实验。">
     <div class="knowledge-card-top"><span>Adjacent · 研究方法</span><span>研究设计</span></div>
     <h2><a href="/atlas/knowledge/cross-domain-transfer-evaluation/">从热门模型到机器人 Idea：跨领域迁移的证伪框架</a></h2>
     <p>用能力、接口、闭环、时延、数据假设和失败代价审查 SAM 2、DINOv2、VGGT 与 CARLA 等外部成果，避免把模型名直接当研究问题。</p>

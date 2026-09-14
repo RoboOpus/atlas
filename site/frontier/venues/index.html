@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 重点机器人与机器学习会议采集状态表。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>顶会状态表 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/frontier/venues/venues.css">
+    <script src="/atlas/frontier/venues/venues.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>RoboOpus Atlas</span></a>
+      <nav aria-label="顶会状态导航">
+        <a href="/atlas/frontier/">arXiv 雷达</a>
+        <a href="/atlas/frontier/venues/">顶会状态</a>
+        <a href="/atlas/pipeline/">采集管线</a>
+        <a href="/atlas/sources/?track=frontier">来源</a>
+      </nav>
+    </header>
+
+    <main class="catalog-main">
+      <section class="venue-intro">
+        <div>
+          <p class="eyebrow">Venue registry · access before ranking</p>
+          <h1>顶会<br><em>状态表</em></h1>
+        </div>
+        <div class="venue-policy">
+          <strong>会议入口不是会议排名</strong>
+          <p>先回答主会用什么系统、当前公开到哪一步、能否自动收集论文。OpenReview Group 可访问，不代表投稿、评审或决定已经公开。</p>
+        </div>
+      </section>
+
+      <section class="venue-status" aria-label="会议注册表状态">
+        <div><span>会议周期</span><strong id="venue-total">—</strong></div>
+        <div><span>OpenReview 新鲜</span><strong id="fresh-total">—</strong></div>
+        <div><span>当前可抓论文</span><strong id="ready-total">—</strong></div>
+        <div><span>最近核验</span><strong id="venue-updated">加载中</strong></div>
+      </section>
+
+      <section class="catalog-controls" aria-label="会议筛选">
+        <label class="search-field"><span>搜索会议</span><input id="venue-search" type="search" placeholder="CoRL、RSS、robotics、WAM…" autocomplete="off"></label>
+        <div class="filter-group">
+          <span class="filter-label">领域</span>
+          <div class="filter-row" aria-label="按领域筛选">
+            <button type="button" data-domain="all" class="active">全部</button>
+            <button type="button" data-domain="robotics">Robotics</button>
+            <button type="button" data-domain="machine-learning">Machine Learning</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">采集</span>
+          <div class="filter-row" aria-label="按采集方式筛选">
+            <button type="button" data-mode="all" class="active">全部</button>
+            <button type="button" data-mode="openreview-api-v2">OpenReview API v2</button>
+            <button type="button" data-mode="official-site">官网 / 出版入口</button>
+          </div>
+        </div>
+        <div class="result-line" aria-live="polite"><strong id="venue-count">加载中</strong><span>公开性按周期核验，不能从会议名称或往年状态推断。</span></div>
+      </section>
+
+      <section id="venue-grid" class="venue-grid" aria-label="会议状态列表"></section>
+      <div id="venue-empty" class="catalog-empty" hidden><strong>没有匹配会议</strong><p>换一个关键词或切回“全部”。</p></div>
+      <noscript>该页面需要 JavaScript 来加载机器可读会议状态。</noscript>
+    </main>
+
+    <footer>
+      <p>RoboOpus Atlas · 自动化只更新元数据</p>
+      <p><a href="/atlas/data/venue-registry.json">机器可读会议注册表</a> · <a href="https://docs.openreview.net/reference/api-v2/entities/group">OpenReview Group API ↗</a></p>
+    </footer>
+  </body>
+</html>

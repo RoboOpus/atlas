@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.1.0",
+  "endpoint": "https://api2.openreview.net/groups",
+  "schedule": "每周一 08:45（Asia/Shanghai）",
+  "venues": [
+    {
+      "id": "corl-2026",
+      "family": "CoRL",
+      "cycle": 2026,
+      "domain": "robotics",
+      "relevance_routes": ["wam", "robotics"],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "robot-learning.org/CoRL/2026/Conference"
+    },
+    {
+      "id": "rss-2026",
+      "family": "RSS",
+      "cycle": 2026,
+      "domain": "robotics",
+      "relevance_routes": ["wam", "robotics", "hardware"],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "roboticsfoundation.org/RSS/2026/Conference"
+    },
+    {
+      "id": "neurips-2026",
+      "family": "NeurIPS",
+      "cycle": 2026,
+      "domain": "machine-learning",
+      "relevance_routes": ["wam", "adjacent"],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "NeurIPS.cc/2026/Conference"
+    },
+    {
+      "id": "icml-2026",
+      "family": "ICML",
+      "cycle": 2026,
+      "domain": "machine-learning",
+      "relevance_routes": ["wam", "adjacent"],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "ICML.cc/2026/Conference"
+    },
+    {
+      "id": "iclr-2027",
+      "family": "ICLR",
+      "cycle": 2027,
+      "domain": "machine-learning",
+      "relevance_routes": ["wam", "adjacent"],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "ICLR.cc/2027/Conference"
+    },
+    {
+      "id": "icra-2026",
+      "family": "ICRA",
+      "cycle": 2026,
+      "domain": "robotics",
+      "relevance_routes": ["robotics", "hardware"],
+      "source_id": "frontier-icra-official",
+      "capture_mode": "official-site",
+      "title": "2026 IEEE International Conference on Robotics and Automation",
+      "venue_url": "https://2026.ieee-icra.org/",
+      "location": "Vienna, Austria",
+      "start_date": "Jun 01 2026",
+      "date_text": "Conference: Jun 01–05 2026; main paper submission closed",
+      "collection_note": "主会论文不从 OpenReview 抓取；按官网、会议程序与 IEEE Xplore 追踪。"
+    },
+    {
+      "id": "iros-2026",
+      "family": "IROS",
+      "cycle": 2026,
+      "domain": "robotics",
+      "relevance_routes": ["robotics", "hardware"],
+      "source_id": "frontier-iros-official",
+      "capture_mode": "official-site",
+      "title": "2026 IEEE/RSJ International Conference on Intelligent Robots and Systems",
+      "venue_url": "https://2026.ieee-iros.org/",
+      "location": "Pittsburgh, PA, USA",
+      "start_date": "Sep 27 2026",
+      "date_text": "Conference: Sep 27–Oct 02 2026; submission deadline needs official-page recheck",
+      "collection_note": "主会论文不从 OpenReview 抓取；按官网、会议程序与出版入口追踪。"
+    }
+  ]
+}

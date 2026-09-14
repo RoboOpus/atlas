@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-13",
+  "updated_at": "2026-09-14",
   "scope": "Breadth-first field guides for the Robotics, Hardware, and Adjacent tracks",
   "policy": {
     "ranking": "No item is ranked by popularity or vendor claims.",
@@ -483,6 +483,81 @@
         {"label": "核验重点", "value": "机型、BOM、固件、提交记录"}
       ],
       "tags": ["低成本", "数据采集", "开源生态"]
+    },
+    {
+      "id": "hardware-robotiq-2f85",
+      "track": "hardware",
+      "section": "夹爪与末端",
+      "name": "Robotiq 2F-85",
+      "subtitle": "85 mm 行程的自适应两指电动夹爪",
+      "kind": "协作机器人夹爪",
+      "summary": "首批结构化末端规格样本，覆盖开口、夹持力、速度、自重、反馈和环境边界，适合作为中小物体抓取候选。",
+      "use_when": "对象尺寸落在 85 mm 行程内，需要位置、速度、力与物体检测控制，并希望使用成熟协作机器人生态。",
+      "boundary": "5 kg 是厂商载荷声明，不等于任意姿态、加速度和指尖下都安全；转接板、指尖、质心和动态载荷必须重算。公开页未给出统一地区标价，价格保持 unknown。",
+      "node_ids": ["hardware-grippers"],
+      "source_ids": ["hardware-robotiq-grippers"],
+      "facts": [
+        {"label": "行程", "value": "85 mm"},
+        {"label": "夹持力", "value": "20–235 N"},
+        {"label": "闭合速度", "value": "20–150 mm/s"},
+        {"label": "重复性", "value": "0.05 mm"},
+        {"label": "夹爪自重", "value": "1 kg"},
+        {"label": "厂商载荷", "value": "5 kg"},
+        {"label": "供电", "value": "24 V, 2 A"},
+        {"label": "防护 / 温度", "value": "IP40 / -10–50 °C"},
+        {"label": "公开价格", "value": "unknown（需地区询价）"}
+      ],
+      "evidence_urls": [{"label": "官方规格页", "url": "https://robotiq.com/products/adaptive-grippers"}],
+      "tags": ["两指夹爪", "自适应", "85 mm", "力反馈"]
+    },
+    {
+      "id": "hardware-robotiq-2f140",
+      "track": "hardware",
+      "section": "夹爪与末端",
+      "name": "Robotiq 2F-140",
+      "subtitle": "140 mm 大行程的自适应两指电动夹爪",
+      "kind": "协作机器人夹爪",
+      "summary": "以更大开口覆盖较宽物体，代价是较低的厂商载荷与夹持力区间；适合与 2F-85 按同口径比较。",
+      "use_when": "对象宽度超过 85 mm，或需要包络更大、形状变化更明显的物体。",
+      "boundary": "大行程不代表适合更重物体；指尖几何、摩擦、偏心负载和闭合方向决定真实抓持裕度。公开页未给出统一地区标价。",
+      "node_ids": ["hardware-grippers"],
+      "source_ids": ["hardware-robotiq-grippers"],
+      "facts": [
+        {"label": "行程", "value": "140 mm"},
+        {"label": "夹持力", "value": "10–125 N"},
+        {"label": "闭合速度", "value": "30–250 mm/s"},
+        {"label": "重复性", "value": "0.08 mm"},
+        {"label": "夹爪自重", "value": "1 kg"},
+        {"label": "厂商载荷", "value": "2.5 kg"},
+        {"label": "供电", "value": "24 V, 2 A"},
+        {"label": "防护 / 温度", "value": "IP40 / -10–50 °C"},
+        {"label": "公开价格", "value": "unknown（需地区询价）"}
+      ],
+      "evidence_urls": [{"label": "官方规格页", "url": "https://robotiq.com/products/adaptive-grippers"}],
+      "tags": ["两指夹爪", "自适应", "140 mm", "大行程"]
+    },
+    {
+      "id": "hardware-onrobot-rg2-model",
+      "track": "hardware",
+      "section": "夹爪与末端",
+      "name": "OnRobot RG2",
+      "subtitle": "带宽度与抓取状态反馈的两指电动夹爪",
+      "kind": "协作机器人夹爪",
+      "summary": "官方页明确给出 110 mm 可调行程、抓取检测、宽度测量、指尖定制以及 TCP 与负载计算功能。",
+      "use_when": "需要中等行程、可编程状态反馈，并希望减少 TCP、负载和深度补偿的集成工作。",
+      "boundary": "当前官方页面文本未稳定暴露统一的夹持力、载荷、自重和公开地区价格，本表不从经销商或搜索摘要补值。",
+      "node_ids": ["hardware-grippers"],
+      "source_ids": ["hardware-onrobot-rg2"],
+      "facts": [
+        {"label": "可调行程", "value": "最大 110 mm"},
+        {"label": "状态反馈", "value": "抓取检测 / 失去抓取 / 连续抓取 / 宽度测量"},
+        {"label": "集成功能", "value": "TCP、负载计算与深度补偿"},
+        {"label": "指尖", "value": "支持定制"},
+        {"label": "夹持力 / 载荷", "value": "unknown（待官方数据表核验）"},
+        {"label": "公开价格", "value": "unknown（需地区询价）"}
+      ],
+      "evidence_urls": [{"label": "官方产品页", "url": "https://onrobot.com/en/products/rg2-finger-gripper"}],
+      "tags": ["两指夹爪", "110 mm", "宽度反馈", "TCP"]
     },
 
     {

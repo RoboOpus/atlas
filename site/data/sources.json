@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "verified_at": "2026-09-13",
+  "verified_at": "2026-09-14",
   "scope": "RoboOpus Atlas non-WAM trusted source registry",
   "sources": [
     {
@@ -41,6 +41,32 @@
       "best_for": "追踪公开投稿、评审、讨论与最终决定，补充论文社区语境。",
       "reuse_note": "公开字段和历史会议 API 版本不同，按 venue 核验可见性。",
       "tags": ["同行评审", "讨论", "会议"]
+    },
+    {
+      "id": "frontier-icra-official",
+      "track": "frontier",
+      "name": "IEEE ICRA Official Site",
+      "owner": "IEEE Robotics and Automation Society",
+      "kind": "platform",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://2026.ieee-icra.org/",
+      "best_for": "核验 ICRA 会议日期、投稿状态、正式程序和 IEEE Xplore 出版入口。",
+      "reuse_note": "主会不按 OpenReview 公开投稿流处理；论文身份需结合程序和出版页核验。",
+      "tags": ["ICRA", "机器人会议", "IEEE"]
+    },
+    {
+      "id": "frontier-iros-official",
+      "track": "frontier",
+      "name": "IEEE/RSJ IROS Official Site",
+      "owner": "IEEE / RSJ",
+      "kind": "platform",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://2026.ieee-iros.org/",
+      "best_for": "核验 IROS 会议周期、正式程序和出版入口。",
+      "reuse_note": "主会不按 OpenReview 公开投稿流处理；官网字段变化时保留核验日期。",
+      "tags": ["IROS", "机器人会议", "IEEE"]
     },
     {
       "id": "frontier-crossref-rest",
@@ -133,6 +159,19 @@
       "best_for": "机器人运动学、动力学、规划和控制的系统化课程主线。",
       "reuse_note": "以章节索引和原创笔记回链；教材与视频按原许可使用。",
       "tags": ["运动学", "动力学", "教材"]
+    },
+    {
+      "id": "robotics-libfranka-control-examples",
+      "track": "robotics",
+      "name": "libfranka Control Examples",
+      "owner": "Franka Robotics",
+      "kind": "documentation",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://frankarobotics.github.io/libfranka/0.18.2/cartesian_impedance_control_8cpp-example.html",
+      "best_for": "核对笛卡尔阻抗控制器的刚度、阻尼、动力学补偿与真实机器人安全提示。",
+      "reuse_note": "示例参数不能直接移植到其他机械臂或末端；部署前按机器人限制重新验证。",
+      "tags": ["阻抗控制", "libfranka", "实时控制"]
     },
     {
       "id": "robotics-underactuated",

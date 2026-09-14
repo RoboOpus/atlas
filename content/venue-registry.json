@@ -1,0 +1,185 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-14T03:36:53.677Z",
+  "source": {
+    "endpoint": "https://api2.openreview.net/groups",
+    "schedule": "每周一 08:45（Asia/Shanghai）",
+    "documentation": "https://docs.openreview.net/reference/api-v2/entities/group"
+  },
+  "policy": {
+    "purpose": "Venue access and visibility tracking, not venue ranking.",
+    "public_gate": "A reachable venue Group does not imply public submissions.",
+    "review_gate": "Automation may update metadata only; acceptance and quality claims require source review."
+  },
+  "venues": [
+    {
+      "id": "iclr-2027",
+      "family": "ICLR",
+      "cycle": 2027,
+      "domain": "machine-learning",
+      "relevance_routes": [
+        "wam",
+        "adjacent"
+      ],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "ICLR.cc/2027/Conference",
+      "title": "The Fifteenth International Conference on Learning Representations",
+      "venue_url": "https://iclr.cc/Conferences/2027",
+      "group_url": "https://openreview.net/group?id=ICLR.cc%2F2027%2FConference",
+      "location": "San Francisco, CA, USA",
+      "start_date": "2027-04-26",
+      "date_text": "unknown",
+      "submissions_public": false,
+      "paper_ingestion": "metadata-only",
+      "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
+      "fetch_state": "fresh",
+      "checked_at": "2026-09-14T03:36:53.677Z"
+    },
+    {
+      "id": "icml-2026",
+      "family": "ICML",
+      "cycle": 2026,
+      "domain": "machine-learning",
+      "relevance_routes": [
+        "wam",
+        "adjacent"
+      ],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "ICML.cc/2026/Conference",
+      "title": "Forty-third International Conference on Machine Learning",
+      "venue_url": "https://icml.cc",
+      "group_url": "https://openreview.net/group?id=ICML.cc%2F2026%2FConference",
+      "location": "Seoul, South Korea",
+      "start_date": "Jul 06 2026",
+      "date_text": "Submission Start: Jan 08 2026 12:00AM UTC-0, Abstract Registration: Jan 24 2026 11:59AM UTC-0, Submission Deadline: Jan 29 2026 11:59AM UTC-0",
+      "submissions_public": false,
+      "paper_ingestion": "metadata-only",
+      "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
+      "fetch_state": "fresh",
+      "checked_at": "2026-09-14T03:36:53.677Z"
+    },
+    {
+      "id": "neurips-2026",
+      "family": "NeurIPS",
+      "cycle": 2026,
+      "domain": "machine-learning",
+      "relevance_routes": [
+        "wam",
+        "adjacent"
+      ],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "NeurIPS.cc/2026/Conference",
+      "title": "The Fortieth Annual Conference on Neural Information Processing Systems",
+      "venue_url": "https://neurips.cc/",
+      "group_url": "https://openreview.net/group?id=NeurIPS.cc%2F2026%2FConference",
+      "location": "Sydney, Australia",
+      "start_date": "Dec 06 2026",
+      "date_text": "Submission Start: Apr 15 2026 12:00PM UTC-0, Abstract Registration: May 05 2026 11:59AM UTC-0, Submission Deadline: May 07 2026 11:59AM UTC-0",
+      "submissions_public": false,
+      "paper_ingestion": "metadata-only",
+      "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
+      "fetch_state": "fresh",
+      "checked_at": "2026-09-14T03:36:53.677Z"
+    },
+    {
+      "id": "corl-2026",
+      "family": "CoRL",
+      "cycle": 2026,
+      "domain": "robotics",
+      "relevance_routes": [
+        "wam",
+        "robotics"
+      ],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "robot-learning.org/CoRL/2026/Conference",
+      "title": "10th Annual Conference on Robot Learning",
+      "venue_url": "https://www.corl.org/",
+      "group_url": "https://openreview.net/group?id=robot-learning.org%2FCoRL%2F2026%2FConference",
+      "location": "Austin, USA",
+      "start_date": "Nov 09 2026",
+      "date_text": "Submission Start: May 08 2026 12:00AM UTC-0, Abstract Registration: May 26 2026 11:59AM UTC-0, Submission Deadline: May 29 2026 11:59AM UTC-0",
+      "submissions_public": false,
+      "paper_ingestion": "metadata-only",
+      "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
+      "fetch_state": "fresh",
+      "checked_at": "2026-09-14T03:36:53.677Z"
+    },
+    {
+      "id": "icra-2026",
+      "family": "ICRA",
+      "cycle": 2026,
+      "domain": "robotics",
+      "relevance_routes": [
+        "robotics",
+        "hardware"
+      ],
+      "source_id": "frontier-icra-official",
+      "capture_mode": "official-site",
+      "title": "2026 IEEE International Conference on Robotics and Automation",
+      "venue_url": "https://2026.ieee-icra.org/",
+      "location": "Vienna, Austria",
+      "start_date": "Jun 01 2026",
+      "date_text": "Conference: Jun 01–05 2026; main paper submission closed",
+      "collection_note": "主会论文不从 OpenReview 抓取；按官网、会议程序与 IEEE Xplore 追踪。",
+      "group_id": null,
+      "group_url": null,
+      "submissions_public": null,
+      "paper_ingestion": "manual-proceedings",
+      "fetch_state": "manual-source",
+      "checked_at": "2026-09-14T03:36:53.677Z"
+    },
+    {
+      "id": "iros-2026",
+      "family": "IROS",
+      "cycle": 2026,
+      "domain": "robotics",
+      "relevance_routes": [
+        "robotics",
+        "hardware"
+      ],
+      "source_id": "frontier-iros-official",
+      "capture_mode": "official-site",
+      "title": "2026 IEEE/RSJ International Conference on Intelligent Robots and Systems",
+      "venue_url": "https://2026.ieee-iros.org/",
+      "location": "Pittsburgh, PA, USA",
+      "start_date": "Sep 27 2026",
+      "date_text": "Conference: Sep 27–Oct 02 2026; submission deadline needs official-page recheck",
+      "collection_note": "主会论文不从 OpenReview 抓取；按官网、会议程序与出版入口追踪。",
+      "group_id": null,
+      "group_url": null,
+      "submissions_public": null,
+      "paper_ingestion": "manual-proceedings",
+      "fetch_state": "manual-source",
+      "checked_at": "2026-09-14T03:36:53.677Z"
+    },
+    {
+      "id": "rss-2026",
+      "family": "RSS",
+      "cycle": 2026,
+      "domain": "robotics",
+      "relevance_routes": [
+        "wam",
+        "robotics",
+        "hardware"
+      ],
+      "source_id": "frontier-openreview-api",
+      "capture_mode": "openreview-api-v2",
+      "group_id": "roboticsfoundation.org/RSS/2026/Conference",
+      "title": "Robotics: Science and Systems 2026",
+      "venue_url": "https://roboticsconference.org/",
+      "group_url": "https://openreview.net/group?id=roboticsfoundation.org%2FRSS%2F2026%2FConference",
+      "location": "Sydney, Australia",
+      "start_date": "Jul 13 2026",
+      "date_text": "Submission Start: Dec 24 2025 11:59AM UTC-0, Abstract Registration: Jan 24 2026 11:59AM UTC-0, Submission Deadline: Jan 31 2026 11:59AM UTC-0",
+      "submissions_public": false,
+      "paper_ingestion": "metadata-only",
+      "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
+      "fetch_state": "fresh",
+      "checked_at": "2026-09-14T03:36:53.677Z"
+    }
+  ]
+}
