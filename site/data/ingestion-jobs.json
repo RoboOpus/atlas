@@ -35,13 +35,14 @@
       "track": "frontier",
       "title": "论文身份与版本归一",
       "summary": "用 DOI、作者、出版信息和引用关系把预印本、会议版与期刊版合并为同一成果。",
-      "source_ids": ["frontier-crossref-rest", "frontier-openalex-api", "frontier-semantic-scholar-api"],
+      "source_ids": ["frontier-arxiv-api", "frontier-crossref-rest", "frontier-openalex-api", "frontier-semantic-scholar-api", "frontier-github-rest-search"],
       "target_node_ids": ["frontier-top-venues", "frontier-evidence-ledger"],
       "access_mode": "automatic",
       "cadence": "每周",
-      "status": "planned",
-      "output": "待建 work identity graph",
-      "next_action": "定义 arXiv ID、DOI、OpenReview forum 与仓库 URL 的去重键。"
+      "status": "ready",
+      "output": "content/work-identities.json · 4 个首批成果身份",
+      "next_action": "接入 Crossref、OpenAlex 和 OpenReview 候选匹配；自动合并仍需一手互链或人工确认。",
+      "detail_url": "/atlas/frontier/works/"
     },
     {
       "id": "frontier-github-releases",
@@ -87,13 +88,13 @@
       "track": "robotics",
       "title": "机器人基础课程主线",
       "summary": "以公开课程和教材建立坐标、运动学、动力学、规划、控制的学习顺序。",
-      "source_ids": ["robotics-modern-robotics", "robotics-underactuated"],
-      "target_node_ids": ["robotics-coordinate-frames", "robotics-kinematics", "robotics-dynamics", "robotics-mpc"],
+      "source_ids": ["robotics-modern-robotics", "robotics-underactuated", "robotics-ros2-control", "robotics-tsid"],
+      "target_node_ids": ["robotics-coordinate-frames", "robotics-kinematics", "robotics-dynamics", "robotics-classical-feedback", "robotics-optimal-control", "robotics-mpc", "robotics-impedance", "robotics-whole-body-control"],
       "access_mode": "assisted",
       "cadence": "一次建骨架，季度复核",
       "status": "active",
-      "output": "知识正文：坐标、运动学、动力学、阻抗与力控制",
-      "next_action": "已补控制目标、坐标约定和最小接触实验；下一步增加可运行数值练习与真机日志模板。",
+      "output": "知识正文 + PD、LQR、iLQR、MPC、导纳与全身控制对照条目",
+      "next_action": "用同一动力系统建立 LQR、iLQR 与 MPC 数值对照，并增加真机控制周期与降级日志模板。",
       "detail_url": "/atlas/knowledge/impedance-force-control/"
     },
     {
@@ -163,7 +164,7 @@
       "cadence": "每月核验",
       "status": "active",
       "output": "知识正文：机器人传感器选型",
-      "next_action": "按传感原理补具体型号，并增加时间同步与外参验收模板。",
+      "next_action": "已补 D455、Mini45 SI-145-5 与 GelSight Mini；下一步增加同步、外参和接触耐久验收记录。",
       "detail_url": "/atlas/knowledge/robot-sensor-selection/"
     },
     {

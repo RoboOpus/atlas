@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-12",
+  "updated_at": "2026-09-14",
   "description": "Breadth-first seed nodes for RoboOpus Atlas tracks other than WAM.",
   "nodes": [
     {"id":"frontier-arxiv-radar","track":"frontier","section":"论文雷达","title":"arXiv 每日雷达","title_en":"Daily arXiv Radar","summary":"按主题、时间和证据完整度发现具身智能新论文，并与 WAM 专题去重。","priority":"P0","tags":["arXiv","论文发现","具身智能"],"next_step":"固化查询式、去重键和候选卡字段。"},
@@ -28,8 +28,12 @@
     {"id":"robotics-sampling-planning","track":"robotics","section":"规划","title":"采样式运动规划","title_en":"Sampling-based Motion Planning","summary":"整理 PRM、RRT 系列、约束采样与概率完备性。","priority":"P0","tags":["RRT","PRM","运动规划"],"next_step":"建立算法性质和适用空间对照表。"},
     {"id":"robotics-trajectory-optimization","track":"robotics","section":"规划","title":"轨迹优化","title_en":"Trajectory Optimization","summary":"覆盖直接配点、序列凸化、梯度法与约束处理。","priority":"P0","tags":["TrajOpt","优化","约束"],"next_step":"梳理目标函数、约束和求解器接口。"},
     {"id":"robotics-tamp","track":"robotics","section":"规划","title":"任务与运动规划","title_en":"Task and Motion Planning","summary":"连接符号任务、连续运动、接触选择和长时程操作。","priority":"P0","tags":["TAMP","符号规划","长时程"],"next_step":"建立离散—连续接口分类。"},
+    {"id":"robotics-classical-feedback","track":"robotics","section":"控制","title":"经典反馈与计算力矩","title_en":"Classical Feedback and Computed Torque","summary":"从 PD/PID、重力补偿到计算力矩，建立低层关节反馈的适用边界与调参基线。","priority":"P0","tags":["PID","PD","计算力矩"],"next_step":"为单关节与机械臂轨迹跟踪建立统一误差日志。"},
+    {"id":"robotics-optimal-control","track":"robotics","section":"控制","title":"LQR、iLQR 与最优控制","title_en":"LQR, iLQR and Optimal Control","summary":"组织线性二次调节、时变反馈、局部轨迹优化和价值函数近似。","priority":"P0","tags":["LQR","iLQR","最优控制"],"next_step":"建立同一动力系统的 LQR、iLQR 与 MPC 对照实验。"},
     {"id":"robotics-mpc","track":"robotics","section":"控制","title":"模型预测控制","title_en":"Model Predictive Control","summary":"覆盖滚动优化、线性与非线性 MPC、约束和实时求解。","priority":"P0","tags":["MPC","最优控制","实时优化"],"next_step":"建立从 LQR 到 NMPC 的学习路线。"},
     {"id":"robotics-impedance","track":"robotics","section":"控制","title":"阻抗与导纳控制","title_en":"Impedance and Admittance Control","summary":"整理力—位移关系、交互稳定性和接触任务调参。","priority":"P0","tags":["阻抗控制","导纳控制","力控"],"next_step":"加入机械臂接触实验的参数解释。"},
+    {"id":"robotics-whole-body-control","track":"robotics","section":"控制","title":"全身与层级控制","title_en":"Whole-body and Hierarchical Control","summary":"用任务优先级、接触约束和优化式逆动力学协调机械臂、人形与四足的多任务控制。","priority":"P1","tags":["全身控制","任务空间","QP"],"next_step":"建立任务、约束、权重与接触切换的字段表。"},
+    {"id":"robotics-robust-adaptive-control","track":"robotics","section":"控制","title":"鲁棒与自适应控制","title_en":"Robust and Adaptive Control","summary":"整理模型不确定性、扰动抑制、在线参数更新与稳定性保证之间的取舍。","priority":"P1","tags":["鲁棒控制","自适应控制","不确定性"],"next_step":"按不确定性假设和稳定性保证建立经典入口。"},
     {"id":"robotics-system-identification","track":"robotics","section":"学习与模型结合","title":"系统辨识","title_en":"System Identification","summary":"从参数估计到学习动力学，记录激励、误差和模型有效域。","priority":"P1","tags":["系统辨识","动力学学习","参数估计"],"next_step":"区分离线辨识与在线适应。"},
     {"id":"robotics-sim-to-real","track":"robotics","section":"仿真与系统","title":"仿真与 Sim-to-Real","title_en":"Simulation and Sim-to-Real","summary":"组织仿真器、域随机化、系统辨识、校准和迁移评测。","priority":"P0","tags":["仿真","Sim-to-Real","域随机化"],"next_step":"建立仿真能力与真实验证矩阵。"},
 

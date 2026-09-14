@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 论文、项目页、代码与出版身份归一表。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>论文身份表 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/frontier/works/works.css">
+    <script src="/atlas/frontier/works/works.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>RoboOpus Atlas</span></a>
+      <nav aria-label="论文身份导航">
+        <a href="/atlas/frontier/">arXiv 雷达</a>
+        <a href="/atlas/frontier/venues/">顶会状态</a>
+        <a href="/atlas/frontier/works/">论文身份</a>
+        <a href="/atlas/pipeline/">采集管线</a>
+      </nav>
+    </header>
+
+    <main class="catalog-main">
+      <section class="work-intro">
+        <div>
+          <p class="eyebrow">Work identity · one work, many records</p>
+          <h1>论文<br><em>身份表</em></h1>
+        </div>
+        <div class="work-policy">
+          <strong>链接多，不等于论文多</strong>
+          <p>arXiv、OpenReview、会议论文集、DOI、项目页、代码和模型可能属于同一成果。本表显式保留空值，只在作者与一手来源互链支持时合并。</p>
+        </div>
+      </section>
+
+      <section class="work-status" aria-label="论文身份注册表状态">
+        <div><span>工作条目</span><strong id="work-total">—</strong></div>
+        <div><span>已连正式论文集</span><strong id="venue-total">—</strong></div>
+        <div><span>已连官方代码</span><strong id="code-total">—</strong></div>
+        <div><span>最近核验</span><strong id="work-updated">加载中</strong></div>
+      </section>
+
+      <section class="catalog-controls" aria-label="论文身份筛选">
+        <label class="search-field"><span>搜索成果</span><input id="work-search" type="search" placeholder="RT-2、Octo、OpenVLA、arXiv ID…" autocomplete="off"></label>
+        <div class="filter-group">
+          <span class="filter-label">路由</span>
+          <div class="filter-row" aria-label="按路由筛选">
+            <button type="button" data-route="all" class="active">全部</button>
+            <button type="button" data-route="wam">WAM</button>
+            <button type="button" data-route="robotics">Robotics</button>
+            <button type="button" data-route="adjacent">Adjacent</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">连接状态</span>
+          <div class="filter-row" aria-label="按连接状态筛选">
+            <button type="button" data-state="all" class="active">全部</button>
+            <button type="button" data-state="venue-linked">正式论文集</button>
+            <button type="button" data-state="project-linked">项目已连接</button>
+          </div>
+        </div>
+        <div class="result-line" aria-live="polite"><strong id="work-count">加载中</strong><span>arXiv DataCite DOI 不当作同行评审 venue DOI。</span></div>
+      </section>
+
+      <section id="work-grid" class="work-grid" aria-label="论文身份列表"></section>
+      <div id="work-empty" class="catalog-empty" hidden><strong>没有匹配条目</strong><p>换一个关键词或切回“全部”。</p></div>
+      <noscript>该页面需要 JavaScript 来加载机器可读论文身份表。</noscript>
+    </main>
+
+    <footer>
+      <p>RoboOpus Atlas · 合并身份，不合并不确定性</p>
+      <p><a href="/atlas/data/work-identities.json">机器可读论文身份表</a></p>
+    </footer>
+  </body>
+</html>

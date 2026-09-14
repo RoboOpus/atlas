@@ -73,7 +73,8 @@
     "article_count": 16,
     "structured_datasets": [
       "https://roboopus.github.io/atlas/data/hardware-price-snapshots.json",
-      "https://roboopus.github.io/atlas/data/venue-registry.json"
+      "https://roboopus.github.io/atlas/data/venue-registry.json",
+      "https://roboopus.github.io/atlas/data/work-identities.json"
     ],
     "default_editorial_state": "source-checked-draft",
     "human_review_required_for": "reviewed"

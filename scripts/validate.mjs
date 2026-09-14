@@ -14,6 +14,8 @@ const hardwarePriceSourcePath = path.join(repo, "content", "hardware-price-snaps
 const hardwarePricePublishedPath = path.join(repo, "site", "data", "hardware-price-snapshots.json");
 const venueRegistrySourcePath = path.join(repo, "content", "venue-registry.json");
 const venueRegistryPublishedPath = path.join(repo, "site", "data", "venue-registry.json");
+const workIdentitySourcePath = path.join(repo, "content", "work-identities.json");
+const workIdentityPublishedPath = path.join(repo, "site", "data", "work-identities.json");
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const venueConfigPath = path.join(repo, "config", "frontier-venues.json");
 const requiredFiles = [
@@ -28,6 +30,7 @@ const requiredFiles = [
   "site/data/knowledge.json",
   "site/data/hardware-price-snapshots.json",
   "site/data/venue-registry.json",
+  "site/data/work-identities.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
@@ -43,6 +46,9 @@ const requiredFiles = [
   "site/frontier/venues/index.html",
   "site/frontier/venues/venues.css",
   "site/frontier/venues/venues.js",
+  "site/frontier/works/index.html",
+  "site/frontier/works/works.css",
+  "site/frontier/works/works.js",
   "site/field.css",
   "site/field.js",
   "site/robotics/index.html",
@@ -65,10 +71,12 @@ const requiredFiles = [
   "content/ingestion-jobs-schema.md",
   "content/frontier-radar-schema.md",
   "content/venue-registry-schema.md",
+  "content/work-identities-schema.md",
   "content/field-guides-schema.md",
   "content/knowledge-schema.md",
   "content/hardware-price-snapshots.json",
   "content/venue-registry.json",
+  "content/work-identities.json",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -88,6 +96,8 @@ const hardwarePrices = JSON.parse(await readFile(hardwarePriceSourcePath, "utf8"
 const publishedHardwarePrices = JSON.parse(await readFile(hardwarePricePublishedPath, "utf8"));
 const venueRegistry = JSON.parse(await readFile(venueRegistrySourcePath, "utf8"));
 const publishedVenueRegistry = JSON.parse(await readFile(venueRegistryPublishedPath, "utf8"));
+const workIdentities = JSON.parse(await readFile(workIdentitySourcePath, "utf8"));
+const publishedWorkIdentities = JSON.parse(await readFile(workIdentityPublishedPath, "utf8"));
 const frontierConfig = JSON.parse(await readFile(frontierConfigPath, "utf8"));
 const venueConfig = JSON.parse(await readFile(venueConfigPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
@@ -201,6 +211,29 @@ for (const venue of venueRegistry.venues) {
   } else if (venue.group_id !== null || venue.group_url !== null || venue.submissions_public !== null || venue.paper_ingestion !== "manual-proceedings") {
     throw new Error(`Official-site venue incorrectly claims OpenReview access: ${venue.id}`);
   }
+}
+
+const workIdentityStates = new Set(["arxiv-only", "project-linked", "venue-linked", "fully-linked"]);
+if (workIdentities.schema_version !== "0.1.0" || !Array.isArray(workIdentities.works)) throw new Error("Unexpected work identity registry schema");
+if (!/^\d{4}-\d{2}-\d{2}$/.test(workIdentities.updated_at)) throw new Error("Work identity update date is invalid");
+if (workIdentities.policy?.unknowns !== "Unknown DOI, OpenReview, code, model, or venue links remain null.") throw new Error("Work identity unknown policy is incomplete");
+if (workIdentities.works.length < 4) throw new Error("Work identity registry is too thin");
+if (JSON.stringify(workIdentities) !== JSON.stringify(publishedWorkIdentities)) throw new Error("Published work identity registry is stale");
+const workIds = new Set();
+for (const work of workIdentities.works) {
+  if (!work.id || workIds.has(work.id)) throw new Error(`Missing or duplicate work identity: ${work.id}`);
+  workIds.add(work.id);
+  if (!work.title || !Number.isInteger(work.year) || !Array.isArray(work.lead_authors) || work.lead_authors.length === 0) throw new Error(`Incomplete work identity: ${work.id}`);
+  if (!Array.isArray(work.routes) || work.routes.length === 0 || work.routes.some((route) => !venueRoutes.has(route))) throw new Error(`Invalid work route: ${work.id}`);
+  if (!workIdentityStates.has(work.identity_state)) throw new Error(`Invalid work identity state: ${work.id}`);
+  if (!work.canonical_url?.startsWith("https://") || !/^\d{4}-\d{2}-\d{2}$/.test(work.checked_at) || !work.notes) throw new Error(`Incomplete work provenance: ${work.id}`);
+  if (!work.identifiers || !Object.hasOwn(work.identifiers, "arxiv") || !Object.hasOwn(work.identifiers, "doi") || !Object.hasOwn(work.identifiers, "openreview")) throw new Error(`Missing work identifiers: ${work.id}`);
+  if (work.identifiers.arxiv && !/^\d{4}\.\d{4,5}(v\d+)?$/.test(work.identifiers.arxiv)) throw new Error(`Invalid arXiv identity: ${work.id}`);
+  if (work.identifiers.doi?.toLocaleLowerCase().startsWith("10.48550/arxiv.")) throw new Error(`arXiv DataCite DOI incorrectly used as venue DOI: ${work.id}`);
+  if (!work.links || !Object.hasOwn(work.links, "project") || !Object.hasOwn(work.links, "code") || !Object.hasOwn(work.links, "model") || !Object.hasOwn(work.links, "venue_publication") || !Object.hasOwn(work.links, "official_paper")) throw new Error(`Missing work link fields: ${work.id}`);
+  for (const url of Object.values(work.links).filter(Boolean)) if (!url.startsWith("https://")) throw new Error(`Invalid work link: ${work.id}`);
+  if (!Array.isArray(work.source_ids) || work.source_ids.length === 0 || work.source_ids.some((sourceId) => !sourceIds.has(sourceId))) throw new Error(`Unknown source in work identity: ${work.id}`);
+  if (work.identity_state === "venue-linked" && (!work.venue || !work.links.venue_publication)) throw new Error(`Venue-linked work lacks publication identity: ${work.id}`);
 }
 
 const jobStatuses = new Set(["active", "ready", "planned", "awaiting-input"]);
@@ -338,4 +371,4 @@ for (const paper of frontierPapers.papers) {
   if (!paperStatuses.has(paper.status)) throw new Error(`Invalid Frontier paper status: ${paper.id}`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${venueRegistry.venues.length} venue records, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${venueRegistry.venues.length} venue records, ${workIdentities.works.length} work identities, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);

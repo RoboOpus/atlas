@@ -45,6 +45,130 @@
       "tags": ["最优控制", "规划", "动力系统"]
     },
     {
+      "id": "robotics-pd-computed-torque",
+      "track": "robotics",
+      "section": "控制方法",
+      "name": "PD / PID 与计算力矩",
+      "subtitle": "从误差反馈到模型补偿的低层控制基线",
+      "kind": "经典反馈控制",
+      "summary": "以关节误差和误差变化率建立反馈，再按需要叠加重力、科氏力和惯性补偿；是评估复杂控制器前应保留的透明基线。",
+      "use_when": "关节或末端轨迹较平滑、约束可由参考轨迹与安全层处理，并且需要低计算量和高控制频率。",
+      "boundary": "增益不能跨机器人直接复制；模型误差、饱和、时延、摩擦和接触会破坏理想跟踪假设。",
+      "node_ids": ["robotics-classical-feedback", "robotics-dynamics"],
+      "source_ids": ["robotics-modern-robotics"],
+      "facts": [
+        {"label": "主要输入", "value": "状态 / 参考轨迹，可选动力学模型"},
+        {"label": "典型输出", "value": "关节力矩、速度或位置命令"},
+        {"label": "约束处理", "value": "通常依赖外部限幅、安全层或参考轨迹"},
+        {"label": "首要日志", "value": "跟踪误差、饱和率、控制周期与接触峰值"}
+      ],
+      "tags": ["PD", "PID", "计算力矩", "基线"],
+      "evidence_urls": [{"label":"Modern Robotics 课程","url":"https://modernrobotics.northwestern.edu/"}]
+    },
+    {
+      "id": "robotics-lqr-tvlqr",
+      "track": "robotics",
+      "section": "控制方法",
+      "name": "LQR / TVLQR",
+      "subtitle": "平衡状态代价与控制代价的局部最优反馈",
+      "kind": "最优反馈控制",
+      "summary": "LQR 为线性动力学与二次代价生成状态反馈；沿名义轨迹线性化后，TVLQR 可形成随时间变化的局部稳定反馈。",
+      "use_when": "已有线性模型或可信名义轨迹，需要可解释、计算轻量且便于稳定性分析的反馈控制。",
+      "boundary": "它是局部方法；硬状态/输入约束和大范围非线性通常需要 MPC、轨迹优化或额外约束层。",
+      "node_ids": ["robotics-optimal-control", "robotics-dynamics"],
+      "source_ids": ["robotics-underactuated"],
+      "facts": [
+        {"label": "模型", "value": "线性或沿轨迹局部线性化"},
+        {"label": "代价", "value": "状态偏差与控制输入的二次型"},
+        {"label": "约束处理", "value": "标准形式不直接处理硬约束"},
+        {"label": "典型角色", "value": "平衡点稳定、轨迹跟踪、局部终端控制器"}
+      ],
+      "tags": ["LQR", "TVLQR", "状态反馈"],
+      "evidence_urls": [{"label":"Underactuated LQR 章节","url":"https://underactuated.mit.edu/lqr.html"}]
+    },
+    {
+      "id": "robotics-ilqr-ddp",
+      "track": "robotics",
+      "section": "控制方法",
+      "name": "iLQR / DDP",
+      "subtitle": "围绕名义轨迹反复局部化的非线性最优控制",
+      "kind": "轨迹优化 / 最优控制",
+      "summary": "通过前向 rollout 与反向局部二次近似迭代更新控制序列，连接轨迹优化、局部反馈和模型预测控制。",
+      "use_when": "系统非线性明显，但动力学和代价可计算局部导数，且问题可由较好的初值逐步改进。",
+      "boundary": "全局最优没有保证；接触不连续、硬约束、差初值和导数误差会显著影响收敛。",
+      "node_ids": ["robotics-optimal-control", "robotics-trajectory-optimization", "robotics-dynamics"],
+      "source_ids": ["robotics-underactuated", "robotics-drake"],
+      "facts": [
+        {"label": "迭代结构", "value": "前向 rollout + 反向局部二次近似"},
+        {"label": "依赖", "value": "动力学 / 代价及其局部导数"},
+        {"label": "约束处理", "value": "变体相关，不能默认等同通用约束优化"},
+        {"label": "首要风险", "value": "局部极值、初值与接触模式敏感"}
+      ],
+      "tags": ["iLQR", "DDP", "轨迹优化"]
+    },
+    {
+      "id": "robotics-mpc-control",
+      "track": "robotics",
+      "section": "控制方法",
+      "name": "模型预测控制（MPC）",
+      "subtitle": "每个控制周期滚动求解有限时域优化",
+      "kind": "在线优化控制",
+      "summary": "根据当前状态重复求解有限时域控制问题，只执行首段动作，再用新观测重规划；可显式表达状态、输入和任务约束。",
+      "use_when": "约束和预测很重要，系统模型足够可信，并且硬件与求解器能满足稳定的实时预算。",
+      "boundary": "性能受模型、状态估计、预测时域、终端设计和求解超时共同影响；必须记录失败与降级策略。",
+      "node_ids": ["robotics-mpc", "robotics-trajectory-optimization", "robotics-state-estimation"],
+      "source_ids": ["robotics-underactuated", "robotics-drake"],
+      "facts": [
+        {"label": "循环", "value": "估计状态 → 有限时域求解 → 执行首段 → 重复"},
+        {"label": "约束处理", "value": "可显式建模，能力取决于具体求解形式"},
+        {"label": "实时指标", "value": "求解时延分布、超时率、可行率"},
+        {"label": "必备降级", "value": "上次可行解、局部反馈或安全停止"}
+      ],
+      "tags": ["MPC", "滚动优化", "约束", "实时"]
+    },
+    {
+      "id": "robotics-ros2-admittance",
+      "track": "robotics",
+      "section": "控制方法",
+      "name": "ros2_control 导纳控制器",
+      "subtitle": "把 TCP 力测量转换为位置 / 速度参考的工程入口",
+      "kind": "控制器实现",
+      "summary": "官方控制器从 TCP 力/力矩测量构造零力交互响应，可链在 JointTrajectoryController 等控制器前，并导出位置与速度参考接口。",
+      "use_when": "机器人位置接口成熟、末端有六维力传感器，并希望用虚拟质量—阻尼—刚度实现柔顺交互。",
+      "boundary": "需要外部运动学插件和正确的基座、工具、力传感器及重力补偿坐标；参数与坐标错误会直接污染交互行为。",
+      "node_ids": ["robotics-impedance", "hardware-force-torque", "robotics-calibration"],
+      "source_ids": ["robotics-ros2-control"],
+      "facts": [
+        {"label": "测量输入", "value": "TCP 六维力 / 力矩"},
+        {"label": "链式输出", "value": "位置与速度参考接口"},
+        {"label": "必要依赖", "value": "外部运动学插件"},
+        {"label": "关键配置", "value": "传感器、控制、世界与重力补偿坐标系"}
+      ],
+      "tags": ["导纳控制", "ROS 2", "六维力", "链式控制"],
+      "evidence_urls": [{"label":"Kilted 导纳控制器文档","url":"https://control.ros.org/kilted/doc/ros2_controllers/admittance_controller/doc/userdoc.html"}]
+    },
+    {
+      "id": "robotics-tsid-whole-body",
+      "track": "robotics",
+      "section": "控制方法",
+      "name": "TSID 全身任务空间逆动力学",
+      "subtitle": "用优化协调任务、接触与刚体动力学",
+      "kind": "全身控制软件库",
+      "summary": "TSID 基于 Pinocchio 提供优化式任务空间逆动力学，并含机械臂、人形和四足示例，是全身控制从概念到代码的入口。",
+      "use_when": "多个任务需共享自由度，或浮动基机器人需要同时处理接触、姿态、质心和末端任务。",
+      "boundary": "任务权重、优先级、接触切换和求解器配置决定实际行为；库本身不替代状态估计、硬件安全和实时验证。",
+      "node_ids": ["robotics-whole-body-control", "robotics-dynamics", "robotics-contact-modeling"],
+      "source_ids": ["robotics-tsid", "robotics-pinocchio"],
+      "facts": [
+        {"label": "方法", "value": "优化式任务空间逆动力学"},
+        {"label": "模型层", "value": "Pinocchio 刚体多体动力学"},
+        {"label": "示例本体", "value": "机械臂、人形、四足"},
+        {"label": "首要记录", "value": "任务、约束、权重、接触状态与求解时间"}
+      ],
+      "tags": ["TSID", "全身控制", "逆动力学", "Pinocchio"],
+      "evidence_urls": [{"label":"TSID 官方仓库","url":"https://github.com/stack-of-tasks/tsid"}]
+    },
+    {
       "id": "robotics-pinocchio-modeling",
       "track": "robotics",
       "section": "建模与动力学",
@@ -359,6 +483,29 @@
       "tags": ["RGB-D", "深度", "SDK"]
     },
     {
+      "id": "hardware-realsense-d455",
+      "track": "hardware",
+      "section": "视觉传感器",
+      "name": "RealSense D455",
+      "subtitle": "长基线主动红外双目 RGB-D 相机",
+      "kind": "RGB-D 相机型号",
+      "summary": "把 D455 作为具体型号登记：深度、RGB 与 IMU 集成在同一设备中，适合中距离室内机器人感知与外参、同步实验。",
+      "use_when": "桌面到房间尺度需要 0.6–6 m 级深度覆盖，并希望获得全局快门 RGB、深度与 IMU 数据。",
+      "boundary": "厂商量程和误差指标依赖场景与设置；主动红外双目的户外光照、低纹理、反光和运动性能必须实测。",
+      "node_ids": ["hardware-rgbd-cameras", "hardware-imu", "robotics-visual-perception", "robotics-calibration"],
+      "source_ids": ["hardware-realsense"],
+      "facts": [
+        {"label": "官方理想量程", "value": "0.6–6 m"},
+        {"label": "深度视场", "value": "87° × 58°"},
+        {"label": "深度输出", "value": "最高 1280 × 720，最高 90 fps"},
+        {"label": "RGB 输出", "value": "最高 1280 × 800 @ 30 fps，全局快门"},
+        {"label": "IMU", "value": "集成 Bosch BMI055"},
+        {"label": "价格", "value": "unknown；待记录地区、税费与核验时间"}
+      ],
+      "tags": ["D455", "RGB-D", "全局快门", "IMU"],
+      "evidence_urls": [{"label":"D455 官方产品页","url":"https://www.realsenseai.com/products/real-sense-depth-camera-d455f/"}]
+    },
+    {
       "id": "hardware-zed-family",
       "track": "hardware",
       "section": "视觉传感器",
@@ -413,6 +560,29 @@
       "tags": ["六维力", "力控", "装配"]
     },
     {
+      "id": "hardware-ati-mini45-si145-5",
+      "track": "hardware",
+      "section": "力与触觉",
+      "name": "ATI Mini45 · SI-145-5",
+      "subtitle": "明确绑定校准变体的六维力/力矩传感器卡",
+      "kind": "六维力/力矩传感器型号",
+      "summary": "Mini45 有多种 SI 校准量程；本卡只记录 SI-145-5，避免把同一外形下的不同量程合并成不存在的通用规格。",
+      "use_when": "末端装配、力控或接触实验需要比 Nano 系列更高量程，并能配套合适的 ATI 电子系统与机械安装。",
+      "boundary": "分辨率、采样与接口和配套电子系统相关；过载、安装、线缆和校准文件必须随真实采购配置核验。",
+      "node_ids": ["hardware-force-torque", "robotics-impedance"],
+      "source_ids": ["hardware-ati-ft"],
+      "facts": [
+        {"label": "校准变体", "value": "SI-145-5"},
+        {"label": "Fx / Fy", "value": "±145 N"},
+        {"label": "Fz", "value": "±290 N"},
+        {"label": "Tx / Ty / Tz", "value": "±5 N·m"},
+        {"label": "配置依赖", "value": "电子系统、接口、校准文件与安装"},
+        {"label": "价格", "value": "unknown；通常需询价并记录完整系统配置"}
+      ],
+      "tags": ["Mini45", "SI-145-5", "六维力", "校准变体"],
+      "evidence_urls": [{"label":"ATI Mini45 官方型号页","url":"https://www.ati-ia.com/products/ft/ft_models.aspx?id=Mini45"}]
+    },
+    {
       "id": "hardware-gelsight-family",
       "track": "hardware",
       "section": "力与触觉",
@@ -429,6 +599,29 @@
         {"label": "比较字段", "value": "接触面积、分辨率、帧率、表面寿命"}
       ],
       "tags": ["触觉", "接触", "精细操作"]
+    },
+    {
+      "id": "hardware-gelsight-mini",
+      "track": "hardware",
+      "section": "力与触觉",
+      "name": "GelSight Mini",
+      "subtitle": "可更换凝胶触头的紧凑型视触觉传感器",
+      "kind": "视触觉传感器型号",
+      "summary": "通过 RGB 照明与相机观测接触表面形变，提供局部接触图像；可更换 cartridge 便于把触头损耗纳入实验维护。",
+      "use_when": "精细抓取、滑移、纹理或接触几何实验需要比单点力信号更丰富的局部接触观测。",
+      "boundary": "耐久数字来自特定 coin-press 测试，不能直接外推到尖锐物、污染或高剪切任务；算法输出还依赖标定与照明一致性。",
+      "node_ids": ["hardware-tactile-sensors", "robotics-tactile-perception"],
+      "source_ids": ["hardware-gelsight"],
+      "facts": [
+        {"label": "相机", "value": "8 MP"},
+        {"label": "帧率", "value": "25 fps"},
+        {"label": "接触视场", "value": "18.6 mm × 14.3 mm"},
+        {"label": "照明", "value": "RGB LED"},
+        {"label": "触头维护", "value": "cartridge 可更换，无需工具"},
+        {"label": "价格", "value": "unknown；待记录地区、税费与耗材成本"}
+      ],
+      "tags": ["GelSight Mini", "视触觉", "接触图像", "可更换触头"],
+      "evidence_urls": [{"label":"GelSight Mini 官方产品表","url":"https://www.gelsight.com/wp-content/uploads/productsheet/Mini/GS_Mini_4.3.24.pdf"}]
     },
     {
       "id": "hardware-jetson-family",

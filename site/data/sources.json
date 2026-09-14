@@ -187,6 +187,32 @@
       "tags": ["最优控制", "动力系统", "规划"]
     },
     {
+      "id": "robotics-ros2-control",
+      "track": "robotics",
+      "name": "ros2_control Controllers",
+      "owner": "ros-controls community",
+      "kind": "documentation",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://control.ros.org/kilted/doc/ros2_controllers/doc/controllers_index.html",
+      "best_for": "核对 ROS 2 控制器接口、链式控制、导纳控制参数与硬件接口约定。",
+      "reuse_note": "绑定 ROS 2 发行版；Rolling 是开发版本，知识条目默认引用最新稳定版 Kilted。",
+      "tags": ["ROS 2", "控制器", "导纳控制"]
+    },
+    {
+      "id": "robotics-tsid",
+      "track": "robotics",
+      "name": "TSID: Task Space Inverse Dynamics",
+      "owner": "stack-of-tasks",
+      "kind": "repository",
+      "access_mode": "assisted",
+      "official": true,
+      "url": "https://github.com/stack-of-tasks/tsid",
+      "best_for": "优化式任务空间逆动力学、全身多任务控制，以及机械臂、人形和四足示例。",
+      "reuse_note": "库依赖 Pinocchio；算法能力、机器人模型和求解器配置需分别锁定版本。",
+      "tags": ["全身控制", "逆动力学", "Pinocchio"]
+    },
+    {
       "id": "robotics-drake",
       "track": "robotics",
       "name": "Drake",

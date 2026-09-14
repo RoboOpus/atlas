@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.1.0",
+  "updated_at": "2026-09-14",
+  "policy": {
+    "unit": "One research work may have multiple public identities.",
+    "arxiv_doi": "The DataCite DOI for an arXiv record is not treated as a peer-reviewed venue DOI.",
+    "unknowns": "Unknown DOI, OpenReview, code, model, or venue links remain null.",
+    "merge_gate": "Title similarity alone is insufficient; author overlap and first-party links must support a merge."
+  },
+  "works": [
+    {
+      "id": "rt2-2023",
+      "title": "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
+      "year": 2023,
+      "lead_authors": ["Anthony Brohan", "Noah Brown", "Justice Carbajal"],
+      "routes": ["wam", "robotics"],
+      "identity_state": "project-linked",
+      "canonical_url": "https://arxiv.org/abs/2307.15818",
+      "identifiers": {
+        "arxiv": "2307.15818",
+        "doi": null,
+        "openreview": null
+      },
+      "links": {
+        "project": "https://robotics-transformer2.github.io/",
+        "code": null,
+        "model": null,
+        "venue_publication": null,
+        "official_paper": null
+      },
+      "source_ids": ["frontier-arxiv-api"],
+      "checked_at": "2026-09-14",
+      "notes": "项目页和 arXiv 身份已连接；未把社区复现仓库冒充官方代码。"
+    },
+    {
+      "id": "octo-2024",
+      "title": "Octo: An Open-Source Generalist Robot Policy",
+      "year": 2024,
+      "lead_authors": ["Octo Model Team"],
+      "routes": ["wam", "robotics"],
+      "identity_state": "venue-linked",
+      "canonical_url": "https://www.roboticsproceedings.org/rss20/p090.html",
+      "identifiers": {
+        "arxiv": "2405.12213",
+        "doi": null,
+        "openreview": null
+      },
+      "links": {
+        "project": "https://octo-models.github.io/",
+        "code": "https://github.com/octo-models/octo",
+        "model": null,
+        "venue_publication": "https://www.roboticsproceedings.org/rss20/p090.html",
+        "official_paper": null
+      },
+      "venue": "Robotics: Science and Systems 2024",
+      "source_ids": ["frontier-arxiv-api", "frontier-github-rest-search"],
+      "checked_at": "2026-09-14",
+      "notes": "RSS 2024 论文集、arXiv、项目页与官方代码已合并为同一工作；arXiv DataCite DOI 不填入 venue DOI。"
+    },
+    {
+      "id": "openvla-2024",
+      "title": "OpenVLA: An Open-Source Vision-Language-Action Model",
+      "year": 2024,
+      "lead_authors": ["Moo Jin Kim", "Karl Pertsch", "Siddharth Karamcheti"],
+      "routes": ["wam", "robotics"],
+      "identity_state": "project-linked",
+      "canonical_url": "https://arxiv.org/abs/2406.09246",
+      "identifiers": {
+        "arxiv": "2406.09246",
+        "doi": null,
+        "openreview": null
+      },
+      "links": {
+        "project": "https://openvla.github.io/",
+        "code": "https://github.com/openvla/openvla",
+        "model": "https://huggingface.co/openvla/openvla-7b",
+        "venue_publication": null,
+        "official_paper": null
+      },
+      "source_ids": ["frontier-arxiv-api", "frontier-github-rest-search"],
+      "checked_at": "2026-09-14",
+      "notes": "arXiv、项目页、官方仓库与发布模型已连接；同行评审出版身份仍显式留空。"
+    },
+    {
+      "id": "pi0-2024",
+      "title": "π0: A Vision-Language-Action Flow Model for General Robot Control",
+      "year": 2024,
+      "lead_authors": ["Kevin Black", "Noah Brown", "Danny Driess"],
+      "routes": ["wam", "robotics"],
+      "identity_state": "project-linked",
+      "canonical_url": "https://arxiv.org/abs/2410.24164",
+      "identifiers": {
+        "arxiv": "2410.24164",
+        "doi": null,
+        "openreview": null
+      },
+      "links": {
+        "project": "https://www.physicalintelligence.company/blog/pi0",
+        "code": "https://github.com/Physical-Intelligence/openpi",
+        "model": null,
+        "venue_publication": null,
+        "official_paper": "https://www.physicalintelligence.company/download/pi0.pdf"
+      },
+      "source_ids": ["frontier-arxiv-api", "frontier-github-rest-search"],
+      "checked_at": "2026-09-14",
+      "notes": "arXiv、Physical Intelligence 原始论文和 openpi 官方仓库已连接；出版 venue 与 DOI 未核实，保持 null。"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ const sourceData = JSON.parse(await readFile(path.join(repo, "site", "data", "so
 const catalogData = JSON.parse(await readFile(path.join(repo, "site", "data", "catalog.json"), "utf8"));
 const hardwarePriceData = JSON.parse(await readFile(path.join(repo, "content", "hardware-price-snapshots.json"), "utf8"));
 const venueRegistryData = JSON.parse(await readFile(path.join(repo, "content", "venue-registry.json"), "utf8"));
+const workIdentityData = JSON.parse(await readFile(path.join(repo, "content", "work-identities.json"), "utf8"));
 const sourcesById = new Map(sourceData.sources.map((source) => [source.id, source]));
 const nodesById = new Map(catalogData.nodes.map((node) => [node.id, node]));
 const trackLabels = { robotics: "Robotics", hardware: "Hardware", adjacent: "Adjacent", frontier: "Frontier", lab: "Lab" };
@@ -238,4 +239,5 @@ await writeFile(path.join(outputDir, "index.html"), pageShell({ title: "知识�
 await writeFile(path.join(repo, "site", "data", "knowledge.json"), `${JSON.stringify({ schema_version: "0.1.0", updated_at: articles[0]?.updated_at ?? null, articles }, null, 2)}\n`, "utf8");
 await writeFile(path.join(repo, "site", "data", "hardware-price-snapshots.json"), `${JSON.stringify(hardwarePriceData, null, 2)}\n`, "utf8");
 await writeFile(path.join(repo, "site", "data", "venue-registry.json"), `${JSON.stringify(venueRegistryData, null, 2)}\n`, "utf8");
-process.stdout.write(`Built ${articles.length} source-backed knowledge articles, ${hardwarePriceData.snapshots?.length ?? 0} hardware price snapshots, and ${venueRegistryData.venues?.length ?? 0} venue records.\n`);
+await writeFile(path.join(repo, "site", "data", "work-identities.json"), `${JSON.stringify(workIdentityData, null, 2)}\n`, "utf8");
+process.stdout.write(`Built ${articles.length} source-backed knowledge articles, ${hardwarePriceData.snapshots?.length ?? 0} hardware price snapshots, ${venueRegistryData.venues?.length ?? 0} venue records, and ${workIdentityData.works?.length ?? 0} work identities.\n`);
