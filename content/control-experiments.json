@@ -1,0 +1,99 @@
+{
+  "schema_version": "0.1.0",
+  "updated_at": "2026-09-15",
+  "policy": {
+    "purpose": "Compare control methods under the same plant, initial conditions, constraints, timing, and metrics.",
+    "results": "A specified experiment is not a completed result.",
+    "hardware_gate": "Hardware experiments require an explicit safety review before execution.",
+    "minimum_artifacts": ["machine-readable config", "version manifest", "raw time-series log", "summary metrics", "failure record"]
+  },
+  "experiments": [
+    {
+      "id": "control-double-integrator-lqr-mpc",
+      "track": "robotics",
+      "family": "最优与约束控制",
+      "title": "双积分系统：LQR 对比 MPC",
+      "system": "离散双积分系统",
+      "setting": "simulation",
+      "readiness": "specified",
+      "summary": "在相同模型、初值、采样周期和代价下，比较无硬约束 LQR 与显式状态/输入约束 MPC 的闭环行为。",
+      "question": "当参考变化导致执行器饱和时，MPC 的约束可行性是否值得额外求解开销？",
+      "controllers": [
+        {"name":"LQR","role":"低计算量局部反馈基线","assumption":"线性模型、二次代价；硬约束由外部限幅处理"},
+        {"name":"Linear MPC","role":"滚动时域约束控制","assumption":"离散模型与在线优化在控制周期内可用"}
+      ],
+      "fixed_protocol": [
+        "固定状态维度、质量、离散步长与零阶保持方式",
+        "固定 12 个初始状态、目标序列、Q/R 与预测时域",
+        "LQR 与 MPC 使用相同输入上下限；分别记录限幅前后控制量",
+        "每个初值重复 5 次并保存求解时间分布"
+      ],
+      "metrics": ["累计二次代价", "整定时间", "最大控制输入", "约束违反次数", "求解时延 p50 / p95 / max", "不可行或降级次数"],
+      "artifacts": ["plant.yaml", "controller-lqr.yaml", "controller-mpc.yaml", "initial-states.json", "timeseries.parquet", "summary.json"],
+      "success_gate": "全部初值均完成；约束、代价和时延可由原始日志重算。",
+      "risk_gate": "仿真；无真机安全风险，但禁止用单次轨迹代表整体性能。",
+      "node_ids": ["robotics-control-experiments", "robotics-optimal-control", "robotics-mpc"],
+      "source_ids": ["robotics-underactuated", "robotics-drake"],
+      "evidence_urls": [{"label":"Underactuated LQR","url":"https://underactuated.mit.edu/lqr.html"}]
+    },
+    {
+      "id": "control-pendulum-ilqr-tvlqr",
+      "track": "robotics",
+      "family": "非线性轨迹与局部稳定",
+      "title": "摆起与稳定：iLQR + TVLQR",
+      "system": "受限单摆或 Acrobot",
+      "setting": "simulation",
+      "readiness": "specified",
+      "summary": "用 iLQR/DDP 类轨迹优化生成摆起名义轨迹，再由 TVLQR 沿轨迹构造局部反馈，检查规划与反馈的职责分界。",
+      "question": "名义轨迹偏离多远时，局部反馈不再能够恢复，必须重新优化？",
+      "controllers": [
+        {"name":"iLQR / DDP","role":"生成非线性摆起轨迹","assumption":"动力学和代价局部导数可用，初值足以收敛"},
+        {"name":"TVLQR","role":"跟踪名义轨迹并在终点附近稳定","assumption":"线性化邻域内模型可信"}
+      ],
+      "fixed_protocol": [
+        "固定动力学、积分器、输入限幅、代价与终端条件",
+        "固定优化初值并公开收敛阈值与最大迭代数",
+        "从名义轨迹周围 5 个扰动半径分别采样 20 个初始状态",
+        "记录重优化触发条件与最终稳定区域"
+      ],
+      "metrics": ["轨迹优化收敛率", "迭代次数", "终端误差", "反馈恢复率", "控制饱和率", "重优化次数"],
+      "artifacts": ["plant.yaml", "cost.yaml", "nominal-trajectory.parquet", "feedback-gains.npz", "perturbations.json", "summary.json"],
+      "success_gate": "名义轨迹、反馈增益与扰动样本全部可重放，并能重算恢复率。",
+      "risk_gate": "仿真；若迁移真机，必须增加关节限位、制动距离和能量安全检查。",
+      "node_ids": ["robotics-control-experiments", "robotics-optimal-control", "robotics-trajectory-optimization"],
+      "source_ids": ["robotics-underactuated", "robotics-drake"],
+      "evidence_urls": [{"label":"Underactuated trajectory optimization","url":"https://underactuated.mit.edu/trajopt.html"}]
+    },
+    {
+      "id": "control-franka-contact-compliance",
+      "track": "robotics",
+      "family": "接触与柔顺控制",
+      "title": "机械臂接触：阻抗对比导纳",
+      "system": "Franka 类 7-DoF 机械臂 + 六维力传感或关节力矩估计",
+      "setting": "hardware",
+      "readiness": "safety-review-required",
+      "summary": "在相同接近轨迹、工具、接触材料和目标力下，分别记录笛卡尔阻抗与基于 TCP 力测量的导纳控制行为。",
+      "question": "在位置接口、力传感噪声和通信时延既定时，哪种柔顺实现能更稳定地限制接触峰值？",
+      "controllers": [
+        {"name":"Cartesian impedance","role":"直接定义末端位姿误差到力矩的柔顺关系","assumption":"可用低层力矩接口与可信机器人动力学"},
+        {"name":"ros2_control admittance","role":"把 TCP 力测量转换为位置 / 速度参考","assumption":"六维力测量、坐标变换和外部运动学插件正确"}
+      ],
+      "fixed_protocol": [
+        "固定工具质量、质心、接触材料、法向接近速度和目标力",
+        "完成零偏、重力补偿、工具坐标与力传感器坐标核验",
+        "从低刚度和低速度开始，逐级提高并设置硬件限力与急停",
+        "每组参数至少 10 次接触，失败和急停不从统计中删除"
+      ],
+      "metrics": ["首次接触峰值力", "稳态力误差", "超调量", "接触后整定时间", "控制周期抖动", "保护触发次数"],
+      "artifacts": ["robot-version.json", "tool-and-contact.yaml", "frame-check.json", "controller-params.yaml", "timeseries.parquet", "safety-events.json"],
+      "success_gate": "所有试次含完整时间戳、控制命令、位姿与六维力数据；失败试次可复盘。",
+      "risk_gate": "真机执行前必须完成人工安全复核，确认限位、限速、限力、工作空间隔离、急停与监护人。",
+      "node_ids": ["robotics-control-experiments", "robotics-impedance", "robotics-calibration", "hardware-force-torque"],
+      "source_ids": ["robotics-libfranka-control-examples", "robotics-ros2-control"],
+      "evidence_urls": [
+        {"label":"libfranka Cartesian impedance example","url":"https://frankarobotics.github.io/libfranka/0.18.2/cartesian_impedance_control_8cpp-example.html"},
+        {"label":"ros2_control admittance controller","url":"https://control.ros.org/kilted/doc/ros2_controllers/admittance_controller/doc/userdoc.html"}
+      ]
+    }
+  ]
+}

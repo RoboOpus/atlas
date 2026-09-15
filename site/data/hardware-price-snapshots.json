@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "captured_at": "2026-09-13",
+  "captured_at": "2026-09-15",
   "policy": {
     "append_only": true,
     "currency_conversion": false,
@@ -82,6 +82,21 @@
       "source_id": "hardware-ufactory-us-xarm6-price",
       "source_url": "https://www.ufactory.us/product/ufactory-xarm-6",
       "captured_at": "2026-09-13"
+    },
+    {
+      "id": "2026-09-15-unitree-g1-standard-cn",
+      "product": "Unitree G1",
+      "variant": "G1 Standard",
+      "category": "humanoid",
+      "region": "China official page",
+      "price": 85000,
+      "currency": "CNY",
+      "tax": "included",
+      "freight": "unknown",
+      "availability": "contact-sales-before-purchase",
+      "source_id": "hardware-unitree-g1-price",
+      "source_url": "https://www.unitree.com/cn/g1/",
+      "captured_at": "2026-09-15"
     }
   ]
 }

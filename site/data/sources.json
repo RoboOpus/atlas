@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "verified_at": "2026-09-14",
+  "verified_at": "2026-09-15",
   "scope": "RoboOpus Atlas non-WAM trusted source registry",
   "sources": [
     {
@@ -498,6 +498,19 @@
       "best_for": "核对 Go2 各版本的官方起售价、规格和税运费声明。",
       "reuse_note": "页面明确标注税费和运费不含；不同地区实际可购配置需再次确认。",
       "tags": ["四足价格", "Go2", "公开标价"]
+    },
+    {
+      "id": "hardware-unitree-g1-price",
+      "track": "hardware",
+      "name": "Unitree G1 Official Product Page",
+      "owner": "Unitree",
+      "kind": "vendor",
+      "access_mode": "manual",
+      "official": true,
+      "url": "https://www.unitree.com/cn/g1/",
+      "best_for": "核对 G1 与 G1 EDU 的自由度、负载、开发能力、公开含税起售价和安全提示。",
+      "reuse_note": "G1 普通版与 EDU 版不可混写；页面注明参数随配置和场景变化，采购前需再次核验。",
+      "tags": ["人形机器人", "G1", "公开标价"]
     },
     {
       "id": "hardware-realsense",

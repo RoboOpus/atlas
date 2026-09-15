@@ -11,6 +11,17 @@
 - `links.code` 只登记作者或项目明确指向的官方仓库；社区复现另建 implementation 关系。
 - 自动任务可以提出合并候选，最终合并至少需要作者重叠和一手来源互链之一。
 
+## 确定性候选匹配
+
+`scripts/match-work-identities.mjs` 只做候选匹配，不直接改写身份表：
+
+- arXiv、DOI 或 OpenReview 标识符精确相同，允许输出 `auto-link`。
+- 候选 URL 与登记的一手项目页、官方代码、模型或出版页精确相同，允许输出 `auto-link`。
+- 只有标题、作者和年份组合相符时，只输出 `review`，必须人工或一手互链确认。
+- 标题相似但作者证据缺失时保持 `unmatched`。
+
+这一保守规则由 `tests/work-identity-matcher.test.mjs` 固定，避免标题近似造成错误合并。
+
 ## 发布
 
 构建脚本将源数据原样发布到 `site/data/work-identities.json`，前端页位于 `/atlas/frontier/works/`。

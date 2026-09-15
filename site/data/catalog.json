@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-14",
+  "updated_at": "2026-09-15",
   "description": "Breadth-first seed nodes for RoboOpus Atlas tracks other than WAM.",
   "nodes": [
     {"id":"frontier-arxiv-radar","track":"frontier","section":"论文雷达","title":"arXiv 每日雷达","title_en":"Daily arXiv Radar","summary":"按主题、时间和证据完整度发现具身智能新论文，并与 WAM 专题去重。","priority":"P0","tags":["arXiv","论文发现","具身智能"],"next_step":"固化查询式、去重键和候选卡字段。"},
@@ -34,6 +34,7 @@
     {"id":"robotics-impedance","track":"robotics","section":"控制","title":"阻抗与导纳控制","title_en":"Impedance and Admittance Control","summary":"整理力—位移关系、交互稳定性和接触任务调参。","priority":"P0","tags":["阻抗控制","导纳控制","力控"],"next_step":"加入机械臂接触实验的参数解释。"},
     {"id":"robotics-whole-body-control","track":"robotics","section":"控制","title":"全身与层级控制","title_en":"Whole-body and Hierarchical Control","summary":"用任务优先级、接触约束和优化式逆动力学协调机械臂、人形与四足的多任务控制。","priority":"P1","tags":["全身控制","任务空间","QP"],"next_step":"建立任务、约束、权重与接触切换的字段表。"},
     {"id":"robotics-robust-adaptive-control","track":"robotics","section":"控制","title":"鲁棒与自适应控制","title_en":"Robust and Adaptive Control","summary":"整理模型不确定性、扰动抑制、在线参数更新与稳定性保证之间的取舍。","priority":"P1","tags":["鲁棒控制","自适应控制","不确定性"],"next_step":"按不确定性假设和稳定性保证建立经典入口。"},
+    {"id":"robotics-control-experiments","track":"robotics","section":"控制","title":"控制实验与复现协议","title_en":"Control Experiments and Reproduction Protocols","summary":"用固定系统、初值、约束、指标和产物要求公平比较反馈、最优与接触控制方法。","priority":"P0","tags":["控制实验","复现","评测协议"],"next_step":"先完成双积分、摆起稳定与接触柔顺三个最小实验。"},
     {"id":"robotics-system-identification","track":"robotics","section":"学习与模型结合","title":"系统辨识","title_en":"System Identification","summary":"从参数估计到学习动力学，记录激励、误差和模型有效域。","priority":"P1","tags":["系统辨识","动力学学习","参数估计"],"next_step":"区分离线辨识与在线适应。"},
     {"id":"robotics-sim-to-real","track":"robotics","section":"仿真与系统","title":"仿真与 Sim-to-Real","title_en":"Simulation and Sim-to-Real","summary":"组织仿真器、域随机化、系统辨识、校准和迁移评测。","priority":"P0","tags":["仿真","Sim-to-Real","域随机化"],"next_step":"建立仿真能力与真实验证矩阵。"},
 

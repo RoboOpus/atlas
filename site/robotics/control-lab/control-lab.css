@@ -1,0 +1,31 @@
+.lab-intro { display: grid; grid-template-columns: minmax(330px, 1.1fr) minmax(320px, 0.9fr); gap: 50px; align-items: end; padding: 54px 0 34px; }
+.lab-intro h1 { font-size: clamp(50px, 7vw, 86px); }
+.lab-policy { padding: 22px; border: 1px solid var(--ink); background: var(--panel); }
+.lab-policy strong { color: var(--orange); font: 750 12px/1.2 ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; }
+.lab-policy p { margin: 14px 0 0; color: var(--muted); line-height: 1.75; }
+.lab-status { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; padding: 1px; background: var(--line); }
+.lab-status div { min-height: 98px; padding: 17px; background: var(--paper); }
+.lab-status span { display: block; color: var(--muted); font: 700 10px/1 ui-monospace, monospace; letter-spacing: .07em; text-transform: uppercase; }
+.lab-status strong { display: block; margin-top: 20px; font: 500 22px/1.05 Georgia, "Noto Serif SC", serif; }
+.experiment-grid { display: grid; grid-template-columns: 1fr; gap: 12px; padding-top: 30px; }
+.experiment-card { padding: 26px; border: 1px solid var(--line); background: var(--panel); }
+.experiment-top { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font: 700 10px/1.3 ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; }
+.experiment-readiness { color: var(--blue); }
+.experiment-card h2 { margin: 24px 0 6px; font: 500 31px/1.12 Georgia, "Noto Serif SC", serif; letter-spacing: -.025em; }
+.experiment-question { max-width: 850px; margin: 10px 0 0; color: var(--muted); line-height: 1.65; }
+.experiment-columns { display: grid; grid-template-columns: .8fr 1fr 1fr; gap: 22px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
+.experiment-columns h3 { margin: 0 0 12px; color: var(--orange); font: 750 10px/1.2 ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; }
+.experiment-columns ul { margin: 0; padding-left: 18px; }
+.experiment-columns li { margin-bottom: 8px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.controller { margin-bottom: 12px; padding: 12px; background: rgba(255,255,255,.55); border-left: 3px solid var(--blue); }
+.controller strong { display: block; font-size: 12px; }
+.controller span { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.gate-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.gate { padding: 14px; border: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.6; }
+.gate strong { display: block; margin-bottom: 5px; color: var(--ink); }
+.gate.risk { border-left: 3px solid var(--orange); }
+.experiment-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.experiment-links a { padding: 7px 9px; border: 1px solid var(--line); color: var(--muted); font-size: 10px; text-decoration: none; }
+.experiment-links a:hover { color: var(--blue); border-color: var(--blue); }
+@media (max-width: 900px) { .lab-intro, .experiment-columns { grid-template-columns: 1fr; } .lab-status { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .lab-status, .gate-row { grid-template-columns: 1fr; } .experiment-card { padding: 20px; } }

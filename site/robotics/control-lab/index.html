@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 机器人控制方法可复现实验台账。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>控制实验台账 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/robotics/control-lab/control-lab.css">
+    <script src="/atlas/robotics/control-lab/control-lab.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>Control Lab</span></a>
+      <nav aria-label="控制实验导航">
+        <a href="/atlas/robotics/">Robotics</a>
+        <a href="/atlas/robotics/control-lab/">控制实验</a>
+        <a href="/atlas/knowledge/?track=robotics">知识正文</a>
+        <a href="/atlas/catalog/?track=robotics">知识节点</a>
+      </nav>
+    </header>
+
+    <main class="catalog-main">
+      <section class="lab-intro">
+        <div>
+          <p class="eyebrow">Control experiments · protocol before result</p>
+          <h1>控制<br><em>实验台账</em></h1>
+        </div>
+        <div class="lab-policy">
+          <strong>定义完成，不等于实验完成</strong>
+          <p>先锁定被控系统、初值、约束、控制周期、指标和原始产物，再比较方法。真机条目只有经过人工安全复核后才能执行。</p>
+        </div>
+      </section>
+
+      <section class="lab-status" aria-label="控制实验状态">
+        <div><span>实验协议</span><strong id="experiment-total">—</strong></div>
+        <div><span>仿真实验</span><strong id="simulation-total">—</strong></div>
+        <div><span>真机安全闸门</span><strong id="hardware-total">—</strong></div>
+        <div><span>最近更新</span><strong id="experiment-updated">加载中</strong></div>
+      </section>
+
+      <section class="catalog-controls" aria-label="控制实验筛选">
+        <label class="search-field"><span>搜索协议</span><input id="experiment-search" type="search" placeholder="LQR、MPC、摆起、阻抗、接触…" autocomplete="off"></label>
+        <div class="filter-group">
+          <span class="filter-label">环境</span>
+          <div class="filter-row" aria-label="按实验环境筛选">
+            <button type="button" data-setting="all" class="active">全部</button>
+            <button type="button" data-setting="simulation">仿真</button>
+            <button type="button" data-setting="hardware">真机</button>
+          </div>
+        </div>
+        <div class="result-line" aria-live="polite"><strong id="experiment-count">加载中</strong><span>所有指标必须能从原始时序日志重算。</span></div>
+      </section>
+
+      <section id="experiment-grid" class="experiment-grid" aria-label="控制实验协议列表"></section>
+      <div id="experiment-empty" class="catalog-empty" hidden><strong>没有匹配协议</strong><p>换一个关键词或切回“全部”。</p></div>
+      <noscript>该页面需要 JavaScript 来加载机器可读实验台账。</noscript>
+    </main>
+
+    <footer>
+      <p>RoboOpus Atlas · 固定协议，再比较结果</p>
+      <p><a href="/atlas/data/control-experiments.json">机器可读控制实验台账</a></p>
+    </footer>
+  </body>
+</html>

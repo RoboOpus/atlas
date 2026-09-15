@@ -16,6 +16,8 @@ const venueRegistrySourcePath = path.join(repo, "content", "venue-registry.json"
 const venueRegistryPublishedPath = path.join(repo, "site", "data", "venue-registry.json");
 const workIdentitySourcePath = path.join(repo, "content", "work-identities.json");
 const workIdentityPublishedPath = path.join(repo, "site", "data", "work-identities.json");
+const controlExperimentSourcePath = path.join(repo, "content", "control-experiments.json");
+const controlExperimentPublishedPath = path.join(repo, "site", "data", "control-experiments.json");
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const venueConfigPath = path.join(repo, "config", "frontier-venues.json");
 const requiredFiles = [
@@ -31,6 +33,7 @@ const requiredFiles = [
   "site/data/hardware-price-snapshots.json",
   "site/data/venue-registry.json",
   "site/data/work-identities.json",
+  "site/data/control-experiments.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
@@ -52,6 +55,9 @@ const requiredFiles = [
   "site/field.css",
   "site/field.js",
   "site/robotics/index.html",
+  "site/robotics/control-lab/index.html",
+  "site/robotics/control-lab/control-lab.css",
+  "site/robotics/control-lab/control-lab.js",
   "site/hardware/index.html",
   "site/adjacent/index.html",
   "site/knowledge/index.html",
@@ -62,6 +68,8 @@ const requiredFiles = [
   "scripts/fetch-frontier-arxiv.mjs",
   "scripts/fetch-openreview-venues.mjs",
   "scripts/build-knowledge.mjs",
+  "scripts/match-work-identities.mjs",
+  "tests/work-identity-matcher.test.mjs",
   "tests/fixtures/frontier-arxiv.atom.xml",
   "tests/fixtures/frontier-arxiv-listing.html",
   ".github/workflows/refresh-frontier-arxiv.yml",
@@ -77,6 +85,8 @@ const requiredFiles = [
   "content/hardware-price-snapshots.json",
   "content/venue-registry.json",
   "content/work-identities.json",
+  "content/control-experiments.json",
+  "content/control-experiments-schema.md",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -98,6 +108,8 @@ const venueRegistry = JSON.parse(await readFile(venueRegistrySourcePath, "utf8")
 const publishedVenueRegistry = JSON.parse(await readFile(venueRegistryPublishedPath, "utf8"));
 const workIdentities = JSON.parse(await readFile(workIdentitySourcePath, "utf8"));
 const publishedWorkIdentities = JSON.parse(await readFile(workIdentityPublishedPath, "utf8"));
+const controlExperiments = JSON.parse(await readFile(controlExperimentSourcePath, "utf8"));
+const publishedControlExperiments = JSON.parse(await readFile(controlExperimentPublishedPath, "utf8"));
 const frontierConfig = JSON.parse(await readFile(frontierConfigPath, "utf8"));
 const venueConfig = JSON.parse(await readFile(venueConfigPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
@@ -236,6 +248,31 @@ for (const work of workIdentities.works) {
   if (work.identity_state === "venue-linked" && (!work.venue || !work.links.venue_publication)) throw new Error(`Venue-linked work lacks publication identity: ${work.id}`);
 }
 
+const experimentSettings = new Set(["simulation", "hardware"]);
+const experimentReadiness = new Set(["specified", "running", "completed", "safety-review-required"]);
+if (controlExperiments.schema_version !== "0.1.0" || !Array.isArray(controlExperiments.experiments)) throw new Error("Unexpected control experiment schema");
+if (!/^\d{4}-\d{2}-\d{2}$/.test(controlExperiments.updated_at)) throw new Error("Control experiment update date is invalid");
+if (!controlExperiments.policy?.results?.includes("not a completed result") || !controlExperiments.policy?.hardware_gate?.includes("safety review")) throw new Error("Control experiment policy is incomplete");
+if (controlExperiments.experiments.length < 3) throw new Error("Control experiment registry needs at least three protocols");
+if (JSON.stringify(controlExperiments) !== JSON.stringify(publishedControlExperiments)) throw new Error("Published control experiment registry is stale");
+const experimentIds = new Set();
+for (const experiment of controlExperiments.experiments) {
+  if (!experiment.id || experimentIds.has(experiment.id)) throw new Error(`Missing or duplicate control experiment: ${experiment.id}`);
+  experimentIds.add(experiment.id);
+  if (experiment.track !== "robotics" || !experiment.id.startsWith("control-")) throw new Error(`Invalid control experiment route: ${experiment.id}`);
+  if (!experiment.family || !experiment.title || !experiment.system || !experiment.summary || !experiment.question) throw new Error(`Incomplete control experiment identity: ${experiment.id}`);
+  if (!experimentSettings.has(experiment.setting) || !experimentReadiness.has(experiment.readiness)) throw new Error(`Invalid control experiment state: ${experiment.id}`);
+  if (!Array.isArray(experiment.controllers) || experiment.controllers.length < 2 || experiment.controllers.some((controller) => !controller.name || !controller.role || !controller.assumption)) throw new Error(`Control experiment needs two comparable controllers: ${experiment.id}`);
+  if (!Array.isArray(experiment.fixed_protocol) || experiment.fixed_protocol.length < 3) throw new Error(`Control experiment protocol is too thin: ${experiment.id}`);
+  if (!Array.isArray(experiment.metrics) || experiment.metrics.length < 4) throw new Error(`Control experiment metrics are too thin: ${experiment.id}`);
+  if (!Array.isArray(experiment.artifacts) || experiment.artifacts.length < 4) throw new Error(`Control experiment artifacts are too thin: ${experiment.id}`);
+  if (!experiment.success_gate || !experiment.risk_gate) throw new Error(`Control experiment gates are incomplete: ${experiment.id}`);
+  if (!Array.isArray(experiment.node_ids) || !experiment.node_ids.includes("robotics-control-experiments") || experiment.node_ids.some((nodeId) => !nodeIds.has(nodeId))) throw new Error(`Unknown node in control experiment: ${experiment.id}`);
+  if (!Array.isArray(experiment.source_ids) || experiment.source_ids.length === 0 || experiment.source_ids.some((sourceId) => !sourceIds.has(sourceId))) throw new Error(`Unknown source in control experiment: ${experiment.id}`);
+  if (!Array.isArray(experiment.evidence_urls) || experiment.evidence_urls.length === 0 || experiment.evidence_urls.some((evidence) => !evidence.label || !evidence.url?.startsWith("https://"))) throw new Error(`Invalid evidence in control experiment: ${experiment.id}`);
+  if (experiment.setting === "hardware" && (experiment.readiness !== "safety-review-required" || !/(safety|安全)/iu.test(experiment.risk_gate))) throw new Error(`Hardware experiment bypasses safety review: ${experiment.id}`);
+}
+
 const jobStatuses = new Set(["active", "ready", "planned", "awaiting-input"]);
 if (jobs.schema_version !== "0.1.0") throw new Error("Unexpected ingestion job schema version");
 if (!Array.isArray(jobs.jobs) || jobs.jobs.length < 15) throw new Error("Ingestion plan must contain at least 15 jobs");
@@ -371,4 +408,4 @@ for (const paper of frontierPapers.papers) {
   if (!paperStatuses.has(paper.status)) throw new Error(`Invalid Frontier paper status: ${paper.id}`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${venueRegistry.venues.length} venue records, ${workIdentities.works.length} work identities, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${venueRegistry.venues.length} venue records, ${workIdentities.works.length} work identities, ${controlExperiments.experiments.length} control experiment protocols, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);

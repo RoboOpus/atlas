@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "build": "node scripts/build-knowledge.mjs && node scripts/validate.mjs",
+    "test": "node --test tests/work-identity-matcher.test.mjs",
     "knowledge:build": "node scripts/build-knowledge.mjs",
     "frontier:fetch": "node scripts/fetch-frontier-arxiv.mjs",
     "frontier:venues": "node scripts/fetch-openreview-venues.mjs"

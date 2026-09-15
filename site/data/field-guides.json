@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-14",
+  "updated_at": "2026-09-15",
   "scope": "Breadth-first field guides for the Robotics, Hardware, and Adjacent tracks",
   "policy": {
     "ranking": "No item is ranked by popularity or vendor claims.",
@@ -465,6 +465,55 @@
       "tags": ["四足", "人形", "本体"]
     },
     {
+      "id": "hardware-unitree-go2-platform",
+      "track": "hardware",
+      "section": "机器人本体",
+      "name": "Unitree Go2",
+      "subtitle": "约 15 kg 的消费 / 科研四足平台",
+      "kind": "四足机器人型号",
+      "summary": "按通用本体字段记录 Go2 的尺寸、重量、载荷、速度、电池和 L2 4D LiDAR；AIR、PRO、X、EDU 的计算与开发能力继续分栏。",
+      "use_when": "需要轻量四足作为导航、感知、运动控制或具身数据采集平台，并能接受版本相关的软件开放程度。",
+      "boundary": "页面展示的约 5 m/s 是实验室最高速度，不等同规格表中的 0–2.5 m/s工作范围；EDU 接口不可推断到消费版本。",
+      "node_ids": ["hardware-quadrupeds", "hardware-edge-compute", "hardware-lidar", "robotics-sim-to-real"],
+      "source_ids": ["hardware-unitree-go2-price"],
+      "facts": [
+        {"label": "站立尺寸", "value": "70 × 31 × 40 cm"},
+        {"label": "含电池重量", "value": "约 15 kg"},
+        {"label": "载荷", "value": "约 7 kg；最大约 10 kg"},
+        {"label": "规格表速度", "value": "0–2.5 m/s"},
+        {"label": "感知", "value": "L2 4D LiDAR，360° × 96°，最小距离低至 0.05 m"},
+        {"label": "电池", "value": "8000 mAh；可选 15000 mAh"},
+        {"label": "公开价格", "value": "AIR / PRO / EDU 已进入带日期价格快照"}
+      ],
+      "tags": ["Go2", "四足", "4D LiDAR", "版本分栏"],
+      "evidence_urls": [{"label":"Go2 官方产品页","url":"https://www.unitree.com/mobile/go2/"}]
+    },
+    {
+      "id": "hardware-unitree-g1-standard",
+      "track": "hardware",
+      "section": "机器人本体",
+      "name": "Unitree G1 · Standard",
+      "subtitle": "普通版与 EDU 能力不混写的人形机器人卡",
+      "kind": "人形机器人型号",
+      "summary": "本卡只记录 G1 普通版：23 个关节电机、约 35 kg、深度相机与 3D LiDAR；二次开发能力属于 G1 EDU，不能继承到普通版。",
+      "use_when": "需要评估紧凑型人形本体、基础运动能力与价格门槛，并在采购前明确是否真正需要 EDU 开发接口。",
+      "boundary": "官方页面明确普通版不提供二次开发；手臂负载随姿态变化，演示中的灵巧手和高算力模组也不能视为普通版标配。",
+      "node_ids": ["hardware-humanoids", "hardware-edge-compute", "hardware-dexterous-hands", "robotics-whole-body-control"],
+      "source_ids": ["hardware-unitree-g1-price"],
+      "facts": [
+        {"label": "站立尺寸", "value": "1320 × 450 × 200 mm"},
+        {"label": "含电池重量", "value": "约 35 kg"},
+        {"label": "关节电机", "value": "23；G1 EDU 为 23–43"},
+        {"label": "手臂最大负载", "value": "约 2 kg，姿态相关"},
+        {"label": "感知", "value": "深度相机 + 3D LiDAR"},
+        {"label": "续航", "value": "约 2 h"},
+        {"label": "二次开发", "value": "普通版：无；G1 EDU：有"},
+        {"label": "公开价格", "value": "¥85,000，官方中国页含税快照"}
+      ],
+      "tags": ["G1", "人形机器人", "23 DoF", "开发边界"],
+      "evidence_urls": [{"label":"G1 官方产品与规格页","url":"https://www.unitree.com/cn/g1/"}]
+    },
+    {
       "id": "hardware-realsense-family",
       "track": "hardware",
       "section": "视觉传感器",
@@ -524,6 +573,30 @@
       "tags": ["双目", "VIO", "定位"]
     },
     {
+      "id": "hardware-zed2i-21mm",
+      "track": "hardware",
+      "section": "视觉传感器",
+      "name": "ZED 2i · 2.1 mm",
+      "subtitle": "明确镜头与偏振选项的双目视觉惯性相机卡",
+      "kind": "双目 / 视觉惯性相机型号",
+      "summary": "以 2.1 mm 镜头版本为比较单位，记录 120 mm 基线、宽视场、双 4 MP 图像传感器、深度范围和集成惯性环境传感器。",
+      "use_when": "移动机器人需要宽视场双目深度、视觉惯性定位和 ZED SDK，并具备兼容的 NVIDIA GPU 或 Jetson 计算平台。",
+      "boundary": "深度由主机侧神经双目算法计算，效果依赖 GPU、SDK、场景纹理和标定；4 mm 镜头的范围与视场不能拼入本卡。",
+      "node_ids": ["hardware-rgbd-cameras", "hardware-imu", "hardware-edge-compute", "robotics-slam"],
+      "source_ids": ["hardware-stereolabs-zed"],
+      "facts": [
+        {"label": "双目基线", "value": "120 mm"},
+        {"label": "2.1 mm 最大视场", "value": "110° H × 70° V × 120° D"},
+        {"label": "最大深度范围", "value": "0.3–20 m"},
+        {"label": "理想深度范围", "value": "0.3–12 m"},
+        {"label": "图像传感器", "value": "双 4 MP；同步滚动快门"},
+        {"label": "运动传感", "value": "加速度计、陀螺仪、气压计、磁力计、温度"},
+        {"label": "主机依赖", "value": "ZED SDK + 兼容 NVIDIA GPU / Jetson"}
+      ],
+      "tags": ["ZED 2i", "2.1 mm", "双目", "VIO"],
+      "evidence_urls": [{"label":"ZED 2i 官方产品与规格页","url":"https://store.stereolabs.com/products/zed-2i"}]
+    },
+    {
       "id": "hardware-ouster-os",
       "track": "hardware",
       "section": "距离传感器",
@@ -540,6 +613,31 @@
         {"label": "比较字段", "value": "线数、视场、量程、同步、接口"}
       ],
       "tags": ["LiDAR", "3D 感知", "定位"]
+    },
+    {
+      "id": "hardware-ouster-os0-128",
+      "track": "hardware",
+      "section": "距离传感器",
+      "name": "Ouster OS0-128",
+      "subtitle": "90° 垂直视场的近场高密度 3D LiDAR",
+      "kind": "3D LiDAR 型号",
+      "summary": "把 OS0 的 128 线配置单独登记，用宽垂直视场和高点率覆盖机器人近场、仓储通道和室内建图。",
+      "use_when": "移动机器人或无人机需要近场上下覆盖、较高点云密度和 ROS 2 驱动，而不是优先追求远距离窄视场。",
+      "boundary": "35 m 是 10% 反射率条件，100 m 是最大量程；32/64 线配置、回波模式和线束选项不能与 128 线卡混写。",
+      "node_ids": ["hardware-lidar", "robotics-slam", "robotics-state-estimation"],
+      "source_ids": ["hardware-ouster"],
+      "facts": [
+        {"label": "线数", "value": "128 channels"},
+        {"label": "垂直视场", "value": "90°"},
+        {"label": "10% 反射率量程", "value": "35 m"},
+        {"label": "最大量程", "value": "100 m"},
+        {"label": "最大点率", "value": "5.2 M points/s"},
+        {"label": "最大帧率", "value": "20 Hz"},
+        {"label": "防护", "value": "IP68 / IP69K"},
+        {"label": "价格", "value": "unknown / 联系销售"}
+      ],
+      "tags": ["OS0-128", "3D LiDAR", "90° FOV", "近场感知"],
+      "evidence_urls": [{"label":"OS0 官方产品页","url":"https://ouster.com/products/hardware/os0"}]
     },
     {
       "id": "hardware-ati-ft-family",
