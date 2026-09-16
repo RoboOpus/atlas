@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RoboOpus Atlas 机器人 Benchmark 与数据集注册表：协议、指标、版本、许可和比较边界。">
+    <meta name="theme-color" content="#f4f0e8">
+    <title>Benchmark 与数据集 · RoboOpus Atlas</title>
+    <link rel="stylesheet" href="/atlas/styles.css">
+    <link rel="stylesheet" href="/atlas/catalog/catalog.css">
+    <link rel="stylesheet" href="/atlas/robotics/benchmarks/benchmarks.css">
+    <script src="/atlas/robotics/benchmarks/benchmarks.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>Benchmarks</span></a>
+      <nav aria-label="Benchmark 注册表导航">
+        <a href="/atlas/robotics/">Robotics</a>
+        <a href="/atlas/robotics/benchmarks/">Benchmarks</a>
+        <a href="/atlas/robotics/control-lab/">控制实验</a>
+        <a href="/atlas/frontier/">Frontier</a>
+      </nav>
+    </header>
+
+    <main class="benchmark-main">
+      <section class="benchmark-head">
+        <div>
+          <p class="eyebrow">Protocol first · score second</p>
+          <h1>Benchmark<br><em>与数据集</em></h1>
+        </div>
+        <p><strong>这里不做跨任务总排名。</strong>先对齐任务版本、评测单位、观测与动作空间、随机性、指标和许可，再讨论结果。数据规模是覆盖信息，不是质量分数。</p>
+      </section>
+
+      <section class="benchmark-stats" aria-label="注册表概览">
+        <div><span>已登记</span><strong id="record-total">—</strong></div>
+        <div><span>含 Benchmark</span><strong id="benchmark-total">—</strong></div>
+        <div><span>纯数据集</span><strong id="dataset-total">—</strong></div>
+        <div><span>仿真 + 真机</span><strong id="sim-real-total">—</strong></div>
+      </section>
+
+      <section class="benchmark-controls" aria-label="筛选 Benchmark 与数据集">
+        <label class="search-field"><span>搜索</span><input id="benchmark-search" type="search" placeholder="RoboDojo、长时程、真实数据、导航…" autocomplete="off"></label>
+        <div class="control-block"><span>类型</span><div class="filter-row" aria-label="按类型筛选">
+          <button type="button" class="active" data-type="all">全部</button>
+          <button type="button" data-type="benchmark">Benchmark</button>
+          <button type="button" data-type="dataset">数据集</button>
+          <button type="button" data-type="platform">平台</button>
+        </div></div>
+        <div class="control-block"><span>环境</span><div class="filter-row" aria-label="按环境筛选">
+          <button type="button" class="active" data-environment="all">全部</button>
+          <button type="button" data-environment="simulation">仿真</button>
+          <button type="button" data-environment="real">真机数据</button>
+          <button type="button" data-environment="sim-and-real">仿真 + 真机</button>
+        </div></div>
+        <div class="result-line" aria-live="polite"><strong id="benchmark-count">加载中</strong><span>任何结果都应附协议与版本。</span></div>
+      </section>
+
+      <section id="benchmark-grid" class="benchmark-grid" aria-label="Benchmark 与数据集列表"></section>
+      <div id="benchmark-empty" class="catalog-empty" hidden><strong>没有匹配记录</strong><p>换一个关键词或切回“全部”。</p></div>
+      <noscript>该页面需要 JavaScript 来读取机器可读注册表。</noscript>
+    </main>
+
+    <footer>
+      <p>RoboOpus Atlas · 先对齐协议，再比较分数</p>
+      <p><a href="/atlas/data/benchmark-registry.json">机器可读注册表</a> · <a href="/atlas/catalog/?track=robotics">机器人知识节点</a></p>
+    </footer>
+  </body>
+</html>

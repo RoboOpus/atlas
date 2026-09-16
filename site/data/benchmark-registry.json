@@ -1,0 +1,542 @@
+{
+  "schema_version": "0.1.0",
+  "updated_at": "2026-09-16",
+  "policy": {
+    "comparison": "Do not compare headline scores across different task versions, observation/action spaces, reset distributions, horizons, or evaluation units.",
+    "scale": "Dataset size and task count are coverage facts, not quality scores.",
+    "versioning": "Every reproduced result must bind code, assets, task split, configuration, seeds, and evaluation date.",
+    "licenses": "Code, data, assets, and model weights may have different licenses; unknown terms remain explicit."
+  },
+  "records": [
+    {
+      "id": "robodojo-2026",
+      "name": "RoboDojo",
+      "artifact_type": "benchmark",
+      "domain": "generalist-manipulation",
+      "environment": "sim-and-real",
+      "focus": "用统一接口评估通用机器人操作策略的泛化、记忆、精度、长时程与开放能力。",
+      "scale_statement": "42 个 Isaac Sim 仿真任务、18 个真机任务、3 类机器人本体；当前公开版以评测为主。",
+      "evaluation_unit": "固定任务、种子、场景与本体配置下的策略 rollout",
+      "primary_metrics": [
+        "任务成功率",
+        "五类能力维度汇总",
+        "失败与结果产物完整性"
+      ],
+      "protocol_keys": [
+        "RoboDojo commit/release",
+        "XPolicyLab policy adapter",
+        "simulation or real task set",
+        "robot embodiment",
+        "seed and layout",
+        "action mode"
+      ],
+      "comparison_boundary": "仿真榜与真机榜不能互换；RoboDojo 评测端与 XPolicyLab 策略服务端版本都必须锁定。",
+      "license_note": "README 声明 RoboDojo Non-Commercial Research License；商业使用需书面许可。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-sim-to-real",
+        "robotics-contact-modeling"
+      ],
+      "source_ids": [
+        "robotics-robodojo",
+        "robotics-isaac-lab"
+      ],
+      "links": {
+        "project": "https://robodojo-benchmark.com/",
+        "repository": "https://github.com/RoboDojo-Benchmark/RoboDojo",
+        "paper": "https://arxiv.org/abs/2607.04434",
+        "data": null
+      },
+      "tags": [
+        "RoboDojo",
+        "sim-and-real",
+        "VLA evaluation"
+      ]
+    },
+    {
+      "id": "libero",
+      "name": "LIBERO",
+      "artifact_type": "benchmark-and-dataset",
+      "domain": "lifelong-manipulation",
+      "environment": "simulation",
+      "focus": "研究终身模仿学习中的知识迁移、任务顺序、遗忘与多任务预训练。",
+      "scale_statement": "提供 LIBERO-SPATIAL、OBJECT、GOAL 与 100 等任务/数据套件，并区分 LIBERO-90/10 训练评测划分。",
+      "evaluation_unit": "指定任务套件、任务顺序与算法设置下的操作 episode",
+      "primary_metrics": [
+        "任务成功率",
+        "终身学习阶段表现",
+        "知识迁移与遗忘对照"
+      ],
+      "protocol_keys": [
+        "LIBERO version",
+        "benchmark suite",
+        "task order",
+        "training algorithm",
+        "policy architecture",
+        "seed and checkpoint"
+      ],
+      "comparison_boundary": "LIBERO-10、90、100 及 spatial/object/goal 回答的问题不同；任务顺序和训练预算变化会改变结论。",
+      "license_note": "官方仓库标明代码 MIT；演示数据 CC BY 4.0。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-sim-to-real",
+        "robotics-system-identification"
+      ],
+      "source_ids": [
+        "robotics-libero"
+      ],
+      "links": {
+        "project": "https://libero-project.github.io/main.html",
+        "repository": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+        "paper": "https://arxiv.org/abs/2306.03310",
+        "data": "https://huggingface.co/datasets/yifengzhu-hf/LIBERO-datasets"
+      },
+      "tags": [
+        "LIBERO",
+        "lifelong learning",
+        "imitation learning"
+      ]
+    },
+    {
+      "id": "calvin",
+      "name": "CALVIN",
+      "artifact_type": "benchmark-and-dataset",
+      "domain": "language-conditioned-manipulation",
+      "environment": "simulation",
+      "focus": "评估仅由自然语言指定的长时程、多任务连续控制策略。",
+      "scale_statement": "开放仿真环境、语言标注演示与 Calvin Challenge 长时程多任务协议。",
+      "evaluation_unit": "从中立初始位姿开始的连续语言指令链",
+      "primary_metrics": [
+        "连续完成指令数",
+        "每个子任务成功率",
+        "不同训练环境设置下的泛化"
+      ],
+      "protocol_keys": [
+        "CALVIN repository version",
+        "training environments",
+        "sensor suite",
+        "action representation",
+        "evaluation sequence set",
+        "reset protocol"
+      ],
+      "comparison_boundary": "单步任务成功不能替代连续指令链表现；传感器和训练环境数量必须与报告设置一致。",
+      "license_note": "官方仓库为 MIT License；下载数据时仍需核对随附条款。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-tamp",
+        "robotics-sim-to-real"
+      ],
+      "source_ids": [
+        "robotics-calvin"
+      ],
+      "links": {
+        "project": "https://calvin.cs.uni-freiburg.de/",
+        "repository": "https://github.com/mees/calvin",
+        "paper": "https://arxiv.org/abs/2112.03227",
+        "data": "https://github.com/mees/calvin#download"
+      },
+      "tags": [
+        "CALVIN",
+        "language conditioned",
+        "long horizon"
+      ]
+    },
+    {
+      "id": "robocasa365-v1",
+      "name": "RoboCasa365",
+      "artifact_type": "benchmark-and-dataset",
+      "domain": "household-mobile-manipulation",
+      "environment": "simulation",
+      "focus": "在大规模厨房场景中训练和评测家庭任务、层级策略与通用机器人。",
+      "scale_statement": "v1.0 发布 365 个任务、2,500+ 厨房场景和 2,200+ 小时机器人演示数据。",
+      "evaluation_unit": "指定任务、scene/object split 与控制器下的仿真 rollout",
+      "primary_metrics": [
+        "任务成功率",
+        "预训练/目标场景泛化",
+        "长时程阶段完成情况"
+      ],
+      "protocol_keys": [
+        "RoboCasa release",
+        "robosuite backend version",
+        "task suite",
+        "scene/object split",
+        "robot and controller",
+        "episode horizon"
+      ],
+      "comparison_boundary": "原始 RoboCasa 与 RoboCasa365 不同；2026 年 v1.0.1 调整过 horizon，旧结果不可直接拼表。",
+      "license_note": "代码、资产、生成对象与演示数据可能适用不同许可，使用前逐项核对官方 License。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-tamp",
+        "robotics-sim-to-real"
+      ],
+      "source_ids": [
+        "robotics-robocasa"
+      ],
+      "links": {
+        "project": "https://robocasa.ai/",
+        "repository": "https://github.com/robocasa/robocasa",
+        "paper": "https://robocasa.ai/assets/robocasa365_iclr26.pdf",
+        "data": "https://github.com/robocasa/robocasa"
+      },
+      "tags": [
+        "RoboCasa365",
+        "household",
+        "mobile manipulation"
+      ]
+    },
+    {
+      "id": "maniskill",
+      "name": "ManiSkill",
+      "artifact_type": "benchmark-and-dataset",
+      "domain": "generalist-manipulation",
+      "environment": "simulation",
+      "focus": "以统一 Gymnasium 风格接口覆盖桌面、移动与灵巧操作，支持状态、视觉和点云策略。",
+      "scale_statement": "持续维护的操作任务、并行仿真、演示与基线集合；规模随版本增长。",
+      "evaluation_unit": "固定任务、观测模式、控制模式与初始状态分布下的 episode",
+      "primary_metrics": [
+        "任务成功率",
+        "样本效率",
+        "仿真吞吐与回放一致性"
+      ],
+      "protocol_keys": [
+        "ManiSkill version",
+        "task id",
+        "observation mode",
+        "control mode",
+        "robot embodiment",
+        "seed and episode count"
+      ],
+      "comparison_boundary": "不同观测/控制模式和物理后端配置不是同一协议；吞吐数字也必须绑定硬件。",
+      "license_note": "遵循官方仓库和各资产/数据组件许可；资产条款不可由代码许可代替。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-sim-to-real",
+        "robotics-contact-modeling"
+      ],
+      "source_ids": [
+        "robotics-maniskill"
+      ],
+      "links": {
+        "project": "https://maniskill.readthedocs.io/en/latest/",
+        "repository": "https://github.com/haosulab/ManiSkill",
+        "paper": null,
+        "data": "https://maniskill.readthedocs.io/en/latest/user_guide/datasets/index.html"
+      },
+      "tags": [
+        "ManiSkill",
+        "Gymnasium",
+        "GPU simulation"
+      ]
+    },
+    {
+      "id": "robotwin-2",
+      "name": "RoboTwin 2.0",
+      "artifact_type": "benchmark-and-dataset",
+      "domain": "bimanual-manipulation",
+      "environment": "simulation",
+      "focus": "通过强域随机化的数据生成和双臂任务评估视觉鲁棒性、多任务与跨本体能力。",
+      "scale_statement": "包含 50+ 双臂任务、数据生成流程、多种策略基线与独立排行榜。",
+      "evaluation_unit": "固定任务、控制模式和随机化设置下的多回合 rollout",
+      "primary_metrics": [
+        "任务成功率",
+        "clean/randomized 设置差异",
+        "跨任务与跨本体表现"
+      ],
+      "protocol_keys": [
+        "RoboTwin branch/version",
+        "task config",
+        "control mode",
+        "embodiment asset",
+        "domain randomization",
+        "evaluation episodes"
+      ],
+      "comparison_boundary": "1.0、2.0、挑战赛分支和 clean/randomized 设置必须分开；控制模式变化会改变难度。",
+      "license_note": "按官方仓库、资产包与策略实现分别核对许可。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-sim-to-real",
+        "robotics-contact-modeling"
+      ],
+      "source_ids": [
+        "robotics-robotwin"
+      ],
+      "links": {
+        "project": "https://robotwin-platform.github.io/",
+        "repository": "https://github.com/RoboTwin-Platform/RoboTwin",
+        "paper": "https://arxiv.org/abs/2506.18088",
+        "data": "https://robotwin-platform.github.io/"
+      },
+      "tags": [
+        "RoboTwin 2.0",
+        "bimanual",
+        "domain randomization"
+      ]
+    },
+    {
+      "id": "behavior-1k",
+      "name": "BEHAVIOR-1K",
+      "artifact_type": "benchmark-and-dataset",
+      "domain": "household-mobile-manipulation",
+      "environment": "simulation",
+      "focus": "在房屋尺度场景中评估导航、双手操作、对象状态变化和长时程家庭活动。",
+      "scale_statement": "完整活动库含 1,000 个日常活动；2026 Challenge 是其中 100 个任务、20,000 条人类遥操作演示的版本化子集。",
+      "evaluation_unit": "带 BDDL 目标谓词和时间上限的完整家庭任务 rollout",
+      "primary_metrics": [
+        "BDDL 目标谓词部分成功分",
+        "模拟时间",
+        "导航距离",
+        "末端执行器位移"
+      ],
+      "protocol_keys": [
+        "BEHAVIOR tag",
+        "challenge year",
+        "task and instance ids",
+        "robot embodiment",
+        "allowed observations",
+        "timeout and evaluator"
+      ],
+      "comparison_boundary": "1,000 个活动库不等于某届挑战的 100 个评测任务；挑战 tag、公开实例和特权观测限制都必须锁定。",
+      "license_note": "代码、OmniGibson、数据与资产许可分开，按具体下载组件核对。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-tamp",
+        "robotics-sim-to-real"
+      ],
+      "source_ids": [
+        "robotics-behavior-1k"
+      ],
+      "links": {
+        "project": "https://behavior.stanford.edu/",
+        "repository": "https://github.com/StanfordVL/BEHAVIOR-1K",
+        "paper": "https://arxiv.org/abs/2403.09227",
+        "data": "https://github.com/StanfordVL/BEHAVIOR-1K/blob/main/docs/challenge/dataset.md"
+      },
+      "tags": [
+        "BEHAVIOR-1K",
+        "household",
+        "BDDL"
+      ]
+    },
+    {
+      "id": "metaworld-v3",
+      "name": "Meta-World",
+      "artifact_type": "benchmark",
+      "domain": "multi-task-meta-rl",
+      "environment": "simulation",
+      "focus": "评估连续控制机器人操作中的多任务强化学习和少样本元学习。",
+      "scale_statement": "50 个 V3 操作任务，组织为 MT1/10/50 与 ML1/10/45 等不同协议。",
+      "evaluation_unit": "给定 MT 或 ML 训练/测试划分下的操作 episode",
+      "primary_metrics": [
+        "任务成功率",
+        "跨任务平均表现",
+        "元学习测试任务适应表现"
+      ],
+      "protocol_keys": [
+        "Meta-World version",
+        "MT or ML benchmark",
+        "train/test split",
+        "goal distribution",
+        "seed",
+        "training budget"
+      ],
+      "comparison_boundary": "MT 是多任务训练，ML 是元学习适应；协议和任务划分不同，不能合并成一个排名。",
+      "license_note": "官方仓库代码采用 MIT License；仍需核对依赖和模型资产。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-sim-to-real",
+        "robotics-system-identification"
+      ],
+      "source_ids": [
+        "robotics-metaworld"
+      ],
+      "links": {
+        "project": "https://metaworld.farama.org/",
+        "repository": "https://github.com/Farama-Foundation/Metaworld",
+        "paper": "https://arxiv.org/abs/1910.10897",
+        "data": null
+      },
+      "tags": [
+        "Meta-World",
+        "multi-task RL",
+        "meta RL"
+      ]
+    },
+    {
+      "id": "habitat-lab",
+      "name": "Habitat-Lab",
+      "artifact_type": "platform",
+      "domain": "navigation-and-rearrangement",
+      "environment": "simulation",
+      "focus": "为导航、重排、指令跟随、人类跟随和多智能体任务提供可配置训练评测平台。",
+      "scale_statement": "平台支持多任务和多种机器人本体；具体规模由所选数据集、challenge 与配置决定。",
+      "evaluation_unit": "指定 Habitat task、dataset split、agent 与 sensor config 下的 episode",
+      "primary_metrics": [
+        "任务相关成功率",
+        "导航 SPL/距离类指标",
+        "重排任务阶段与整体成功"
+      ],
+      "protocol_keys": [
+        "Habitat-Lab version",
+        "Habitat-Sim version",
+        "task config",
+        "dataset and split",
+        "agent sensors",
+        "evaluation metrics"
+      ],
+      "comparison_boundary": "Habitat-Lab 是平台而非单一 benchmark；导航、重排和多智能体任务必须分别报告。",
+      "license_note": "遵循 Habitat-Lab、Habitat-Sim、数据集和场景资产各自许可。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-slam",
+        "robotics-tamp"
+      ],
+      "source_ids": [
+        "robotics-habitat-lab"
+      ],
+      "links": {
+        "project": "https://aihabitat.org/",
+        "repository": "https://github.com/facebookresearch/habitat-lab",
+        "paper": null,
+        "data": null
+      },
+      "tags": [
+        "Habitat",
+        "navigation",
+        "rearrangement"
+      ]
+    },
+    {
+      "id": "droid-dataset",
+      "name": "DROID",
+      "artifact_type": "dataset",
+      "domain": "real-world-manipulation-data",
+      "environment": "real",
+      "focus": "提供跨建筑、场景、收集者和任务的真实机器人操作数据及可复现采集平台。",
+      "scale_statement": "项目页报告约 76k 条轨迹、350 小时、564 个场景；任务数在不同版本资料中为 84/86，必须绑定来源版本。",
+      "evaluation_unit": "带语言、图像、机器人状态和动作的真实遥操作 episode",
+      "primary_metrics": [
+        "轨迹与小时覆盖",
+        "场景/任务/收集者多样性",
+        "下游策略泛化实验"
+      ],
+      "protocol_keys": [
+        "RLDS or raw release",
+        "annotation release",
+        "camera calibration release",
+        "episode filtering",
+        "train/test split",
+        "loader version"
+      ],
+      "comparison_boundary": "RLDS 1.7 TB 与原始多相机数据不是同一输入；任务数差异和缺失 episode 修订需要随版本记录。",
+      "license_note": "使用前核对数据下载条款、代码许可和人脸模糊/标注版本。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-sim-to-real",
+        "hardware-research-arms"
+      ],
+      "source_ids": [
+        "robotics-droid-dataset"
+      ],
+      "links": {
+        "project": "https://droid-dataset.github.io/",
+        "repository": "https://github.com/droid-dataset/droid",
+        "paper": "https://arxiv.org/abs/2403.12945",
+        "data": "https://droid-dataset.github.io/droid/"
+      },
+      "tags": [
+        "DROID",
+        "real robot",
+        "RLDS"
+      ]
+    },
+    {
+      "id": "open-x-embodiment",
+      "name": "Open X-Embodiment",
+      "artifact_type": "dataset",
+      "domain": "cross-embodiment-data",
+      "environment": "real",
+      "focus": "把多机构、多机器人数据统一为 RLDS episode，支持跨本体预训练和 RT-X 研究。",
+      "scale_statement": "论文与项目资料描述 60 个数据集、22 种机器人本体；每个贡献数据集仍保留独立元数据与引用。",
+      "evaluation_unit": "标准化 RLDS episode 与贡献数据集级元数据",
+      "primary_metrics": [
+        "数据集与本体覆盖",
+        "任务/技能覆盖",
+        "跨本体下游迁移"
+      ],
+      "protocol_keys": [
+        "dataset list snapshot",
+        "component dataset versions",
+        "RLDS builders",
+        "mixture weights",
+        "normalization",
+        "per-dataset licenses"
+      ],
+      "comparison_boundary": "统一格式不等于动作语义、相机、控制频率或质量一致；混合权重和归一化决定训练分布。",
+      "license_note": "聚合软件 Apache 2.0；每个贡献数据集的许可和引用必须单独遵守。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-sim-to-real",
+        "frontier-dataset-releases"
+      ],
+      "source_ids": [
+        "robotics-open-x-embodiment"
+      ],
+      "links": {
+        "project": "https://robotics-transformer-x.github.io/",
+        "repository": "https://github.com/google-deepmind/open_x_embodiment",
+        "paper": "https://arxiv.org/abs/2310.08864",
+        "data": "https://github.com/google-deepmind/open_x_embodiment"
+      },
+      "tags": [
+        "Open X-Embodiment",
+        "cross embodiment",
+        "RLDS"
+      ]
+    },
+    {
+      "id": "bridgedata-v2",
+      "name": "BridgeData V2",
+      "artifact_type": "dataset",
+      "domain": "real-world-manipulation-data",
+      "environment": "real",
+      "focus": "为语言或目标图像条件的多任务机器人学习提供多环境 WidowX 操作数据。",
+      "scale_statement": "60,096 条轨迹、24 个环境、13 类技能；其中 50,365 条遥操作演示、9,731 条脚本策略 rollout。",
+      "evaluation_unit": "带自然语言指令和多相机观测的 WidowX 轨迹",
+      "primary_metrics": [
+        "轨迹/环境/技能覆盖",
+        "新对象与新环境泛化",
+        "目标图像或语言条件下游表现"
+      ],
+      "protocol_keys": [
+        "BridgeData V2 release",
+        "teleop or scripted subset",
+        "camera selection",
+        "language annotations",
+        "train/test split",
+        "control frequency"
+      ],
+      "comparison_boundary": "数据以 WidowX 250、5 Hz 和特定相机布局采集；迁移到其他本体前必须重审动作与观测映射。",
+      "license_note": "官方页面标明数据采用 CC BY 4.0；训练代码许可单独核对。",
+      "node_ids": [
+        "robotics-benchmark-registry",
+        "robotics-sim-to-real",
+        "hardware-low-cost-arms"
+      ],
+      "source_ids": [
+        "robotics-bridgedata-v2"
+      ],
+      "links": {
+        "project": "https://rail-berkeley.github.io/bridgedata/",
+        "repository": "https://github.com/rail-berkeley/bridge_data_v2",
+        "paper": "https://arxiv.org/abs/2308.12952",
+        "data": "https://rail-berkeley.github.io/bridgedata/"
+      },
+      "tags": [
+        "BridgeData V2",
+        "WidowX",
+        "CC BY 4.0"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-15",
+  "updated_at": "2026-09-16",
   "description": "Breadth-first seed nodes for RoboOpus Atlas tracks other than WAM.",
   "nodes": [
     {"id":"frontier-arxiv-radar","track":"frontier","section":"论文雷达","title":"arXiv 每日雷达","title_en":"Daily arXiv Radar","summary":"按主题、时间和证据完整度发现具身智能新论文，并与 WAM 专题去重。","priority":"P0","tags":["arXiv","论文发现","具身智能"],"next_step":"固化查询式、去重键和候选卡字段。"},
@@ -37,6 +37,7 @@
     {"id":"robotics-control-experiments","track":"robotics","section":"控制","title":"控制实验与复现协议","title_en":"Control Experiments and Reproduction Protocols","summary":"用固定系统、初值、约束、指标和产物要求公平比较反馈、最优与接触控制方法。","priority":"P0","tags":["控制实验","复现","评测协议"],"next_step":"先完成双积分、摆起稳定与接触柔顺三个最小实验。"},
     {"id":"robotics-system-identification","track":"robotics","section":"学习与模型结合","title":"系统辨识","title_en":"System Identification","summary":"从参数估计到学习动力学，记录激励、误差和模型有效域。","priority":"P1","tags":["系统辨识","动力学学习","参数估计"],"next_step":"区分离线辨识与在线适应。"},
     {"id":"robotics-sim-to-real","track":"robotics","section":"仿真与系统","title":"仿真与 Sim-to-Real","title_en":"Simulation and Sim-to-Real","summary":"组织仿真器、域随机化、系统辨识、校准和迁移评测。","priority":"P0","tags":["仿真","Sim-to-Real","域随机化"],"next_step":"建立仿真能力与真实验证矩阵。"},
+    {"id":"robotics-benchmark-registry","track":"robotics","section":"仿真与系统","title":"机器人 Benchmark 与数据集","title_en":"Robot Benchmarks and Datasets","summary":"按任务、环境、评测单位、指标、许可和版本登记机器人基准与训练数据，避免只比较排行榜数字。","priority":"P0","tags":["Benchmark","数据集","评测协议"],"next_step":"维护首批跨仿真、真机、移动操作和跨本体数据注册表。"},
 
     {"id":"hardware-humanoids","track":"hardware","section":"机器人本体","title":"人形机器人","title_en":"Humanoid Robots","summary":"比较自由度、负载、续航、算力、接口与开发开放程度。","priority":"P1","tags":["人形机器人","本体","开发平台"],"next_step":"先确定产品卡核心指标和地区范围。"},
     {"id":"hardware-quadrupeds","track":"hardware","section":"机器人本体","title":"四足机器人","title_en":"Quadruped Robots","summary":"整理运动能力、载荷、感知配置、SDK 和 ROS 支持。","priority":"P1","tags":["四足","移动机器人","SDK"],"next_step":"建立研究型与行业型产品分组。"},

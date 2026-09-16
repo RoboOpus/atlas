@@ -11,6 +11,7 @@ const hardwarePriceData = JSON.parse(await readFile(path.join(repo, "content", "
 const venueRegistryData = JSON.parse(await readFile(path.join(repo, "content", "venue-registry.json"), "utf8"));
 const workIdentityData = JSON.parse(await readFile(path.join(repo, "content", "work-identities.json"), "utf8"));
 const controlExperimentData = JSON.parse(await readFile(path.join(repo, "content", "control-experiments.json"), "utf8"));
+const benchmarkRegistryData = JSON.parse(await readFile(path.join(repo, "content", "benchmark-registry.json"), "utf8"));
 const sourcesById = new Map(sourceData.sources.map((source) => [source.id, source]));
 const nodesById = new Map(catalogData.nodes.map((node) => [node.id, node]));
 const trackLabels = { robotics: "Robotics", hardware: "Hardware", adjacent: "Adjacent", frontier: "Frontier", lab: "Lab" };
@@ -242,4 +243,5 @@ await writeFile(path.join(repo, "site", "data", "hardware-price-snapshots.json")
 await writeFile(path.join(repo, "site", "data", "venue-registry.json"), `${JSON.stringify(venueRegistryData, null, 2)}\n`, "utf8");
 await writeFile(path.join(repo, "site", "data", "work-identities.json"), `${JSON.stringify(workIdentityData, null, 2)}\n`, "utf8");
 await writeFile(path.join(repo, "site", "data", "control-experiments.json"), `${JSON.stringify(controlExperimentData, null, 2)}\n`, "utf8");
-process.stdout.write(`Built ${articles.length} source-backed knowledge articles, ${hardwarePriceData.snapshots?.length ?? 0} hardware price snapshots, ${venueRegistryData.venues?.length ?? 0} venue records, ${workIdentityData.works?.length ?? 0} work identities, and ${controlExperimentData.experiments?.length ?? 0} control experiment protocols.\n`);
+await writeFile(path.join(repo, "site", "data", "benchmark-registry.json"), `${JSON.stringify(benchmarkRegistryData, null, 2)}\n`, "utf8");
+process.stdout.write(`Built ${articles.length} source-backed knowledge articles, ${hardwarePriceData.snapshots?.length ?? 0} hardware price snapshots, ${venueRegistryData.venues?.length ?? 0} venue records, ${workIdentityData.works?.length ?? 0} work identities, ${controlExperimentData.experiments?.length ?? 0} control experiment protocols, and ${benchmarkRegistryData.records?.length ?? 0} benchmark/dataset records.\n`);

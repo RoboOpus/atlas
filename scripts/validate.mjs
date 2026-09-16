@@ -18,6 +18,8 @@ const workIdentitySourcePath = path.join(repo, "content", "work-identities.json"
 const workIdentityPublishedPath = path.join(repo, "site", "data", "work-identities.json");
 const controlExperimentSourcePath = path.join(repo, "content", "control-experiments.json");
 const controlExperimentPublishedPath = path.join(repo, "site", "data", "control-experiments.json");
+const benchmarkRegistrySourcePath = path.join(repo, "content", "benchmark-registry.json");
+const benchmarkRegistryPublishedPath = path.join(repo, "site", "data", "benchmark-registry.json");
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const venueConfigPath = path.join(repo, "config", "frontier-venues.json");
 const requiredFiles = [
@@ -34,6 +36,7 @@ const requiredFiles = [
   "site/data/venue-registry.json",
   "site/data/work-identities.json",
   "site/data/control-experiments.json",
+  "site/data/benchmark-registry.json",
   "site/catalog/index.html",
   "site/catalog/catalog.css",
   "site/catalog/catalog.js",
@@ -58,6 +61,9 @@ const requiredFiles = [
   "site/robotics/control-lab/index.html",
   "site/robotics/control-lab/control-lab.css",
   "site/robotics/control-lab/control-lab.js",
+  "site/robotics/benchmarks/index.html",
+  "site/robotics/benchmarks/benchmarks.css",
+  "site/robotics/benchmarks/benchmarks.js",
   "site/hardware/index.html",
   "site/adjacent/index.html",
   "site/knowledge/index.html",
@@ -87,6 +93,8 @@ const requiredFiles = [
   "content/work-identities.json",
   "content/control-experiments.json",
   "content/control-experiments-schema.md",
+  "content/benchmark-registry.json",
+  "content/benchmark-registry-schema.md",
   "content/frontier.md",
   "content/robotics.md",
   "content/hardware.md",
@@ -110,6 +118,8 @@ const workIdentities = JSON.parse(await readFile(workIdentitySourcePath, "utf8")
 const publishedWorkIdentities = JSON.parse(await readFile(workIdentityPublishedPath, "utf8"));
 const controlExperiments = JSON.parse(await readFile(controlExperimentSourcePath, "utf8"));
 const publishedControlExperiments = JSON.parse(await readFile(controlExperimentPublishedPath, "utf8"));
+const benchmarkRegistry = JSON.parse(await readFile(benchmarkRegistrySourcePath, "utf8"));
+const publishedBenchmarkRegistry = JSON.parse(await readFile(benchmarkRegistryPublishedPath, "utf8"));
 const frontierConfig = JSON.parse(await readFile(frontierConfigPath, "utf8"));
 const venueConfig = JSON.parse(await readFile(venueConfigPath, "utf8"));
 const allowedStatuses = new Set(["live", "seeded", "planned", "awaiting-source-material"]);
@@ -273,6 +283,30 @@ for (const experiment of controlExperiments.experiments) {
   if (experiment.setting === "hardware" && (experiment.readiness !== "safety-review-required" || !/(safety|安全)/iu.test(experiment.risk_gate))) throw new Error(`Hardware experiment bypasses safety review: ${experiment.id}`);
 }
 
+const benchmarkArtifactTypes = new Set(["benchmark", "dataset", "benchmark-and-dataset", "platform"]);
+const benchmarkEnvironments = new Set(["simulation", "real", "sim-and-real"]);
+if (benchmarkRegistry.schema_version !== "0.1.0" || !Array.isArray(benchmarkRegistry.records)) throw new Error("Unexpected benchmark registry schema");
+if (!/^\d{4}-\d{2}-\d{2}$/.test(benchmarkRegistry.updated_at)) throw new Error("Benchmark registry update date is invalid");
+if (!benchmarkRegistry.policy?.comparison || !benchmarkRegistry.policy?.scale || !benchmarkRegistry.policy?.versioning || !benchmarkRegistry.policy?.licenses) throw new Error("Benchmark registry policy is incomplete");
+if (benchmarkRegistry.records.length < 10) throw new Error("Benchmark registry needs at least ten breadth records");
+if (JSON.stringify(benchmarkRegistry) !== JSON.stringify(publishedBenchmarkRegistry)) throw new Error("Published benchmark registry is stale");
+const benchmarkIds = new Set();
+for (const record of benchmarkRegistry.records) {
+  if (!record.id || benchmarkIds.has(record.id)) throw new Error(`Missing or duplicate benchmark record: ${record.id}`);
+  benchmarkIds.add(record.id);
+  if (!record.name || !record.domain || !record.focus || !record.scale_statement || !record.evaluation_unit) throw new Error(`Incomplete benchmark identity: ${record.id}`);
+  if (!benchmarkArtifactTypes.has(record.artifact_type) || !benchmarkEnvironments.has(record.environment)) throw new Error(`Invalid benchmark classification: ${record.id}`);
+  if (!Array.isArray(record.primary_metrics) || record.primary_metrics.length < 2) throw new Error(`Benchmark metrics are too thin: ${record.id}`);
+  if (!Array.isArray(record.protocol_keys) || record.protocol_keys.length < 4) throw new Error(`Benchmark protocol is too thin: ${record.id}`);
+  if (!record.comparison_boundary || !record.license_note) throw new Error(`Benchmark boundaries are incomplete: ${record.id}`);
+  if (!Array.isArray(record.node_ids) || !record.node_ids.includes("robotics-benchmark-registry") || record.node_ids.some((nodeId) => !nodeIds.has(nodeId))) throw new Error(`Unknown node in benchmark registry: ${record.id}`);
+  if (!Array.isArray(record.source_ids) || record.source_ids.length === 0 || record.source_ids.some((sourceId) => !sourceIds.has(sourceId))) throw new Error(`Unknown source in benchmark registry: ${record.id}`);
+  if (!record.links || !Object.hasOwn(record.links, "project") || !Object.hasOwn(record.links, "repository") || !Object.hasOwn(record.links, "paper") || !Object.hasOwn(record.links, "data")) throw new Error(`Benchmark links are incomplete: ${record.id}`);
+  for (const url of Object.values(record.links).filter(Boolean)) if (!url.startsWith("https://")) throw new Error(`Invalid benchmark URL: ${record.id}`);
+  if (!Array.isArray(record.tags) || record.tags.length < 2) throw new Error(`Benchmark tags are too thin: ${record.id}`);
+}
+if (!benchmarkIds.has("robodojo-2026")) throw new Error("RoboDojo must remain in the benchmark registry");
+
 const jobStatuses = new Set(["active", "ready", "planned", "awaiting-input"]);
 if (jobs.schema_version !== "0.1.0") throw new Error("Unexpected ingestion job schema version");
 if (!Array.isArray(jobs.jobs) || jobs.jobs.length < 15) throw new Error("Ingestion plan must contain at least 15 jobs");
@@ -408,4 +442,4 @@ for (const paper of frontierPapers.papers) {
   if (!paperStatuses.has(paper.status)) throw new Error(`Invalid Frontier paper status: ${paper.id}`);
 }
 
-process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${venueRegistry.venues.length} venue records, ${workIdentities.works.length} work identities, ${controlExperiments.experiments.length} control experiment protocols, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);
+process.stdout.write(`Validated ${atlas.tracks.length} tracks, ${catalog.nodes.length} catalog nodes, ${sources.sources.length} sources, ${jobs.jobs.length} ingestion jobs, ${fieldGuides.records.length} field-guide records, ${knowledge.articles.length} knowledge articles, ${hardwarePrices.snapshots.length} hardware price snapshots, ${venueRegistry.venues.length} venue records, ${workIdentities.works.length} work identities, ${controlExperiments.experiments.length} control experiment protocols, ${benchmarkRegistry.records.length} benchmark/dataset records, ${frontierPapers.papers.length} Frontier candidates, and ${requiredFiles.length} required files.\n`);

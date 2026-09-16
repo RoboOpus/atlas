@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-15",
+  "updated_at": "2026-09-16",
   "name": "RoboOpus Atlas",
   "repository": "RoboOpus/atlas",
   "site_url": "https://roboopus.github.io/atlas/",
@@ -75,7 +75,8 @@
       "https://roboopus.github.io/atlas/data/hardware-price-snapshots.json",
       "https://roboopus.github.io/atlas/data/venue-registry.json",
       "https://roboopus.github.io/atlas/data/work-identities.json",
-      "https://roboopus.github.io/atlas/data/control-experiments.json"
+      "https://roboopus.github.io/atlas/data/control-experiments.json",
+      "https://roboopus.github.io/atlas/data/benchmark-registry.json"
     ],
     "default_editorial_state": "source-checked-draft",
     "human_review_required_for": "reviewed"

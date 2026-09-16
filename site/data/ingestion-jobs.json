@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-15",
+  "updated_at": "2026-09-16",
   "jobs": [
     {
       "id": "frontier-daily-arxiv",
@@ -128,16 +128,16 @@
     {
       "id": "robotics-simulation-benchmarks",
       "track": "robotics",
-      "title": "仿真与操作 Benchmark",
-      "summary": "对齐 MuJoCo、Isaac Lab、ManiSkill 的任务、观测、控制和评测口径。",
-      "source_ids": ["robotics-mujoco", "robotics-isaac-lab", "robotics-maniskill"],
-      "target_node_ids": ["robotics-sim-to-real", "robotics-contact-modeling"],
+      "title": "机器人 Benchmark 与数据集注册表",
+      "summary": "对齐仿真、真机、长时程操作、移动操作与跨本体数据的任务、观测、控制、指标和许可口径。",
+      "source_ids": ["robotics-mujoco", "robotics-isaac-lab", "robotics-maniskill", "robotics-robodojo", "robotics-libero", "robotics-calvin", "robotics-robocasa", "robotics-robotwin", "robotics-behavior-1k", "robotics-metaworld", "robotics-habitat-lab", "robotics-droid-dataset", "robotics-open-x-embodiment", "robotics-bridgedata-v2"],
+      "target_node_ids": ["robotics-benchmark-registry", "robotics-sim-to-real", "robotics-contact-modeling", "robotics-tamp"],
       "access_mode": "assisted",
       "cadence": "每月版本复核",
       "status": "active",
-      "output": "site/data/field-guides.json · Robotics / 仿真与评测",
-      "next_action": "补版本、物理引擎、观测/控制模式、任务协议与公平比较字段。",
-      "detail_url": "/atlas/robotics/"
+      "output": "content/benchmark-registry.json · 12 条 Benchmark / 数据集记录",
+      "next_action": "继续补各项目 release、挑战年份、资产版本和可执行最小评测命令；不制作跨任务总排名。",
+      "detail_url": "/atlas/robotics/benchmarks/"
     },
     {
       "id": "hardware-research-arms",
