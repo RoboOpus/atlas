@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>统一检索 · RoboOpus Atlas</title>
+  <meta name="description" content="检索 RoboOpus 的机器人正文、论文候选、领域卡片、Benchmark、硬件价格与可信来源。">
+  <link rel="stylesheet" href="/atlas/styles.css"><link rel="stylesheet" href="/atlas/search/search.css">
+</head>
+<body>
+  <header class="topbar"><a class="wordmark" href="/atlas/"><span class="mark">R/O</span><span>Atlas / Search</span></a><nav aria-label="主导航"><a href="/atlas/knowledge/">知识正文</a><a href="/atlas/catalog/">领域目录</a><a href="/atlas/maintenance/">维护台账</a><a href="https://roboopus.github.io/wam/">WAM ↗</a></nav></header>
+  <main class="discovery-main">
+    <section class="discovery-intro"><p class="eyebrow">One query · connected knowledge</p><h1>从一个问题，<br><em>找到已有知识。</em></h1><p class="lede">跨正文全文、领域卡片、论文候选和结构化资料检索。排序仅表示文字相关性，不是论文质量排名。</p></section>
+    <form id="search-form" class="search-panel" role="search">
+      <label class="query-label" for="query">搜索关键词</label>
+      <div class="query-row"><input id="query" name="q" type="search" placeholder="例如：阻抗、MPC、RoboDojo、Unitree" autocomplete="off" maxlength="300"><button type="submit">检索 →</button></div>
+      <div class="select-row"><label>板块 <select id="track" name="track"><option value="all">全部板块</option></select></label><label>资料类型 <select id="type" name="type"><option value="all">全部类型</option></select></label><button type="button" id="clear">清除筛选</button></div>
+      <p class="search-help">多词以空格分隔，需同时命中；支持少量中英术语对应。浏览器本地匹配，无第三方搜索服务；链接会包含关键词，请勿输入私密内容。</p>
+    </form>
+    <div class="result-heading"><p id="result-status" role="status" aria-live="polite">正在加载公开索引…</p><a href="/atlas/data/search-index.json">公开索引 JSON ↗</a></div>
+    <p class="scope-note">当前范围：Atlas 的公开内容。WAM 相关候选已纳入，独立 WAM 站正文尚未接入；个人私密材料不在此索引中。</p>
+    <section id="results" class="search-results" aria-label="检索结果"></section>
+    <p id="empty" hidden>没有找到匹配条目。试试缩短关键词、使用英文名，或切回全部板块。没有搜索结果不代表该主题不存在。</p>
+    <button id="more" type="button" hidden>再显示 20 条</button>
+    <noscript><p>检索需要 JavaScript。你仍可访问<a href="/atlas/knowledge/">知识正文</a>或下载上方公开索引。</p></noscript>
+  </main>
+  <footer><p>RoboOpus Atlas · Evidence before conclusions</p><p><a href="/atlas/maintenance/">查看覆盖缺口与待核验项 →</a></p></footer>
+  <script type="module" src="/atlas/search/search.js"></script>
+</body>
+</html>

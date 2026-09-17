@@ -29,6 +29,8 @@ jobs:
           node-version: 22
       - name: Validate site and content map
         run: npm run build
+      - name: Test search and identity matching
+        run: npm test
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:

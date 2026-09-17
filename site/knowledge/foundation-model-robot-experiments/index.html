@@ -13,7 +13,7 @@
   <body>
     <header class="topbar">
       <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
-      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/search/">统一检索</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
     </header>
     <main class="article-main">
       <header class="article-header">
@@ -79,10 +79,10 @@
 <h2 id="三张卡如何形成研究-idea">三张卡如何形成研究 Idea</h2>
 <p>有价值的组合不是简单串联三个模型，而是明确互补关系。例如：SAM 2 给出动态对象区域，VGGT 估计静态场景几何，DINOv2 为对象重识别提供特征。随后用任务级失败定义决定是否值得组合。</p>
 <p>组合实验仍要保留单模型基线、额外时延、显存、数据需求和故障传播。只要加入模型后不能明确改善成功率、恢复能力、数据效率或人工成本，就不应因为模型流行而继续扩张系统。</p>
-          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noreferrer">Segment Anything 2 ↗</a><p>Meta AI Research · 图像与视频可提示分割，可迁移到机器人目标建模和交互感知。</p></div></li>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态：来源已核对 · 待人工复核。</p><ol><li id="source-1"><span>S1</span><div><a href="https://github.com/facebookresearch/sam2" target="_blank" rel="noreferrer">Segment Anything 2 ↗</a><p>Meta AI Research · 图像与视频可提示分割，可迁移到机器人目标建模和交互感知。</p></div></li>
 <li id="source-2"><span>S2</span><div><a href="https://github.com/facebookresearch/dinov2" target="_blank" rel="noreferrer">DINOv2 ↗</a><p>Meta AI Research · 通用视觉表征及其在机器人感知和数据效率中的迁移。</p></div></li>
 <li id="source-3"><span>S3</span><div><a href="https://github.com/facebookresearch/vggt" target="_blank" rel="noreferrer">VGGT ↗</a><p>Meta AI Research · 从图像预测相机、深度、点图和跟踪等 3D 几何量。</p></div></li></ol></section>
-          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=adjacent">多模态基础模型</a><a href="/atlas/catalog/?track=adjacent">视频理解与预测</a><a href="/atlas/catalog/?track=adjacent">3D / 4D 表征</a><a href="/atlas/catalog/?track=robotics">机器人视觉感知</a><a href="/atlas/catalog/?track=robotics">6D 位姿估计</a><a href="/atlas/catalog/?track=adjacent">闭环评测</a></div></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=adjacent#adjacent-multimodal-models">多模态基础模型</a><a href="/atlas/catalog/?track=adjacent#adjacent-video-understanding">视频理解与预测</a><a href="/atlas/catalog/?track=adjacent#adjacent-3d4d">3D / 4D 表征</a><a href="/atlas/catalog/?track=robotics#robotics-visual-perception">机器人视觉感知</a><a href="/atlas/catalog/?track=robotics#robotics-pose-estimation">6D 位姿估计</a><a href="/atlas/catalog/?track=adjacent#adjacent-closed-loop-eval">闭环评测</a></div></section>
         </article>
       </div>
     </main>

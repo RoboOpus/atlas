@@ -53,6 +53,7 @@ function render() {
   grid.replaceChildren();
   for (const record of filtered) {
     const card = element("article", "benchmark-card");
+    card.id = record.id;
     const top = element("div", "benchmark-card-top");
     top.append(element("span", "", `${typeLabels[record.artifact_type]} · ${environmentLabels[record.environment]}`), element("span", "", record.domain));
     card.append(top, element("h2", "", record.name), element("p", "focus", record.focus));
@@ -116,6 +117,7 @@ fetch("/atlas/data/benchmark-registry.json")
     document.querySelector("#dataset-total").textContent = String(records.filter((item) => item.artifact_type === "dataset").length);
     document.querySelector("#sim-real-total").textContent = String(records.filter((item) => item.environment === "sim-and-real").length);
     render();
+    document.getElementById(location.hash.slice(1))?.scrollIntoView();
   })
   .catch(() => {
     count.textContent = "数据加载失败";

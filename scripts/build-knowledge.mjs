@@ -172,14 +172,14 @@ for (const filename of files) {
   const url = `/atlas/knowledge/${meta.slug}/`;
   const sourceItems = articleSources.map((source, index) => `<li id="source-${index + 1}"><span>S${index + 1}</span><div><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.name)} ↗</a><p>${escapeHtml(source.owner)} · ${escapeHtml(source.best_for)}</p></div></li>`).join("\n");
   const tocItems = rendered.headings.filter((heading) => heading.level === 2).map((heading) => `<a href="#${escapeHtml(heading.id)}">${escapeHtml(heading.title)}</a>`).join("\n");
-  const nodeLinks = articleNodes.map((node) => `<a href="/atlas/catalog/?track=${escapeHtml(node.track)}">${escapeHtml(node.title)}</a>`).join("");
+  const nodeLinks = articleNodes.map((node) => `<a href="/atlas/catalog/?track=${escapeHtml(node.track)}#${escapeHtml(node.id)}">${escapeHtml(node.title)}</a>`).join("");
   const takeaways = (meta.takeaways ?? []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
   const prerequisites = (meta.prerequisites ?? []).map((item) => `<span>${escapeHtml(item)}</span>`).join("");
 
   const articleBody = `
     <header class="topbar">
       <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
-      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/search/">统一检索</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
     </header>
     <main class="article-main">
       <header class="article-header">
@@ -194,7 +194,7 @@ for (const filename of files) {
         <article class="article-content">
           <section class="takeaway-box"><strong>读完应带走</strong><ul>${takeaways}</ul></section>
           ${rendered.html}
-          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol>${sourceItems}</ol></section>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态：${escapeHtml(stateLabels[meta.editorial_state])}。</p><ol>${sourceItems}</ol></section>
           <section class="node-section"><strong>连接的知识节点</strong><div>${nodeLinks}</div></section>
         </article>
       </div>
@@ -221,7 +221,7 @@ const cards = articles.map((article) => {
 const indexBody = `
   <header class="topbar">
     <a class="wordmark" href="/atlas/" aria-label="返回 RoboOpus Atlas 首页"><span class="mark">R/O</span><span>Knowledge</span></a>
-    <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+    <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/search/">统一检索</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
   </header>
   <main class="knowledge-main">
     <section class="knowledge-intro"><div><p class="eyebrow">Knowledge units · source backed</p><h1>知识正文</h1></div><p>这里不是目录槽位，而是可阅读、可引用、可继续修订的知识单元。每篇都公开来源、知识节点、编辑状态和更新时间。</p></section>

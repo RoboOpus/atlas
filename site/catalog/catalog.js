@@ -36,6 +36,7 @@ function render() {
   for (const node of filtered) {
     const card = document.createElement("article");
     card.className = "node-card";
+    card.id = node.id;
 
     const top = document.createElement("div");
     top.className = "node-top";
@@ -107,6 +108,7 @@ Promise.all([getJson("/atlas/data/catalog.json"), getJson("/atlas/data/knowledge
       }
     }
     render();
+    document.getElementById(location.hash.slice(1))?.scrollIntoView();
   })
   .catch(() => {
     count.textContent = "目录加载失败";

@@ -38,6 +38,9 @@ jobs:
       - name: Validate site and data
         run: npm run build
 
+      - name: Test derived search and matching
+        run: npm test
+
       - name: Detect registry changes
         id: changes
         shell: bash

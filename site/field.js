@@ -59,6 +59,7 @@ function render() {
   for (const record of filtered) {
     const card = document.createElement("article");
     card.className = "field-card";
+    card.id = record.id;
 
     const top = document.createElement("div");
     top.className = "field-top";
@@ -147,6 +148,7 @@ Promise.all([
     if (unknownLabel && unknownFacts > 0) unknownLabel.textContent = `${unknownFacts} 个未知字段被明确保留，未做推测。`;
     renderFilters();
     render();
+    document.getElementById(location.hash.slice(1))?.scrollIntoView();
   })
   .catch(() => {
     count.textContent = "数据加载失败";

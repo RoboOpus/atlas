@@ -13,7 +13,7 @@
   <body>
     <header class="topbar">
       <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
-      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/search/">统一检索</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
     </header>
     <main class="article-main">
       <header class="article-header">
@@ -77,11 +77,11 @@ raw-log URI / video URI / replay command</code></pre>
 <h2 id="不要让基准绑架研究问题">不要让基准绑架研究问题</h2>
 <p>公开数据集容易测量，但机器人真实瓶颈可能不在现有标签里。若研究目标是接触安全，就应加入峰值力、滑移、碰撞和停止事件；若目标是长时任务，就应记录恢复次数、累积漂移和人工介入，而不能只沿用图像或轨迹误差。</p>
 <p>RoboOpus 后续会把闭环评测沉淀为“场景注册表 + 运行账本 + 失败切片”。论文表格是其派生结果，原始证据和重放入口才是长期可进化的知识。</p>
-          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://carla.org/" target="_blank" rel="noreferrer">CARLA Simulator ↗</a><p>CARLA Team · 自动驾驶仿真、传感器、场景、交通参与者和评测协议。</p></div></li>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态：来源已核对 · 待人工复核。</p><ol><li id="source-1"><span>S1</span><div><a href="https://carla.org/" target="_blank" rel="noreferrer">CARLA Simulator ↗</a><p>CARLA Team · 自动驾驶仿真、传感器、场景、交通参与者和评测协议。</p></div></li>
 <li id="source-2"><span>S2</span><div><a href="https://waymo.com/open/about/" target="_blank" rel="noreferrer">Waymo Open Dataset ↗</a><p>Waymo · 自动驾驶感知、运动预测、场景生成和端到端驾驶对照。</p></div></li>
 <li id="source-3"><span>S3</span><div><a href="https://www.nuscenes.org/nuscenes" target="_blank" rel="noreferrer">nuScenes ↗</a><p>Motional · 多模态 3D 感知、跟踪、预测、地图与占用研究。</p></div></li>
 <li id="source-4"><span>S4</span><div><a href="https://www.cvlibs.net/datasets/kitti/" target="_blank" rel="noreferrer">KITTI Vision Benchmark Suite ↗</a><p>KIT / Toyota Technological Institute · 立体视觉、光流、视觉里程计与 3D 检测的经典基准。</p></div></li></ol></section>
-          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=adjacent">闭环评测</a><a href="/atlas/catalog/?track=adjacent">数据引擎</a><a href="/atlas/catalog/?track=adjacent">自动驾驶世界模型</a></div></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=adjacent#adjacent-closed-loop-eval">闭环评测</a><a href="/atlas/catalog/?track=adjacent#adjacent-data-engines">数据引擎</a><a href="/atlas/catalog/?track=adjacent#adjacent-driving-world-models">自动驾驶世界模型</a></div></section>
         </article>
       </div>
     </main>

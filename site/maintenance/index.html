@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>维护台账 · RoboOpus Atlas</title><link rel="stylesheet" href="/atlas/styles.css"><link rel="stylesheet" href="/atlas/search/search.css"></head>
+<body>
+  <header class="topbar"><a class="wordmark" href="/atlas/"><span class="mark">R/O</span><span>Atlas / Maintenance</span></a><nav aria-label="主导航"><a href="/atlas/search/">统一检索</a><a href="/atlas/pipeline/">采集管线</a><a href="/atlas/knowledge/">知识正文</a></nav></header>
+  <main class="discovery-main">
+    <section class="discovery-intro"><p class="eyebrow">Coverage · freshness · evidence</p><h1>知道已有多少，<br><em>也知道还缺什么。</em></h1><p class="lede">这里统计公开内容的建设状态，不用页面数量代替知识完成度，也不把采集成功当成人工审核。</p></section>
+    <p id="maintenance-status" role="status">正在读取维护快照…</p>
+    <section class="maintenance-section" aria-labelledby="coverage-title"><h2 id="coverage-title">板块覆盖与空缺</h2><div id="coverage" class="maintenance-grid"></div></section>
+    <section class="maintenance-section" aria-labelledby="feeds-title"><h2 id="feeds-title">采集新鲜度</h2><p class="scope-note">使用快照里的更新时间判断，非实时服务探测。超过 3 天未更新的 arXiv、超过 10 天未更新的会议表会提示检查；没有内容变更也可能导致时间停留。</p><ul id="feeds" class="maintenance-list"></ul></section>
+    <section class="maintenance-section" aria-labelledby="review-title"><h2 id="review-title">正文人工复核队列</h2><p class="scope-note">来源核对草稿仍需人工复核。此处不提供一键自动“审核通过”。</p><ul id="reviews" class="maintenance-list"></ul></section>
+    <section class="maintenance-section" aria-labelledby="prices-title"><h2 id="prices-title">硬件价格重查清单</h2><p class="scope-note">历史快照不等于今日报价。90 天仅为维护提醒阈值，不是报价有效期；采购前仍须检查官方配置、税费、运费与地区。</p><ul id="prices" class="maintenance-list"></ul></section>
+    <section class="maintenance-section" aria-labelledby="jobs-title"><h2 id="jobs-title">尚未启用的采集任务</h2><p class="scope-note">“active”是仓库声明的任务状态，不等于本页已检查最近一次 Actions 运行成功。</p><ul id="jobs" class="maintenance-list"></ul></section>
+    <noscript><p>此视图需要 JavaScript。可下载<a href="/atlas/data/maintenance.json">维护快照 JSON</a>。</p></noscript>
+  </main>
+  <footer><p>RoboOpus Atlas · Public content maintenance</p><p><a href="/atlas/data/maintenance.json">机器可读快照</a></p></footer>
+  <script type="module" src="/atlas/maintenance/maintenance.js"></script>
+</body>
+</html>

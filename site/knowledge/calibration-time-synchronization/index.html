@@ -13,7 +13,7 @@
   <body>
     <header class="topbar">
       <a class="wordmark" href="/atlas/knowledge/" aria-label="返回知识正文"><span class="mark">R/O</span><span>Knowledge</span></a>
-      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
+      <nav aria-label="知识正文导航"><a href="/atlas/">Atlas</a><a href="/atlas/search/">统一检索</a><a href="/atlas/knowledge/">全部正文</a><a href="/atlas/robotics/">Robotics</a><a href="/atlas/hardware/">Hardware</a><a href="/atlas/adjacent/">Adjacent</a></nav>
     </header>
     <main class="article-main">
       <header class="article-header">
@@ -85,11 +85,11 @@
 <li>在线监控：记录残差、时间差和异常跳变，触发重新标定而非静默退化。</li>
 </ol>
 <p>标定条目的最终产物应是“参数 + 数据 + 证据 + 适用范围”，而不是一份无法追溯的配置文件。</p>
-          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态尚未经过人工终审。</p><ol><li id="source-1"><span>S1</span><div><a href="https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html" target="_blank" rel="noreferrer">OpenCV calib3d ↗</a><p>OpenCV · 相机模型、内外参、畸变、PnP、立体几何与手眼标定 API。</p></div></li>
+          <section id="evidence" class="evidence-section"><h2>来源与证据</h2><p>正文为 RoboOpus 的原创整理；以下是一手来源。当前状态：来源已核对 · 待人工复核。</p><ol><li id="source-1"><span>S1</span><div><a href="https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html" target="_blank" rel="noreferrer">OpenCV calib3d ↗</a><p>OpenCV · 相机模型、内外参、畸变、PnP、立体几何与手眼标定 API。</p></div></li>
 <li id="source-2"><span>S2</span><div><a href="https://github.com/ethz-asl/kalibr" target="_blank" rel="noreferrer">Kalibr ↗</a><p>ETH Zurich ASL · 多相机与相机—IMU 的空间和时间标定、噪声模型及报告。</p></div></li>
 <li id="source-3"><span>S3</span><div><a href="https://docs.ros.org/en/rolling/p/message_filters/doc/tutorials.html" target="_blank" rel="noreferrer">ROS 2 message_filters Tutorials ↗</a><p>Open Robotics · 核对多传感器消息的精确、近似与容差时间同步接口。</p></div></li>
 <li id="source-4"><span>S4</span><div><a href="https://docs.ros.org/en/rolling/" target="_blank" rel="noreferrer">ROS 2 Documentation ↗</a><p>Open Robotics · 机器人中间件、接口、工具链、包索引和发行版兼容性。</p></div></li></ol></section>
-          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=robotics">机器人与传感器标定</a><a href="/atlas/catalog/?track=robotics">状态估计</a><a href="/atlas/catalog/?track=robotics">VO / VIO / SLAM</a><a href="/atlas/catalog/?track=hardware">RGB-D 相机</a><a href="/atlas/catalog/?track=hardware">IMU 与惯性系统</a></div></section>
+          <section class="node-section"><strong>连接的知识节点</strong><div><a href="/atlas/catalog/?track=robotics#robotics-calibration">机器人与传感器标定</a><a href="/atlas/catalog/?track=robotics#robotics-state-estimation">状态估计</a><a href="/atlas/catalog/?track=robotics#robotics-slam">VO / VIO / SLAM</a><a href="/atlas/catalog/?track=hardware#hardware-rgbd-cameras">RGB-D 相机</a><a href="/atlas/catalog/?track=hardware#hardware-imu">IMU 与惯性系统</a></div></section>
         </article>
       </div>
     </main>

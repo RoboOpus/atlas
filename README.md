@@ -6,6 +6,9 @@ RoboOpus 具身智能与机器人知识库的总入口与跨项目治理仓库�
 
 ## 当前范围
 
+- 在 `/atlas/search/` 统一检索正文全文与十类公开资料；独立 WAM 站正文尚未接入，WAM 相关候选已包含。
+- 在 `/atlas/maintenance/` 查看覆盖缺口、待人工复核正文、价格重查提醒、采集快照日期与尚未启用任务。
+- 完整项目的已实现/待实现/缺少输入边界记录在 [项目完成度](planning/PROJECT_COMPLETION.md)。
 - 汇总 WAM、Frontier、Robotics、Hardware、Adjacent、Lab 六条建设线。
 - 保存各板块的一级知识树和首批字段规范。
 - 在 `/atlas/catalog/` 发布可搜索、可筛选的非 WAM 一级目录。
@@ -44,7 +47,10 @@ npm run dev
 
 ```powershell
 npm run build
+npm test
 ```
+
+统一检索与维护 JSON 是忽略 Git 的构建产物；本地开发前先执行 build。定时刷新与正式发布也会重建它们。搜索在浏览器本地匹配，不接第三方搜索服务；查询会保存在 URL 中，分享或重新打开链接时会随请求发送给站点，请勿输入私密内容。
 
 ## 仓库边界
 

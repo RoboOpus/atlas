@@ -41,6 +41,7 @@ function render() {
   grid.replaceChildren();
   for (const experiment of filtered) {
     const card = element("article", "experiment-card");
+    card.id = experiment.id;
     const top = element("div", "experiment-top");
     top.append(element("span", "", `${experiment.family} · ${experiment.setting}`), element("span", "experiment-readiness", readinessLabel(experiment.readiness)));
     card.append(top, element("h2", "", experiment.title), element("p", "experiment-question", experiment.question));
@@ -99,6 +100,7 @@ fetch("/atlas/data/control-experiments.json")
     document.querySelector("#hardware-total").textContent = String(experiments.filter((item) => item.setting === "hardware").length);
     document.querySelector("#experiment-updated").textContent = data.updated_at;
     render();
+    document.getElementById(location.hash.slice(1))?.scrollIntoView();
   })
   .catch(() => {
     count.textContent = "数据加载失败";

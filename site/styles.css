@@ -5,6 +5,8 @@
   --line: #c9c5bb;
   --blue: #1453d8;
   --orange: #d95d20;
+  --accent: var(--orange);
+  --serif: Georgia, "Noto Serif SC", serif;
   --panel: rgba(255, 255, 255, 0.56);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
@@ -20,7 +22,8 @@ a { color: inherit; }
 .topbar { min-height: 72px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
 .wordmark { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 760; letter-spacing: -0.02em; }
 .mark { display: grid; place-items: center; width: 42px; height: 42px; color: white; background: var(--ink); font: 700 12px/1 ui-monospace, monospace; }
-nav { display: flex; gap: 24px; font-size: 14px; }
+nav { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; }
+article:target { outline: 2px solid var(--blue); outline-offset: 6px; scroll-margin-top: 24px; }
 nav a { text-decoration: none; }
 nav a:hover { color: var(--blue); }
 .hero { padding: clamp(70px, 10vw, 128px) 0 80px; border-bottom: 1px solid var(--line); }

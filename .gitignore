@@ -3,3 +3,6 @@ node_modules/
 Thumbs.db
 private-cache/
 *.local
+# Derived from public source data on every build (including scheduled deploys).
+site/data/search-index.json
+site/data/maintenance.json
