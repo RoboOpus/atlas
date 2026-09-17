@@ -36,6 +36,7 @@ function compactAbstract(value) {
 }
 
 function dateLabel(value) {
+  if (!value) return "日期未知";
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? "日期未知" : date.toISOString().slice(0, 10);
 }
@@ -56,7 +57,7 @@ function render() {
     const top = document.createElement("div");
     top.className = "paper-top";
     top.append(
-      createText("span", "", `${paper.primaryCategory} · ${dateLabel(paper.published)}`),
+      createText("span", "", `${paper.primaryCategory} · ${paper.dateProvenance === "arxiv-api" ? `提交 ${dateLabel(paper.published)}` : paper.announcedAt ? `公告 ${dateLabel(paper.announcedAt)}` : "历史日期待核验"}`),
       createText("span", "paper-score", `路由相关度 ${paper.triageScore}`)
     );
     card.append(top);

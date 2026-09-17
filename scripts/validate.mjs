@@ -31,6 +31,12 @@ const requiredFiles = [
   "site/maintenance/maintenance.js",
   "site/data/search-index.json",
   "site/data/maintenance.json",
+  "site/data/frontier-archive.json",
+  "site/data/frontier-events.json",
+  "content/frontier-archive.json",
+  "content/frontier-events.json",
+  "site/frontier/changes/index.html",
+  "site/frontier/changes/changes.js",
   "site/index.html",
   "site/styles.css",
   "site/data/atlas.json",
@@ -439,7 +445,8 @@ const paperIds = new Set();
 for (const paper of frontierPapers.papers) {
   if (!paper.id || paperIds.has(paper.id)) throw new Error(`Missing or duplicate Frontier paper id: ${paper.id}`);
   paperIds.add(paper.id);
-  if (!paper.title || !paper.url || !paper.pdfUrl || !paper.published) throw new Error(`Incomplete Frontier paper: ${paper.id}`);
+  if (!paper.title || !paper.url || !paper.pdfUrl) throw new Error(`Incomplete Frontier paper: ${paper.id}`);
+  if (paper.dateProvenance === "arxiv-api" && (!Number.isFinite(Date.parse(paper.published)) || !Number.isFinite(Date.parse(paper.updated)))) throw new Error(`Invalid API timestamps: ${paper.id}`);
   if (!new Set(["abstract", "listing"]).has(paper.metadataCompleteness)) throw new Error(`Unknown Frontier metadata completeness: ${paper.id}`);
   if (paper.metadataCompleteness === "abstract" && !paper.abstract) throw new Error(`Frontier abstract is missing: ${paper.id}`);
   if (!Array.isArray(paper.authors) || paper.authors.length === 0) throw new Error(`Frontier paper has no authors: ${paper.id}`);

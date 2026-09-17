@@ -4,12 +4,30 @@ import { fileURLToPath } from "node:url";
 import { typeLabels, trackLabels } from "../site/search/engine.js";
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const archive = JSON.parse(await readFile(path.join(repo, "content/frontier-archive.json"), "utf8"));
+const events = JSON.parse(await readFile(path.join(repo, "content/frontier-events.json"), "utf8"));
+const archiveIds = new Set(archive.papers.map((paper) => paper.id));
+if (archiveIds.size !== archive.papers.length) throw new Error("Duplicate archive IDs");
+for (const paper of archive.papers) {
+  if (!/^\d{4}\.\d{4,5}$/.test(paper.id) || !paper.title || !paper.authors?.length || !Number.isFinite(Date.parse(paper.firstSeen))) throw new Error(`Invalid archived metadata: ${paper.id}`);
+  if (!["candidate", "reviewing", "verified", "reviewed", "ignored"].includes(paper.status)) throw new Error(`Invalid archived state: ${paper.id}`);
+  if (!["arxiv-api", "rss-announcement", "listing-announcement", "legacy-unverified"].includes(paper.dateProvenance)) throw new Error(`Invalid date provenance: ${paper.id}`);
+  if (paper.dateProvenance === "arxiv-api" && (!Number.isFinite(Date.parse(paper.published)) || !Number.isFinite(Date.parse(paper.updated)))) throw new Error(`Invalid archive API timestamps: ${paper.id}`);
+  if (!paper.url.startsWith("https://arxiv.org/abs/") || !paper.pdfUrl.startsWith("https://arxiv.org/pdf/")) throw new Error(`Invalid archived arXiv link: ${paper.id}`);
+}
+if (new Set(events.events.map((event) => event.id)).size !== events.events.length) throw new Error("Duplicate discovery events");
+for (const event of events.events) {
+  if (!["baseline", "discovery"].includes(event.kind) || !Number.isFinite(Date.parse(event.at))) throw new Error("Invalid discovery event");
+  if ([...(event.added ?? []), ...(event.updated ?? []), ...(event.baseline_ids ?? [])].some((id) => !archiveIds.has(id))) throw new Error("Event references missing archive paper");
+}
+for (const [name, data] of [["frontier-archive", archive], ["frontier-events", events]]) await writeFile(path.join(repo, "site/data", `${name}.json`), JSON.stringify(data, null, 2) + "\n");
 const read = async (name) => JSON.parse(await readFile(path.join(repo, "site/data", `${name}.json`), "utf8"));
 const [knowledge, guides, catalog, sources, frontier, benchmarks, experiments, works, prices, venues, jobs] = await Promise.all([
   "knowledge", "field-guides", "catalog", "sources", "frontier-papers", "benchmark-registry",
   "control-experiments", "work-identities", "hardware-price-snapshots", "venue-registry", "ingestion-jobs"
 ].map(read));
 const records = [];
+if (frontier.papers.some((paper) => !archiveIds.has(paper.id))) throw new Error("Radar window contains a paper missing from the durable archive");
 const flatten = (value) => typeof value === "string" ? value : Array.isArray(value) ? value.map(flatten).join(" ") : value && typeof value === "object" ? Object.values(value).map(flatten).join(" ") : "";
 function add(type, item, options) {
   records.push({
@@ -29,7 +47,7 @@ for (const article of knowledge.articles) {
 for (const guide of guides.records) add("guide", guide, { url: `/atlas/${guide.track}/#${encodeURIComponent(guide.id)}`, updated_at: guides.updated_at });
 for (const node of catalog.nodes) add("node", node, { url: `/atlas/catalog/?track=${node.track}#${encodeURIComponent(node.id)}`, evidence: "知识树节点 · 不代表已有完整正文", updated_at: catalog.updated_at });
 for (const source of sources.sources) add("source", source, { url: source.url, evidence: source.official ? "第一方来源入口 · 非结论背书" : "发现线索 · 需回溯一手证据" });
-for (const paper of frontier.papers) add("paper", paper, { url: paper.url, tracks: [...new Set(["frontier", ...paper.routes])], summary: paper.abstract ? "预印本候选；下方为作者摘要检索片段，不是本站评审结论。" : "标题级元数据候选；摘要尚未补齐。", evidence: `候选 · ${paper.metadataCompleteness === "abstract" ? "含作者摘要" : "仅列表元数据"}`, updated_at: paper.firstSeen, date_label: "首次收录" });
+for (const paper of archive.papers) add("paper", paper, { url: paper.url, tracks: [...new Set(["frontier", ...paper.routes])], summary: paper.abstract ? "预印本候选；下方为作者摘要检索片段，不是本站评审结论。" : "标题级元数据候选；摘要尚未补齐。", evidence: `候选 · ${paper.metadataCompleteness === "abstract" ? "含作者摘要" : "仅列表元数据"}`, updated_at: paper.firstSeen, date_label: "首次收录" });
 for (const item of benchmarks.records) add("benchmark", item, { tracks: ["robotics", "wam"], url: `/atlas/robotics/benchmarks/#${encodeURIComponent(item.id)}`, updated_at: benchmarks.updated_at });
 for (const item of experiments.experiments) add("experiment", item, { url: `/atlas/robotics/control-lab/#${encodeURIComponent(item.id)}`, evidence: `实验状态：${item.readiness} · 协议不等于结果`, updated_at: experiments.updated_at });
 for (const item of works.works) add("work", item, { tracks: ["frontier", ...item.routes], url: item.canonical_url, summary: item.notes, updated_at: item.checked_at, evidence: `身份关联：${item.identity_state} · 非质量评级` });
@@ -50,6 +68,7 @@ records.sort((a, b) => a.id.localeCompare(b.id));
 const maintenance = {
   schema_version: "1.0.0",
   policy: "构建时统计公开仓库快照；不是实时网络健康检查，不代表人工审核完成。日期取源字段，不把构建日期伪装成核验日期。",
+  archive: { count: archive.papers.length, window_count: frontier.papers.length, created_at: archive.created_at, last_success_at: archive.last_success_at, events: events.events.length },
   coverage: Object.keys(trackLabels).map((track) => {
     const nodes = catalog.nodes.filter((node) => node.track === track);
     const articles = knowledge.articles.filter((article) => article.track === track);

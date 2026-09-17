@@ -1,8 +1,11 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { bootstrapArchive, updateArchive } from "./frontier-archive.mjs";
 
 const CONFIG_PATH = resolve(process.cwd(), "config", "frontier-arxiv.json");
 const OUTPUT_PATH = resolve(process.cwd(), "site", "data", "frontier-papers.json");
+const ARCHIVE_PATH = resolve(process.cwd(), "content", "frontier-archive.json");
+const EVENTS_PATH = resolve(process.cwd(), "content", "frontier-events.json");
 const config = JSON.parse(readFileSync(CONFIG_PATH, "utf8"));
 const endpoint = config.endpoint;
 const fallbackFeed = config.fallback_feed;
@@ -114,6 +117,7 @@ function parseEntries(xml) {
       authors,
       published: tag(entry, "published"),
       updated: tag(entry, "updated"),
+      dateProvenance: "arxiv-api",
       primaryCategory:
         attribute(entry.match(/<arxiv:primary_category\b([^>]*)\/?\s*>/i)?.[1] ?? "", "term") ||
         categories[0] ||
@@ -140,8 +144,10 @@ function parseRssItems(xml) {
       title: tag(item, "title"),
       abstract: description,
       authors: creator.split(/,\s+|\s+and\s+/i).map((author) => author.trim()).filter(Boolean),
-      published: Number.isNaN(published.getTime()) ? new Date().toISOString() : published.toISOString(),
-      updated: Number.isNaN(published.getTime()) ? new Date().toISOString() : published.toISOString(),
+      published: null,
+      updated: null,
+      announcedAt: Number.isNaN(published.getTime()) ? null : published.toISOString(),
+      dateProvenance: "rss-announcement",
       primaryCategory: "cs.RO",
       categories: ["cs.RO"],
       url: rawUrl,
@@ -160,7 +166,7 @@ function classBlock(fragment, className) {
 
 function parseRecentListing(html) {
   const records = [];
-  let published = new Date().toISOString();
+  let published = null;
   const blocks = html.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>|<dt\b[^>]*>([\s\S]*?)<\/dt>\s*<dd\b[^>]*>([\s\S]*?)<\/dd>/gi);
 
   for (const block of blocks) {
@@ -188,8 +194,10 @@ function parseRecentListing(html) {
       title: normalizeText(classBlock(metadata, "list-title")).replace(/^Title:\s*/i, ""),
       abstract: "",
       authors,
-      published,
-      updated: published,
+      published: null,
+      updated: null,
+      announcedAt: published,
+      dateProvenance: "listing-announcement",
       primaryCategory: primarySubject || categories[0] || "cs.RO",
       categories: categories.length > 0 ? categories : ["cs.RO"],
       url: `https://arxiv.org/abs/${id}`,
@@ -217,7 +225,7 @@ function scorePaper(paper, now) {
     routeScores.set(rule.route, (routeScores.get(rule.route) ?? 0) + contribution);
   }
 
-  const ageDays = Math.max(0, (now.getTime() - new Date(paper.published).getTime()) / 86_400_000);
+  const ageDays = Math.max(0, (now.getTime() - Date.parse(paper.published ?? paper.announcedAt ?? "")) / 86_400_000);
   if (ageDays <= 14) triageScore += 3;
   else if (ageDays <= 45) triageScore += 2;
   else if (ageDays <= 120) triageScore += 1;
@@ -238,6 +246,8 @@ function publicRecord(paper, previous, now) {
     metadataCompleteness: paper.abstract ? "abstract" : "listing",
     published: paper.published,
     updated: paper.updated,
+    dateProvenance: paper.dateProvenance ?? "legacy-unverified",
+    ...(paper.announcedAt ? { announcedAt: paper.announcedAt } : {}),
     primaryCategory: paper.primaryCategory,
     categories: paper.categories,
     url: paper.url,
@@ -267,8 +277,9 @@ let parsed = [];
 if (inputFile) {
   const fixture = readFileSync(resolve(process.cwd(), inputFile), "utf8");
   const isListing = /<dl\b[^>]*id=["']articles["']/i.test(fixture);
-  parsed = isListing ? parseRecentListing(fixture) : parseEntries(fixture);
-  sourceMode = isListing ? "fixture-listing" : "fixture";
+  const isRss = /<rss\b/i.test(fixture);
+  parsed = isListing ? parseRecentListing(fixture) : isRss ? parseRssItems(fixture) : parseEntries(fixture);
+  sourceMode = isListing ? "fixture-listing" : isRss ? "fixture-rss" : "fixture";
   sourceEndpoint = inputFile;
   sourceQuery = isListing ? "cs.RO recent listing fixture" : config.search_query;
 } else if (listingOnly) {
@@ -310,34 +321,20 @@ if (parsed.length === 0) {
   console.log(`arXiv ${sourceMode} returned no new entries; preserving ${current.papers.length} existing candidates.`);
   process.exit(0);
 }
-const previousById = new Map((current.papers ?? []).map((paper) => [paper.id, paper]));
-const mergedById = new Map(previousById);
-
-for (const paper of parsed) {
-  const previous = previousById.get(paper.id);
-  const record = publicRecord(paper, previous, now);
-  if (record.matchedTopics.length > 0 && record.triageScore >= minTriageScore) {
-    mergedById.set(record.id, record);
-  }
-}
-
-const papers = [...mergedById.values()]
-  .sort(
-    (a, b) =>
-      b.triageScore - a.triageScore ||
-      new Date(b.published).getTime() - new Date(a.published).getTime() ||
-      a.id.localeCompare(b.id)
-  )
-  .slice(0, poolLimit);
+if (existsSync(ARCHIVE_PATH) !== existsSync(EVENTS_PATH)) throw new Error("Archive/event ledger mismatch; refusing to reset history.");
+const baseline = existsSync(ARCHIVE_PATH)
+  ? { archive: JSON.parse(readFileSync(ARCHIVE_PATH, "utf8")), events: JSON.parse(readFileSync(EVENTS_PATH, "utf8")) }
+  : bootstrapArchive(current.papers ?? [], now.toISOString());
+const previousById = new Map(baseline.archive.papers.map((paper) => [paper.id, paper]));
+const result = updateArchive({ ...baseline, incoming: parsed.map((paper) => publicRecord(paper, previousById.get(paper.id), now)),
+  now: now.toISOString(), score: (paper) => scorePaper(paper, now), minScore: minTriageScore, poolLimit,
+  source: { endpoint: sourceEndpoint, mode: sourceMode, query: sourceQuery } });
+const papers = result.pool;
 
 if (dryRun) {
   console.log(`Dry run parsed ${parsed.length} records and retained ${papers.length} candidates.`);
+  console.log(`Archive: ${result.archive.papers.length}; new: ${result.added.length}; metadata changes: ${result.updated.length}. No files written.`);
   console.log(papers.map((paper) => `${paper.id}: ${paper.routes.join(",")} (${paper.triageScore})`).join("\n"));
-  process.exit(0);
-}
-
-if (JSON.stringify(papers) === JSON.stringify(current.papers ?? [])) {
-  console.log(`Frontier arXiv pool is unchanged (${papers.length} candidates).`);
   process.exit(0);
 }
 
@@ -361,4 +358,7 @@ const snapshot = {
 };
 
 writeFileSync(OUTPUT_PATH, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
+writeFileSync(ARCHIVE_PATH, `${JSON.stringify(result.archive, null, 2)}\n`, "utf8");
+writeFileSync(EVENTS_PATH, `${JSON.stringify(result.events, null, 2)}\n`, "utf8");
 console.log(`Updated Frontier arXiv pool with ${papers.length} candidates from ${parsed.length} results.`);
+console.log(`Archive total ${result.archive.papers.length}; added ${result.added.length}, metadata updated ${result.updated.length}.`);

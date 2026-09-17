@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-09-17T05:00:57.445Z",
+  "generated_at": "2026-09-17T17:47:37.883Z",
   "source": {
     "endpoint": "https://export.arxiv.org/api/query",
     "mode": "api",
@@ -72,7 +72,8 @@
       ],
       "triageScore": 36,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.16644",
@@ -123,7 +124,8 @@
       ],
       "triageScore": 30,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.18869",
@@ -139,6 +141,7 @@
       "metadataCompleteness": "abstract",
       "published": "2026-09-16T16:07:33Z",
       "updated": "2026-09-16T16:07:33Z",
+      "dateProvenance": "arxiv-api",
       "primaryCategory": "cs.RO",
       "categories": [
         "cs.RO"
@@ -222,7 +225,8 @@
       ],
       "triageScore": 28,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.17172",
@@ -271,7 +275,8 @@
       ],
       "triageScore": 27,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.13779",
@@ -324,7 +329,8 @@
       ],
       "triageScore": 27,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.15005",
@@ -373,7 +379,8 @@
       ],
       "triageScore": 27,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.15570",
@@ -434,7 +441,8 @@
       ],
       "triageScore": 27,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.18623",
@@ -449,6 +457,7 @@
       "metadataCompleteness": "abstract",
       "published": "2026-09-16T13:13:18Z",
       "updated": "2026-09-16T13:13:18Z",
+      "dateProvenance": "arxiv-api",
       "primaryCategory": "cs.CV",
       "categories": [
         "cs.CV",
@@ -538,7 +547,8 @@
       ],
       "triageScore": 26,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.14219",
@@ -584,7 +594,8 @@
       ],
       "triageScore": 26,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.15921",
@@ -632,7 +643,8 @@
       ],
       "triageScore": 26,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.12721",
@@ -683,7 +695,8 @@
       ],
       "triageScore": 26,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.11308",
@@ -723,7 +736,8 @@
       ],
       "triageScore": 26,
       "status": "candidate",
-      "firstSeen": "2026-09-13T15:10:33.155Z"
+      "firstSeen": "2026-09-13T15:10:33.155Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.10506",
@@ -767,7 +781,8 @@
       ],
       "triageScore": 26,
       "status": "candidate",
-      "firstSeen": "2026-09-13T15:10:33.155Z"
+      "firstSeen": "2026-09-13T15:10:33.155Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.17210",
@@ -832,7 +847,8 @@
       ],
       "triageScore": 25,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2605.27759",
@@ -882,7 +898,8 @@
       ],
       "triageScore": 25,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2606.20980",
@@ -928,7 +945,8 @@
       ],
       "triageScore": 25,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2606.24815",
@@ -977,7 +995,8 @@
       ],
       "triageScore": 25,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2607.08098",
@@ -1021,7 +1040,8 @@
       ],
       "triageScore": 25,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.12347",
@@ -1075,7 +1095,8 @@
       ],
       "triageScore": 25,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.18243",
@@ -1101,6 +1122,7 @@
       "metadataCompleteness": "abstract",
       "published": "2026-09-16T07:20:18Z",
       "updated": "2026-09-16T07:20:18Z",
+      "dateProvenance": "arxiv-api",
       "primaryCategory": "cs.RO",
       "categories": [
         "cs.RO",
@@ -1174,7 +1196,8 @@
       ],
       "triageScore": 24,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.13289",
@@ -1220,7 +1243,8 @@
       ],
       "triageScore": 24,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.14058",
@@ -1261,7 +1285,8 @@
       ],
       "triageScore": 24,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.14868",
@@ -1306,7 +1331,8 @@
       ],
       "triageScore": 24,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.15770",
@@ -1351,7 +1377,8 @@
       ],
       "triageScore": 24,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2510.10932",
@@ -1404,7 +1431,8 @@
       ],
       "triageScore": 24,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.18242",
@@ -1427,6 +1455,7 @@
       "metadataCompleteness": "abstract",
       "published": "2026-09-16T07:20:10Z",
       "updated": "2026-09-16T07:20:10Z",
+      "dateProvenance": "arxiv-api",
       "primaryCategory": "cs.RO",
       "categories": [
         "cs.RO"
@@ -1491,7 +1520,8 @@
       ],
       "triageScore": 23,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.15726",
@@ -1555,7 +1585,8 @@
       ],
       "triageScore": 23,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.18669",
@@ -1572,6 +1603,7 @@
       "metadataCompleteness": "abstract",
       "published": "2026-09-16T13:47:13Z",
       "updated": "2026-09-16T13:47:13Z",
+      "dateProvenance": "arxiv-api",
       "primaryCategory": "cs.RO",
       "categories": [
         "cs.RO"
@@ -1614,6 +1646,7 @@
       "metadataCompleteness": "abstract",
       "published": "2026-09-16T09:48:58Z",
       "updated": "2026-09-16T09:48:58Z",
+      "dateProvenance": "arxiv-api",
       "primaryCategory": "cs.RO",
       "categories": [
         "cs.RO"
@@ -1682,7 +1715,8 @@
       ],
       "triageScore": 22,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.17372",
@@ -1743,7 +1777,8 @@
       ],
       "triageScore": 22,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2607.01079",
@@ -1787,7 +1822,8 @@
       ],
       "triageScore": 22,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.18232",
@@ -1813,6 +1849,7 @@
       "metadataCompleteness": "abstract",
       "published": "2026-09-16T07:03:09Z",
       "updated": "2026-09-16T07:03:09Z",
+      "dateProvenance": "arxiv-api",
       "primaryCategory": "cs.RO",
       "categories": [
         "cs.RO"
@@ -1890,7 +1927,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.17021",
@@ -1936,7 +1974,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
+      "firstSeen": "2026-09-16T04:58:10.738Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2607.04816",
@@ -1985,7 +2024,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.13231",
@@ -2028,7 +2068,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.13675",
@@ -2071,7 +2112,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.14878",
@@ -2111,7 +2153,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.15509",
@@ -2155,7 +2198,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
+      "firstSeen": "2026-09-15T05:04:26.168Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.12075",
@@ -2200,7 +2244,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.12221",
@@ -2240,7 +2285,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.12737",
@@ -2279,7 +2325,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     },
     {
       "id": "2609.12927",
@@ -2317,7 +2364,8 @@
       ],
       "triageScore": 21,
       "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z"
+      "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
     }
   ]
 }

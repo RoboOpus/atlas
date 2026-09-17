@@ -7,7 +7,7 @@ const index = await read("search-index");
 const maintenance = await read("maintenance");
 
 test("index includes every public entity once, across ten source types", async () => {
-  const inputs = [["knowledge", "articles"], ["field-guides", "records"], ["catalog", "nodes"], ["sources", "sources"], ["frontier-papers", "papers"], ["benchmark-registry", "records"], ["control-experiments", "experiments"], ["work-identities", "works"], ["hardware-price-snapshots", "snapshots"], ["venue-registry", "venues"]];
+  const inputs = [["knowledge", "articles"], ["field-guides", "records"], ["catalog", "nodes"], ["sources", "sources"], ["frontier-archive", "papers"], ["benchmark-registry", "records"], ["control-experiments", "experiments"], ["work-identities", "works"], ["hardware-price-snapshots", "snapshots"], ["venue-registry", "venues"]];
   let count = 0;
   for (const [name, key] of inputs) count += (await read(name))[key].length;
   assert.equal(index.records.length, count);

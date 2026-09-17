@@ -1,0 +1,10 @@
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { bootstrapArchive } from "./frontier-archive.mjs";
+const target = "content/frontier-archive.json";
+const eventsTarget = "content/frontier-events.json";
+if (existsSync(target) || existsSync(eventsTarget)) throw new Error("Archive already exists; bootstrap refuses to overwrite history.");
+const current = JSON.parse(readFileSync("site/data/frontier-papers.json", "utf8"));
+const result = bootstrapArchive(current.papers, new Date().toISOString());
+writeFileSync(target, JSON.stringify(result.archive, null, 2) + "\n");
+writeFileSync(eventsTarget, JSON.stringify(result.events, null, 2) + "\n");
+console.log(`Imported ${result.archive.papers.length} existing records as a baseline, not new discoveries.`);

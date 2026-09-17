@@ -8,6 +8,7 @@ RoboOpus 具身智能与机器人知识库的总入口与跨项目治理仓库�
 
 - 在 `/atlas/search/` 统一检索正文全文与十类公开资料；独立 WAM 站正文尚未接入，WAM 相关候选已包含。
 - 在 `/atlas/maintenance/` 查看覆盖缺口、待人工复核正文、价格重查提醒、采集快照日期与尚未启用任务。
+- 在 `/atlas/frontier/changes/` 查看 arXiv 持久归档与逐批发现记录。雷达上限仅限制展示，历史候选仍可统一检索。
 - 完整项目的已实现/待实现/缺少输入边界记录在 [项目完成度](planning/PROJECT_COMPLETION.md)。
 - 汇总 WAM、Frontier、Robotics、Hardware、Adjacent、Lab 六条建设线。
 - 保存各板块的一级知识树和首批字段规范。
@@ -51,6 +52,18 @@ npm test
 ```
 
 统一检索与维护 JSON 是忽略 Git 的构建产物；本地开发前先执行 build。定时刷新与正式发布也会重建它们。搜索在浏览器本地匹配，不接第三方搜索服务；查询会保存在 URL 中，分享或重新打开链接时会随请求发送给站点，请勿输入私密内容。
+
+## 候选归档与发现记录
+
+`content/frontier-archive.json` 和 `content/frontier-events.json` 是受 Git 追踪的持久源数据。构建时发布对应 JSON 镜像，并把全部归档接到统一检索；`site/data/frontier-papers.json` 只保留配置上限内的排序窗口。
+
+- 首次导入旧雷达记为 baseline，不伪装成新发现；此前已被窗口截断的数据不能凭空恢复。
+- 同一 arXiv ID 去重，保留 firstSeen、编辑状态与备注；新条目强制 candidate。
+- 分数随时间重新计算，但单纯排名变化不会被记为科研内容更新。
+- API 日期、RSS/列表公告日期分开；旧记录没有逐条来源证据时标为 legacy-unverified，等待 API 再核验。日期含义参考 [arXiv API 手册](https://info.arxiv.org/help/api/user-manual.html) 和 [RSS 说明](https://info.arxiv.org/help/rss.html)。
+- 后备列表不抹掉已知摘要；旧 API 版本不能覆盖新版本元数据。
+- 每次成功收录保存运行时间；事件只在新增或元数据变化时追加。空响应/请求失败不伪造成功收录。
+- 自动工作流同时提交雷达、归档和事件源文件，构建派生索引后再部署。
 
 ## 仓库边界
 

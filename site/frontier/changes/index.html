@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>发现记录 · RoboOpus Atlas</title><link rel="stylesheet" href="/atlas/styles.css"><link rel="stylesheet" href="/atlas/search/search.css"></head>
+<body>
+  <header class="topbar"><a class="wordmark" href="/atlas/"><span class="mark">R/O</span><span>Atlas / Discovery log</span></a><nav aria-label="主导航"><a href="/atlas/frontier/">候选雷达</a><a href="/atlas/search/?type=paper">历史候选检索</a><a href="/atlas/maintenance/">维护台账</a></nav></header>
+  <main class="discovery-main">
+    <section class="discovery-intro"><p class="eyebrow">Persistent archive · explicit changes</p><h1>每次发现，<br><em>都有迹可循。</em></h1><p class="lede">雷达是有限的展示窗口，归档保存历史候选。这里区分已有数据基线、新收录和元数据更新，不把分数变化当作论文进展。</p></section>
+    <p id="changes-status" role="status">正在读取归档与变更记录…</p>
+    <p class="scope-note">“新收录”指本站首次保留，不代表论文刚发表；“更新”指元数据变化，不代表新的科研结论。历史元数据可通过仓库 Git 版本追溯，未归档论文全文。</p>
+    <section id="changes" class="search-results" aria-label="发现事件"></section>
+    <button id="more-events" type="button" hidden>再显示 20 批</button>
+    <noscript><p>可下载<a href="/atlas/data/frontier-events.json">变更事件 JSON</a>和<a href="/atlas/data/frontier-archive.json">候选归档 JSON</a>。</p></noscript>
+  </main>
+  <footer><p>RoboOpus Atlas · Candidates are not conclusions</p><p><a href="/atlas/data/frontier-events.json">事件 JSON</a> · <a href="/atlas/data/frontier-archive.json">归档 JSON</a></p></footer>
+  <script type="module" src="/atlas/frontier/changes/changes.js"></script>
+</body>
+</html>
