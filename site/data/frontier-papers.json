@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-09-16T04:58:10.738Z",
+  "generated_at": "2026-09-17T05:00:57.445Z",
   "source": {
     "endpoint": "https://export.arxiv.org/api/query",
     "mode": "api",
@@ -124,6 +124,56 @@
       "triageScore": 30,
       "status": "candidate",
       "firstSeen": "2026-09-16T04:58:10.738Z"
+    },
+    {
+      "id": "2609.18869",
+      "title": "KINO: A Keyframe Interface for VLM Planning and Whole-Body Control in Humanoid Loco-Manipulation",
+      "authors": [
+        "Sitong Chen",
+        "Fatemeh Zargarbashi",
+        "Jin Cheng",
+        "Tianxu An",
+        "Stelian Coros"
+      ],
+      "abstract": "Humanoid loco-manipulation requires robots to interpret task instructions and scene semantics while executing coordinated whole-body motions. We propose a hierarchical framework that uses motion keyframes as an intermediate representation between Vision-Language Model (VLM) planning and Reinforcement Learning (RL) control. Each keyframe specifies a target whole-body robot pose and, when applicable, an object pose. Given a language instruction, scene observations, and execution feedback, the VLM selects successive task-relevant keyframes from a predefined library. The selected keyframes are retargeted to the current scene to account for object poses and dimensions. A keyframe-conditioned whole-body policy then generates joint-level actions to reach these goals. We introduce a saliency-based keyframe sampling strategy for low-level policy training that improves end-to-end task success rate from 44% to 92% when using sparse VLM keyframes. We evaluate our framework on object pickup, transport, and placement tasks in simulation and on a Unitree G1 humanoid. The system successfully performs both one- and two-handed manipulation and generalises to placement locations beyond the training reference data.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-16T16:07:33Z",
+      "updated": "2026-09-16T16:07:33Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.18869v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18869v1",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        },
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        },
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "adjacent"
+      ],
+      "triageScore": 29,
+      "status": "candidate",
+      "firstSeen": "2026-09-17T05:00:57.445Z"
     },
     {
       "id": "2609.12316",
@@ -385,6 +435,52 @@
       "triageScore": 27,
       "status": "candidate",
       "firstSeen": "2026-09-15T05:04:26.168Z"
+    },
+    {
+      "id": "2609.18623",
+      "title": "FIVE-VLA: Fast and EffectIVE Autonomous Driving with Recurrent Action Memory",
+      "authors": [
+        "Kemal Oksuz",
+        "Alexandru Buburuzan",
+        "Yuhan Yao",
+        "Puneet K. Dokania"
+      ],
+      "abstract": "State-of-the-art vision-language-action models (VLA) for autonomous driving face critical limitations: excessive parameter counts, inefficient high-resolution image processing, and lack of temporal memory. We introduce Fast and EffectIVE VLA (FIVE-VLA) to address these through two key contributions. First, we employ an efficient vision encoder that processes high-resolution ($448 \\times 896$) images while generating only 98 tokens, over $5\\times$ fewer than existing approaches, and bypass text generation entirely for single-pass trajectory prediction. Second, we propose Recurrent Action Memory (RAM), a lightweight module that conditions action prediction on previous action tokens, providing temporal context critical for manoeuvres such as overtaking and emergency braking. With only 641M parameters, FIVE-VLA completes $\\sim$10% more routes without traffic rule infractions than the previous state-of-the-art VLA on the challenging Bench2Drive closed-loop driving benchmark. Non-reactive open-loop simulation on the large-scale real-world NVIDIA Physical AI AV dataset shows 10.2% and 7.7% lower collision-violation rates than SimLingo in single- and four-view settings, respectively. Additionally, FIVE-VLA runs at $\\sim$30 fps on an A100 and $\\sim$4 fps on a T4 GPU (proxy to an edge device), representing an 8-30$\\times$ speedup over previous methods.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-16T13:13:18Z",
+      "updated": "2026-09-16T13:13:18Z",
+      "primaryCategory": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.18623v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18623v1",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        },
+        {
+          "id": "autonomous-systems",
+          "label": "自动驾驶 / 自主系统",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "wam",
+        "adjacent",
+        "robotics"
+      ],
+      "triageScore": 26,
+      "status": "candidate",
+      "firstSeen": "2026-09-17T05:00:57.445Z"
     },
     {
       "id": "2609.16864",
@@ -982,6 +1078,62 @@
       "firstSeen": "2026-09-14T05:09:27.748Z"
     },
     {
+      "id": "2609.18243",
+      "title": "Acting in Meters: Learning Metric Interactions for Precise Robotic Manipulation",
+      "authors": [
+        "Lijie Wang",
+        "Zheng Lu",
+        "Yiming Wang",
+        "Heyang Yu",
+        "Kenghou Hoi",
+        "Bowen Hu",
+        "Di Cui",
+        "Tianyu Xin",
+        "Haoran Liao",
+        "Wanqi Zhong",
+        "Xingjie Fan",
+        "Yizhao Xu",
+        "Ziliang Wang",
+        "Fei Gao",
+        "Yiming Li"
+      ],
+      "abstract": "Vision-Language-Action models and World-Action Models have advanced language-conditioned robotic manipulation, yet often leave metric relations among actions, objects, and scene geometry implicit. Human manipulation combines semantic understanding of task-relevant objects with spatial feedback that guides hand motion relative to objects and their surroundings. Inspired by this, we introduce a metric interaction framework that models object-level and scene-level interactions in physical Cartesian space at a shared metric scale. At the object level, Interaction-Centric Tokens (ICTs) explicitly represent end-effector pose trajectories relative to manipulated objects and are jointly denoised with actions, providing physically grounded interaction supervision. At the scene level, the Metric Action Interaction Field (MAIF) uses action and ICT queries to attend to metric scene point-cloud features and learns geometry-conditioned action corrections. Through two-stage adaptation, our framework improves diverse VLA and WAM baselines with a small number of additional parameters and training steps. Experiments demonstrate average success-rate gains of 0.80 and 3.59 percentage points on LIBERO and RoboTwin~2.0, respectively, alongside gains of 6.80 percentage points on real-world tasks and 7.45 percentage points on their out-of-distribution variants.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-16T07:20:18Z",
+      "updated": "2026-09-16T07:20:18Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "url": "https://arxiv.org/abs/2609.18243v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18243v1",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        },
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics"
+      ],
+      "triageScore": 24,
+      "status": "candidate",
+      "firstSeen": "2026-09-17T05:00:57.445Z"
+    },
+    {
       "id": "2505.12384",
       "title": "Is Semantic SLAM Ready for Embedded Systems ? A Comparative Survey",
       "authors": [
@@ -1255,6 +1407,53 @@
       "firstSeen": "2026-09-14T05:09:27.748Z"
     },
     {
+      "id": "2609.18242",
+      "title": "ForceDelta-VLA: Distilling Force-Conditioned ActionCorrections for Contact-Rich Manipulation",
+      "authors": [
+        "Ju Dong",
+        "Yu Fu",
+        "Jian Chen",
+        "Yimeng Liu",
+        "Haocheng Zhao",
+        "Lei Zhang",
+        "Kaixin Bai",
+        "Liding Zhang",
+        "Diwen Zheng",
+        "Alois Christian Knoll",
+        "Angela P. Schoellig",
+        "Jianwei Zhang"
+      ],
+      "abstract": "Force-aware Vision-Language-Action (VLA) policies improve contact-rich manipulation, but typically combine task-level motion and contact-dependent adjustment in a single action prediction. Demonstrations provide no explicit labels for decomposing that prediction into a reusable reference action and a correction. We present ForceDelta-VLA, a correction-distillation framework that constructs an explicit force-correction target using paired predictions from a frozen teacher's force-conditioned and learned force-agnostic modes. A separate delay-correction target accounts for reference-action mismatch and the change in reference state. Training uses asynchronous schedule replay with the cached task context available during execution. The resulting lightweight policy adjusts the reference actions using recent force history and robot state, responding to contact changes between reference-action updates without regenerating complete action chunks. Across nine single-arm and bimanual contact-rich tasks, ForceDelta-VLA achieves an 82.2% mean success rate, compared with 54.4% for the original ForceVLA baseline. Direct execution of our Stage-1 Temporal Teacher achieves 70.6%. Relative to ForceVLA, the complete system reduces mean peak contact force over successful trials by approximately 26% on both platforms.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-16T07:20:10Z",
+      "updated": "2026-09-16T07:20:10Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.18242v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18242v1",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics"
+      ],
+      "triageScore": 23,
+      "status": "candidate",
+      "firstSeen": "2026-09-17T05:00:57.445Z"
+    },
+    {
       "id": "2609.16641",
       "title": "SAVLA: Symmetry-Aware Vision-Language-Action Models for Robotic Manipulation",
       "authors": [
@@ -1357,6 +1556,94 @@
       "triageScore": 23,
       "status": "candidate",
       "firstSeen": "2026-09-15T05:04:26.168Z"
+    },
+    {
+      "id": "2609.18669",
+      "title": "M$^3$P-R1: Reinforcement Learning for Large Language Model Guided Multi-Modal Motion Planning via MIP Code Generation",
+      "authors": [
+        "Xingpeng Sun",
+        "Zherong Pan",
+        "Kai Cheng",
+        "Xindi Tang",
+        "Syed Talha Bukhari",
+        "Aniket Bera"
+      ],
+      "abstract": "Multi-Modal Motion Planning (M$^3$P) requires joint reasoning over continuous motions and discrete mode transitions, making it difficult to solve efficiently. For instance, a bipedal robot may walk to a target location and then use its arms to grasp an object. This scenario captures both mode transitions and continuous dynamics, yielding feasible paths that neither purely discrete nor continuous planners can handle. While Mixed-Integer Programming (MIP) offers a principled framework, constructing tractable formulations for non-convex problems is typically manual and domain-specific, especially in the approximate, discretization-based MIP regime needed for non-convex robotic tasks. We propose M$^3$P-R1, a reinforcement learning method that fine-tunes large language models (LLMs) to decompose M$^3$P tasks into MIP variables, constraints, and objectives. Instead of directly outputting answers, which are often prone to hallucination, the model generates executable Python code using MIP optimization libraries and constraint interfaces. This enables solver-backed execution for robust and verifiable solutions. Trained with an outcome-driven reward against the solver, M$^3$P-R1 learns to compose modality-level discretization primitives and synthesize cross-modal coupling constraints, producing executable MIP programs for complex M$^3$P tasks.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-16T13:47:13Z",
+      "updated": "2026-09-16T13:47:13Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.18669v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18669v1",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "planning-control",
+          "label": "规划与控制",
+          "route": "robotics"
+        },
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "adjacent"
+      ],
+      "triageScore": 22,
+      "status": "candidate",
+      "firstSeen": "2026-09-17T05:00:57.445Z"
+    },
+    {
+      "id": "2609.18392",
+      "title": "DistAL: Distance-based Advantage Learning for VLA Fine-Tuning",
+      "authors": [
+        "Reece O'Mahoney",
+        "Ioannis Havoutis"
+      ],
+      "abstract": "Vision-language-action models (VLAs) have trans- formed the field of robotic manipulation in recent years by combining the semantic understanding of LLMs with the precise control of flow-matching policies. Advantage conditioning is a recent technique that iteratively improves VLAs by training a value function on deployment data and using this to train an advantage-conditioned policy. Previous works have only applied simple, low-information success/failure rewards, which leave the value function unable to distinguish states of differing quality beyond how far along the task they appear. Motivated by an exploration of out-of-distribution (OOD) detection methods, we introduce Distance-based Advantage Learning (DistAL), which, by using an embedding space distance as a reward, produces a more informative value function and subsequently a higher downstream task success rate. We validate our method on a series of simulation benchmarks and dexterous bi-manual manipulation tasks on real hardware.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-16T09:48:58Z",
+      "updated": "2026-09-16T09:48:58Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.18392v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18392v1",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics"
+      ],
+      "triageScore": 22,
+      "status": "candidate",
+      "firstSeen": "2026-09-17T05:00:57.445Z"
     },
     {
       "id": "2609.17524",
@@ -1501,6 +1788,62 @@
       "triageScore": 22,
       "status": "candidate",
       "firstSeen": "2026-09-15T05:04:26.168Z"
+    },
+    {
+      "id": "2609.18232",
+      "title": "UMI-Bridge: Action-Anchored Latent Alignment across Human and Robot Manipulation Data",
+      "authors": [
+        "Haiyi Liu",
+        "Jingming Ma",
+        "Ke Rui",
+        "Yuteng Wei",
+        "Yuan Ma",
+        "Yushen Zuo",
+        "Honglong Tian",
+        "Haoran Jia",
+        "Weitao Zhou",
+        "Jiawei Wang",
+        "Minglei Li",
+        "Shiyi Chen",
+        "Haiyan Mao",
+        "Jiaqi Zhang",
+        "Chun Zhang"
+      ],
+      "abstract": "Real-robot demonstrations are limited, motivating the use of human manipulation data collected without robots, including egocentric videos and handheld Universal Manipulation Interface (UMI) demonstrations. However, differences in viewpoint, embodiment, and available action supervision make it difficult to align representations across these sources according to manipulation motion rather than visual appearance. We introduce UMI-Bridge, which uses UMI as an intermediate domain to align representations according to action equivalence rather than pixel similarity. UMI action supervision anchors the latent representation to end-effector motion and gripper behavior, while synchronized head-wrist observations and paired ego-UMI clips support alignment across views and domains. We train a dual-view latent action model (LAM) on human manipulation data without robot demonstrations, then freeze its wrist teacher and dynamics model to regularize vision-language-action (VLA) post-training on UMI and robot data. The shared wrist interface enables this training-time supervision across both domains while preserving the policy's standard inference architecture. Across three real-robot tasks, UMI-Bridge achieves 91.7% mean success versus 73.3% for Naive Co-training with matched UMI and robot data. On two data-efficiency tasks, it surpasses a full-data Robot-only baseline using 25% of the robot demonstrations together with UMI data. It also achieves 85% and 90% success on two additional tasks learned from UMI demonstrations without task-specific robot demonstrations. These results support action-anchored latent alignment for data-efficient robot learning and UMI-to-robot task transfer.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-16T07:03:09Z",
+      "updated": "2026-09-16T07:03:09Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.18232v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18232v1",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "wam",
+        "hardware"
+      ],
+      "triageScore": 21,
+      "status": "candidate",
+      "firstSeen": "2026-09-17T05:00:57.445Z"
     },
     {
       "id": "2609.17035",
@@ -1975,310 +2318,6 @@
       "triageScore": 21,
       "status": "candidate",
       "firstSeen": "2026-09-14T05:09:27.748Z"
-    },
-    {
-      "id": "2609.11357",
-      "title": "Morphology-Aware Human Motion Retargeting for Wheeled-Humanoid Loco-Manipulation",
-      "authors": [
-        "Chenbo Xia",
-        "Chao Ye"
-      ],
-      "abstract": "",
-      "metadataCompleteness": "listing",
-      "published": "2026-09-11T12:00:00.000Z",
-      "updated": "2026-09-11T12:00:00.000Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.11357",
-      "pdfUrl": "https://arxiv.org/pdf/2609.11357",
-      "matchedTopics": [
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        },
-        {
-          "id": "locomotion-navigation",
-          "label": "运动与导航",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "robotics"
-      ],
-      "triageScore": 21,
-      "status": "candidate",
-      "firstSeen": "2026-09-13T15:10:33.155Z"
-    },
-    {
-      "id": "2609.09492",
-      "title": "Actuator Dynamics Curricula for Narrow-Viability Tasks in Legged Robot Learning",
-      "authors": [
-        "Kousheek Chakraborty",
-        "Chandan K. Rajendra",
-        "Ayham Alharbat",
-        "Abeje Y. Mersha"
-      ],
-      "abstract": "",
-      "metadataCompleteness": "listing",
-      "published": "2026-09-10T12:00:00.000Z",
-      "updated": "2026-09-10T12:00:00.000Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.09492",
-      "pdfUrl": "https://arxiv.org/pdf/2609.09492",
-      "matchedTopics": [
-        {
-          "id": "locomotion-navigation",
-          "label": "运动与导航",
-          "route": "robotics"
-        },
-        {
-          "id": "hardware-sensing",
-          "label": "硬件与传感",
-          "route": "hardware"
-        }
-      ],
-      "routes": [
-        "hardware",
-        "robotics"
-      ],
-      "triageScore": 21,
-      "status": "candidate",
-      "firstSeen": "2026-09-13T15:10:33.155Z"
-    },
-    {
-      "id": "2609.17405",
-      "title": "Optimized Wrench Polytope Analysis for Real-Time Stability Control of Legged Robots in Complex Multi-Contact Configurations",
-      "authors": [
-        "Friedrich Graaf",
-        "Elias Birkefeld",
-        "Christian Eichmann",
-        "Elias Hofele",
-        "Tristan Schnell",
-        "Georg Heppner",
-        "Arne Roennau",
-        "Rüdiger Dillmann"
-      ],
-      "abstract": "Legged robots offer a variety of automation applications in real-world scenarios. But areas that are difficult to traverse, like slopes, caves, or scaffolding, still pose a great challenge for traversal. To tackle this problem, we propose an optimized algorithm for evaluating the full actuatable wrench polytope for arbitrary contact scenarios. With our improved analysis algorithm, the torques for each joint of the robot can be calculated within a control frequency of 49 Hz. The achieved speedup allows for deployment within a regular control loop for actuating robot poses for different contact scenarios. We evaluated our stability controller extensively in simulation scenarios and validated its applicability by deploying it on actual walking robot hardware. The proposed controller achieved stability in very complex scenarios that are currently not achievable by any other controller.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-15T16:35:02Z",
-      "updated": "2026-09-15T16:35:02Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.17405v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.17405v1",
-      "matchedTopics": [
-        {
-          "id": "locomotion-navigation",
-          "label": "运动与导航",
-          "route": "robotics"
-        },
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        },
-        {
-          "id": "hardware-sensing",
-          "label": "硬件与传感",
-          "route": "hardware"
-        }
-      ],
-      "routes": [
-        "robotics",
-        "hardware"
-      ],
-      "triageScore": 20,
-      "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
-    },
-    {
-      "id": "2609.17404",
-      "title": "Residual Fault Adaptation for Dexterous In-Hand Manipulation Under Runtime Joint Faults",
-      "authors": [
-        "Linan Deng",
-        "Xing Liu",
-        "Lin Hong",
-        "Feng Hua",
-        "Guijun Ma",
-        "Zuogong Yue",
-        "Fumin Zhang"
-      ],
-      "abstract": "Dexterous in-hand manipulation requires coordinated control of multiple actuated joints, and a runtime joint fault can abruptly disrupt the contact configuration required for successful manipulation. In this work, we propose residual fault adaptation (RFA), a teacher-anchored framework for compensating for hidden command-channel faults. RFA retains a frozen healthy teacher to provide nominal behavior and trains a recurrent residual policy to infer corrective actions from proprioceptive and command-response history. During training, fault-injection domain randomization (FIDR) varies the fault mode, affected joint, severity, and onset time, while adaptive sampling increases the frequency of fault modes associated with lower recent performance. A frozen Direct FIDR policy provides a distributional reference only on fault-active training samples and is absent from deployment. The deployed controller receives neither fault labels nor controller-switching signals. Simulation experiments on the dexterous hand indicate that RFA can improve manipulation performance relative to the healthy policy under a fixed mixed-fault protocol. Real-robot experiments with software-injected faults further demonstrate zero-shot deployment of the learned adaptation policy.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-15T16:34:45Z",
-      "updated": "2026-09-15T16:34:45Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.17404v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.17404v1",
-      "matchedTopics": [
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        },
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        },
-        {
-          "id": "hardware-sensing",
-          "label": "硬件与传感",
-          "route": "hardware"
-        }
-      ],
-      "routes": [
-        "robotics",
-        "hardware"
-      ],
-      "triageScore": 20,
-      "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
-    },
-    {
-      "id": "2609.17145",
-      "title": "LiLi: Lie Theory Based 3D LiDAR Scan Alignment Degeneracy Detection",
-      "authors": [
-        "Vsevolod Hulchuk",
-        "Jan Bayer",
-        "Jan Faigl"
-      ],
-      "abstract": "In this paper, we study 3D LiDAR scan alignment in challenging scenarios with degeneracies, such as straight corridors or flat fields, where the alignment solution is not unique and compromises localization and mapping accuracy. Existing degeneracy detection methods that neglect the potential for reassociating data points are prone to being sensitive to noise and complex degeneracies. Therefore, we propose LiLi - a novel method that leverages Lie theory to identify the full set of degenerate transformations within the SE(3) Lie group of rigid transformations. The method employs perturbations of the optimized solution and compares the resulting optimized poses to ensure robust detection of degeneracies. By leveraging generators from the Lie algebra se(3), the method provides a systematic approach to describing the set of degenerate transformations. Quantitative evaluations on synthetic data show significant improvement over the state-of-the-art Hessian-based method, reducing alignment error by 50%, with more significant improvements for datasets featuring noise. In the real-world degenerate datasets, the proposed method integrated into LiDAR-based odometry yields superior localization performance compared to the reference solution based on the Hessian-based degeneracy detector on a 260 m long trajectory, and succeeds on a 430 m long round-trip tunnel trajectory where the reference fails.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-15T13:10:08Z",
-      "updated": "2026-09-15T13:10:08Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.17145v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.17145v1",
-      "matchedTopics": [
-        {
-          "id": "perception-estimation",
-          "label": "感知与估计",
-          "route": "robotics"
-        },
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        },
-        {
-          "id": "hardware-sensing",
-          "label": "硬件与传感",
-          "route": "hardware"
-        }
-      ],
-      "routes": [
-        "hardware",
-        "robotics"
-      ],
-      "triageScore": 20,
-      "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
-    },
-    {
-      "id": "2609.17106",
-      "title": "BRAVE-6D: Benchmark for Robotic Active Vision in 6DOF Pose Estimation",
-      "authors": [
-        "Philipp Ausserlechner",
-        "Bernhard Neuberger",
-        "Alessandro Scherl",
-        "Michael Schebek",
-        "Stefan Thalhammer",
-        "Markus Vincze"
-      ],
-      "abstract": "Detecting and grasping small objects remains a significant challenge in robotics. Active vision, where the robot moves closer to the object, is an intuitive solution, yet comparing approaches on common ground is difficult since identical physical scene setups are required. Hence, we introduce BRAVE-6D, a benchmark designed to evaluate robotic active vision systems for object pose estimation, a crucial first step in grasping objects. BRAVE-6D leverages view synthesis based on Gaussian Splats (3DGS) to provide scenes and tools for benchmarking active vision systems. We show baseline solutions performing visual servoing within the scene and accurately estimating the poses of small objects.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-15T12:38:20Z",
-      "updated": "2026-09-15T12:38:20Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.17106v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.17106v1",
-      "matchedTopics": [
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        },
-        {
-          "id": "perception-estimation",
-          "label": "感知与估计",
-          "route": "robotics"
-        },
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "robotics"
-      ],
-      "triageScore": 20,
-      "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z"
-    },
-    {
-      "id": "2511.11218",
-      "title": "Humanoid Whole-Body Badminton via an Annealed Reinforcement Learning Curriculum",
-      "authors": [
-        "Chenhao Liu",
-        "Leyun Jiang",
-        "Ningyuan Tian",
-        "Yibo Wang",
-        "Kairan Yao",
-        "Jinchen Fu",
-        "Xiaoyu Ren"
-      ],
-      "abstract": "Humanoid robots have demonstrated strong capabilities for interacting with static scenes across locomotion and manipulation, yet dynamic real-world interactions remain challenging. As a step toward fast-moving object interactions, we present an RL training pipeline that yields a unified whole-body controller for humanoid badminton, coordinating footwork and striking without motion priors or expert demonstrations. In badminton, locomotion and striking are tightly coupled, making the final hitting objective difficult to optimize directly due to sparse rewards and conflicting gradients. We address this with an annealed curriculum that first stabilizes learning through auxiliary locomotion objectives, then progressively removes them to focus optimization on the final hitting objective. For deployment, we use an Extended Kalman Filter (EKF) to estimate and predict shuttlecock trajectories for target striking, and also develop a prediction-free variant that removes the EKF and explicit prediction. We validate the framework in simulation and on hardware. In simulation, two robots sustain a rally of 21 consecutive hits. In real-world tests with both machine-fed shuttles and human-robot rallies, the robot achieves outgoing shuttle speeds up to 19.1 m/s. Moreover, the prediction-free variant attains comparable performance to the EKF-based policy. Overall, our approach enables dynamic yet precise goal striking in humanoid badminton and suggests a path toward more dynamics-critical whole-body interaction tasks.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-15T04:00:00.000Z",
-      "updated": "2026-09-15T04:00:00.000Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2511.11218",
-      "pdfUrl": "https://arxiv.org/pdf/2511.11218",
-      "matchedTopics": [
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        },
-        {
-          "id": "locomotion-navigation",
-          "label": "运动与导航",
-          "route": "robotics"
-        },
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "robotics"
-      ],
-      "triageScore": 20,
-      "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z"
     }
   ]
 }
