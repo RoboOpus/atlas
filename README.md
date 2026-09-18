@@ -31,7 +31,7 @@ RoboOpus 具身智能与机器人知识库的总入口与跨项目治理仓库�
 - 发布 50 个结构化入口组成的 `site/data/field-guides.json`，连接知识节点与一手来源。
 - 已发布 16 篇知识正文，覆盖机器人基础、硬件选型与跨领域实验设计；每篇标明来源、关联节点、编辑状态和是否经过人工复核。
 - 6 条首批硬件价格快照以追加式 JSON 保存，价格与地区、币种、税运费、库存和日期绑定。
-- 首批论文身份以 `content/work-identities.json` 保存；确定性匹配器只自动连接精确标识符或一手 URL，标题近似只能进入复核。
+- 首批论文身份以 `content/work-identities.json` 保存；确定性匹配器仅对唯一、无冲突的精确论文标识符建议自动连接，共享项目/代码链接、身份冲突及标题近似进入复核。
 - 3 个控制实验协议以 `content/control-experiments.json` 保存，真机实验必须经过显式安全复核。
 - 12 条 Benchmark / 数据集记录以 `content/benchmark-registry.json` 保存，覆盖 RoboDojo、LIBERO、CALVIN、RoboCasa365、ManiSkill、RoboTwin 2.0、BEHAVIOR-1K、Meta-World、Habitat-Lab、DROID、Open X-Embodiment 与 BridgeData V2。
 - 每天北京时间 08:20 运行 Frontier arXiv 发现任务；自动化只能创建 `candidate`，不能发布人工结论。
