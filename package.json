@@ -10,6 +10,7 @@
     "knowledge:build": "node scripts/build-knowledge.mjs",
     "frontier:fetch": "node scripts/fetch-frontier-arxiv.mjs",
     "frontier:venues": "node scripts/fetch-openreview-venues.mjs",
-    "inbox": "node scripts/inbox.mjs"
+    "inbox": "node scripts/inbox.mjs",
+    "papers:search": "node scripts/search-papers.mjs"
   }
 }

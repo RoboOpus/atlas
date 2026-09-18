@@ -23,6 +23,9 @@ const benchmarkRegistryPublishedPath = path.join(repo, "site", "data", "benchmar
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const venueConfigPath = path.join(repo, "config", "frontier-venues.json");
 const requiredFiles = [
+  "scripts/paper-search-core.mjs",
+  "scripts/search-papers.mjs",
+  "planning/ON_DEMAND_PAPER_SEARCH.md",
   "site/search/federation.js",
   "site/inbox/index.html",
   "site/inbox/inbox.js",

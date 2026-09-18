@@ -1,10 +1,30 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { searchRecords, excerpt, queryGroups, freshness } from "../site/search/engine.js";
 const read = async (name) => JSON.parse(await readFile(new URL(`../site/data/${name}.json`, import.meta.url), "utf8"));
 const index = await read("search-index");
 const maintenance = await read("maintenance");
+
+test("every explicit selection reaches archive, discovery log and keyword search", async () => {
+  const folder = new URL("../content/paper-selections/", import.meta.url);
+  const archive = await read("frontier-archive"), ledger = await read("frontier-events");
+  const daily = JSON.parse(await readFile(new URL("../content/frontier-archive.json", import.meta.url), "utf8"));
+  assert.equal(archive.last_success_at, daily.last_success_at);
+  for (const filename of (await readdir(folder)).filter((name) => name.endsWith(".json"))) {
+    const batch = JSON.parse(await readFile(new URL(filename, folder), "utf8"));
+    const event = ledger.events.find((item) => item.id === batch.id);
+    assert.equal(event.kind, "selection");
+    assert.deepEqual(event.selected, batch.papers.map((item) => item.id));
+    assert(!Object.hasOwn(event, "query")); assert(!Object.hasOwn(event, "source"));
+    for (const paper of batch.papers) {
+      assert.equal(archive.papers.filter((item) => item.id === paper.id).length, 1);
+      assert(archive.papers.find((item) => item.id === paper.id).routes.includes(batch.track));
+      const results = searchRecords(index.records, { q: paper.id, track: batch.track, type: "paper" });
+      assert(results.some((item) => item.id === `paper:${paper.id}`));
+    }
+  }
+});
 
 test("index includes every public entity once, including selected reading notes", async () => {
   const inputs = [["knowledge", "articles"], ["field-guides", "records"], ["catalog", "nodes"], ["sources", "sources"], ["frontier-archive", "papers"], ["benchmark-registry", "records"], ["control-experiments", "experiments"], ["work-identities", "works"], ["hardware-price-snapshots", "snapshots"], ["venue-registry", "venues"]];

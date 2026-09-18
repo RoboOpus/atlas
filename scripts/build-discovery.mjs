@@ -1,11 +1,21 @@
-import { readFile, writeFile, access } from "node:fs/promises";
+import { readFile, writeFile, access, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { typeLabels, trackLabels } from "../site/search/engine.js";
+import { combineSelections } from "./paper-search-core.mjs";
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const archive = JSON.parse(await readFile(path.join(repo, "content/frontier-archive.json"), "utf8"));
-const events = JSON.parse(await readFile(path.join(repo, "content/frontier-events.json"), "utf8"));
+let archive = JSON.parse(await readFile(path.join(repo, "content/frontier-archive.json"), "utf8"));
+let events = JSON.parse(await readFile(path.join(repo, "content/frontier-events.json"), "utf8"));
+const selectionFolder = path.join(repo, "content/paper-selections");
+let selectionFiles = [];
+try { selectionFiles = (await readdir(selectionFolder)).filter((name) => name.endsWith(".json")).sort(); } catch (error) { if (error.code !== "ENOENT") throw error; }
+const selections = await Promise.all(selectionFiles.map(async (name) => {
+  const batch = JSON.parse(await readFile(path.join(selectionFolder, name), "utf8"));
+  if (name !== `${batch.id}.json`) throw new Error("Selection filename/identity mismatch");
+  return batch;
+}));
+({ archive, events } = combineSelections(archive, events, selections));
 const archiveIds = new Set(archive.papers.map((paper) => paper.id));
 if (archiveIds.size !== archive.papers.length) throw new Error("Duplicate archive IDs");
 for (const paper of archive.papers) {
@@ -17,8 +27,8 @@ for (const paper of archive.papers) {
 }
 if (new Set(events.events.map((event) => event.id)).size !== events.events.length) throw new Error("Duplicate discovery events");
 for (const event of events.events) {
-  if (!["baseline", "discovery"].includes(event.kind) || !Number.isFinite(Date.parse(event.at))) throw new Error("Invalid discovery event");
-  if ([...(event.added ?? []), ...(event.updated ?? []), ...(event.baseline_ids ?? [])].some((id) => !archiveIds.has(id))) throw new Error("Event references missing archive paper");
+  if (!["baseline", "discovery", "selection"].includes(event.kind) || !Number.isFinite(Date.parse(event.at))) throw new Error("Invalid discovery event");
+  if ([...(event.added ?? []), ...(event.updated ?? []), ...(event.baseline_ids ?? []), ...(event.selected ?? [])].some((id) => !archiveIds.has(id))) throw new Error("Event references missing archive paper");
 }
 for (const [name, data] of [["frontier-archive", archive], ["frontier-events", events]]) await writeFile(path.join(repo, "site/data", `${name}.json`), JSON.stringify(data, null, 2) + "\n");
 const read = async (name) => JSON.parse(await readFile(path.join(repo, "site/data", `${name}.json`), "utf8"));

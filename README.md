@@ -11,6 +11,7 @@ RoboOpus 具身智能与机器人知识库的总入口与跨项目治理仓库�
 - 在 `/atlas/reading/` 阅读来源笔记；笔记接入统一检索，并区分来源陈述、编辑推断与社区观点。详见 [收件箱操作说明](planning/INBOX_WORKFLOW.md)。
 - 在 `/atlas/maintenance/` 查看覆盖缺口、待人工复核正文、价格重查提醒、采集快照日期与尚未启用任务。
 - 在 `/atlas/frontier/changes/` 查看 arXiv 持久归档与逐批发现记录。雷达上限仅限制展示，历史候选仍可统一检索。
+- 用 `npm run papers:search` 按关键词、板块和日期检索 arXiv，先本地查看、再选择候选公开收录；不改每日雷达配置，不公开检索词。详见 [按需论文检索](planning/ON_DEMAND_PAPER_SEARCH.md)。
 - 完整项目的已实现/待实现/缺少输入边界记录在 [项目完成度](planning/PROJECT_COMPLETION.md)。
 - 汇总 WAM、Frontier、Robotics、Hardware、Adjacent、Lab 六条建设线。
 - 保存各板块的一级知识树和首批字段规范。
@@ -57,7 +58,7 @@ npm test
 
 ## 候选归档与发现记录
 
-`content/frontier-archive.json` 和 `content/frontier-events.json` 是受 Git 追踪的持久源数据。构建时发布对应 JSON 镜像，并把全部归档接到统一检索；`site/data/frontier-papers.json` 只保留配置上限内的排序窗口。
+`content/frontier-archive.json` 和 `content/frontier-events.json` 是受 Git 追踪的每日采集持久源数据。构建时与 `content/paper-selections/` 中显式选入的按需候选合并，生成公开 JSON 并把全部归档接到统一检索；`site/data/frontier-papers.json` 只保留配置上限内的排序窗口。
 
 - 首次导入旧雷达记为 baseline，不伪装成新发现；此前已被窗口截断的数据不能凭空恢复。
 - 同一 arXiv ID 去重，保留 firstSeen、编辑状态与备注；新条目强制 candidate。
