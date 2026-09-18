@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "id": "url-22569363e64d391b88eb",
+  "track": "robotics",
+  "title": "Xbotics 学习指南：从基础路线连接仿真与实物",
+  "summary": "Xbotics 提供面向具身智能学习与开源实践的资源路线。对 RoboOpus 的启发是让目录节点连接前置知识、实践任务和验收产物，而不只积累外链。",
+  "public_url": "https://github.com/Xbotics-Embodied-AI-club/Xbotics-Embodied-Guide",
+  "source_author": "Xbotics 社区及仓库贡献者",
+  "source_published_at": null,
+  "checked_at": "2026-09-18",
+  "source_type": "repository",
+  "rights": "original-notes-with-links",
+  "claims": [
+    {
+      "kind": "source-statement",
+      "text": "README 的学习地图连接机器人基础、经典算法、学习路线、仿真、开源实物及人物和公司信息。",
+      "evidence_url": "https://github.com/Xbotics-Embodied-AI-club/Xbotics-Embodied-Guide"
+    },
+    {
+      "kind": "source-statement",
+      "text": "学习路线用前置知识、阶段计划、里程碑与验收组织内容；仓库定位是文档与实践导航，而非运行一个统一训练程序。",
+      "evidence_url": "https://github.com/Xbotics-Embodied-AI-club/Xbotics-Embodied-Guide"
+    },
+    {
+      "kind": "editor-inference",
+      "text": "可把其路线组织方式用于 Robotics 与 Hardware：每个主题关联一个可检查的实验产物，并回查原项目文档。",
+      "evidence_url": "https://github.com/Xbotics-Embodied-AI-club/Xbotics-Embodied-Guide"
+    }
+  ],
+  "limitations": [
+    "导航收录不意味着对应算法已经被本站复现。",
+    "公司、人物和软件版本会变化；具体技术结论仍需返回论文或官方项目核验。本条不复制教程正文。"
+  ],
+  "tags": [
+    "参考案例",
+    "学习路线",
+    "机器人基础",
+    "开源实践"
+  ],
+  "editorial_state": "source-noted-draft",
+  "human_reviewed": false,
+  "published_at": "2026-09-18T03:22:36.594Z",
+  "provenance": "Single-link intake; original source-backed notes. Publication selection is not human scientific review."
+}

@@ -1,5 +1,6 @@
 // Shared by the browser and Node tests. Ranking means text relevance, never quality.
 export const typeLabels = {
+  note: "来源笔记",
   article: "知识正文", guide: "领域卡片", paper: "论文候选", benchmark: "Benchmark / 数据集",
   experiment: "实验协议", node: "知识节点", source: "来源入口", work: "论文身份",
   price: "价格快照", venue: "会议入口"

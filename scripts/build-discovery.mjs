@@ -27,6 +27,7 @@ const [knowledge, guides, catalog, sources, frontier, benchmarks, experiments, w
   "control-experiments", "work-identities", "hardware-price-snapshots", "venue-registry", "ingestion-jobs"
 ].map(read));
 const records = [];
+const reading = await read("reading-notes");
 if (frontier.papers.some((paper) => !archiveIds.has(paper.id))) throw new Error("Radar window contains a paper missing from the durable archive");
 const flatten = (value) => typeof value === "string" ? value : Array.isArray(value) ? value.map(flatten).join(" ") : value && typeof value === "object" ? Object.values(value).map(flatten).join(" ") : "";
 function add(type, item, options) {
@@ -37,6 +38,7 @@ function add(type, item, options) {
     evidence: "结构化整理 · 未标记人工终审", ...options
   });
 }
+for (const note of reading.notes) add("note", note, { url: note.url, updated_at: note.checked_at, date_label: "来源核对", evidence: "原创来源笔记 · 未经人工终审" });
 for (const article of knowledge.articles) {
   const target = path.resolve(repo, article.source_file);
   if (!target.startsWith(path.join(repo, "content/knowledge") + path.sep)) throw new Error(`Unsafe article source: ${article.id}`);

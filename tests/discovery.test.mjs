@@ -6,13 +6,14 @@ const read = async (name) => JSON.parse(await readFile(new URL(`../site/data/${n
 const index = await read("search-index");
 const maintenance = await read("maintenance");
 
-test("index includes every public entity once, across ten source types", async () => {
+test("index includes every public entity once, including selected reading notes", async () => {
   const inputs = [["knowledge", "articles"], ["field-guides", "records"], ["catalog", "nodes"], ["sources", "sources"], ["frontier-archive", "papers"], ["benchmark-registry", "records"], ["control-experiments", "experiments"], ["work-identities", "works"], ["hardware-price-snapshots", "snapshots"], ["venue-registry", "venues"]];
   let count = 0;
+  count += (await read("reading-notes")).notes.length;
   for (const [name, key] of inputs) count += (await read(name))[key].length;
   assert.equal(index.records.length, count);
   assert.equal(new Set(index.records.map((item) => item.id)).size, count);
-  assert.equal(new Set(index.records.map((item) => item.type)).size, 10);
+  assert.equal(new Set(index.records.map((item) => item.type)).size, (await read("reading-notes")).notes.length ? 11 : 10);
 });
 test("Chinese aliases find English topics; all query groups must match", () => {
   const rows = [{ id: "1", title: "Impedance control", summary: "Franka", text: "contact", type: "guide", tracks: ["robotics"] }, { id: "2", title: "Impedance", summary: "", text: "", type: "guide", tracks: ["hardware"] }];

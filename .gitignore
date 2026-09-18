@@ -9,3 +9,5 @@ site/data/search-index.json
 site/data/maintenance.json
 site/data/frontier-archive.json
 site/data/frontier-events.json
+site/data/reading-notes.json
+site/reading/url-*/

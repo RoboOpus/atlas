@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "id": "url-8785da0b2bcf70cf9a3b",
+  "track": "frontier",
+  "title": "Paper Leaderboard For You：可借鉴的论文发现流程",
+  "summary": "这个模板值得借鉴的是查询设计、关键词规范与静态数据分层，而不是直接照搬排行榜分数。RoboOpus 可以沿用这些组织思路，继续把候选相关性和论文质量分开。",
+  "public_url": "https://github.com/DreamFallenFlowers/Paper-Leaderboard-For-You",
+  "source_author": "DreamFallenFlowers",
+  "source_published_at": null,
+  "checked_at": "2026-09-18",
+  "source_type": "repository",
+  "rights": "original-notes-with-links",
+  "claims": [
+    {
+      "kind": "source-statement",
+      "text": "README 描述了 arXiv 检索、引用补充、排序、关键词和静态前端的数据流程；查询与分类配置相互分离。",
+      "evidence_url": "https://github.com/DreamFallenFlowers/Paper-Leaderboard-For-You"
+    },
+    {
+      "kind": "source-statement",
+      "text": "引用刷新依赖 Serper 配置；关键词提取是额外步骤，不能把运行主流程理解为已经完成模型标签生成。",
+      "evidence_url": "https://github.com/DreamFallenFlowers/Paper-Leaderboard-For-You"
+    },
+    {
+      "kind": "editor-inference",
+      "text": "建议借鉴受控关键词与查询覆盖检查，但在本项目中保持“自动候选”和“经核验结论”两个层级。",
+      "evidence_url": "https://github.com/DreamFallenFlowers/Paper-Leaderboard-For-You"
+    }
+  ],
+  "limitations": [
+    "本条只核对仓库说明，未运行其代码。",
+    "缺失引用和领域差异会影响排序；分数不是质量证明。采用代码前需核对许可、依赖与费用。"
+  ],
+  "tags": [
+    "参考案例",
+    "论文发现",
+    "关键词",
+    "静态知识库"
+  ],
+  "editorial_state": "source-noted-draft",
+  "human_reviewed": false,
+  "published_at": "2026-09-18T03:22:36.169Z",
+  "provenance": "Single-link intake; original source-backed notes. Publication selection is not human scientific review."
+}

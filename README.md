@@ -6,7 +6,9 @@ RoboOpus 具身智能与机器人知识库的总入口与跨项目治理仓库�
 
 ## 当前范围
 
-- 在 `/atlas/search/` 统一检索正文全文与十类公开资料；独立 WAM 站正文尚未接入，WAM 相关候选已包含。
+- 在 `/atlas/search/` 统一检索正文全文与十一类公开资料（含来源笔记）；独立 WAM 站正文尚未接入，WAM 相关候选已包含。
+- 在 `/atlas/inbox/` 生成本地单链接收录请求；`npm run inbox` 提供导入、元数据读取、原创笔记整理、预览与显式公开导出流程。
+- 在 `/atlas/reading/` 阅读来源笔记；笔记接入统一检索，并区分来源陈述、编辑推断与社区观点。详见 [收件箱操作说明](planning/INBOX_WORKFLOW.md)。
 - 在 `/atlas/maintenance/` 查看覆盖缺口、待人工复核正文、价格重查提醒、采集快照日期与尚未启用任务。
 - 在 `/atlas/frontier/changes/` 查看 arXiv 持久归档与逐批发现记录。雷达上限仅限制展示，历史候选仍可统一检索。
 - 完整项目的已实现/待实现/缺少输入边界记录在 [项目完成度](planning/PROJECT_COMPLETION.md)。
