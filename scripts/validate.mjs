@@ -23,6 +23,7 @@ const benchmarkRegistryPublishedPath = path.join(repo, "site", "data", "benchmar
 const frontierConfigPath = path.join(repo, "config", "frontier-arxiv.json");
 const venueConfigPath = path.join(repo, "config", "frontier-venues.json");
 const requiredFiles = [
+  "site/search/federation.js",
   "site/inbox/index.html",
   "site/inbox/inbox.js",
   "site/inbox/inbox.css",

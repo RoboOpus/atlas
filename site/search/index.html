@@ -13,11 +13,12 @@
     <form id="search-form" class="search-panel" role="search">
       <label class="query-label" for="query">搜索关键词</label>
       <div class="query-row"><input id="query" name="q" type="search" placeholder="例如：阻抗、MPC、RoboDojo、Unitree" autocomplete="off" maxlength="300"><button type="submit">检索 →</button></div>
-      <div class="select-row"><label>板块 <select id="track" name="track"><option value="all">全部板块</option></select></label><label>资料类型 <select id="type" name="type"><option value="all">全部类型</option></select></label><button type="button" id="clear">清除筛选</button></div>
+      <div class="select-row"><label>板块 <select id="track" name="track"><option value="all">全部板块</option></select></label><label>资料类型 <select id="type" name="type"><option value="all">全部类型</option></select></label><label>来源站 <select id="origin" name="origin"><option value="all">全部来源站</option><option value="atlas">Atlas</option><option value="wam">WAM</option></select></label><button type="button" id="clear">清除筛选</button></div>
       <p class="search-help">多词以空格分隔，需同时命中；支持少量中英术语对应。浏览器本地匹配，无第三方搜索服务；链接会包含关键词，请勿输入私密内容。</p>
     </form>
     <div class="result-heading"><p id="result-status" role="status" aria-live="polite">正在加载公开索引…</p><a href="/atlas/data/search-index.json">公开索引 JSON ↗</a></div>
-    <p class="scope-note">当前范围：Atlas 的公开内容。WAM 相关候选已纳入，独立 WAM 站正文尚未接入；个人私密材料不在此索引中。</p>
+    <p class="scope-note" id="federation-status" role="status" aria-live="polite">Atlas 与 WAM 的公开内容分站加载；正在连接 WAM 索引。私密材料不参与检索。</p>
+    <p class="scope-note">同一 arXiv 候选跨站去重；论文目录、精读正文和候选保留各自证据状态。WAM 索引生成时间不是来源核对日期。<a href="https://roboopus.github.io/wam/data/search-index.json">WAM 公开索引 JSON ↗</a></p>
     <section id="results" class="search-results" aria-label="检索结果"></section>
     <p id="empty" hidden>没有找到匹配条目。试试缩短关键词、使用英文名，或切回全部板块。没有搜索结果不代表该主题不存在。</p>
     <button id="more" type="button" hidden>再显示 20 条</button>

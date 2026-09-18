@@ -58,7 +58,7 @@ test("freshness distinguishes unknown, future and threshold crossing", () => {
 test("price clocks use capture date, not build date; WAM and Lab gaps remain explicit", async () => {
   const priceData = await read("hardware-price-snapshots");
   assert.deepEqual(maintenance.prices.map((item) => item.checked_at), priceData.snapshots.map((item) => item.captured_at));
-  assert.match(maintenance.coverage.find((item) => item.track === "wam").note, /尚未接入/);
+  assert.match(maintenance.coverage.find((item) => item.track === "wam").note, /按需加载 WAM/);
   assert.match(maintenance.coverage.find((item) => item.track === "lab").note, /等待用户/);
 });
 test("all links are scoped project routes or HTTPS; static routes exist", async () => {

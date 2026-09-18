@@ -76,7 +76,7 @@ const maintenance = {
     const articles = knowledge.articles.filter((article) => article.track === track);
     return { track, nodes: nodes.length, articles: articles.length, guides: guides.records.filter((guide) => guide.track === track).length,
       nodes_without_article: nodes.filter((node) => !articles.some((article) => article.node_ids.includes(node.id))).map(({ id, title }) => ({ id, title })),
-      note: track === "wam" ? "这里只统计 Atlas 的 WAM 相关条目；独立 WAM 站正文尚未接入统一索引。" : track === "lab" ? "等待用户提供可公开履历与项目材料；不生成虚构个人内容。" : "没有正文不等于没有领域卡片或外部来源。" };
+      note: track === "wam" ? "这里只统计 Atlas 本地条目；统一检索另外按需加载 WAM 的论文、正文、地图与 Benchmark。加载状态在搜索页单独显示，不把跨站数量当成本地覆盖。" : track === "lab" ? "等待用户提供可公开履历与项目材料；不生成虚构个人内容。" : "没有正文不等于没有领域卡片或外部来源。" };
   }),
   review_queue: knowledge.articles.filter((article) => !article.human_reviewed || article.editorial_state !== "reviewed").map(({ id, title, url, updated_at, editorial_state }) => ({ id, title, url, updated_at, editorial_state })),
   prices: prices.snapshots.map(({ id, product, variant, captured_at, source_url }) => ({ id, title: `${product} · ${variant}`, checked_at: captured_at, url: source_url })),
@@ -84,7 +84,7 @@ const maintenance = {
     { id: "openreview", title: "OpenReview 会议元数据", checked_at: venues.generated_at, count: venues.venues.length, url: "/atlas/frontier/venues/", threshold_days: 10 }],
   jobs: jobs.jobs.map(({ id, title, status, next_action, detail_url }) => ({ id, title, status, next_action, url: detail_url ?? "/atlas/pipeline/" }))
 };
-for (const [filename, data] of [["search-index", { schema_version: "1.0.0", scope: "Atlas public content only; WAM related candidates are included, independent WAM articles are not yet indexed.", records }], ["maintenance", maintenance]]) {
+for (const [filename, data] of [["search-index", { schema_version: "1.0.0", scope: "Atlas public content snapshot. The search UI separately loads the WAM public index; this JSON does not embed WAM records.", records }], ["maintenance", maintenance]]) {
   await writeFile(path.join(repo, "site/data", `${filename}.json`), JSON.stringify(data, null, 2) + "\n");
 }
 console.log(`Built unified search: ${records.length} records in ${new Set(records.map((item) => item.type)).size} types; maintenance: ${maintenance.review_queue.length} articles awaiting review.`);

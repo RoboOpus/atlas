@@ -1,5 +1,6 @@
 // Shared by the browser and Node tests. Ranking means text relevance, never quality.
 export const typeLabels = {
+  publication: "论文目录",
   note: "来源笔记",
   article: "知识正文", guide: "领域卡片", paper: "论文候选", benchmark: "Benchmark / 数据集",
   experiment: "实验协议", node: "知识节点", source: "来源入口", work: "论文身份",
@@ -21,10 +22,11 @@ export function queryGroups(query) {
   return normalized.split(/\s+/u).filter(Boolean).slice(0, 16).map((term) => aliases.find((group) => group.includes(term)) ?? [term]);
 }
 
-export function searchRecords(records, { q = "", track = "all", type = "all" } = {}) {
+export function searchRecords(records, { q = "", track = "all", type = "all", origin = "all" } = {}) {
   const groups = queryGroups(q);
   const ranked = [];
   for (const record of records) {
+    if (origin !== "all" && !(record.origins ?? ["atlas"]).includes(origin)) continue;
     if (track !== "all" && !record.tracks.includes(track)) continue;
     if (type !== "all" && record.type !== type) continue;
     const title = normalize(record.title);
