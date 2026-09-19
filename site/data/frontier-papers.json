@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-09-18T04:53:41.082Z",
+  "generated_at": "2026-09-19T04:45:39.863Z",
   "source": {
     "endpoint": "https://export.arxiv.org/api/query",
     "mode": "api",
