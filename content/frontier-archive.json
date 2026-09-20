@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "created_at": "2026-09-17T17:43:26.112Z",
-  "last_success_at": "2026-09-19T04:45:39.863Z",
+  "last_success_at": "2026-09-20T05:02:18.598Z",
   "policy": "Persistent candidates; removal from the ranked window never deletes the archive. Legacy publication dates need re-verification.",
   "papers": [
     {
