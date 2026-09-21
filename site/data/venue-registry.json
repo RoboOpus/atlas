@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-09-14T03:36:53.677Z",
+  "generated_at": "2026-09-21T05:30:08.415Z",
   "source": {
     "endpoint": "https://api2.openreview.net/groups",
     "schedule": "每周一 08:45（Asia/Shanghai）",
@@ -34,7 +34,7 @@
       "paper_ingestion": "metadata-only",
       "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
       "fetch_state": "fresh",
-      "checked_at": "2026-09-14T03:36:53.677Z"
+      "checked_at": "2026-09-21T05:30:08.415Z"
     },
     {
       "id": "icml-2026",
@@ -58,7 +58,7 @@
       "paper_ingestion": "metadata-only",
       "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
       "fetch_state": "fresh",
-      "checked_at": "2026-09-14T03:36:53.677Z"
+      "checked_at": "2026-09-21T05:30:08.415Z"
     },
     {
       "id": "neurips-2026",
@@ -82,7 +82,7 @@
       "paper_ingestion": "metadata-only",
       "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
       "fetch_state": "fresh",
-      "checked_at": "2026-09-14T03:36:53.677Z"
+      "checked_at": "2026-09-21T05:30:08.415Z"
     },
     {
       "id": "corl-2026",
@@ -106,7 +106,7 @@
       "paper_ingestion": "metadata-only",
       "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
       "fetch_state": "fresh",
-      "checked_at": "2026-09-14T03:36:53.677Z"
+      "checked_at": "2026-09-21T05:30:08.415Z"
     },
     {
       "id": "icra-2026",
@@ -130,7 +130,7 @@
       "submissions_public": null,
       "paper_ingestion": "manual-proceedings",
       "fetch_state": "manual-source",
-      "checked_at": "2026-09-14T03:36:53.677Z"
+      "checked_at": "2026-09-21T05:30:08.415Z"
     },
     {
       "id": "iros-2026",
@@ -154,7 +154,7 @@
       "submissions_public": null,
       "paper_ingestion": "manual-proceedings",
       "fetch_state": "manual-source",
-      "checked_at": "2026-09-14T03:36:53.677Z"
+      "checked_at": "2026-09-21T05:30:08.415Z"
     },
     {
       "id": "rss-2026",
@@ -179,7 +179,7 @@
       "paper_ingestion": "metadata-only",
       "collection_note": "会议 Group 可核验，但公开投稿开关当前为 false；暂不把投稿列表当作可抓取来源。",
       "fetch_state": "fresh",
-      "checked_at": "2026-09-14T03:36:53.677Z"
+      "checked_at": "2026-09-21T05:30:08.415Z"
     }
   ]
 }
