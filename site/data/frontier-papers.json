@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-09-21T05:08:18.428Z",
+  "generated_at": "2026-09-22T05:09:17.969Z",
   "source": {
     "endpoint": "https://export.arxiv.org/api/query",
     "mode": "api",
@@ -135,6 +135,65 @@
       "triageScore": 34,
       "status": "candidate",
       "firstSeen": "2026-09-21T05:08:18.428Z"
+    },
+    {
+      "id": "2609.24350",
+      "title": "LIBERO-VPro: Benchmarking Closed-Loop Visual Robustness of Robotic Foundation Models",
+      "authors": [
+        "Huiqiong Li",
+        "Zhiting Mei",
+        "Anirudha Majumdar",
+        "Jingjing Chen",
+        "Yu-Gang Jiang",
+        "Bin Zhu"
+      ],
+      "abstract": "Robotic foundation models achieve impressive performance on standard manipulation benchmarks, yet these evaluations typically assume clean, timely, and consistent visual observations throughout execution. We introduce LIBERO-VPro, a benchmark for systematically evaluating the closed-loop visual robustness of robotic foundation models by perturbing the visual evidence available during execution. LIBERO-VPro covers four complementary dimensions, including Visual Evidence Degradation, Camera Staleness, Visual Source Consistency, and Task-Relevant Scene Variation, spanning 12 challenge categories, 96 experimental settings, and 3,296 task-condition cases. We evaluate three vision-language-action models and three world-action models over approximately 196,000 simulated episodes, complemented by 200 real-world rollouts on a Franka Research 3. Our results reveal that strong nominal performance can mask substantial weaknesses in visual grounding and adaptation. Models often remain successful despite severe object-level occlusion, yet degrade sharply when local interaction cues are disrupted or familiar spatial priors are violated. They are also highly sensitive to stale or missing observations and struggle when changed task preconditions require behavioral adaptation. Finally, VLAs and WAMs exhibit distinct robustness profiles, showing that visual robustness is multi-dimensional and architecture-dependent. LIBERO-VPro provides a systematic diagnostic framework for developing robotic foundation models that can more reliably ground and adapt their actions under challenging visual conditions.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-21T09:43:41Z",
+      "updated": "2026-09-21T09:43:41Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "url": "https://arxiv.org/abs/2609.24350v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.24350v1",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        },
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        },
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics",
+        "adjacent"
+      ],
+      "triageScore": 31,
+      "status": "candidate",
+      "firstSeen": "2026-09-22T05:09:17.969Z"
     },
     {
       "id": "2609.20761",
@@ -495,6 +554,113 @@
       "dateProvenance": "legacy-unverified"
     },
     {
+      "id": "2609.24133",
+      "title": "Phrase-Level Robotic Guqin Performance: Bimanual Motion Planning and Audio-Tactile Interaction Monitoring",
+      "authors": [
+        "Zhen Wang",
+        "Zhiheng Chen",
+        "Tianyuan Bao",
+        "Tianwei Zhang"
+      ],
+      "abstract": "Recent advances in humanoid robotics and embodied intelligence have enabled robots to perform increasingly complex manipulation tasks. However, musical instrument performance remains a formidable benchmark, demanding not only collision-free trajectory execution but also precise contact timing, asymmetric bimanual coordination, and target acoustic outcomes on physical instruments. The guqin, a seven-string fretless zither, presents unique manipulation challenges due to its millimetric string spacing, transient right-hand plucking, and sustained left-hand harmonic contacts. In this work, we present a physical heterogeneous dual-arm robotic system for phrase-level autonomous guqin performance. We formulate guqin playing as a hybrid discrete--continuous execution problem and develop a hierarchical planning framework that coordinates working finger assignment, configuration continuity, obstacle avoidance, and tight bimanual contact schedules across consecutive musical events. The system integrates vision-guided instrument localization, tactile-based harmonic contact monitoring, and auditory feedback-informed plucking parameter calibration. Real-world experiments on a 25-event phrase demonstrate that the system reliably executes coordinated open-string and seventh-hui harmonic sequences on a physical guqin, achieving 93.6% and 96.8% event correctness across repeated trials.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-21T05:39:04Z",
+      "updated": "2026-09-21T05:39:04Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.24133v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.24133v1",
+      "matchedTopics": [
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "planning-control",
+          "label": "规划与控制",
+          "route": "robotics"
+        },
+        {
+          "id": "perception-estimation",
+          "label": "感知与估计",
+          "route": "robotics"
+        },
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "robotics"
+      ],
+      "triageScore": 27,
+      "status": "candidate",
+      "firstSeen": "2026-09-22T05:09:17.969Z"
+    },
+    {
+      "id": "2609.24124",
+      "title": "ActiveArena: Benchmarking and Understanding Active Perception in Robotic Manipulation",
+      "authors": [
+        "Yibo Li",
+        "Enshen Zhou",
+        "Rui Chen",
+        "Yanjun Ding",
+        "Mengzhen Liu",
+        "Yi Han",
+        "Jiabo Zhan",
+        "Lipeng Wang",
+        "Shanghang Zhang",
+        "Lu Sheng"
+      ],
+      "abstract": "Active perception and manipulation are crucial for robots to interact with complex scenes. Existing benchmarks struggle to evaluate how robots effectively acquire and maintain information in memory in an active manner. To this end, we introduce ActiveArena-Sim, an active-perception simulator with controllable viewpoints and large-scale workspaces as the foundation. Built on this, we propose ActiveArena-Bench, which comprises 35 tasks across 5 fine-grained categories, covering visual exploration and interactive information acquisition. Each task is difficult to solve from passive observations alone, requiring multi-round evidence acquisition and memory-based reasoning. The benchmark provides rich memory annotations, standardized training data, and ID/OOD protocols featuring disjoint scenes, unseen distractor configurations, and novel backgrounds. Moreover, we present ActiveArena-VLA, a modular suite of 13 vision-language-action configurations for controlled studies of memory writing, memory capacity, proprioceptive state, subtask supervision, and high-level planning in active perception. Benchmark results reveal a substantial ID-OOD gap: uniform memory sampling, increased memory capacity under reliable write policies, proprioceptive inputs, and subtask supervision improve OOD generalization, while planner-guided memory management and decision-making achieve performance close to the best-performing configuration using only sparse memory. ActiveArena thus provides a unified testbed to develop and diagnose models for active perception and manipulation.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-21T05:23:37Z",
+      "updated": "2026-09-21T05:23:37Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "url": "https://arxiv.org/abs/2609.24124v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.24124v1",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        },
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "wam",
+        "hardware"
+      ],
+      "triageScore": 27,
+      "status": "candidate",
+      "firstSeen": "2026-09-22T05:09:17.969Z"
+    },
+    {
       "id": "2609.20649",
       "title": "DexTouch-WM: Learning Action-Conditioned Tactile World Models from Human Touch for Dexterous Robot Manipulation",
       "authors": [
@@ -826,6 +992,98 @@
       "status": "candidate",
       "firstSeen": "2026-09-15T05:04:26.168Z",
       "dateProvenance": "legacy-unverified"
+    },
+    {
+      "id": "2609.24976",
+      "title": "DexTacWAM: A Visuo-Tactile World-Action Model for Dexterous Manipulation",
+      "authors": [
+        "Haoran Yuan",
+        "Zekai Wang",
+        "Boning Shao",
+        "Haoran Lu",
+        "Trevor Darrell",
+        "Ismini Lourentzou",
+        "Wei Zhan"
+      ],
+      "abstract": "Dexterous manipulation depends on contact dynamics that are often only partially observable from vision. Recent World-Action Models (WAMs) couple predictive video world modeling with action generation, but remain largely vision-centric and therefore cannot directly model these contact dynamics. We present DexTacWAM, a visuo-tactile WAM that encodes each fingertip independently, aggregates the resulting features through a finger- and pose-aware tactile compressor, and injects the tactile latent into a video diffusion world model for joint visuo-tactile world modeling. Across six contact-rich dexterous manipulation tasks on a 22-DoF bimanual platform, DexTacWAM achieves the highest score on every task, averaging 70.6 versus 38.0 for the strongest baseline. Ablations attribute the gain to modeling contact evolution as part of the predicted world state rather than tactile conditioning alone: removing tactile world modeling reduces the four-task mean from 74.7 to 26.6 while keeping the same tactile features and action expert. After four hours of tactile-encoder adaptation with a frozen pretrained vision VAE, our continual vision-to-touch learning extends the pretrained video model to touch using roughly 100 demonstrations per task without tactile midtraining, while retaining visual prediction quality within 0.5 dB of vision-only counterparts. The compressor retains 89.4% of pre-fusion contact recall while enabling 2.26x faster training and 1.29x faster inference. Together, these results show that pretrained video priors can be extended to distributed multi-finger contact dynamics in a data- and compute-efficient manner.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-21T17:55:24Z",
+      "updated": "2026-09-21T17:55:24Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "url": "https://arxiv.org/abs/2609.24976v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.24976v1",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics"
+      ],
+      "triageScore": 26,
+      "status": "candidate",
+      "firstSeen": "2026-09-22T05:09:17.969Z"
+    },
+    {
+      "id": "2609.24274",
+      "title": "vla.simd: Efficient CPU Inference for Language-Conditioned Manipulation",
+      "authors": [
+        "Khanh D. Nguyen",
+        "Hoang M. Truong",
+        "An T. Le"
+      ],
+      "abstract": "Deploying language-conditioned manipulation without a dedicated GPU requires efficient inference and action chunks that cover the delay between policy queries. We present vla.simd, a CPU inference engine that combines shared SIMD micro-kernels, reusable computation, and target-specific optimization. We relate query latency and execution horizon to action availability under lagged and time-aligned execution, distinguishing action supply from feedback frequency. Across six policies and four CPUs, vla.simd achieves approximately $1.4\\times$ median speedup over compiled PyTorch references while preserving fp32 numerical fidelity. We also introduce IMPACT, an ACT-based policy with cached text representations and language-modulated visual features. IMPACT is the only language-conditioned policy in our evaluated set that supplies at least 30 actions/s on the Raspberry Pi 5: after a 90 s thermal soak, it supplies 33.5 actions/s in fp32 and 81.2 with int8. Separate GPU evaluations yield $76.4\\%$ mean success across four LIBERO suites without robot pretraining; instruction-shuffling tests demonstrate selection among familiar goals. Trials with IMPACT on an SO-101 arm and SmolVLA on a UR10e with a Robotiq gripper demonstrate CPU deployment on two robot embodiments.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-21T08:39:07Z",
+      "updated": "2026-09-21T08:39:07Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "eess.SY"
+      ],
+      "url": "https://arxiv.org/abs/2609.24274v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.24274v1",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics",
+        "hardware"
+      ],
+      "triageScore": 26,
+      "status": "candidate",
+      "firstSeen": "2026-09-22T05:09:17.969Z"
     },
     {
       "id": "2609.21514",
@@ -1258,6 +1516,56 @@
       "status": "candidate",
       "firstSeen": "2026-09-13T15:10:33.155Z",
       "dateProvenance": "legacy-unverified"
+    },
+    {
+      "id": "2609.24868",
+      "title": "DualWAM: Dual-System World Action Models for Asynchronous Global Planning and Local Refinement",
+      "authors": [
+        "Yixin Zheng",
+        "Jiangran Lyu",
+        "Yuntian Deng",
+        "Kai Liu",
+        "Yizhou Zhou",
+        "Yizhou Wang",
+        "Xiaoguang Zhao",
+        "He Wang",
+        "Zhizheng Zhang"
+      ],
+      "abstract": "World Action Models (WAMs) jointly generate robot actions and predict future world states, transferring priors from video pretraining to robot control. However, future visual prediction is computationally expensive, so existing WAMs often rely on long action chunks to amortize inference cost across control steps, at the cost of closed-loop responsiveness. We present \\method, a dual-system WAM that preserves broader-horizon world-action generation while enabling high-frequency closed-loop action updates by decoupling global planning and local refinement. \\systwo periodically performs high-noise bidirectional denoising over a broader world-action chunk to establish a global plan, while wrist-only \\sysone extracts a temporally aligned short window from the intermediate denoising state and completes low-noise refinement using the latest wrist observations, which provide action-aligned cues about local geometry, motion, and contact during interaction. The two systems operate asynchronously along a shared denoising trajectory: each global plan is reused across multiple local updates, while \\sysone repeatedly incorporates fresh interaction feedback. Across zero-shot manipulation tasks on Franka and Galbot, \\method improves success over the strongest evaluated baseline by 4.5 percentage points on average, while achieving a 16.6$\\times$ critical-path speedup. Further studies show that role-matched egocentric and UMI data improve success by 14 percentage points, and that the decoupled design naturally supports edge--cloud deployment with substantially lower communication overhead than the baseline.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-21T16:37:50Z",
+      "updated": "2026-09-21T16:37:50Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.24868v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.24868v1",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "planning-control",
+          "label": "规划与控制",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics"
+      ],
+      "triageScore": 25,
+      "status": "candidate",
+      "firstSeen": "2026-09-22T05:09:17.969Z"
     },
     {
       "id": "2609.21502",
@@ -2150,303 +2458,6 @@
         "robotics"
       ],
       "triageScore": 23,
-      "status": "candidate",
-      "firstSeen": "2026-09-21T05:08:18.428Z"
-    },
-    {
-      "id": "2609.20747",
-      "title": "MILER: Semantic Mid-Level Representation for Sim-to-Real Reinforcement Learning in Unstructured Autonomous Driving",
-      "authors": [
-        "Thomas Steinecker",
-        "Denis Trescher",
-        "Alexander Bienemann",
-        "Thorsten Luettel",
-        "Mirko Maehlisch"
-      ],
-      "abstract": "Reinforcement learning constitutes a promising approach owing to its potential for superhuman performance and self-learned policies. However, its application to real-world autonomous driving remains scarce, particularly in unstructured environments, because of the challenges associated with sim-to-real transfer for unstructured environments. In this work, we present MILER, an end-to-end policy framework with zero-shot sim-to-real transfer. During offline training, we employ a custom semantic mid-level representation (MLR) simulator and train the policy network using reinforcement learning, with its control outputs applied directly to a bicycle model. During deployment on the real vehicle, camera and LiDAR data are processed by BEVFusion to generate a semantic bird's-eye-view representation consistent with that of the MLR simulator. The actions generated by the policy network are not applied directly to the real vehicle. Instead, we employ a trajectory-alignment strategy that enables zero-shot sim-to-real transfer of both perception and control. We extensively evaluate the proposed framework on a diverse test track comprising numerous challenges, including various obstacles, hairpin curves, velocities of up to 33.6 km/h, and off-road sections. In total, we drove 17.3 km with two different vehicles on a 3.0 km test track without human intervention, thereby demonstrating the effectiveness of our approach. Furthermore, the entire software stack runs on a Jetson AGX Orin.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-17T17:35:22Z",
-      "updated": "2026-09-17T17:35:22Z",
-      "dateProvenance": "arxiv-api",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO",
-        "cs.LG"
-      ],
-      "url": "https://arxiv.org/abs/2609.20747v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.20747v1",
-      "matchedTopics": [
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        },
-        {
-          "id": "hardware-sensing",
-          "label": "硬件与传感",
-          "route": "hardware"
-        },
-        {
-          "id": "autonomous-systems",
-          "label": "自动驾驶 / 自主系统",
-          "route": "adjacent"
-        }
-      ],
-      "routes": [
-        "adjacent",
-        "robotics",
-        "hardware"
-      ],
-      "triageScore": 23,
-      "status": "candidate",
-      "firstSeen": "2026-09-18T04:53:41.082Z"
-    },
-    {
-      "id": "2609.20659",
-      "title": "HIL-UMI: Bringing Human-in-the-Loop Post-Training of Vision-Language-Action Models to Universal Manipulation Interface",
-      "authors": [
-        "Zimu Han",
-        "Yiming Zeng",
-        "Jiyao Zhang",
-        "Zihao Zhao",
-        "Yuanfei Wang",
-        "Yixiang Jin",
-        "Shiqi Li",
-        "Shuangben Chen",
-        "Wei Huang",
-        "Ruodai Li",
-        "Hui Shen",
-        "Hao Dong"
-      ],
-      "abstract": "Large-scale vision-language-action (VLA) models provide powerful priors for robot manipulation, yet adapting them to a specific deployment remains challenging. Supervised fine-tuning (SFT) on task-specific demonstrations provides a step toward deployment, but faces two persistent limitations: static data provide limited coverage of out-of-distribution states, and standard imitation objectives do not distinguish progressing behavior from less useful data. Interactive post-training can address these limitations, but typically requires repeated policy execution and human intervention on a physical robot. We introduce HIL-UMI, a policy-guided Universal Manipulation Interface (UMI) framework for robot-free human-in-the-loop VLA post-training. During handheld UMI demonstrations, HIL-UMI queries the current policy on the same observation stream without executing its predictions. The Energy Score compares the human action trajectory with policy inference and triggers collection when their discrepancy indicates an out-of-distribution region. In a separate feedback loop, low online advantage predictions identify essential segments for refining a progress-based advantage estimator. The updated estimator then guides advantage-conditioned behavioral cloning using a balanced mixture of base demonstrations and new policy data. This design preserves the iterative and policy-aware nature of human-in-the-loop learning while decoupling data collection from robot deployment. Experiments on four real-world tasks spanning long-horizon and precise manipulation show that HIL-UMI achieves consistent improvement over SFT and benefits from both targeted collection and advantage refinement. Moreover, HIL-UMI outperforms HG-DAgger on Clean Up Table with lower per-frame collection time, suggesting a scalable path for VLA post-training across operators and locations.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-17T16:38:37Z",
-      "updated": "2026-09-17T16:38:37Z",
-      "dateProvenance": "arxiv-api",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO",
-        "cs.AI"
-      ],
-      "url": "https://arxiv.org/abs/2609.20659v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.20659v1",
-      "matchedTopics": [
-        {
-          "id": "vla-policy-learning",
-          "label": "VLA / 策略学习",
-          "route": "wam"
-        },
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "wam",
-        "robotics"
-      ],
-      "triageScore": 23,
-      "status": "candidate",
-      "firstSeen": "2026-09-18T04:53:41.082Z"
-    },
-    {
-      "id": "2609.18242",
-      "title": "ForceDelta-VLA: Distilling Force-Conditioned ActionCorrections for Contact-Rich Manipulation",
-      "authors": [
-        "Ju Dong",
-        "Yu Fu",
-        "Jian Chen",
-        "Yimeng Liu",
-        "Haocheng Zhao",
-        "Lei Zhang",
-        "Kaixin Bai",
-        "Liding Zhang",
-        "Diwen Zheng",
-        "Alois Christian Knoll",
-        "Angela P. Schoellig",
-        "Jianwei Zhang"
-      ],
-      "abstract": "Force-aware Vision-Language-Action (VLA) policies improve contact-rich manipulation, but typically combine task-level motion and contact-dependent adjustment in a single action prediction. Demonstrations provide no explicit labels for decomposing that prediction into a reusable reference action and a correction. We present ForceDelta-VLA, a correction-distillation framework that constructs an explicit force-correction target using paired predictions from a frozen teacher's force-conditioned and learned force-agnostic modes. A separate delay-correction target accounts for reference-action mismatch and the change in reference state. Training uses asynchronous schedule replay with the cached task context available during execution. The resulting lightweight policy adjusts the reference actions using recent force history and robot state, responding to contact changes between reference-action updates without regenerating complete action chunks. Across nine single-arm and bimanual contact-rich tasks, ForceDelta-VLA achieves an 82.2% mean success rate, compared with 54.4% for the original ForceVLA baseline. Direct execution of our Stage-1 Temporal Teacher achieves 70.6%. Relative to ForceVLA, the complete system reduces mean peak contact force over successful trials by approximately 26% on both platforms.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-16T07:20:10Z",
-      "updated": "2026-09-16T07:20:10Z",
-      "dateProvenance": "arxiv-api",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.18242v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.18242v1",
-      "matchedTopics": [
-        {
-          "id": "vla-policy-learning",
-          "label": "VLA / 策略学习",
-          "route": "wam"
-        },
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "wam",
-        "robotics"
-      ],
-      "triageScore": 23,
-      "status": "candidate",
-      "firstSeen": "2026-09-17T05:00:57.445Z"
-    },
-    {
-      "id": "2609.16641",
-      "title": "SAVLA: Symmetry-Aware Vision-Language-Action Models for Robotic Manipulation",
-      "authors": [
-        "Junle Li",
-        "Weixian Waylon Li",
-        "Fuxiang Wu",
-        "Fusheng Hao",
-        "Fengxiang He"
-      ],
-      "abstract": "Vision-language-action (VLA) models have become the dominant paradigm for language-conditioned robot manipulation. However, although images and language instructions inherently encode geometric information, VLAs acquire their spatial competence purely from demonstrations. As a result, they are reliable only within the range of scene poses that the demonstrations cover. We propose SAVLA, an end-to-end symmetry-aware VLA model for robust and data-efficient policy learning. Our approach keeps the pretrained vision-language backbone entirely frozen while combining it with an equivariant flow-matching action head and a learned canonicalizer. The head decomposes its state, action, and conditioning inputs into invariant and equivariant channels, and preserves this typing throughout all of its layers. The canonicalizer transforms oblique-view images into a canonical frame and rotates the geometric conditions consistently. We evaluate our model on LIBERO. Compared with the GR00T N1.5 baseline, SAVLA improves the success rate averaged over all four LIBERO suites by 5.1 points and increases the mean success rate under rotation on LIBERO-Goal from 41.5% to 90.4%.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-15T05:02:02Z",
-      "updated": "2026-09-15T05:02:02Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.16641v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.16641v1",
-      "matchedTopics": [
-        {
-          "id": "vla-policy-learning",
-          "label": "VLA / 策略学习",
-          "route": "wam"
-        },
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "wam",
-        "robotics"
-      ],
-      "triageScore": 23,
-      "status": "candidate",
-      "firstSeen": "2026-09-16T04:58:10.738Z",
-      "dateProvenance": "legacy-unverified"
-    },
-    {
-      "id": "2609.15726",
-      "title": "Bench2Dex: Benchmarking Visuo-Tactile Bimanual Dexterous Manipulation Across Dexterous Hands",
-      "authors": [
-        "Zhenjie Yang",
-        "Yideng Zhang",
-        "Dongjie Zhang",
-        "Chenyu Jiang",
-        "Xianshuai Liu",
-        "Yufeng Li",
-        "Zuhao Ge",
-        "Xingyu Jiao",
-        "Zheng Zhang",
-        "Kaiyu He",
-        "He Wang",
-        "Yuwen Zhong",
-        "Yi Deng",
-        "Muyun Jiang",
-        "Xianliang Huang",
-        "Haisheng Su",
-        "Donghang Zhang",
-        "Jian Zhang",
-        "Xue Yang",
-        "Hongyang Li",
-        "Zuxuan Wu",
-        "Yu-Gang Jiang",
-        "Xiaosong Jia",
-        "Junchi Yan"
-      ],
-      "abstract": "Tactile sensing provides contact information that can be difficult to infer from vision alone, but tactile hardware for dexterous hands has not converged to a common design. Dexterous hands differ in finger structure, contact surfaces, and sensor layouts, while simulated tactile signals still differ from measurements produced by physical sensors. These factors make it difficult to study visuo-tactile manipulation across diverse dexterous hands within a consistent experimental setting. We present Bench2Dex, a simulation benchmark for visuo-tactile bimanual manipulation across 12 dexterous hands. We adapt existing robot models with a shared simulated tactile interface that converts local contact geometry into image-like tactile observations. The interface provides a consistent observation format across different hand morphologies without attempting to reproduce the output of a specific physical tactile sensor. Bench2Dex includes 26 bimanual manipulation tasks that involve tool use, articulated-object interaction, and multi-stage manipulation, together with about 1.3K human-teleoperated demonstrations. The benchmark provides synchronized visual, tactile, proprioceptive, action, and object-state observations, together with executable task metrics. For robustness, we group seven perturbation types into invariance axis, where the correct action does not change, and equivariance axis, where the correct action changes together with the perturbation. We evaluate ACT, Diffusion Policy, pi0.5, and GR00T N1.5 on Bench2Dex and report their performance and failure modes. Bench2Dex is meant as a platform for studying visuo-tactile learning across dexterous hands. It does not assume that simulated tactile observations can replace real tactile sensing; it offers a shared setting for algorithm development while tactile hardware and simulation models are still evolving.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-15T04:00:00.000Z",
-      "updated": "2026-09-15T04:00:00.000Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.15726",
-      "pdfUrl": "https://arxiv.org/pdf/2609.15726",
-      "matchedTopics": [
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        },
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        },
-        {
-          "id": "hardware-sensing",
-          "label": "硬件与传感",
-          "route": "hardware"
-        }
-      ],
-      "routes": [
-        "robotics",
-        "hardware"
-      ],
-      "triageScore": 23,
-      "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z",
-      "dateProvenance": "legacy-unverified"
-    },
-    {
-      "id": "2609.22055",
-      "title": "Benchmarking World Models for Continual Learning on Compositional Tasks",
-      "authors": [
-        "Haoyu Zhou",
-        "Joe Watson",
-        "Anson Lei",
-        "Ingmar Posner"
-      ],
-      "abstract": "A desirable property of a world model is the ability to learn continually across tasks, adapting to new environments without forgetting what the agent has already learnt. In particular, the ability to retain and reuse knowledge obtained from prior experiences underpins an agent's ability to efficiently adapt to novel environments, as the dynamics of the physical world can often be described in recurring mechanisms. However, the world model's measure of adaptation entangles two abilities: the speed and capacity to learn unseen tasks, and the reuse of knowledge already acquired, since incoming tasks carry novel content alongside what recurs. In order to isolate knowledge reuse from prior experiences, we propose a compositional continual learning benchmark for world models in robot manipulation. Specifically, we design each task curriculum with compositional tasks that combine aspects of the tasks seen in the sequence. We further factorise this composition along the axes of action and perception to better understand how different input modalities bottleneck knowledge reuse. We evaluate state-of-the-art world models under canonical continual learning methods, alongside a modular world model whose dynamics backbone contains explicitly reusable components. Results show that modularity balances reuse against forgetting better than conventional methods, but none solve the problem fully, leaving clear room for continual world models built to reuse without forgetting. More details are available on our project website: https://object814.github.io/Compositional-Continual-Learning/.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-18T17:46:28Z",
-      "updated": "2026-09-18T17:46:28Z",
-      "dateProvenance": "arxiv-api",
-      "primaryCategory": "cs.LG",
-      "categories": [
-        "cs.LG",
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.22055v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.22055v1",
-      "matchedTopics": [
-        {
-          "id": "world-action-models",
-          "label": "世界模型 / WAM",
-          "route": "wam"
-        },
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        },
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "robotics",
-        "wam"
-      ],
-      "triageScore": 22,
       "status": "candidate",
       "firstSeen": "2026-09-21T05:08:18.428Z"
     }
