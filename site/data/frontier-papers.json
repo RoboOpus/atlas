@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-09-22T05:09:17.969Z",
+  "generated_at": "2026-09-23T04:54:01.223Z",
   "source": {
     "endpoint": "https://export.arxiv.org/api/query",
     "mode": "api",
@@ -1518,6 +1518,103 @@
       "dateProvenance": "legacy-unverified"
     },
     {
+      "id": "2609.26561",
+      "title": "Vision Foundation Models with Synthetic-Only Training for Monocular Spacecraft Pose Estimation",
+      "authors": [
+        "John Church",
+        "Vazghen Nikolian"
+      ],
+      "abstract": "We present an improvement on previous spacecraft pose estimation architectures that results in the lowest published mean rotation errors we know of on the SPEED+ lightbox and sunlamp test sets for a known, non-cooperative spacecraft. By using a previously established heatmap-based pose estimation architecture and adapting a large self-supervised ViT foundation model (DINOv3) in place of the smaller convolutional and ViT encoders of previous work, we show that pose estimation accuracy improves from 300M to 840M parameters with no saturation yet observed. We also evaluate our 840M model on a Jetson Orin NX 16GB, measuring single-pass network inference at 133.8 ms per crop with a board draw of 32.0 W. These measurements demonstrate embedded inference feasibility on a processor family with orbital flight heritage. Our resulting model outperforms previous models across lightbox and sunlamp domains while training only on synthetic data. Our best model, using DINOv3 840M adapted with LoRA as the encoder (rank 64, three-seed ensemble with four-rotation test-time augmentation), results in $1.56^\\circ$ mean rotation error on sunlamp and $1.17^\\circ$ on lightbox, compared to the previous best mean rotation errors we know of on these test sets, $2.66^\\circ$ and $1.75^\\circ$ by EagerNet.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-22T15:13:44Z",
+      "updated": "2026-09-22T15:13:44Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.26561v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.26561v1",
+      "matchedTopics": [
+        {
+          "id": "perception-estimation",
+          "label": "感知与估计",
+          "route": "robotics"
+        },
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        },
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        },
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "adjacent",
+        "hardware"
+      ],
+      "triageScore": 25,
+      "status": "candidate",
+      "firstSeen": "2026-09-23T04:54:01.223Z"
+    },
+    {
+      "id": "2609.25756",
+      "title": "MedVLA: A Hierarchical Vision-Language-Action Framework for Closed-Loop Precision Medical Robot Manipulation",
+      "authors": [
+        "Junjie Xie",
+        "Chuxuan He",
+        "Angen Ye",
+        "Yujia Song",
+        "Dapeng Zhang"
+      ],
+      "abstract": "Precision medical robotics demands adaptive decision-making under strict safety, interpretability, and execution constraints. Although recent Vision-Language-Action (VLA) models show strong multimodal reasoning ability, their continuous action generation paradigm is not well suited for precision medical tasks, where reliable closed-loop operation may also depend on non-action system function calls. To address this gap, we propose MedVLA, a hierarchical framework that couples high-level multimodal reasoning with low-level function-constrained execution. We further introduce a scalable multi-agent pipeline to generate skill-oriented chain-of-thought(CoT) data for structured training. Built on different multimodal large-model backbones, MedVLA consistently improves performance after fine-tuning, demonstrating the effectiveness of the proposed framework across model variants. Under identical initial conditions, we perform 100 closed-loop flexible electrode implantation trials. The results show that MedVLA achieves a 95.0\\% task success rate, substantially outperforming representative VLA baselines, including OpenVLA (8\\%) and $π_0$ (15\\%), in accuracy, stability, and safety. These results indicate that structured reasoning with constrained function-level execution is a practical route toward deployable precision medical robotics.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-22T06:50:10Z",
+      "updated": "2026-09-22T06:50:10Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.25756v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.25756v1",
+      "matchedTopics": [
+        {
+          "id": "vla-policy-learning",
+          "label": "VLA / 策略学习",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        },
+        {
+          "id": "foundation-models",
+          "label": "基础模型 / 多模态",
+          "route": "adjacent"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics",
+        "adjacent"
+      ],
+      "triageScore": 25,
+      "status": "candidate",
+      "firstSeen": "2026-09-23T04:54:01.223Z"
+    },
+    {
       "id": "2609.24868",
       "title": "DualWAM: Dual-System World Action Models for Asynchronous Global Planning and Local Refinement",
       "authors": [
@@ -1935,6 +2032,92 @@
       "dateProvenance": "legacy-unverified"
     },
     {
+      "id": "2609.25813",
+      "title": "MOLA LiDAR-Inertial Odometry (MOLA-LIO) on the COMFORT Localization Benchmark",
+      "authors": [
+        "Jose Luis Blanco-Claraco"
+      ],
+      "abstract": "This short report documents our entry to the COMFORT Localization Benchmark (IROS 2026), evaluated on the GrandTour dataset recorded with the Boxi payload. It extends MOLA-LO into a LiDAR-inertial system that also ingests IMU and, optionally, legged kinematic odometry. We describe the architecture, the streams consumed, the local protocol that selected the submitted configuration, and the measurements backing our real-time claim.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-22T07:42:14Z",
+      "updated": "2026-09-22T07:42:14Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "url": "https://arxiv.org/abs/2609.25813v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.25813v1",
+      "matchedTopics": [
+        {
+          "id": "perception-estimation",
+          "label": "感知与估计",
+          "route": "robotics"
+        },
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        },
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "hardware"
+      ],
+      "triageScore": 24,
+      "status": "candidate",
+      "firstSeen": "2026-09-23T04:54:01.223Z"
+    },
+    {
+      "id": "2609.25687",
+      "title": "SG-CPG: Severity-Gated Central Pattern Generators for Adaptive Quadruped Locomotion under Continuous Actuator Degradation",
+      "authors": [
+        "Adarsh Kumar Kosta",
+        "Kaushik Roy"
+      ],
+      "abstract": "An animal with a weakened limb does not necessarily switch its gait, instead it unloads the affected limb, re-coordinates the remaining limbs, and scales its response with injury severity. This graded adaptation allows locomotion to persist despite partial loss of limb strength, rather than requiring a discrete transition between healthy and failed. Inspired by this behavior, we propose SG-CPG, a central pattern generator (CPG) for quadruped locomotion under continuous actuator degradation. SG-CPG preserves a frozen healthy CPG policy and introduces two severity-driven gates: a residual gate that re-coordinates all four legs and an amplitude gate that progressively shortens the weakened leg's stride as degradation increases. We emulate progressive degradation through two mechanisms: lowering the joint torque ceiling (ceiling mechanism) and scaling its low-level controller gains (gain mechanism), representing distinct forms of actuator weakening. Our simulations on a Unitree Go2 show that SG-CPG maintains a trot gait with 100% survival across an omnidirectional command schedule under 95% joint strength loss while tracking commands within 8%. Under a lowered torque ceiling, removing either severity path, the residual's severity observation or the amplitude gate, raises clipping at the weakened joint from 4.4% to 13.6% and 26.3% of steps at an 80% loss. On a real Go2, SG-CPG survives 28 of 29 forward and turning trials with up to 93% calf torque degradation. These results show that severity-gated adaptation can extend a healthy locomotion policy to progressive actuator degradation without treating the fault as a discrete failure.",
+      "metadataCompleteness": "abstract",
+      "published": "2026-09-22T04:44:24Z",
+      "updated": "2026-09-22T04:44:24Z",
+      "dateProvenance": "arxiv-api",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "url": "https://arxiv.org/abs/2609.25687v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.25687v1",
+      "matchedTopics": [
+        {
+          "id": "locomotion-navigation",
+          "label": "运动与导航",
+          "route": "robotics"
+        },
+        {
+          "id": "simulation-data",
+          "label": "仿真 / 数据 / 评测",
+          "route": "robotics"
+        },
+        {
+          "id": "hardware-sensing",
+          "label": "硬件与传感",
+          "route": "hardware"
+        }
+      ],
+      "routes": [
+        "robotics",
+        "hardware"
+      ],
+      "triageScore": 24,
+      "status": "candidate",
+      "firstSeen": "2026-09-23T04:54:01.223Z"
+    },
+    {
       "id": "2609.21449",
       "title": "ME-Dex 1.0: Bringing Heterogeneous Tactile Sensing into World Action Modeling",
       "authors": [
@@ -2274,192 +2457,6 @@
       "status": "candidate",
       "firstSeen": "2026-09-15T05:04:26.168Z",
       "dateProvenance": "legacy-unverified"
-    },
-    {
-      "id": "2609.15770",
-      "title": "JEPLO: Joint-Embedding Predictive Learning for LiDAR-Based Legged Locomotion",
-      "authors": [
-        "Qihao Yuan",
-        "Yixuan Qiu",
-        "Ziyu Cao",
-        "Ming Cao",
-        "Kailai Li"
-      ],
-      "abstract": "Light detection and ranging (LiDAR) remains less explored than RGB-D sensing for perceptive legged locomotion, and existing LiDAR-based approaches often rely on explicit mapping. We present JEPLO (Joint-Embedding Predictive learning for legged LOcomotion), a single-stage learning framework for mapping-free, LiDAR-based perceptive locomotion for legged robots. We introduce a proprio-exteroceptive JEPA (PE-JEPA) world model to learn predictive egocentric terrain representations from onboard observations, including raw LiDAR scans. A concurrent JEPA-teacher-student (CJTS) pipeline is further proposed to train a locomotion policy informed by JEPA latent representations in simulation using deep reinforcement learning with a simple reward formulation. The framework achieves successful sim-to-real transfer, enabling omnidirectional traversal of diverse terrains, including long staircases and high boxes, with lightweight onboard computation. Evaluations demonstrate greater robustness than existing perceptive locomotion frameworks, particularly under degraded perception caused by occlusion, sparsity and noise. Further analysis validates JEPLO's ability to retain task-relevant information under these challenging conditions. We open-source our implementation, experimental datasets, and hardware setup designs https://github.com/ASIG-X/JEPLO.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-15T04:00:00.000Z",
-      "updated": "2026-09-15T04:00:00.000Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.15770",
-      "pdfUrl": "https://arxiv.org/pdf/2609.15770",
-      "matchedTopics": [
-        {
-          "id": "locomotion-navigation",
-          "label": "运动与导航",
-          "route": "robotics"
-        },
-        {
-          "id": "simulation-data",
-          "label": "仿真 / 数据 / 评测",
-          "route": "robotics"
-        },
-        {
-          "id": "hardware-sensing",
-          "label": "硬件与传感",
-          "route": "hardware"
-        }
-      ],
-      "routes": [
-        "robotics",
-        "hardware"
-      ],
-      "triageScore": 24,
-      "status": "candidate",
-      "firstSeen": "2026-09-15T05:04:26.168Z",
-      "dateProvenance": "legacy-unverified"
-    },
-    {
-      "id": "2510.10932",
-      "title": "DropVLA: An Action-Level Backdoor Attack on Vision-Language-Action Models",
-      "authors": [
-        "Zonghuan Xu",
-        "Jiayu Li",
-        "Yunhan Zhao",
-        "Xiang Zheng",
-        "Xingjun Ma",
-        "Yu-Gang Jiang"
-      ],
-      "abstract": "-cross Abstract: Vision-Language-Action (VLA) models map multimodal perception and language instructions to executable robot actions, making them particularly vulnerable to behavioral backdoor manipulation: a hidden trigger introduced during training can induce unintended physical actions while nominal task performance remains intact. Prior work on VLA backdoors primarily studies untargeted attacks or task-level hijacking, leaving fine-grained control over individual actions largely unexplored. In this work, we present DropVLA, an action-level backdoor attack that forces a reusable action primitive (e.g., open_gripper) to execute at attacker-chosen decision points under a realistic pipeline-black-box setting with limited data-poisoning access, using a window-consistent relabeling scheme for chunked fine-tuning. On OpenVLA-7B evaluated with LIBERO, vision-only poisoning achieves 98.67%-99.83% attack success rate (ASR) with only 0.31% poisoned episodes while preserving 98.50%-99.17% clean-task retention, and successfully triggers the targeted action within 25 control steps at 500 Hz (0.05 s). Text-only triggers are unstable at low poisoning budgets, and combining text with vision provides no consistent ASR improvement over vision-only attacks. The backdoor remains robust to moderate trigger variations and transfers across evaluation suites (96.27%, 99.09%), whereas text-only largely fails (0.72%). We further validate physical-world feasibility on a 7-DoF Franka arm with pi0-fast, demonstrating non-trivial attack efficacy under camera-relative motion that induces image-plane trigger drift. These results reveal that VLA models can be covertly steered at the granularity of safety-critical actions with minimal poisoning and without observable degradation of nominal performance.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-14T04:00:00.000Z",
-      "updated": "2026-09-14T04:00:00.000Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2510.10932",
-      "pdfUrl": "https://arxiv.org/pdf/2510.10932",
-      "matchedTopics": [
-        {
-          "id": "vla-policy-learning",
-          "label": "VLA / 策略学习",
-          "route": "wam"
-        },
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        },
-        {
-          "id": "hardware-sensing",
-          "label": "硬件与传感",
-          "route": "hardware"
-        },
-        {
-          "id": "foundation-models",
-          "label": "基础模型 / 多模态",
-          "route": "adjacent"
-        }
-      ],
-      "routes": [
-        "wam",
-        "hardware",
-        "robotics",
-        "adjacent"
-      ],
-      "triageScore": 24,
-      "status": "candidate",
-      "firstSeen": "2026-09-14T05:09:27.748Z",
-      "dateProvenance": "legacy-unverified"
-    },
-    {
-      "id": "2609.21908",
-      "title": "CommitFlow: Semantic Commitment Verification and Local Correction for Long-Horizon Robot Manipulation VLA Execution",
-      "authors": [
-        "Zixiang Zhao",
-        "Yansong Feng",
-        "Yang Yang",
-        "Chaoyu Wang",
-        "Haoran Xiao",
-        "Hui Zhang",
-        "Chuang Cheng",
-        "Jianjun Ma"
-      ],
-      "abstract": "Although vision-language-action (VLA) policies have advanced rapidly, long-horizon execution may still progress to the next task stage before the required physical effect has been established. We call this a mismatch between semantic commitments, physical conditions that a stage must establish or maintain, and the actual physical state. Because an action command alone cannot confirm such a condition, local deviations can propagate and cause task failure. To address this problem, we present CommitFlow, a closed-loop execution framework that combines commitment monitoring with local correction while keeping the base policy frozen. CommitFlow integrates three components. A Semantic Commitment Monitor (SCM) compares stage requirements against current state evidence and holds back dependent actions when a required condition is unmet or violated. BoundaryFlow then generates a local correction conditioned on the current state and base action, and Relation and Gain Calibration (RGC) selects the smallest correction strength that satisfies the relevant constraints. Across the ten common RoboTwin 2.0 benchmark tasks, CommitFlow achieves a mean success rate of 75.9 percent, improving on the base policy pi0.5 by 22.7 percent. Cross-policy experiments show consistent gains, pointing toward reliable long-horizon robot execution.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-18T15:33:50Z",
-      "updated": "2026-09-18T15:33:50Z",
-      "dateProvenance": "arxiv-api",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.21908v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.21908v1",
-      "matchedTopics": [
-        {
-          "id": "vla-policy-learning",
-          "label": "VLA / 策略学习",
-          "route": "wam"
-        },
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "wam",
-        "robotics"
-      ],
-      "triageScore": 23,
-      "status": "candidate",
-      "firstSeen": "2026-09-21T05:08:18.428Z"
-    },
-    {
-      "id": "2609.21621",
-      "title": "Towards Fine-Grained Object Manipulation: SAM3-Guided Visuomotor Policy with Persistent Memory Learning and Focused Visual Conditioning",
-      "authors": [
-        "Haolong Meng",
-        "Fangbo Qin",
-        "Mengchen Bai",
-        "Houwu Wang",
-        "Cirong Liu",
-        "Shan Yu"
-      ],
-      "abstract": "Fine-grained object (FO) manipulation requires robots to distinguish a specified FO from visually similar objects and execute actions reliably despite scene distractors. However, scene-level visual conditioning lacks explicit object selection, while category-level guidance cannot reliably distinguish FOs within the same category. We present a SAM3-guided visuomotor framework that addresses these challenges through persistent object memory and focused visual conditioning. First, we introduce FO Memory-driven SAM3 (FOM-SAM3), which learns reusable FO memory tokens from limited multi-view registration images while keeping SAM3 fully frozen. Through one-vs-rest learning, these tokens encode persistent memories for localizing target FOs and rejecting similar alternatives, which can be stored in a memory bank. Second, we propose Focused Spatial-Appearance Encoding (FSAE), which combines in-FO local appearance features with explicit bounding-box coordinates to condition action policies including Diffusion Policy (DP) and Action Chunking with Transformers (ACT). The effectiveness of the proposed FOM-SAM3 was validated on the FO-30 dataset comprising 30 physical objects across four coarse categories. Across three real-robot FO manipulation tasks, our FOM-SAM3-guided policies demonstrated robustness against distractors, discrimination ability among similar FOs, and extendibility to new FOs.",
-      "metadataCompleteness": "abstract",
-      "published": "2026-09-18T11:01:46Z",
-      "updated": "2026-09-18T11:01:46Z",
-      "dateProvenance": "arxiv-api",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO"
-      ],
-      "url": "https://arxiv.org/abs/2609.21621v1",
-      "pdfUrl": "https://arxiv.org/pdf/2609.21621v1",
-      "matchedTopics": [
-        {
-          "id": "vla-policy-learning",
-          "label": "VLA / 策略学习",
-          "route": "wam"
-        },
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "wam",
-        "robotics"
-      ],
-      "triageScore": 23,
-      "status": "candidate",
-      "firstSeen": "2026-09-21T05:08:18.428Z"
     }
   ]
 }
