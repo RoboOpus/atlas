@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-09-25T05:06:17.082Z",
+  "generated_at": "2026-09-26T05:09:27.099Z",
   "source": {
     "endpoint": "https://export.arxiv.org/api/query",
     "mode": "api",
@@ -1629,47 +1629,6 @@
       "dateProvenance": "legacy-unverified"
     },
     {
-      "id": "2609.11308",
-      "title": "2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation",
-      "authors": [
-        "Yutong Hu",
-        "Fengjiao Chen",
-        "Xuezhi Cao",
-        "Renaud Detry"
-      ],
-      "abstract": "",
-      "metadataCompleteness": "listing",
-      "published": "2026-09-11T12:00:00.000Z",
-      "updated": "2026-09-11T12:00:00.000Z",
-      "primaryCategory": "cs.RO",
-      "categories": [
-        "cs.RO",
-        "cs.AI"
-      ],
-      "url": "https://arxiv.org/abs/2609.11308",
-      "pdfUrl": "https://arxiv.org/pdf/2609.11308",
-      "matchedTopics": [
-        {
-          "id": "world-action-models",
-          "label": "世界模型 / WAM",
-          "route": "wam"
-        },
-        {
-          "id": "manipulation",
-          "label": "机器人操作",
-          "route": "robotics"
-        }
-      ],
-      "routes": [
-        "wam",
-        "robotics"
-      ],
-      "triageScore": 26,
-      "status": "candidate",
-      "firstSeen": "2026-09-13T15:10:33.155Z",
-      "dateProvenance": "legacy-unverified"
-    },
-    {
       "id": "2609.30247",
       "title": "Rolling-WAM: World Action Models with Rolling Imagination",
       "authors": [
@@ -2235,6 +2194,47 @@
       "triageScore": 25,
       "status": "candidate",
       "firstSeen": "2026-09-14T05:09:27.748Z",
+      "dateProvenance": "legacy-unverified"
+    },
+    {
+      "id": "2609.11308",
+      "title": "2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation",
+      "authors": [
+        "Yutong Hu",
+        "Fengjiao Chen",
+        "Xuezhi Cao",
+        "Renaud Detry"
+      ],
+      "abstract": "",
+      "metadataCompleteness": "listing",
+      "published": "2026-09-11T12:00:00.000Z",
+      "updated": "2026-09-11T12:00:00.000Z",
+      "primaryCategory": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "url": "https://arxiv.org/abs/2609.11308",
+      "pdfUrl": "https://arxiv.org/pdf/2609.11308",
+      "matchedTopics": [
+        {
+          "id": "world-action-models",
+          "label": "世界模型 / WAM",
+          "route": "wam"
+        },
+        {
+          "id": "manipulation",
+          "label": "机器人操作",
+          "route": "robotics"
+        }
+      ],
+      "routes": [
+        "wam",
+        "robotics"
+      ],
+      "triageScore": 25,
+      "status": "candidate",
+      "firstSeen": "2026-09-13T15:10:33.155Z",
       "dateProvenance": "legacy-unverified"
     },
     {
